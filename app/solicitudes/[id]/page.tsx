@@ -15,6 +15,9 @@ import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { prisma } from '@/lib/db/prisma'
+
+// Never pre-render at build time — requires DATABASE_URL at runtime
+export const dynamic = 'force-dynamic'
 import { getNombreMunicipio, getNombreDepto, getDeptoFromMunicipio } from '@/app/cotizar/config/colombia-dane'
 import PanelComercial from '@/components/solicitudes/PanelComercial'
 import CondicionesEspeciales, { type Condicion } from '@/components/solicitudes/CondicionesEspeciales'
