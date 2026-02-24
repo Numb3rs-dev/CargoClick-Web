@@ -27,30 +27,30 @@ export default function BulletItem({ iconSrc, iconAlt, iconFallback, text, color
       style={{
         display: 'flex',
         alignItems: 'flex-start',
-        gap: '12px',
-        paddingTop: '8px',
-        paddingBottom: '8px',
+        gap: 'clamp(6px, 1.5vw, 12px)',
+        paddingTop: 'clamp(4px, 1vw, 8px)',
+        paddingBottom: 'clamp(4px, 1vw, 8px)',
       }}
     >
-      {/* Ícono 24×24 */}
+      {/* Ícono */}
       <div
         style={{
           flexShrink: 0,
-          width: '24px',
-          height: '24px',
+          width: 'clamp(16px, 3vw, 24px)',
+          height: 'clamp(16px, 3vw, 24px)',
           color,
         }}
         aria-hidden="true"
       >
         {iconSrc ? (
-          <Image src={iconSrc} alt={iconAlt ?? ''} width={24} height={24} />
+          <Image src={iconSrc} alt={iconAlt ?? ''} width={24} height={24} style={{ width: '100%', height: 'auto' }} />
         ) : (
           iconFallback
         )}
       </div>
 
       {/* Texto */}
-      <span style={{ color: '#1A1A1A', fontSize: '16px', lineHeight: '1.5' }}>
+      <span style={{ color: '#1A1A1A', fontSize: 'clamp(10px, 2vw, 16px)', lineHeight: '1.4' }}>
         {text}
       </span>
     </div>

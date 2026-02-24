@@ -54,22 +54,26 @@ export default function FortalezaBlock({ tema, titulo, logoSrc, bullets }: Forta
     }}>
       {/* Logo o título del bloque – contenedor de altura fija para alinear líneas */}
       {logoSrc ? (
-        <div style={{ height: '72px', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
+        <div style={{ height: 'clamp(40px, 8vw, 72px)', display: 'flex', alignItems: 'center', marginBottom: '12px' }}>
           <Image
             src={logoSrc}
             alt={titulo}
             height={tema === 'operacion' ? 64 : 48}
             width={tema === 'operacion' ? 280 : 200}
-            style={{ height: tema === 'operacion' ? '64px' : '48px', width: 'auto' }}
+            style={{
+              height: tema === 'operacion' ? 'clamp(28px, 6vw, 64px)' : 'clamp(22px, 5vw, 48px)',
+              width: 'auto',
+              maxWidth: '100%',
+            }}
           />
         </div>
       ) : (
         <h3
           style={{
             color,
-            fontSize: '22px',
+            fontSize: 'clamp(14px, 3vw, 22px)',
             fontWeight: 700,
-            height: '72px',
+            height: 'clamp(40px, 8vw, 72px)',
             display: 'flex',
             alignItems: 'center',
             margin: '0 0 12px 0',
