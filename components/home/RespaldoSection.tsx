@@ -10,20 +10,16 @@
 
 import Image from 'next/image';
 import { Building2 } from 'lucide-react';
-import FadeInSection from '@/components/ui/FadeInSection';
 
 export default function RespaldoSection() {
-  // Asset disponible en /public/assets/
-  const assetExists = true;
+  // Cambiar a true cuando el asset esté en /public/assets/
+  const assetExists = false;
 
   return (
     <section
       aria-label="Respaldo operativo"
-      style={{ background: '#F4F4FC', padding: '0 0 0', textAlign: 'center' }}
+      style={{ background: '#F5F7FA', padding: '48px 0', textAlign: 'center' }}
     >
-      {/* Gradiente de transición suave desde el Hero (#FDFCFE → #F4F4FC) */}
-      <div style={{ height: '56px', background: 'linear-gradient(to bottom, #FCFBFE, #F4F4FC)', pointerEvents: 'none' }} />
-      <FadeInSection direction="up" delay={0}>
       <div
         className="px-5 md:px-10"
         style={{
@@ -32,42 +28,30 @@ export default function RespaldoSection() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '0px',
+          gap: '20px',
         }}
       >
-        {/* Texto con líneas decorativas a izquierda y derecha */}
-        <div
+        {/* Texto principal */}
+        <p
+          className="text-base md:text-lg"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-            width: '100%',
+            color: '#1A1A1A',
+            fontWeight: 600,
+            lineHeight: 1.4,
+            margin: 0,
           }}
         >
-          <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to right, transparent, #C8CAD0)' }} />
-          <p
-            className="text-[14px] md:text-[15px]"
-            style={{
-              color: '#5E6B78',
-              fontWeight: 400,
-              lineHeight: 1.6,
-              margin: 0,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Operación respaldada por
-          </p>
-          <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to left, transparent, #C8CAD0)' }} />
-        </div>
+          Operación respaldada por Transportes Nuevo Mundo S.A.S.
+        </p>
 
         {/* Logo o Placeholder */}
         {assetExists ? (
           <Image
-            src="/assets/NuevoMundoLogoNombreLadoDerecho.png"
+            src="/assets/NuevoMundoLogoNombreLadoDerecho.svg"
             alt="Transportes Nuevo Mundo S.A.S. – Empresa respaldante de CargoClick"
-            height={90}
-            width={300}
-            style={{ height: '90px', width: 'auto' }}
+            height={60}
+            width={200}
+            style={{ height: '60px', width: 'auto' }}
           />
         ) : (
           <div
@@ -87,7 +71,6 @@ export default function RespaldoSection() {
           </div>
         )}
       </div>
-      </FadeInSection>
     </section>
   );
 }

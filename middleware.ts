@@ -19,6 +19,10 @@ export default clerkMiddleware(async (auth, req) => {
   if (!isPublicRoute(req)) {
     await auth.protect()
   }
+}, {
+  // Tolerancia a desfase de reloj del sistema (clock skew)
+  // Evita el loop infinito de Clerk cuando el reloj local está levemente adelantado/atrasado
+  clockSkewInMs: 60_000,
 })
 
 export const config = {

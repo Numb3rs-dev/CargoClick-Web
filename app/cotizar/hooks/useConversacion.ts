@@ -14,7 +14,7 @@
 
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import type { 
   ConversacionState, 
   UseConversacionReturn,
@@ -127,7 +127,7 @@ function limpiarRespuestaConversacional(texto: string): string {
  * }
  * ```
  */
-export function useConversacion(): UseConversacionReturn {
+export function useConversacion(initialSolicitudId?: string): UseConversacionReturn {
   // Estado principal del wizard
   const [state, setState] = useState<ConversacionState>({
     pasoActual: -1, // Inicia en landing page
@@ -136,6 +136,66 @@ export function useConversacion(): UseConversacionReturn {
     error: null,
     datosForm: {},
   });
+
+  // Si venimos desde un enlace con ?reanudar=<id>, cargar la solicitud existente y
+  // pre-rellenar el formulario saltando directamente al paso incompleto.
+  useEffect(() => {
+    if (!initialSolicitudId) return;
+
+    setState(prev => ({ ...prev, isLoading: true, error: null }));
+
+    fetch(`/api/solicitudes/${initialSolicitudId}`)
+      .then(r => r.json())
+      .then(body => {
+        if (!body?.data) {
+          setState(prev => ({ ...prev, isLoading: false }));
+          return;
+        }
+        const sol = body.data as any;
+
+        const datosReanudados = {
+          contacto:           sol.contacto          || '',
+          telefono:           sol.telefono          || '',
+          empresa:            sol.empresa           || '',
+          email:              sol.email             || '',
+          telefonoEmpresa:    sol.telefonoEmpresa   || '',
+          origen:             sol.origen            || '',
+          destino:            sol.destino           || '',
+          tipoCarga:          sol.tipoCarga         || 'CARGA_GENERAL',
+          tipoServicio:       sol.tipoServicio      || 'NACIONAL',
+          pesoKg:             sol.pesoKg            ?? 0,
+          dimLargoCm:         sol.dimLargoCm        ?? 0,
+          dimAnchoCm:         sol.dimAnchoCm        ?? 0,
+          dimAltoCm:          sol.dimAltoCm         ?? 0,
+          ...(sol.distanciaKm        ? { distanciaKm:           sol.distanciaKm }        : {}),
+          ...(sol.tramoDistancia     ? { tramoDistancia:        sol.tramoDistancia }     : {}),
+          ...(sol.tiempoTransitoDesc ? { tiempoTransitoDesc:    sol.tiempoTransitoDesc } : {}),
+          ...(sol.vehiculoSugeridoId ? { vehiculoSugeridoId:   sol.vehiculoSugeridoId } : {}),
+          ...(sol.vehiculoSugeridoNombre ? { vehiculoSugeridoNombre: sol.vehiculoSugeridoNombre } : {}),
+        };
+
+        // Detectar el primer paso incompleto para reanudar ahí
+        const pasoInicial =
+          !sol.origen || sol.origen === '' ? 1        // sin ruta → desde empresa (skippable)
+          : !sol.pesoKg || sol.pesoKg === 0 ? 3       // sin carga → tipo + peso
+          : 5;                                        // sin fecha → selector de fecha
+
+        console.info('[reanudar] Solicitud cargada, retomando desde paso', pasoInicial, '–', sol.id);
+
+        setState(prev => ({
+          ...prev,
+          solicitudId:  sol.id,
+          datosForm:    { ...prev.datosForm, ...datosReanudados },
+          pasoActual:   pasoInicial,
+          isLoading:    false,
+        }));
+      })
+      .catch(err => {
+        console.error('[reanudar] Error cargando solicitud:', err);
+        setState(prev => ({ ...prev, isLoading: false }));
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialSolicitudId]);
 
   // Obtener configuración del paso actual (solo si no está en landing o completado)
   const pasoConfig = useMemo(() => {
@@ -562,7 +622,47 @@ export function useConversacion(): UseConversacionReturn {
       })
         .then(resp => resp.json())
         .then(body => {
-          if (body?.data?.id) {
+          if (!body?.data?.id) return;
+
+          if (body.reanudada === true) {
+            // ── Solicitud EN_PROGRESO existente: reanudar desde el paso correcto ──
+            const sol = body.data as any;
+            const datosReanudados = {
+              contacto:     sol.contacto     || '',
+              telefono:     sol.telefono     || '',
+              empresa:      sol.empresa      || '',
+              email:        sol.email        || '',
+              origen:       sol.origen       || '',
+              destino:      sol.destino      || '',
+              tipoCarga:    sol.tipoCarga    || 'CARGA_GENERAL',
+              tipoServicio: sol.tipoServicio || 'NACIONAL',
+              pesoKg:       sol.pesoKg       ?? 0,
+              dimLargoCm:   sol.dimLargoCm   ?? 0,
+              dimAnchoCm:   sol.dimAnchoCm   ?? 0,
+              dimAltoCm:    sol.dimAltoCm    ?? 0,
+              ...(sol.distanciaKm      ? { distanciaKm:      sol.distanciaKm }      : {}),
+              ...(sol.tramoDistancia   ? { tramoDistancia:   sol.tramoDistancia }   : {}),
+              ...(sol.tiempoTransitoDesc ? { tiempoTransitoDesc: sol.tiempoTransitoDesc } : {}),
+              ...(sol.telefonoEmpresa  ? { telefonoEmpresa:  sol.telefonoEmpresa }  : {}),
+              ...(sol.vehiculoSugeridoId ? { vehiculoSugeridoId: sol.vehiculoSugeridoId } : {}),
+              ...(sol.vehiculoSugeridoNombre ? { vehiculoSugeridoNombre: sol.vehiculoSugeridoNombre } : {}),
+            };
+
+            // Determinar desde qué paso reanudar según los campos ya completados
+            const pasoReanudacion = !sol.origen || sol.origen === '' ? 2
+              : !sol.pesoKg || sol.pesoKg === 0 ? 3
+              : 5;
+
+            console.info('[reanudación] Retomando solicitud', sol.id, '→ paso', pasoReanudacion);
+
+            setState(prev => ({
+              ...prev,
+              solicitudId: sol.id,
+              datosForm: { ...prev.datosForm, ...datosReanudados },
+              pasoActual: pasoReanudacion,
+            }));
+          } else {
+            // Solicitud nueva creada correctamente
             setState(prev => ({ ...prev, solicitudId: body.data.id }));
           }
         })
@@ -747,7 +847,16 @@ export function useConversacion(): UseConversacionReturn {
         pasoActual: TOTAL_PASOS, // >= TOTAL_PASOS = completado
       }));
 
+      // Disparar cotización SISETAC al finalizar el wizard (fire-and-forget)
+      const solicitudIdFinal = state.solicitudId;
+      const dispararCotizacion = () => {
+        if (!solicitudIdFinal) return;
+        fetch(`/api/solicitudes/${solicitudIdFinal}/cotizar`, { method: 'POST' })
+          .catch(err => console.error('[cotizar] Error al generar cotización:', err));
+      };
+
       // PATCH fire-and-forget si el usuario envió detalles (no hizo "Listo, gracias")
+      // La cotización se dispara DESPUÉS del PATCH para que todos los campos estén guardados
       if (!ev.skip && state.solicitudId) {
         fetch(`/api/solicitudes/${state.solicitudId}`, {
           method: 'PATCH',
@@ -768,7 +877,12 @@ export function useConversacion(): UseConversacionReturn {
             cargaSobredimensionada:   ev.cargaSobredimensionada    ?? false,
             detalleSobredimensionada: ev.detalleSobredimensionada  ?? '',
           }),
-        }).catch(err => console.error('[guardado] PATCH paso 6 fallido (no bloqueante):', err));
+        })
+          .catch(err => console.error('[guardado] PATCH paso 6 fallido (no bloqueante):', err))
+          .finally(dispararCotizacion);
+      } else {
+        // El usuario saltó los extras: cotizar directamente
+        dispararCotizacion();
       }
       return;
     }

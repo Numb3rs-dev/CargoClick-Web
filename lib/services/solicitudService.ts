@@ -49,7 +49,7 @@ export class SolicitudService {
    * // solicitud.id = "01JXX..."
    * // solicitud.estado = "EN_PROGRESO"
    */
-  async crearSolicitudInicial(input: CrearSolicitudInicialInput): Promise<Solicitud> {
+  async crearSolicitudInicial(input: CrearSolicitudInicialInput): Promise<Solicitud & { reanudada?: boolean }> {
     console.log('[SolicitudService] Creando solicitud inicial con datos:', input);
 
     // Validar con Zod
@@ -63,12 +63,22 @@ export class SolicitudService {
     );
 
     if (solicitudReciente) {
-      const horasDesdeCreacion = Math.floor(
-        (Date.now() - solicitudReciente.createdAt.getTime()) / (1000 * 60 * 60)
-      );
-      
+      // Si la solicitud está EN_PROGRESO, reanudarla en lugar de bloquear al usuario
+      if (solicitudReciente.estado === 'EN_PROGRESO') {
+        console.info('[SolicitudService] Reanudando solicitud EN_PROGRESO:', solicitudReciente.id);
+        return { ...solicitudReciente, reanudada: true };
+      }
+
+      // Solicitud ya finalizada/cotizada → mensaje amigable con tiempo correcto
+      const msDesdeCreacion = Date.now() - solicitudReciente.createdAt.getTime();
+      const horasDesde = Math.floor(msDesdeCreacion / (1000 * 60 * 60));
+      const minutosDesde = Math.floor(msDesdeCreacion / (1000 * 60));
+      const tiempoDesc = horasDesde === 0
+        ? minutosDesde <= 1 ? 'hace menos de 1 minuto' : `hace ${minutosDesde} minuto(s)`
+        : `hace ${horasDesde} hora(s)`;
+
       throw new Error(
-        `Ya recibimos tu solicitud hace ${horasDesdeCreacion} hora(s). ` +
+        `Ya recibimos tu solicitud ${tiempoDesc}. ` +
         `Nos comunicaremos contigo pronto. ID: ${solicitudReciente.id}`
       );
     }

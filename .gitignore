@@ -39,9 +39,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# prisma
-prisma/migrations/**/*.sql
-prisma/migrations/**/migration.sql
+# prisma — las migraciones SÍ deben commitearse, no se excluye nada aquí
 
 # IDEs
 .vscode/settings.json

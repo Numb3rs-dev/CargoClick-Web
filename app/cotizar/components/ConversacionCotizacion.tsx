@@ -21,6 +21,7 @@
 
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useConversacion } from '../hooks/useConversacion';
 import { DynamicInput } from './DynamicInputMUI'; // MUI version
 import { ProgressIndicator } from '@/components/shared/ProgressIndicator';
@@ -31,6 +32,10 @@ import { Box, Container, IconButton, Typography, Paper, Alert, Fade, LinearProgr
 import { ArrowBack } from '@mui/icons-material';
 
 export function ConversacionCotizacion() {
+  // Detectar si venimos desde "/cotizar?reanudar=<id>" (enlace de solicitud existente)
+  const searchParams = useSearchParams();
+  const reanudarId = searchParams.get('reanudar') ?? undefined;
+
   // Hook principal con toda la lógica del wizard
   const {
     pasoActual,
@@ -44,7 +49,7 @@ export function ConversacionCotizacion() {
     siguientePaso,
     pasoAnterior,
     resetear,
-  } = useConversacion();
+  } = useConversacion(reanudarId);
 
   // Landing page (no iniciado)
   if (pasoActual === -1) {
@@ -174,7 +179,17 @@ export function ConversacionCotizacion() {
               config={pasoConfig}
               onSubmit={siguientePaso}
               isLoading={isLoading}
-              defaultValue={datosForm[pasoConfig.campoFormulario]}
+              defaultValue={
+                pasoConfig.tipoInput === 'client-data'
+                  ? { contacto: datosForm.contacto ?? '', telefono: datosForm.telefono ?? '' }
+                  : pasoConfig.tipoInput === 'company-data'
+                  ? { empresa: datosForm.empresa ?? '', email: datosForm.email ?? '', telefonoEmpresa: datosForm.telefonoEmpresa ?? '' }
+                  : pasoConfig.tipoInput === 'origin-destination'
+                  ? { origen: datosForm.origen ?? '', destino: datosForm.destino ?? '' }
+                  : pasoConfig.tipoInput === 'weight-dimensions'
+                  ? { pesoKg: datosForm.pesoKg ?? 0, dimLargoCm: datosForm.dimLargoCm ?? 0, dimAnchoCm: datosForm.dimAnchoCm ?? 0, dimAltoCm: datosForm.dimAltoCm ?? 0 }
+                  : datosForm[pasoConfig.campoFormulario as keyof typeof datosForm]
+              }
               solicitudId={solicitudId}
             />
 

@@ -15,11 +15,13 @@ import Link from 'next/link'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { prisma } from '@/lib/db/prisma'
+import { getNombreMunicipio, getNombreDepto, getDeptoFromMunicipio } from '@/app/cotizar/config/colombia-dane'
 import PanelComercial from '@/components/solicitudes/PanelComercial'
 import CondicionesEspeciales, { type Condicion } from '@/components/solicitudes/CondicionesEspeciales'
 import DesgloseSisetac from '@/components/solicitudes/DesgloseSisetac'
 import CardColapsable from '@/components/solicitudes/CardColapsable'
 import BaseRndc, { type RndcData } from '@/components/solicitudes/BaseRndc'
+import CotizarButton from '@/components/solicitudes/CotizarButton'
 import { consultarRndc } from '@/lib/services/rndcEngine'
 
 // ─── Helpers ────────────────────────────────────────────────
@@ -237,8 +239,10 @@ export async function generateMetadata(
     select: { empresa: true, origen: true, destino: true },
   })
   if (!solicitud) return { title: 'Solicitud no encontrada | CargoClick' }
+  const origenLabel = solicitud.origen ? getNombreMunicipio(solicitud.origen) : '?'
+  const destinoLabel = solicitud.destino ? getNombreMunicipio(solicitud.destino) : '?'
   return {
-    title: `Solicitud ${solicitud.empresa} | ${solicitud.origen} → ${solicitud.destino ?? '?'} | CargoClick`,
+    title: `Solicitud ${solicitud.empresa} | ${origenLabel} → ${destinoLabel} | CargoClick`,
   }
 }
 
@@ -262,6 +266,15 @@ export default async function SolicitudDetallePage(
   if (!solicitud) notFound()
 
   const cotizacion = solicitud.cotizaciones[0] ?? null
+
+  // Resolver nombres legibles desde códigos DANE (fallback: el propio código)
+  const origenNombre = solicitud.origen
+    ? `${getNombreMunicipio(solicitud.origen)}, ${getNombreDepto(getDeptoFromMunicipio(solicitud.origen))}`
+    : '—'
+  const destinoNombre = solicitud.destino
+    ? `${getNombreMunicipio(solicitud.destino)}, ${getNombreDepto(getDeptoFromMunicipio(solicitud.destino))}`
+    : null
+
   const desgloseCv = cotizacion?.desgloseCv as DesgloseCv | null
   const desgloseCf = cotizacion?.desgloseCf as DesgloseCf | null
   const params_  = cotizacion?.parametrosUsados as ParamsUsados | null
@@ -324,11 +337,11 @@ export default async function SolicitudDetallePage(
                 {solicitud.empresa ?? 'Sin empresa'}
               </h1>
               <p style={{ margin: '4px 0 0', fontSize: 15, color: '#6B7280' }}>
-                {solicitud.origen}
-                {solicitud.destino && <> <span style={{ color: '#D1D5DB' }}>→</span> {solicitud.destino}</>}
+                {origenNombre}
+                {destinoNombre && <> <span style={{ color: '#D1D5DB' }}>→</span> {destinoNombre}</>}
                 {solicitud.distanciaKm && (
                   <span style={{ marginLeft: 8, padding: '2px 8px', background: '#EFF6FF', color: '#1D4ED8', borderRadius: 9999, fontSize: 12, fontWeight: 600 }}>
-                    {solicitud.distanciaKm} km
+                    📏 {Number(solicitud.distanciaKm)} km
                   </span>
                 )}
               </p>
@@ -370,8 +383,8 @@ export default async function SolicitudDetallePage(
                     <IconField icon="🚚" label="Tipo de servicio"   value={solicitud.tipoServicio} />
                     <IconField icon="📦" label="Tipo de carga"      value={solicitud.tipoCarga} />
                     <IconField icon="📅" label="Fecha requerida"    value={formatDate(solicitud.fechaRequerida)} />
-                    <IconField icon="📍" label="Origen"             value={solicitud.origen} />
-                    <IconField icon="🎯" label="Destino"            value={solicitud.destino ?? '—'} />
+                    <IconField icon="📍" label="Origen"             value={origenNombre} />
+                    <IconField icon="🎯" label="Destino"            value={destinoNombre ?? '—'} />
                     <IconField icon="📏" label="Tramo / distancia"  value={`${solicitud.tramoDistancia ?? '—'}${solicitud.distanciaKm ? ` · ${solicitud.distanciaKm} km` : ''}`} />
                     <IconField icon="⏱️" label="Tiempo de tránsito" value={solicitud.tiempoTransitoDesc ?? '—'} />
                   </div>
@@ -478,8 +491,8 @@ export default async function SolicitudDetallePage(
                   fleteRefActual={Number(cotizacion.fleteReferencialSisetac)}
                   pesoKg={solicitud.pesoKg ? Number(solicitud.pesoKg) : null}
                   distanciaKm={cotizacion.distanciaKm}
-                  origen={solicitud.origen}
-                  destino={solicitud.destino ?? null}
+                  origen={origenNombre}
+                  destino={destinoNombre}
                   condicionesEspeciales={condicionesActivas}
                 />
               </div>
@@ -504,13 +517,24 @@ export default async function SolicitudDetallePage(
               </h3>
               <p style={{ margin: '0 0 24px', fontSize: 14, color: '#6B7280' }}>
                 La solicitud se encuentra en estado <strong>{solicitud.estado}</strong>.
-                Cuando se genere la cotización SISETAC aparecerá aquí.
+                {solicitud.distanciaKm && Number(solicitud.distanciaKm) > 0
+                  ? ' Puedes generar la cotización SISETAC ahora.'
+                  : ' Completa el flujo del cotizador para tener todos los datos necesarios.'}
               </p>
-              <p style={{ margin: 0, fontSize: 13, color: '#9CA3AF' }}>
-                Genera la cotización via <code style={{ background: '#F3F4F6', padding: '2px 6px', borderRadius: 4 }}>
-                  POST /api/solicitudes/{id}/cotizar
-                </code>
-              </p>
+              {solicitud.distanciaKm && Number(solicitud.distanciaKm) > 0 ? (
+                <CotizarButton solicitudId={id} />
+              ) : (
+                <Link
+                  href={`/cotizar?reanudar=${id}`}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    padding: '10px 24px', background: '#059669', color: '#FFFFFF',
+                    borderRadius: 8, fontWeight: 700, fontSize: 14, textDecoration: 'none',
+                  }}
+                >
+                  Completar cotizador →
+                </Link>
+              )}
             </div>
           )}
 

@@ -49,7 +49,7 @@ const securityHeaders = [
       // Clerk necesita unsafe-inline/eval para su widget
       `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkScriptSrc}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://img.clerk.com",
+      "img-src 'self' data: blob: https://img.clerk.com https://flagcdn.com",
       "font-src 'self'",
       `connect-src 'self' ${clerkConnectSrc}`,
       `frame-src ${clerkFrameSrc}`,

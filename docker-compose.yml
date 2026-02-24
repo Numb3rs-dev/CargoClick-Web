@@ -1,9 +1,8 @@
 # ============================================================================
-# DOCKER COMPOSE - SISTEMA COTIZACIÓN DE TRANSPORTE B2B
+# DOCKER COMPOSE - CARGOCLICK WEB
 # ============================================================================
 # Servicios:
 #   - PostgreSQL 16.x: Base de datos principal
-#   - pgAdmin 4: Interfaz web para administrar PostgreSQL (opcional)
 #
 # Comandos útiles:
 #   docker-compose up -d          # Iniciar servicios en background
@@ -12,15 +11,13 @@
 #   docker-compose ps             # Ver estado de servicios
 # ============================================================================
 
-version: '3.8'
-
 services:
   # --------------------------------------------------------------------------
   # POSTGRESQL 16
   # --------------------------------------------------------------------------
   postgres:
     image: postgres:16-alpine
-    container_name: cotizaciones-postgres
+    container_name: cargoclick-postgres
     restart: unless-stopped
     ports:
       - "5432:5432"
@@ -28,7 +25,7 @@ services:
       # Credenciales de base de datos (deben coincidir con .env)
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: cotizaciones_db
+      POSTGRES_DB: cargoclick_web_db
       # Configuración de performance
       POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
     volumes:
@@ -42,30 +39,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - cotizaciones-network
-
-  # --------------------------------------------------------------------------
-  # PGADMIN 4 (Interfaz web para administrar PostgreSQL)
-  # --------------------------------------------------------------------------
-  # Acceder en: http://localhost:5050
-  # Email: admin@cotizaciones.local
-  # Password: admin
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: cotizaciones-pgadmin
-    restart: unless-stopped
-    ports:
-      - "5050:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@cotizaciones.local
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    depends_on:
-      - postgres
-    networks:
-      - cotizaciones-network
+      - cargoclick-network
 
 # ----------------------------------------------------------------------------
 # VOLUMES (Persistencia de datos)
@@ -73,14 +47,12 @@ services:
 volumes:
   postgres_data:
     driver: local
-  pgadmin_data:
-    driver: local
 
 # ----------------------------------------------------------------------------
 # NETWORKS
 # ----------------------------------------------------------------------------
 networks:
-  cotizaciones-network:
+  cargoclick-network:
     driver: bridge
 
 # ============================================================================
@@ -92,20 +64,14 @@ networks:
 #
 # 2. VERIFICAR QUE POSTGRESQL ESTÁ CORRIENDO:
 #    docker-compose ps
-#    # Debe mostrar "cotizaciones-postgres" en estado "Up"
+#    # Debe mostrar "cargoclick-postgres" en estado "Up"
 #
 # 3. EJECUTAR MIGRACIONES DE PRISMA:
 #    npx prisma migrate dev --name init_solicitudes
 #
-# 4. ACCEDER A PGADMIN (Opcional):
-#    - Abrir navegador: http://localhost:5050
-#    - Login: admin@cotizaciones.local / admin
-#    - Agregar servidor:
-#      * Name: Cotizaciones DB
-#      * Host: postgres (nombre del servicio)
-#      * Port: 5432
-#      * Username: postgres
-#      * Password: postgres
+# 4. INSPECCIONAR LA BASE DE DATOS (con Prisma Studio):
+#    npx prisma studio
+#    # Abre interfaz visual en http://localhost:5555
 #
 # 5. DETENER SERVICIOS (sin eliminar datos):
 #    docker-compose down
@@ -121,6 +87,6 @@ networks:
 # ============================================================================
 # 
 # En tu archivo .env:
-# DATABASE_URL=postgresql://postgres:postgres@localhost:5432/cotizaciones_db
+# DATABASE_URL=postgresql://postgres:postgres@localhost:5432/cargoclick_web_db
 #
 # ============================================================================

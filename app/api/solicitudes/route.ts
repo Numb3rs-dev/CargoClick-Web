@@ -60,15 +60,17 @@ export async function POST(request: NextRequest) {
 
     // Crear solicitud inicial (servicio valida con Zod)
     const solicitud = await solicitudService.crearSolicitudInicial(body);
+    const reanudada = (solicitud as any).reanudada === true;
 
-    // Retornar 201 Created
+    // 200 si es reanudación de solicitud existente, 201 si es nueva
     return NextResponse.json(
       {
         success: true,
         data: solicitud,
-        message: 'Solicitud creada correctamente',
+        reanudada,
+        message: reanudada ? 'Solicitud existente reanudada' : 'Solicitud creada correctamente',
       },
-      { status: 201 }
+      { status: reanudada ? 200 : 201 }
     );
   } catch (error) {
     logger.error('API POST /solicitudes', error);
