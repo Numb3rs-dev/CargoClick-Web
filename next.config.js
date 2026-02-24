@@ -9,21 +9,26 @@
 // ─── A-1: HTTP Security Headers ─────────────────────────────────────────────
 // En desarrollo Clerk usa clerk.accounts.dev; en producción usa el dominio
 // propio de tu instancia Clerk (ej: tuapp.clerk.accounts.com o clerk.tudominio.com)
-const isProd = process.env.NODE_ENV === 'production'
+// Detect Clerk mode by key prefix, not NODE_ENV.
+// pk_test_ = dev keys (use *.clerk.accounts.dev)
+// pk_live_ = prod keys (use *.clerk.accounts.com)
+const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
+const isClerkProd = clerkKey.startsWith('pk_live_')
 const clerkDomain = process.env.CLERK_FRONTEND_API_URL ?? 'https://clerk.accounts.dev'
 
-// Dominios Clerk permitidos según entorno
-const clerkScriptSrc = isProd
+// Always include both dev and prod Clerk domains to avoid CSP issues when
+// NODE_ENV=production but using pk_test_ keys (e.g. Railway staging)
+const clerkScriptSrc = isClerkProd
   ? `${clerkDomain} https://*.clerk.accounts.com`
-  : 'https://clerk.accounts.dev https://*.clerk.accounts.dev'
+  : 'https://clerk.accounts.dev https://*.clerk.accounts.dev https://*.clerk.accounts.com'
 
-const clerkConnectSrc = isProd
+const clerkConnectSrc = isClerkProd
   ? `${clerkDomain} https://api.clerk.com https://*.clerk.accounts.com`
-  : 'https://*.clerk.accounts.dev https://api.clerk.dev'
+  : 'https://*.clerk.accounts.dev https://api.clerk.dev https://*.clerk.accounts.com https://api.clerk.com'
 
-const clerkFrameSrc = isProd
+const clerkFrameSrc = isClerkProd
   ? `${clerkDomain} https://*.clerk.accounts.com`
-  : 'https://clerk.accounts.dev https://*.clerk.accounts.dev'
+  : 'https://clerk.accounts.dev https://*.clerk.accounts.dev https://*.clerk.accounts.com'
 
 const securityHeaders = [
   // Evita MIME sniffing
