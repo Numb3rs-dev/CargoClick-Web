@@ -76,7 +76,7 @@ interface MunicipioSearchProps {
   onChange: (codigo: string) => void;
   disabled?: boolean;
   autoFocus?: boolean;
-  color: 'primary' | 'error';
+  color: 'primary' | 'error' | 'success';
   icon: React.ReactNode;
 }
 
