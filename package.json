@@ -1,5 +1,5 @@
 {
-  "name": "cargoclick-platform",
+  "name": "cargoclick-web",
   "version": "0.1.0",
   "private": true,
   "description": "Sistema de Cotización de Transporte B2B - Backend Next.js con Clean Architecture",
