@@ -592,7 +592,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
             <TextField
               fullWidth
               type="tel"
-              label="Tel\u00e9fono de la empresa"
+              label="Teléfono de la empresa"
               value={cv2.telefonoEmpresa ?? ''}
               onChange={(e) => setValor({ ...cv2, telefonoEmpresa: e.target.value.replace(/[^0-9+\-\s()]/g, '') })}
               placeholder="Ej: 601 123 4567"

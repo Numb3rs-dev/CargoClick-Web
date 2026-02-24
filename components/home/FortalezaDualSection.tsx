@@ -71,8 +71,8 @@ export default function FortalezaDualSection() {
 
         {/* Grid: 1 columna mobile → 2 columnas desktop. Operación siempre primero. */}
         <div
-          className="grid grid-cols-1 md:grid-cols-2"
-          style={{ gap: '32px' }}
+          className="grid grid-cols-2"
+          style={{ gap: '24px' }}
         >
           <FadeInSection direction="left">
             <FortalezaBlock

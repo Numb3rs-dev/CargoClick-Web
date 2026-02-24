@@ -49,7 +49,7 @@ export default function PasoCard({
       className="transition-shadow duration-[250ms] ease-in-out hover:shadow-[0_4px_16px_rgba(0,0,0,0.10)]"
       style={{
         background: '#FFFFFF',
-        padding: '32px 24px',
+        padding: 'clamp(12px, 3vw, 32px) clamp(8px, 2vw, 24px)',
         borderRadius: '12px',
         boxShadow: '0 4px 6px -1px rgba(0,0,0,0.07), 0 10px 30px -5px rgba(0,0,0,0.10), 0 1px 0 0 rgba(255,255,255,0.9) inset',
         border: '1px solid rgba(255,255,255,0.8)',
@@ -63,11 +63,11 @@ export default function PasoCard({
       {/* Ícono central – asset o fallback Lucide */}
       <div
         style={{
-          height: '96px',
+          height: 'clamp(48px, 10vw, 96px)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 20px',
+          margin: '0 auto clamp(8px, 2vw, 20px)',
         }}
       >
         {ASSET_EXISTS ? (
@@ -75,8 +75,7 @@ export default function PasoCard({
             src={iconoSrc}
             alt={iconoAlt}
             width={96}
-            height={96}
-          />
+            height={96}            style={{ width: 'clamp(40px, 9vw, 96px)', height: 'clamp(40px, 9vw, 96px)', objectFit: 'contain' }}          />
         ) : (
           fallbackIcon
         )}
@@ -86,10 +85,9 @@ export default function PasoCard({
       <h3
         style={{
           color: '#1A1A1A',
-          fontSize: '18px',
+          fontSize: 'clamp(12px, 2.5vw, 18px)',
           fontWeight: 700,
-          marginBottom: '12px',
-          margin: '0 0 12px 0',
+          margin: '0 0 clamp(4px, 1vw, 12px) 0',
         }}
       >
         {titulo}
@@ -99,8 +97,8 @@ export default function PasoCard({
       <p
         style={{
           color: '#5E6B78',
-          fontSize: '15px',
-          lineHeight: '1.6',
+          fontSize: 'clamp(10px, 2vw, 15px)',
+          lineHeight: '1.5',
           margin: 0,
         }}
       >

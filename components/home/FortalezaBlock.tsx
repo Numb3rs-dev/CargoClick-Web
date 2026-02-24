@@ -48,7 +48,7 @@ export default function FortalezaBlock({ tema, titulo, logoSrc, bullets }: Forta
     <div style={{
       background: '#FFFFFF',
       borderRadius: '12px',
-      padding: '28px 24px',
+      padding: 'clamp(14px, 3vw, 28px) clamp(12px, 2.5vw, 24px)',
       boxShadow: '0 4px 6px -1px rgba(0,0,0,0.07), 0 10px 30px -5px rgba(0,0,0,0.10), 0 1px 0 0 rgba(255,255,255,0.9) inset',
       border: '1px solid rgba(255,255,255,0.8)',
     }}>

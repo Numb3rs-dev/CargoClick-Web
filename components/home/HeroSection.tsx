@@ -24,9 +24,9 @@ export default function HeroSection() {
     >
       {/* Grid container */}
       <div
-        className="max-w-[1200px] mx-auto px-5 md:px-10 grid grid-cols-1 md:grid-cols-[45fr_55fr] items-end"
+        className="max-w-[1200px] mx-auto px-5 md:px-10 grid grid-cols-[45fr_55fr] items-end"
         style={{
-          paddingTop: '48px',
+          paddingTop: 'clamp(32px, 6vw, 80px)',
           paddingBottom: '0px',
         }}
       >
@@ -51,7 +51,7 @@ export default function HeroSection() {
           {/* H1 – título principal */}
           <h1
             id="hero-titulo"
-            className="text-[32px] md:text-[56px]"
+            className="text-[20px] md:text-[56px]"
             style={{
               color: '#0B3D91',
               fontWeight: 700,
@@ -66,12 +66,12 @@ export default function HeroSection() {
 
           {/* Subtítulo */}
           <p
-            className="text-[16px] md:text-[18px]"
+            className="text-[12px] md:text-[18px]"
             style={{
               color: '#5E6B78',
               fontWeight: 400,
-              lineHeight: 1.6,
-              marginTop: '16px',
+              lineHeight: 1.5,
+              marginTop: '10px',
               marginBottom: 0,
             }}
           >
@@ -90,7 +90,7 @@ export default function HeroSection() {
 
         {/* ── Columna derecha: imagen – fade solo opacidad ── */}
         <FadeInSection direction="none" delay={0.2}>
-        <div className="mt-6 md:mt-0 md:-ml-10">
+        <div style={{ marginLeft: '-40px' }}>
           {ASSET_CAMION_DISPONIBLE ? (
             <Image
               src="/assets/CamionConCargaV2.jpg"

@@ -248,8 +248,8 @@ export function OriginDestinationDANE({
         value={valor.destino}
         onChange={handleDestinoChange}
         disabled={disabled}
-        color="error"
-        icon={<PlaceTwoTone sx={{ color: 'error.main', fontSize: 20 }} />}
+        color="success"
+        icon={<PlaceTwoTone sx={{ color: 'success.main', fontSize: 20 }} />}
       />
 
       {/* ── Tarjeta info de ruta (se muestra cuando ambos están elegidos) ── */}
