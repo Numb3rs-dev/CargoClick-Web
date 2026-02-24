@@ -1,29 +1,37 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
+import type { NextRequest, NextFetchEvent } from 'next/server'
 
 /**
  * Rutas públicas: accesibles sin autenticación.
  * Todo lo demás queda protegido por Clerk.
  */
 const isPublicRoute = createRouteMatcher([
-  '/',                   // Root (redirige a /home)
-  '/home(.*)',           // Landing / marketing page
-  '/cotizar(.*)',        // Flujo de cotización para clientes
-  '/sign-in(.*)',        // Página de login de Clerk
-  '/api/health(.*)',     // Health check (no requiere auth)
-  '/api/solicitudes',   // POST — crear solicitud (flujo público del wizard)
+  '/',                    // Root (redirige a /home)
+  '/home(.*)',            // Landing / marketing page
+  '/cotizar(.*)',         // Flujo de cotización para clientes
+  '/sign-in(.*)',         // Página de login de Clerk
+  '/api/health(.*)',      // Health check (no requiere auth)
+  '/api/solicitudes',    // POST — crear solicitud (flujo público del wizard)
   '/api/solicitudes/:id', // GET/PATCH — guardado progresivo del wizard
   // /sign-up intencionalmente ausente: registro deshabilitado
 ])
 
-export default clerkMiddleware(async (auth, req) => {
-  if (!isPublicRoute(req)) {
-    await auth.protect()
-  }
-}, {
-  // Tolerancia a desfase de reloj del sistema (clock skew)
-  // Evita el loop infinito de Clerk cuando el reloj local está levemente adelantado/atrasado
-  clockSkewInMs: 60_000,
-})
+// Build the Clerk handler only when the key is present.
+// Without this guard, Clerk crashes every request at Railway runtime
+// before env vars are configured, blocking even the healthcheck.
+const clerkHandler = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+  ? clerkMiddleware(async (auth, req) => {
+      if (!isPublicRoute(req)) {
+        await auth.protect()
+      }
+    }, { clockSkewInMs: 60_000 })
+  : null
+
+export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  if (!clerkHandler) return NextResponse.next()
+  return clerkHandler(req, event)
+}
 
 export const config = {
   matcher: [
