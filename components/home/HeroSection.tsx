@@ -24,13 +24,9 @@ export default function HeroSection() {
     >
       {/* Grid container */}
       <div
-        className="max-w-[1200px] mx-auto px-5 md:px-10"
+        className="max-w-[1200px] mx-auto px-5 md:px-10 grid grid-cols-1 md:grid-cols-[45fr_55fr] items-end"
         style={{
-          display: 'grid',
-          gridTemplateColumns: '45fr 55fr',
-          gap: '0px',
-          alignItems: 'flex-end',
-          paddingTop: '80px',
+          paddingTop: '48px',
           paddingBottom: '0px',
         }}
       >
@@ -94,7 +90,7 @@ export default function HeroSection() {
 
         {/* ── Columna derecha: imagen – fade solo opacidad ── */}
         <FadeInSection direction="none" delay={0.2}>
-        <div style={{ marginLeft: '-40px' }}>
+        <div className="mt-6 md:mt-0 md:-ml-10">
           {ASSET_CAMION_DISPONIBLE ? (
             <Image
               src="/assets/CamionConCargaV2.jpg"

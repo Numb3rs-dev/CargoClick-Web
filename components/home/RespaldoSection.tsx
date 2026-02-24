@@ -5,20 +5,20 @@
  * Transportes Nuevo Mundo S.A.S. Aparece justo debajo del Hero.
  *
  * Server Component – sin 'use client'.
- * Diseño centrado sobre fondo gris (#F5F7FA).
+ * Fondo blanco puro para separarse visualmente del Hero (#FCFBFE).
  */
 
 import Image from 'next/image';
-import { Building2 } from 'lucide-react';
 
 export default function RespaldoSection() {
-  // Cambiar a true cuando el asset esté en /public/assets/
-  const assetExists = false;
-
   return (
     <section
       aria-label="Respaldo operativo"
-      style={{ background: '#F5F7FA', padding: '48px 0', textAlign: 'center' }}
+      style={{
+        background: '#FCFBFE',
+        padding: '0',
+        textAlign: 'center',
+      }}
     >
       <div
         className="px-5 md:px-10"
@@ -28,48 +28,60 @@ export default function RespaldoSection() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '20px',
+          gap: '8px',
         }}
       >
-        {/* Texto principal */}
-        <p
-          className="text-base md:text-lg"
+        {/* Eyebrow con líneas laterales */}
+        <div
           style={{
-            color: '#1A1A1A',
-            fontWeight: 600,
-            lineHeight: 1.4,
-            margin: 0,
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            maxWidth: '600px',
+            gap: '16px',
           }}
         >
-          Operación respaldada por Transportes Nuevo Mundo S.A.S.
-        </p>
-
-        {/* Logo o Placeholder */}
-        {assetExists ? (
-          <Image
-            src="/assets/NuevoMundoLogoNombreLadoDerecho.svg"
-            alt="Transportes Nuevo Mundo S.A.S. – Empresa respaldante de CargoClick"
-            height={60}
-            width={200}
-            style={{ height: '60px', width: 'auto' }}
-          />
-        ) : (
+          {/* Línea izquierda */}
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '12px 24px',
-              border: '2px solid #0B3D91',
-              borderRadius: '6px',
+              flex: 1,
+              height: '1px',
+              background: 'linear-gradient(to right, transparent, #5E6B78)',
+            }}
+          />
+
+          <p
+            className="text-[16px] md:text-[18px]"
+            style={{
+              color: '#5E6B78',
+              fontWeight: 400,
+              lineHeight: 1.6,
+              margin: 0,
+              whiteSpace: 'nowrap',
             }}
           >
-            <Building2 size={24} color="#0B3D91" aria-hidden="true" />
-            <span style={{ color: '#0B3D91', fontSize: '16px', fontWeight: 700 }}>
-              Transportes Nuevo Mundo S.A.S.
-            </span>
-          </div>
-        )}
+            Operación respaldada por
+          </p>
+
+          {/* Línea derecha */}
+          <div
+            style={{
+              flex: 1,
+              height: '1px',
+              background: 'linear-gradient(to left, transparent, #5E6B78)',
+            }}
+          />
+        </div>
+
+        {/* Logo Transportes Nuevo Mundo */}
+        <Image
+          src="/assets/NuevoMundoLogo.png"
+          alt="Transportes Nuevo Mundo S.A.S."
+          height={168}
+          width={360}
+          style={{ height: '168px', width: 'auto', objectFit: 'contain', display: 'block' }}
+          priority
+        />
       </div>
     </section>
   );

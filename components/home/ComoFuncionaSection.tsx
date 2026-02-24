@@ -54,13 +54,14 @@ export default function ComoFuncionaSection() {
     >
       {/* Título de sección con líneas decorativas – igual que RespaldoSection */}
       <div
+        className="px-5 md:px-10"
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '20px',
           maxWidth: '1200px',
-          margin: '0 auto 48px',
-          padding: '40px 40px 0',
+          margin: '0 auto 40px',
+          paddingTop: '40px',
         }}
       >
         <div style={{ flex: 1, height: '2px', background: 'linear-gradient(to right, transparent, #C8CAD0)' }} aria-hidden="true" />
@@ -85,9 +86,7 @@ export default function ComoFuncionaSection() {
           style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 3, marginBottom: '-72px', paddingBottom: '72px' }}
           className="px-5 md:px-10"
         >
-          <div
-            style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch', gap: '0' }}
-          >
+          <div className="flex flex-col md:flex-row items-stretch">
             {PASOS.map((paso, index) => (
               <React.Fragment key={paso.numero}>
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -96,11 +95,20 @@ export default function ComoFuncionaSection() {
                   </FadeInSection>
                 </div>
                 {index < PASOS.length - 1 && (
-                  <div style={{ display: 'flex', alignItems: 'center', padding: '0 8px', flexShrink: 0 }}>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                      <path d="M9 18l6-6-6-6" stroke="#0B3D91" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
+                  <>
+                    {/* Flecha horizontal – solo desktop */}
+                    <div className="hidden md:flex items-center" style={{ padding: '0 8px', flexShrink: 0 }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M9 18l6-6-6-6" stroke="#0B3D91" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                    {/* Flecha vertical – solo mobile */}
+                    <div className="flex md:hidden justify-center" style={{ padding: '8px 0' }}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" stroke="#0B3D91" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </>
                 )}
               </React.Fragment>
             ))}
