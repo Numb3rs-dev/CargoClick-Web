@@ -1,0 +1,853 @@
+{
+	"info": {
+		"_postman_id": "solicitudes-api-collection",
+		"name": "Sistema Solicitudes - API REST",
+		"description": "Colección completa para testing del backend de solicitudes de transporte B2B\n\n**Stack:** Next.js 15 + TypeScript + Prisma + PostgreSQL\n\n**Flujo de prueba:**\n1. Health Check\n2. Crear solicitud inicial\n3. Actualizar campos progresivamente\n4. Completar solicitud (envía notificaciones)\n5. Obtener solicitud completada\n\n**Variables:**\n- `base_url`: http://localhost:3000\n- `solicitud_id`: Se guarda automáticamente al crear solicitud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Health Check",
+			"item": [
+				{
+					"name": "Health Check - Success",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"health"
+							]
+						},
+						"description": "Verifica disponibilidad del sistema y conexión a base de datos.\n\n**Response esperado (200):**\n```json\n{\n  \"status\": \"ok\",\n  \"timestamp\": \"2026-02-19T...\",\n  \"database\": \"connected\",\n  \"version\": \"1.0.0\"\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Crear Solicitud Inicial",
+			"item": [
+				{
+					"name": "POST - Crear Solicitud Exitosa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Guardar ID de solicitud en variable de entorno",
+									"if (pm.response.code === 201) {",
+									"    const jsonData = pm.response.json();",
+									"    pm.environment.set('solicitud_id', jsonData.data.id);",
+									"    console.log('✅ Solicitud creada con ID:', jsonData.data.id);",
+									"}",
+									"",
+									"// Test automático",
+									"pm.test('Status code es 201', function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Response tiene estructura correcta', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('success', true);",
+									"    pm.expect(jsonData).to.have.property('data');",
+									"    pm.expect(jsonData.data).to.have.property('id');",
+									"    pm.expect(jsonData.data).to.have.property('empresa');",
+									"    pm.expect(jsonData.data.estado).to.eql('EN_PROGRESO');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"empresa\": \"ACME Transport S.A.S.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes"
+							]
+						},
+						"description": "Crea solicitud inicial con solo nombre de empresa.\n\n**Request Body:**\n```json\n{\n  \"empresa\": \"ACME Transport S.A.S.\"\n}\n```\n\n**Response esperado (201):**\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"01JXX...\",\n    \"empresa\": \"ACME Transport S.A.S.\",\n    \"estado\": \"EN_PROGRESO\",\n    ...\n  },\n  \"message\": \"Solicitud creada correctamente\"\n}\n```\n\n**📝 NOTA:** El ID generado se guarda automáticamente en la variable `{{solicitud_id}}`"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Error Empresa Vacía",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Error de validación Zod', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"    pm.expect(jsonData.error).to.include('inválidos');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"empresa\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes"
+							]
+						},
+						"description": "Validación: empresa no puede estar vacía.\n\n**Response esperado (400):**\n```json\n{\n  \"success\": false,\n  \"error\": \"Datos inválidos\",\n  \"details\": [\n    {\n      \"field\": \"empresa\",\n      \"message\": \"...\"\n    }\n  ]\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Actualizar Solicitud Progresivamente",
+			"item": [
+				{
+					"name": "PATCH - Actualizar Contacto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Contacto actualizado', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data.contacto).to.eql('Juan Pérez García');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"contacto\": \"Juan Pérez García\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 1: Contacto"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Email actualizado', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data.email).to.eql('juan.perez@acme.com');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"juan.perez@acme.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 2: Email"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Teléfono",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Teléfono actualizado', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data.telefono).to.eql('+573001234567');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telefono\": \"+573001234567\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 3: Teléfono"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Tipo Servicio y Origen",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoServicio\": \"NACIONAL\",\n  \"origen\": \"Bogotá D.C.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 4-5: Tipo de servicio y origen"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Destino",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"destino\": \"Medellín\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 6: Destino (obligatorio para NACIONAL según RN-01)"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Tipo Carga y Peso",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoCarga\": \"MERCANCIA_EMPRESARIAL\",\n  \"pesoKg\": 5000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 7-8: Tipo de carga y peso"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Dimensiones",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"dimensiones\": \"200cm x 150cm x 100cm\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 9: Dimensiones"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Valor Asegurado",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"valorAsegurado\": 25000000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 10: Valor asegurado (en pesos colombianos)"
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Condiciones Cargue",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"condicionesCargue\": [\"muelle\", \"montacargas\"]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 11: Condiciones de cargue\n\n**Valores válidos:** \"muelle\", \"montacargas\", \"manual\""
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Actualizar Fecha Requerida",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fechaRequerida\": \"2026-03-01T00:00:00.000Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Actualización progresiva - Paso 12: Fecha requerida de servicio\n\n**IMPORTANTE:** Usar formato ISO 8601: \"YYYY-MM-DDTHH:mm:ss.SSSZ\"\n\n**Ejemplo:** \"2026-03-01T00:00:00.000Z\"\n\n**Validación:** La fecha no puede ser en el pasado."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Completar Solicitud",
+			"item": [
+				{
+					"name": "PATCH - Completar Solicitud (envía notificaciones)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Solicitud completada', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.data.estado).to.eql('COMPLETADA');",
+									"    pm.expect(jsonData.message).to.include('completada');",
+									"});",
+									"",
+									"console.log('🎉 Solicitud completada. Revisa la consola del servidor para ver las notificaciones enviadas.');"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"completar\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "**PASO FINAL:** Completa solicitud con flag `completar: true`\n\n**NOTA:** Si necesitas actualizar fechaRequerida, hazlo primero con el request anterior (Paso 12).\n\n**Acciones del backend:**\n1. Valida solicitud completa con Zod (todos los campos obligatorios)\n2. Verifica reglas de negocio (RN-01 a RN-07)\n3. Cambia estado a COMPLETADA\n4. Dispara notificaciones:\n   - Email al cliente\n   - Email al admin\n   - WhatsApp al admin\n\n**Response esperado (200):**\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"...\",\n    \"estado\": \"COMPLETADA\",\n    \"revisionEspecial\": false,\n    ...\n  },\n  \"message\": \"Solicitud completada. Notificaciones enviadas.\"\n}\n```\n\n**📧 NOTA:** Revisa los logs del servidor para ver las notificaciones enviadas."
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Error Mudanza Rechazada (RN-02)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Error de validación - mudanza rechazada', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"    pm.expect(jsonData.error).to.include('mudanza');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoCarga\": \"mudanza de hogar\",\n  \"fechaRequerida\": \"2026-03-01T00:00:00.000Z\",\n  \"completar\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "**RN-02:** Rechaza solicitudes que contengan palabras prohibidas ('hogar', 'mudanza')\n\n**Response esperado (400):**\n```json\n{\n  \"success\": false,\n  \"error\": \"No procesamos mudanzas de hogar. Nuestro servicio es exclusivo para transporte empresarial.\"\n}\n```\n\n**⚠️ NOTA:** Ejecuta este test ANTES de completar la solicitud, ya que la mudanza será rechazada."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. Obtener Solicitud",
+			"item": [
+				{
+					"name": "GET - Obtener Solicitud por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Solicitud obtenida correctamente', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.data).to.have.property('id');",
+									"    pm.expect(jsonData.data).to.have.property('empresa');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "Obtiene solicitud completa por ID.\n\n**Response esperado (200):**\n```json\n{\n  \"success\": true,\n  \"data\": {\n    \"id\": \"...\",\n    \"empresa\": \"...\",\n    \"estado\": \"...\",\n    ...\n  }\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Error ID No Existe (404)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 404', function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test('Error solicitud no encontrada', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"    pm.expect(jsonData.error).to.include('no encontrada');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/01INVALID0000000000000000",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"01INVALID0000000000000000"
+							]
+						},
+						"description": "Prueba error 404 cuando ID no existe.\n\n**Response esperado (404):**\n```json\n{\n  \"success\": false,\n  \"error\": \"Solicitud no encontrada\"\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Error ID Inválido (400)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Error ID inválido', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"    pm.expect(jsonData.error).to.include('inválido');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/123",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"123"
+							]
+						},
+						"description": "Prueba validación de formato de ID (debe ser ULID de 26 caracteres).\n\n**Response esperado (400):**\n```json\n{\n  \"success\": false,\n  \"error\": \"ID inválido. Debe ser un ULID de 26 caracteres\"\n}\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Casos Avanzados",
+			"item": [
+				{
+					"name": "PATCH - Peso Alto (revisionEspecial = true)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 200', function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('revisionEspecial activado (RN-05)', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data.pesoKg).to.be.above(10000);",
+									"    pm.expect(jsonData.data.revisionEspecial).to.eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"pesoKg\": 15000\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "**RN-05:** Cuando peso > 10,000 kg → revisionEspecial = true\n\nPrueba cálculo automático de campo derivado."
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH - Completar con Destino Faltante (RN-01)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Status code es 400', function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test('Error validación destino obligatorio', function () {",
+									"    const jsonData = pm.response.json();",
+									"    pm.expect(jsonData.success).to.eql(false);",
+									"    pm.expect(jsonData.error).to.include('inválidos');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipoServicio\": \"NACIONAL\",\n  \"destino\": \"\",\n  \"fechaRequerida\": \"2026-03-01T00:00:00.000Z\",\n  \"completar\": true\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/solicitudes/{{solicitud_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"solicitudes",
+								"{{solicitud_id}}"
+							]
+						},
+						"description": "**RN-01:** Si tipoServicio = NACIONAL → destino es obligatorio\n\nPrueba validación de regla de negocio."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "solicitud_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,442 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMERACIONES
+// ============================================
+
+/// Tipo de servicio de transporte ofrecido
+enum TipoServicio {
+  URBANO     @map("urbano")
+  NACIONAL   @map("nacional")
+}
+
+/// Tipo de carga a transportar (categorías SISETAC)
+enum TipoCarga {
+  CARGA_GENERAL   @map("carga_general")   // Mercancía, maquinaria, muebles, materiales secos
+  REFRIGERADA     @map("refrigerada")     // Cadena de frío: alimentos, farmacéuticos, flores
+  CONTENEDOR      @map("contenedor")      // Contenedor ISO 20'/40' — importación/exportación
+  GRANEL_SOLIDO   @map("granel_solido")   // Arena, carbón, granos, escombros — sin empacar
+  GRANEL_LIQUIDO  @map("granel_liquido")  // Combustibles, aceites, químicos — en cisterna
+}
+
+/// Estado del procesamiento de la solicitud
+enum EstadoSolicitud {
+  EN_PROGRESO  @map("en_progreso")
+  COMPLETADA   @map("completada")
+  PENDIENTE    @map("pendiente")
+  COTIZADO     @map("cotizado")
+  RECHAZADO    @map("rechazado")
+  CERRADO      @map("cerrado")
+}
+
+// ============================================
+// MODELO PRINCIPAL
+// ============================================
+
+/// Solicitud de cotización de transporte B2B
+/// Almacena toda la información necesaria para generar una cotización de servicio de transporte
+model Solicitud {
+  // === IDENTIFICACIÓN ===
+  /// ID único de la solicitud (ULID de 26 caracteres generado en código)
+  id              String   @id @default(cuid())
+  
+  // === DATOS DEL SERVICIO ===
+  /// Tipo de servicio de transporte solicitado
+  tipoServicio    TipoServicio
+  
+  /// Ciudad o dirección de origen del servicio
+  origen          String   @db.VarChar(200)
+  
+  /// Ciudad o dirección de destino (obligatorio solo si tipoServicio = NACIONAL)
+  destino         String?  @db.VarChar(200)
+
+  // === DATOS CALCULADOS DE RUTA ===
+  /// Distancia calculada entre origen y destino en kilómetros
+  distanciaKm             Float?   @map("distancia_km")
+
+  /// Tramo logístico de la ruta (CORTA / MEDIA / LARGA / MUY_LARGA)
+  tramoDistancia          String?  @db.VarChar(20)  @map("tramo_distancia")
+
+  /// Descripción del tiempo estimado de tránsito (Ej: "2–3 días hábiles")
+  tiempoTransitoDesc      String?  @db.VarChar(100) @map("tiempo_transito_desc")
+  
+  // === DATOS DE LA CARGA ===
+  /// Tipo de carga a transportar
+  tipoCarga       TipoCarga
+  
+  /// Peso de la carga en kilogramos (precisión 2 decimales)
+  pesoKg          Decimal  @db.Decimal(10, 2)
+  
+  /// Dimensión: Largo en centímetros (precisión 2 decimales)
+  dimLargoCm      Decimal  @db.Decimal(10, 2) @default(0)
+  
+  /// Dimensión: Ancho en centímetros (precisión 2 decimales)
+  dimAnchoCm      Decimal  @db.Decimal(10, 2) @default(0)
+  
+  /// Dimensión: Alto en centímetros (precisión 2 decimales)
+  dimAltoCm       Decimal  @db.Decimal(10, 2) @default(0)
+
+  // === DATOS CALCULADOS DE CARGA ===
+  /// Volumen calculado de la carga en metros cúbicos (largo × ancho × alto / 1_000_000)
+  volumenM3               Float?   @map("volumen_m3")
+
+  /// ID del vehículo mínimo sugerido según catálogo SISETAC (Ej: "CAMION_3_EJES")
+  vehiculoSugeridoId      String?  @db.VarChar(50)  @map("vehiculo_sugerido_id")
+
+  /// Nombre del vehículo mínimo sugerido (Ej: "Camión 3 ejes (C3)")
+  vehiculoSugeridoNombre  String?  @db.VarChar(200) @map("vehiculo_sugerido_nombre")
+  
+  /// Valor asegurado de la carga en pesos colombianos (precisión 2 decimales)
+  valorAsegurado  Decimal  @db.Decimal(15, 2)
+  
+  // === CONDICIONES Y FECHAS ===
+  /// Condiciones de cargue requeridas (array JSON: ["muelle", "montacargas", "manual"])
+  condicionesCargue Json
+  
+  /// Fecha requerida para el servicio (solo fecha, sin hora)
+  fechaRequerida    DateTime @db.Date
+  
+  // === DATOS DEL CLIENTE ===
+  /// Nombre de la empresa cliente (opcional)
+  empresa             String?  @db.VarChar(200)
+  
+  /// Teléfono directo de la empresa cliente (opcional, diferente al celular del contacto)
+  telefonoEmpresa     String?  @db.VarChar(50)  @map("telefono_empresa")
+  
+  /// Nombre del contacto principal
+  contacto        String   @db.VarChar(200)
+  
+  /// Número de teléfono del contacto (formato internacional)
+  telefono        String   @db.VarChar(20)
+  
+  /// Email del contacto para notificaciones
+  email           String   @db.VarChar(100)
+  
+  // === ENRIQUECIMIENTO (paso 6 — checklist de condiciones) ===
+  /// Observaciones libres del cliente sobre la carga o el servicio
+  observaciones              String?  @db.Text
+
+  /// Carga peligrosa HAZMAT — requiere permisos especiales y vehículo certificado
+  cargaPeligrosa             Boolean? @default(false)  @map("carga_peligrosa")
+  /// Detalle adicional de la carga peligrosa (tipo, clásificación, etc.)
+  detalleCargaPeligrosa      String?  @db.Text         @map("detalle_carga_peligrosa")
+
+  /// Requiere ayudante de personal en el origen para el cargue
+  ayudanteCargue             Boolean? @default(false)  @map("ayudante_cargue")
+
+  /// Requiere ayudante de personal en el destino para el descargue
+  ayudanteDescargue          Boolean? @default(false)  @map("ayudante_descargue")
+
+  /// La carga es frágil — requiere embalaje reforzado y manejo especial
+  cargaFragil                Boolean? @default(false)  @map("carga_fragil")
+
+  /// La carga llega sin empacar y necesita embalaje antes del viaje
+  necesitaEmpaque            Boolean? @default(false)  @map("necesita_empaque")
+
+  /// El envío tiene entrega en más de un punto de destino
+  multiplesDestinosEntrega   Boolean? @default(false)  @map("multiples_destinos_entrega")
+  /// Detalle de los puntos de entrega adicionales (cuántos, dónde)
+  detalleMultiplesDestinos   String?  @db.Text         @map("detalle_multiples_destinos")
+
+  /// La carga requiere escolta de seguridad (alto valor)
+  requiereEscolta            Boolean? @default(false)  @map("requiere_escolta")
+
+  /// Hay acceso difícil en origen o destino (rampa, camino angosto, etc.)
+  accesosDificiles           Boolean? @default(false)  @map("accesos_dificiles")
+  /// Detalle de los accesos difíciles
+  detalleAccesosDificiles    String?  @db.Text         @map("detalle_accesos_dificiles")
+
+  /// La carga es sobredimensionada — puede requerir permiso INVIAS y vehículo piloto
+  cargaSobredimensionada     Boolean? @default(false)  @map("carga_sobredimensionada")
+  /// Detalle de las dimensiones fuera de estándar
+  detalleSobredimensionada   String?  @db.Text         @map("detalle_sobredimensionada")
+
+  // === ESTADO Y FLAGS ===
+  /// Estado actual de la solicitud en el flujo de procesamiento
+  estado          EstadoSolicitud @default(PENDIENTE)
+  
+  /// Flag de revisión especial (automático si peso > 10 toneladas)
+  revisionEspecial Boolean  @default(false)
+  
+  // === TIMESTAMPS ===
+  /// Fecha y hora de creación del registro
+  createdAt       DateTime @default(now())      @map("created_at")
+  
+  /// Fecha y hora de última actualización del registro
+  updatedAt       DateTime @updatedAt           @map("updated_at")
+  
+  // === ÍNDICES ===
+  /// Índice para consultas frecuentes por estado
+  @@index([estado])
+  
+  /// Índice para ordenamiento por fecha de creación (descendente)
+  @@index([createdAt(sort: Desc)])
+  
+  /// Índice para búsqueda por email del cliente
+  @@index([email])
+  
+  /// Índice para búsqueda por nombre de empresa
+  @@index([empresa])
+
+  // === RELACIONES ===
+  cotizaciones        Cotizacion[]
+  ajustesComerciales  AjusteComercial[]
+  
+  @@map("solicitudes")
+}
+
+// ============================================
+// MODELOS DEL MOTOR DE COTIZACIÓN (SISETAC)
+// ============================================
+
+/// Parámetros variables que se actualizan mensualmente (ACPM, SMLMV, tasa de interés)
+model MonthlyParams {
+  id               Int      @id @default(autoincrement())
+  periodoYyyyMm    Int      @unique           // 202602
+  acpmPriceCopGal  Decimal  @db.Decimal(12,2) // 10850.00
+  smlmv            Decimal  @db.Decimal(15,2) // 1423500.00
+  interesMensualBr Decimal  @db.Decimal(8,6)  // 0.008400
+  notas            String?  @db.Text
+  createdAt        DateTime @default(now())   @map("created_at")
+  updatedAt        DateTime @updatedAt        @map("updated_at")
+
+  @@map("monthly_params")
+}
+
+/// Parámetros por configuración vehicular y año (capital, seguros, llantas, mantenimiento)
+model VehicleParams {
+  id                          Int     @id @default(autoincrement())
+  configId                    String  @db.VarChar(10)   // C2, C3, C2S2, C2S3, C3S2, C3S3
+  ano                         Int
+  // Capital
+  valorVehiculoCop            Decimal @db.Decimal(15,2)
+  mesesRecuperacion           Int
+  // Seguros
+  soatAnualCop                Decimal @db.Decimal(12,2)
+  seguroTodoRiesgoAnualCop    Decimal @db.Decimal(12,2)
+  // Operación fija
+  rtmAnualCop                 Decimal @db.Decimal(12,2)
+  comunicacionesMesCop        Decimal @db.Decimal(12,2)
+  parqueaderoNocheCop         Decimal @db.Decimal(12,2)
+  // Llantas tracción
+  precioLlantaTraccionCop     Decimal @db.Decimal(12,2)
+  qtyLlantasTraccion          Int
+  vidaUtilTraccionKm          Int
+  // Llantas dirección
+  precioLlantaDireccionalCop  Decimal @db.Decimal(12,2)
+  qtyLlantasDireccional       Int
+  vidaUtilDireccionalKm       Int
+  // Mantenimiento COP/km
+  indicadorLubricantesCopKm   Decimal @db.Decimal(10,4)
+  indicadorFiltrosCopKm       Decimal @db.Decimal(10,4)
+  indicadorLavadoEngraseCopKm Decimal @db.Decimal(10,4)
+  mantenimientoCopKm          Decimal @db.Decimal(10,4)
+
+  @@unique([configId, ano])
+  @@map("vehicle_params")
+}
+
+/// Distribución de terreno (plano/ondulado/montañoso) y peajes por corredor vial
+model RouteTerrain {
+  id                 Int      @id @default(autoincrement())
+  origenDane         String   @db.VarChar(10)
+  destinoDane        String   @db.VarChar(10)
+  kmPlanoPercent     Decimal  @db.Decimal(5,2)  // 0.30 = 30%
+  kmOnduladoPercent  Decimal  @db.Decimal(5,2)
+  kmMontanosoPercent Decimal  @db.Decimal(5,2)
+  totalPeajesC2Cop   Decimal  @db.Decimal(12,2)
+  totalPeajesC3Cop   Decimal  @db.Decimal(12,2) // Aplica a C3, C2S2, C2S3, C3S2, C3S3
+  fuente             String?  @db.VarChar(100)
+  vigenciaDesde      DateTime @db.Date
+
+  @@unique([origenDane, destinoDane])
+  @@map("route_terrain")
+}
+
+/// Política comercial del operador (margen, redondeo, validez)
+model CommercialParams {
+  id                     Int      @id @default(autoincrement())
+  vigenciaDesde          DateTime @db.Date
+  margenOperadorPercent  Decimal  @db.Decimal(5,2)  // 10.00 = 10%
+  redondeoMilCop         Int      @default(50000)
+  validezCotizacionHoras Int      @default(48)
+  activo                 Boolean  @default(true)
+  notas                  String?
+
+  @@map("commercial_params")
+}
+
+/// Registro de cada cotización generada a partir de una solicitud
+model Cotizacion {
+  id                      String    @id @default(cuid())
+  solicitudId             String    @map("solicitud_id")
+  solicitud               Solicitud @relation(fields: [solicitudId], references: [id])
+  periodoParametros       Int       @map("periodo_parametros")  // YYYYMM usado
+  configVehiculo          String    @db.VarChar(10) @map("config_vehiculo")
+  distanciaKm             Float     @map("distancia_km")
+  // Resultados principales (COP)
+  cvTotal                 Decimal   @db.Decimal(15,2) @map("cv_total")
+  cfPorViaje              Decimal   @db.Decimal(15,2) @map("cf_por_viaje")
+  costoTecnicoBase        Decimal   @db.Decimal(15,2) @map("costo_tecnico_base")  // CV + CF
+  fleteReferencialSisetac Decimal   @db.Decimal(15,2) @map("flete_referencial_sisetac")
+  tarifaSugerida          Decimal   @db.Decimal(15,2) @map("tarifa_sugerida")
+  margenAplicado          Decimal   @db.Decimal(5,2)  @map("margen_aplicado")     // % efectivo
+  // Desglose JSON (para trazabilidad y visualización)
+  desgloseCv              Json      @map("desglose_cv")
+  desgloseCf              Json      @map("desglose_cf")
+  parametrosUsados        Json      @map("parametros_usados")
+  // ── Referencia de mercado RNDC (nullable — se llena al cotizar si hay datos)
+  rndcEstimado            Decimal?  @db.Decimal(15,2) @map("rndc_estimado")
+  rndcMediana             Decimal?  @db.Decimal(15,2) @map("rndc_mediana")
+  rndcConfianza           String?   @db.VarChar(10)   @map("rndc_confianza")         // ALTA | MEDIA | BAJA
+  rndcViajesSimilares     Int?                         @map("rndc_viajes_similares")
+  rndcNivelFallback       Int?                         @map("rndc_nivel_fallback")    // 1=ruta exacta 2=dept 3=nacional
+  // Estado y vigencia
+  estado                  String    @default("VIGENTE") @db.VarChar(20)
+  validezHasta            DateTime  @map("validez_hasta")
+  createdAt               DateTime  @default(now()) @map("created_at")
+
+  // Relación ajustes
+  ajustesComerciales      AjusteComercial[]
+
+  @@index([solicitudId])
+  @@map("cotizaciones")
+}
+
+// ============================================
+// MÓDULO COMERCIAL
+// ============================================
+
+/// Capa de negociación sobre la cotización SISETAC.
+/// Almacena la oferta al cliente, la tarifa confirmada, el pago al conductor
+/// y las métricas de rentabilidad real de la operación.
+model AjusteComercial {
+  id                      String    @id @default(cuid())
+
+  // === RELACIONES ===
+  solicitudId             String    @map("solicitud_id")
+  solicitud               Solicitud  @relation(fields: [solicitudId], references: [id])
+
+  cotizacionBaseId        String    @map("cotizacion_base_id")
+  cotizacionBase          Cotizacion @relation(fields: [cotizacionBaseId], references: [id])
+
+  // === SIMULADOR USADO ===
+  /// Tipo de vehículo seleccionado por el comercial (puede diferir del inferido)
+  vehiculoUsado           String    @db.VarChar(10) @map("vehiculo_usado")
+  /// Margen % que se tomó como base en el simulador
+  margenSimulado          Decimal   @db.Decimal(5,2) @map("margen_simulado")
+
+  // === OFERTA AL CLIENTE ===
+  /// Precio que se le ofrece al cliente (puede diferir de tarifaSugerida)
+  tarifaOfertadaCliente   Decimal?  @db.Decimal(15,2) @map("tarifa_ofertada_cliente")
+  /// Margen efectivo sobre el piso SISETAC al momento de la oferta (calculado)
+  margenEfectivoOferta    Decimal?  @db.Decimal(6,2)  @map("margen_efectivo_oferta")
+
+  // === VALOR CONFIRMADO (LO QUE SE COBRÓ) ===
+  /// Tarifa real facturada al cliente — campo impuesto por el comercial
+  tarifaConfirmadaCliente Decimal?  @db.Decimal(15,2) @map("tarifa_confirmada_cliente")
+  /// Cuándo el cliente aceptó
+  fechaAceptacion         DateTime? @map("fecha_aceptacion")
+
+  // === PAGO AL CONDUCTOR ===
+  /// Valor neto que recibe el conductor — campo impuesto por el comercial
+  pagoAlConductor         Decimal?  @db.Decimal(15,2) @map("pago_al_conductor")
+  /// Margen bruto operativo en COP (tarifaConfirmada - pagoAlConductor)
+  margenBrutoCop          Decimal?  @db.Decimal(15,2) @map("margen_bruto_cop")
+  /// Margen bruto operativo en % (sobre tarifaConfirmada)
+  margenBrutoPercent      Decimal?  @db.Decimal(6,2)  @map("margen_bruto_percent")
+
+  // === CONDICIONES COMERCIALES ===
+  /// CONTADO | CREDITO_30 | CREDITO_60 | CREDITO_90
+  formaPago               String    @default("CONTADO") @db.VarChar(20) @map("forma_pago")
+  /// Días de crédito acordados
+  diasCredito             Int       @default(0) @map("dias_credito")
+
+  // === ESTADO Y TRAZABILIDAD ===
+  /// BORRADOR | EN_OFERTA | EN_NEGOCIACION | ACEPTADO | CERRADO | RECHAZADO | CANCELADO
+  estadoNegociacion       String    @default("BORRADOR") @db.VarChar(20) @map("estado_negociacion")
+  /// Nombre del comercial que realizó el ajuste
+  nombreComercial         String?   @db.VarChar(100) @map("nombre_comercial")
+  /// userId de Clerk del usuario que creó el registro (M-3: audit trail)
+  creadoPor               String?   @db.VarChar(100) @map("creado_por")
+  /// userId de Clerk del último usuario que modificó el registro (M-3: audit trail)
+  modificadoPor           String?   @db.VarChar(100) @map("modificado_por")
+  /// Por qué se modificó el precio
+  motivoAjuste            String?   @db.Text @map("motivo_ajuste")
+  /// Por qué el cliente rechazó
+  motivoRechazo           String?   @db.Text @map("motivo_rechazo")
+  /// Notas internas del comercial
+  notasComerciales        String?   @db.Text @map("notas_comerciales")
+
+  // === TIMESTAMPS ===
+  createdAt               DateTime  @default(now()) @map("created_at")
+  updatedAt               DateTime  @updatedAt      @map("updated_at")
+
+  @@index([solicitudId])
+  @@index([estadoNegociacion])
+  @@map("ajustes_comerciales")
+}
+
+// ============================================
+// RNDC — HISTÓRICO DE MANIFIESTOS
+// ============================================
+
+/// Manifiesto de carga registrado en el RNDC (Registro Nacional de Despacho de Carga).
+/// Cada fila es un viaje real donde VALORFLETEPACTADOVIAJE es lo que el transportador cobró.
+/// Sirve como base de referencia de mercado (complemento al piso legal SISETAC).
+model ManifiestoRndc {
+  id              Int      @id @default(autoincrement())
+
+  // === IDENTIFICACIÓN DEL MANIFIESTO ===
+  manifiesto      String   @db.VarChar(30)  @map("manifiesto")
+
+  // === FECHAS ===
+  fechaExpedicion DateTime @db.Date         @map("fecha_expedicion")
+
+  // === ORIGEN ===
+  /// Ciudad de origen normalizada, e.g. "COTA"
+  origen          String   @db.VarChar(100) @map("origen")
+  /// Departamento de origen normalizado, e.g. "CUNDINAMARCA"
+  origenDept      String   @db.VarChar(60)  @map("origen_dept")
+
+  // === DESTINO ===
+  /// Ciudad de destino normalizada, e.g. "MEDELLIN"
+  destino         String   @db.VarChar(100) @map("destino")
+  /// Departamento de destino normalizado, e.g. "ANTIOQUIA"
+  destinoDept     String   @db.VarChar(60)  @map("destino_dept")
+
+  // === CARGA ===
+  /// Kilogramos totales de la remesa
+  pesoKg          Int                       @map("peso_kg")
+
+  // === VALORES ECONÓMICOS ===
+  /// Flete pactado con el transportador (lo que el conductor/empresa cobró por el viaje)
+  fletePactado    Decimal  @db.Decimal(15,2) @map("flete_pactado")
+  /// Flete neto al transportador (después de retenciones)
+  fleteNeto       Decimal  @db.Decimal(15,2) @map("flete_neto")
+  /// Retención en la fuente ICA aplicada
+  retencionIca    Decimal  @db.Decimal(15,2) @map("retencion_ica")
+
+  // === VEHÍCULO Y CONDUCTOR ===
+  placa           String?  @db.VarChar(10)  @map("placa")
+  conductorId     String?  @db.VarChar(20)  @map("conductor_id")
+
+  // === TIMESTAMPS ===
+  createdAt       DateTime @default(now())  @map("created_at")
+
+  @@unique([manifiesto])
+  @@index([origen, destino])
+  @@index([pesoKg])
+  @@index([fechaExpedicion])
+  @@map("manifiestos_rndc")
+}

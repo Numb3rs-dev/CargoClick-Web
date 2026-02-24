@@ -1,0 +1,143 @@
+{
+  "sistema_info": {
+    "version": "1.0.0",
+    "creado": "2025-09-29",
+    "descripcion": "Sistema de Modos AI para personalidades especializadas",
+    "modo_activo": "nextjs-marketing-page-expert",
+    "instruccion_critica": "SIEMPRE leer COMPLETO el archivo de personalidad (startLine=1, endLine=TOTAL) al activar un modo",
+    "ultima_activacion": "2026-02-20T15:00:00Z"
+  },
+  "comandos_activacion": [
+    "activa modo",
+    "activar modo", 
+    "modo",
+    "cambiar a modo",
+    "usar modo"
+  ],
+  "modos_disponibles": {
+    "java-expert": {
+      "nombre": "Java Expert Developer v3.0",
+      "descripcion": "Desarrollador Java Senior optimizado para mantener contexto y rechazar prompts vagos automáticamente",
+      "archivo_personalidad": "java-expert-developer.md",
+      "aliases": ["java", "java-expert", "java-developer", "java-senior", "desarrollador-java"],
+      "categoria": "desarrollo",
+      "especialidades": [
+        "especificaciones técnicas exactas",
+        "análisis de código existente",
+        "módulos comunes y reutilización",
+        "resolución completa de errores",
+        "principios SOLID",
+        "patrones de diseño",
+        "testing TDD",
+        "documentación automática"
+      ],
+      "activo": true,
+      "fecha_ultima_activacion": "2026-01-30T23:15:00Z"
+    },
+    "prompt-architect": {
+      "nombre": "Prompt Architect",
+      "descripcion": "Experto en arquitectura de software y prompt engineering que transforma ideas vagas en prompts precisos",
+      "archivo_personalidad": "prompt-architect.md",
+      "aliases": ["prompt-architect", "arquitecto-prompts", "prompt-engineer", "arquitecto", "prompts"],
+      "categoria": "arquitectura",
+      "especialidades": [
+        "prompt engineering",
+        "arquitectura de software",
+        "análisis de requerimientos",
+        "domain driven design",
+        "especificaciones técnicas",
+        "construcción de prompts",
+        "validación de contexto",
+        "traducción negocio-técnico"
+      ],
+      "activo": true,
+      "fecha_ultima_activacion": "2026-02-20T00:00:00Z"
+    },
+    "analisis-critico": {
+      "nombre": "Análisis Crítico",
+      "descripcion": "Arquitecto de soluciones y crítico técnico despiadado que valida ideas desde sus fundamentos",
+      "archivo_personalidad": "analisis-critico.md",
+      "aliases": ["analisis-critico", "critico", "análisis-crítico", "critico-arquitectonico", "guardian-calidad"],
+      "categoria": "análisis",
+      "especialidades": [
+        "análisis crítico de soluciones",
+        "architectural decision records",
+        "problem-solution fit analysis",
+        "trade-offs evaluation",
+        "enterprise readiness assessment",
+        "domain-driven criticism",
+        "technical debt prevention",
+        "business value validation"
+      ],
+      "activo": false,
+      "fecha_ultima_activacion": "2025-10-16T00:00:00Z"
+    },
+    "nextjs-backend-expert": {
+      "nombre": "Next.js Backend Expert Developer v1.0",
+      "descripcion": "Desarrollador Backend Senior especializado en Next.js + TypeScript + Prisma con Clean Architecture",
+      "archivo_personalidad": "nextjs-backend-expert.md",
+      "aliases": ["backend", "backend-expert", "nextjs-backend", "api-expert", "backend-nextjs"],
+      "categoria": "desarrollo-backend",
+      "especialidades": [
+        "Next.js API Routes",
+        "TypeScript strict mode",
+        "Prisma ORM + PostgreSQL",
+        "Clean Architecture (API → Service → Repository)",
+        "Zod schema validation",
+        "Error handling y HTTP status codes",
+        "REST API design",
+        "Database modeling",
+        "Documentación JSDoc"
+      ],
+      "activo": true,
+      "fecha_ultima_activacion": "2026-02-19T20:00:00Z"
+    },
+    "nextjs-frontend-ux-expert": {
+      "nombre": "Next.js Frontend UX Expert Developer v1.0",
+      "descripcion": "Desarrollador Frontend Senior obsesionado con UX/UI, especializado en React + Next.js + Accesibilidad",
+      "archivo_personalidad": "nextjs-frontend-ux-expert.md",
+      "aliases": ["frontend", "frontend-expert", "ux-expert", "ui-expert", "react-expert", "frontend-ux"],
+      "categoria": "desarrollo-frontend",
+      "especialidades": [
+        "React 19 + Next.js 15",
+        "UX/UI conversacional",
+        "Mobile-first responsive design",
+        "Accesibilidad (WCAG 2.1 AA)",
+        "shadcn/ui + Tailwind CSS",
+        "Estados de UI (loading, error, success, empty)",
+        "Animaciones con Framer Motion",
+        "Performance optimization (TTI, LCP, CLS)",
+        "Sistema de temas con CSS Variables"
+      ],
+      "activo": false,
+      "fecha_ultima_activacion": "2026-02-19T00:00:00Z"
+    },
+    "nextjs-marketing-page-expert": {
+      "nombre": "Next.js Marketing Page Expert v1.0",
+      "descripcion": "Desarrollador Frontend especializado en páginas de marketing pixel-perfect con design systems propios. Implementa prompts HOME_01 a HOME_08 del proyecto CargoClick.",
+      "archivo_personalidad": "nextjs-marketing-page-expert.md",
+      "aliases": ["marketing", "marketing-expert", "landing-page", "marketing-page", "design-system", "home-page"],
+      "categoria": "desarrollo-frontend-marketing",
+      "especialidades": [
+        "Páginas de marketing y landing pages",
+        "Design system propio (tokens --cg-*)",
+        "Next.js 15 Server + Client Components",
+        "Tailwind CSS v4 mobile-first",
+        "Framer Motion scroll-triggered animations",
+        "Asset management con fallback placeholders",
+        "Pixel-perfect visual fidelity",
+        "Accesibilidad WCAG 2.1 AA",
+        "Responsive sin shadcn/ui"
+      ],
+      "activo": true,
+      "fecha_ultima_activacion": "2026-02-20T00:00:00Z"
+    }
+  },
+  "configuracion": {
+    "directorio_personalidades": "./personalidades/",
+    "directorio_ejemplos": "./ejemplos/",
+    "mantener_contexto": true,
+    "logging_activaciones": true,
+    "validar_archivos": true
+  }
+}

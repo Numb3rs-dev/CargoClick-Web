@@ -1,0 +1,126 @@
+# ============================================================================
+# DOCKER COMPOSE - SISTEMA COTIZACIÓN DE TRANSPORTE B2B
+# ============================================================================
+# Servicios:
+#   - PostgreSQL 16.x: Base de datos principal
+#   - pgAdmin 4: Interfaz web para administrar PostgreSQL (opcional)
+#
+# Comandos útiles:
+#   docker-compose up -d          # Iniciar servicios en background
+#   docker-compose down           # Detener servicios
+#   docker-compose logs postgres  # Ver logs de PostgreSQL
+#   docker-compose ps             # Ver estado de servicios
+# ============================================================================
+
+version: '3.8'
+
+services:
+  # --------------------------------------------------------------------------
+  # POSTGRESQL 16
+  # --------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: cotizaciones-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      # Credenciales de base de datos (deben coincidir con .env)
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cotizaciones_db
+      # Configuración de performance
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      # Persistencia de datos (los datos sobreviven a reinicios)
+      - postgres_data:/var/lib/postgresql/data
+      # Scripts de inicialización (opcional)
+      # - ./prisma/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cotizaciones-network
+
+  # --------------------------------------------------------------------------
+  # PGADMIN 4 (Interfaz web para administrar PostgreSQL)
+  # --------------------------------------------------------------------------
+  # Acceder en: http://localhost:5050
+  # Email: admin@cotizaciones.local
+  # Password: admin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: cotizaciones-pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cotizaciones.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - cotizaciones-network
+
+# ----------------------------------------------------------------------------
+# VOLUMES (Persistencia de datos)
+# ----------------------------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+# ----------------------------------------------------------------------------
+# NETWORKS
+# ----------------------------------------------------------------------------
+networks:
+  cotizaciones-network:
+    driver: bridge
+
+# ============================================================================
+# INSTRUCCIONES DE USO
+# ============================================================================
+#
+# 1. INICIAR SERVICIOS:
+#    docker-compose up -d
+#
+# 2. VERIFICAR QUE POSTGRESQL ESTÁ CORRIENDO:
+#    docker-compose ps
+#    # Debe mostrar "cotizaciones-postgres" en estado "Up"
+#
+# 3. EJECUTAR MIGRACIONES DE PRISMA:
+#    npx prisma migrate dev --name init_solicitudes
+#
+# 4. ACCEDER A PGADMIN (Opcional):
+#    - Abrir navegador: http://localhost:5050
+#    - Login: admin@cotizaciones.local / admin
+#    - Agregar servidor:
+#      * Name: Cotizaciones DB
+#      * Host: postgres (nombre del servicio)
+#      * Port: 5432
+#      * Username: postgres
+#      * Password: postgres
+#
+# 5. DETENER SERVICIOS (sin eliminar datos):
+#    docker-compose down
+#
+# 6. DETENER Y ELIMINAR DATOS:
+#    docker-compose down -v
+#
+# 7. VER LOGS:
+#    docker-compose logs -f postgres
+#
+# ============================================================================
+# CONEXIÓN DESDE APLICACIÓN
+# ============================================================================
+# 
+# En tu archivo .env:
+# DATABASE_URL=postgresql://postgres:postgres@localhost:5432/cotizaciones_db
+#
+# ============================================================================

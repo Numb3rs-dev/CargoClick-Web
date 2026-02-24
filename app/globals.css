@@ -1,0 +1,467 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* La fuente Inter se carga optimizadamente via next/font/google en app/layout.tsx */
+
+@layer base {
+  :root {
+    /* ============================================
+       COLORES CORPORATIVOS (Personalizable)
+       Cambiar estos valores para adaptar marca
+       ============================================ */
+    
+    /* Color primario (botones, links, CTA) */
+    --primary: 220 90% 56%;              /* Azul #3B82F6 */
+    --primary-foreground: 210 40% 98%;   /* Texto sobre primario */
+    
+    /* Color secundario (badges, acciones secundarias) */
+    --secondary: 142 76% 36%;            /* Verde #10B981 */
+    --secondary-foreground: 355 7% 97%;  /* Texto sobre secundario */
+    
+    /* Color de acento (alertas, highlights) */
+    --accent: 24 95% 53%;                /* Naranja #F59E0B */
+    --accent-foreground: 26 83% 14%;     /* Texto sobre acento */
+    
+    /* Color destructivo (errores, validaciones) */
+    --destructive: 0 84% 60%;            /* Rojo #EF4444 */
+    --destructive-foreground: 210 40% 98%;
+    
+    /* ============================================
+       COLORES FUNCIONALES DEL SISTEMA
+       ============================================ */
+    
+    /* Fondo y texto principal */
+    --background: 0 0% 100%;             /* Blanco */
+    --foreground: 222 47% 11%;           /* Gris oscuro texto */
+    
+    /* Cards y contenedores */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    /* Elementos desactivados/muted */
+    --muted: 210 40% 96%;                /* Gris muy claro */
+    --muted-foreground: 215 16% 47%;     /* Gris medio */
+    
+    /* Bordes e inputs */
+    --border: 214 32% 91%;               /* Gris claro bordes */
+    --input: 214 32% 91%;                /* Fondo inputs */
+    --ring: 221 83% 53%;                 /* Focus ring */
+    
+    /* ============================================
+       COLORES ESPECÍFICOS DEL CHAT
+       (Independientes para máxima flexibilidad)
+       ============================================ */
+    
+    /* Burbujas de preguntas (bot) */
+    --chat-bot-bg: 220 13% 91%;          /* Gris #E5E7EB */
+    --chat-bot-text: 222 47% 11%;        /* Texto oscuro */
+    --chat-bot-border: 220 13% 85%;      /* Borde opcional */
+    
+    /* Burbujas de respuestas (usuario) */
+    --chat-user-bg: var(--primary);      /* Usa color primario */
+    --chat-user-text: var(--primary-foreground);
+    --chat-user-border: 220 90% 50%;     /* Borde más oscuro */
+    
+    /* Contenedor del chat */
+    --chat-container-bg: 0 0% 98%;       /* Fondo ligeramente gris */
+    
+    /* ============================================
+       SISTEMA DE ESPACIADO
+       ============================================ */
+    
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-2xl: 3rem;      /* 48px */
+    --spacing-3xl: 4rem;      /* 64px */
+    
+    /* ============================================
+       BORDER RADIUS (Curvatura)
+       ============================================ */
+    
+    --radius-sm: 0.25rem;     /* 4px - Poco redondeado */
+    --radius-md: 0.5rem;      /* 8px - Medio */
+    --radius-lg: 1rem;        /* 16px - Bastante redondeado */
+    --radius-xl: 1.5rem;      /* 24px - Muy redondeado */
+    --radius-full: 9999px;    /* Completamente redondo */
+    
+    /* Radius por defecto del sistema */
+    --radius: var(--radius-md);
+    
+    /* ============================================
+       TIPOGRAFÍA MEJORADA
+       ============================================ */
+    
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+    
+    /* Tamaños de fuente optimizados */
+    --text-xs: 0.75rem;       /* 12px */
+    --text-sm: 0.875rem;      /* 14px */
+    --text-base: 1rem;        /* 16px */
+    --text-lg: 1.125rem;      /* 18px */
+    --text-xl: 1.25rem;       /* 20px */
+    --text-2xl: 1.5rem;       /* 24px */
+    --text-3xl: 2rem;         /* 32px */
+    --text-4xl: 2.5rem;       /* 40px */
+    --text-5xl: 3rem;         /* 48px */
+    
+    /* Line heights para mejor legibilidad */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    --text-sm: 0.875rem;      /* 14px */
+    --text-base: 1rem;        /* 16px */
+    --text-lg: 1.125rem;      /* 18px */
+    --text-xl: 1.25rem;       /* 20px */
+    --text-2xl: 1.5rem;       /* 24px */
+    --text-3xl: 2rem;         /* 32px */
+    
+    /* Pesos de fuente */
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    
+    /* ============================================
+       SOMBRAS
+       ============================================ */
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* ============================================
+       TIEMPOS DE ANIMACIÓN
+       ============================================ */
+    
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ============================================
+       PALETA CARGOCLICK HOME PAGE
+       ============================================ */
+
+    /* Azul corporativo – títulos, fondo CTA final, iconografía operativa */
+    --cg-primary: #0B3D91;
+
+    /* Verde acento – botones CTA, iconografía digital, hover nav */
+    --cg-accent: #1F7A5C;
+    --cg-accent-hover: #155D47;
+
+    /* Fondos */
+    --cg-bg-primary: #FFFFFF;
+    --cg-bg-secondary: #F5F7FA;
+
+    /* Texto */
+    --cg-text-primary: #1A1A1A;
+    --cg-text-secondary: #5E6B78;
+
+    /* Footer y secciones oscuras */
+    --cg-footer-bg: #0A2A5E;
+    --cg-cta-bg: #0B3D91;
+    --cg-text-on-dark: #FFFFFF;
+    --cg-text-on-dark-muted: rgba(255, 255, 255, 0.80);
+
+    /* Sombras CargoClick */
+    --cg-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08);
+    --cg-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --cg-shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.10);
+    --cg-shadow-header: 0 1px 6px rgba(0, 0, 0, 0.10);
+  }
+  
+  /* ============================================
+     TEMA OSCURO (Opcional - Fase futura)
+     ============================================ */
+  
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    
+    --chat-container-bg: 222 47% 8%;
+    --chat-bot-bg: 222 47% 15%;
+    --chat-bot-text: 210 40% 98%;
+    
+    /* Burbujas de usuario mantienen color primario */
+    --chat-user-bg: var(--primary);
+    --chat-user-text: var(--primary-foreground);
+  }
+}
+
+/* ============================================
+   CLASES UTILITARIAS CUSTOM
+   ============================================ */
+
+@layer components {
+  /* Contenedor principal del chat */
+  .chat-container {
+    background-color: hsl(var(--chat-container-bg));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Burbuja de mensaje del bot */
+  .bot-message {
+    background-color: hsl(var(--chat-bot-bg));
+    color: hsl(var(--chat-bot-text));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md);
+    max-width: 80%;
+    align-self: flex-start;
+    animation: fadeInUp var(--duration-normal) var(--ease-out);
+  }
+  
+  /* Burbuja de mensaje del usuario */
+  .user-message {
+    background-color: hsl(var(--chat-user-bg));
+    color: hsl(var(--chat-user-text));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-md);
+    max-width: 80%;
+    align-self: flex-end;
+    animation: fadeInLeft var(--duration-normal) var(--ease-out);
+  }
+  
+  /* Botón primario */
+  .btn-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius);
+    font-weight: var(--font-semibold);
+    transition: all var(--duration-fast) var(--ease-in-out);
+  }
+  
+  .btn-primary:hover {
+    filter: brightness(0.95);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+
+@layer utilities {
+  /* =============================================
+     ANIMACIONES PARA MENSAJES DEL CHAT
+     ============================================= */
+  
+  /* Fade in simple para wizard */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Bounce suave para landing page */
+  @keyframes bounceSlow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Mensaje del bot: Aparece desde abajo con fade */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Mensaje del usuario: Aparece desde la derecha con fade */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Indicador de escritura (typing indicator) */
+  @keyframes typingDot {
+    0%, 60% {
+      opacity: 0.3;
+      transform: translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateY(-4px);
+    }
+  }
+  
+  /* =============================================
+     ANIMACIONES PARA INPUTS
+     ============================================= */
+  
+  /* Input aparece con fade y ligero slide up */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Shake (error de validación) */
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(5px);
+    }
+  }
+  
+  /* Pulse (botón loading) */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Spinner para loading overlay */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* =============================================
+     ANIMACIONES PARA BARRA DE PROGRESO
+     ============================================= */
+  
+  @keyframes progressGrow {
+    from {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    to {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+  
+  /* =============================================
+     CLASES UTILITARIAS
+     ============================================= */
+  
+  .animate-fadeIn {
+    animation: fadeIn var(--duration-normal) var(--ease-out);
+  }
+  
+  .animate-bounce-slow {
+    animation: bounceSlow 3s ease-in-out infinite;
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp var(--duration-normal) var(--ease-out);
+  }
+  
+  .animate-fadeInLeft {
+    animation: fadeInLeft var(--duration-normal) var(--ease-out);
+  }
+  
+  .animate-slideInUp {
+    animation: slideInUp var(--duration-normal) var(--ease-out);
+  }
+  
+  .animate-shake {
+    animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+  
+  .animate-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Dot para typing indicator */
+  .typing-dot {
+    animation: typingDot 1.4s infinite;
+  }
+  
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  /* =============================================
+     TRANSICIONES SUAVES
+     ============================================= */
+  
+  .transition-smooth {
+    transition: all var(--duration-normal) var(--ease-in-out);
+  }
+  
+  .transition-fast {
+    transition: all var(--duration-fast) var(--ease-in-out);
+  }
+  
+  .transition-slow {
+    transition: all var(--duration-slow) var(--ease-in-out);
+  }
+  
+  /* =============================================
+     ACCESIBILIDAD: REDUCED MOTION
+     ============================================= */
+  
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
