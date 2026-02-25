@@ -352,18 +352,6 @@ export function OriginDestinationDANE({
             color="success"
             sx={{ fontWeight: 600 }}
           />
-          {infoRuta.tiempoTransito?.tiempoViajeFormato && (
-            <Chip
-              label={`Manejo: ${infoRuta.tiempoTransito.tiempoViajeFormato}`}
-              size="small"
-              variant="filled"
-              sx={{
-                bgcolor: 'action.selected',
-                fontWeight: 500,
-                fontSize: '0.72rem',
-              }}
-            />
-          )}
         </Box>
       )}
     </Stack>

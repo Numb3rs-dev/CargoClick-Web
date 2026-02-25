@@ -126,9 +126,10 @@ export default function BaseRndc({ rndcData, fleteRef, tarifaSugerida }: BaseRnd
         onClick={() => setOpen(o => !o)}
         style={{
           width:'100%', padding:'14px 20px', background:'#F9FAFB',
+          borderTop:'none', borderLeft:'none', borderRight:'none',
           borderBottom: open ? '1px solid #E5E7EB' : 'none',
           display:'flex', alignItems:'center', gap:8,
-          cursor:'pointer', border:'none', textAlign:'left',
+          cursor:'pointer', textAlign:'left',
         }}
       >
         <span style={{ fontSize:18 }}>📊</span>

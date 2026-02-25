@@ -855,7 +855,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
               }}
               disabled={isLoading}
             />
-            <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, pl: 0.5 }}>
+            <Typography variant="caption" color="text.secondary" sx={{ pl: 0.5, lineHeight: 1.4 }}>
               💡 Si tu servicio es <strong>urbano</strong>, pon la misma ciudad en origen y destino.
             </Typography>
           </Stack>
