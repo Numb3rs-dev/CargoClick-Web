@@ -184,6 +184,8 @@ export function ConversacionCotizacion() {
                   ? { contacto: datosForm.contacto ?? '', telefono: datosForm.telefono ?? '' }
                   : pasoConfig.tipoInput === 'company-data'
                   ? { empresa: datosForm.empresa ?? '', email: datosForm.email ?? '', telefonoEmpresa: datosForm.telefonoEmpresa ?? '' }
+                  : pasoConfig.tipoInput === 'client-company-data'
+                  ? { contacto: datosForm.contacto ?? '', telefono: datosForm.telefono ?? '', empresa: datosForm.empresa ?? '', email: datosForm.email ?? '', telefonoEmpresa: datosForm.telefonoEmpresa ?? '' }
                   : pasoConfig.tipoInput === 'origin-destination'
                   ? { origen: datosForm.origen ?? '', destino: datosForm.destino ?? '' }
                   : pasoConfig.tipoInput === 'weight-dimensions'

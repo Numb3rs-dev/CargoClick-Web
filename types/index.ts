@@ -13,6 +13,7 @@ export type TipoInput =
   | 'phone' 
   | 'client-data'
   | 'company-data'
+  | 'client-company-data'
   | 'name-company'
   | 'phone-email'
   | 'origin-destination'

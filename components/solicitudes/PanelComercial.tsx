@@ -659,16 +659,16 @@ export default function PanelComercial({
                 </label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <input
-                    type="range" min={0} max={50} step={0.5}
+                    type="range" min={0} max={500} step={0.5}
                     value={ofertaComision}
                     onChange={e => setOfertaComision(Number(e.target.value))}
                     style={{ flex: 1, cursor: 'pointer' }}
                   />
                   <input
-                    type="number" min={0} max={50} step={0.5}
+                    type="number" min={0} max={500} step={0.5}
                     value={ofertaComision}
                     onChange={e => setOfertaComision(Number(e.target.value))}
-                    style={{ ...inputStyle(), width: 72, textAlign: 'center' }}
+                    style={{ ...inputStyle(), width: 80, textAlign: 'center' }}
                   />
                 </div>
                 {ofertaPisoN > 0 && ofertaComision > 0 && (

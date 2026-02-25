@@ -1,13 +1,12 @@
 /**
- * Configuración de los 7 Pasos del Flujo Conversacional — Nacional
+ * Configuración de los 6 Pasos del Flujo Conversacional — Nacional
  *
- *  Paso 0: datos del cliente (nombre + teléfono)
- *  Paso 1: datos de empresa (todo opcional)  ← empresa, email, tel fijo
- *  Paso 2: ruta (origen + destino)
- *  Paso 3: tipo de carga
- *  Paso 4: peso + dimensiones
- *  Paso 5: fecha requerida  ← AQUÍ se crea la solicitud en BD
- *  Paso 6: pantalla de confirmación + enriquecimiento (observaciones + checklist) — ÚLTIMO
+ *  Paso 0: ruta (origen + destino)
+ *  Paso 1: tipo de carga
+ *  Paso 2: peso + dimensiones
+ *  Paso 3: fecha requerida
+ *  Paso 4: datos del contacto + empresa (fusionados) ← AQUÍ se crea la solicitud en BD
+ *  Paso 5: confirmación + enriquecimiento (observaciones + checklist) — ÚLTIMO
  */
 
 import { z } from 'zod';
@@ -15,35 +14,10 @@ import type { PasoConfig } from '@/types';
 
 export const PASOS: PasoConfig[] = [
 
-  // ── PASO 0: Datos del cliente ──────────────────────────────────────────────
+  // ── PASO 0: Ruta ─────────────────────────────────────────────────────────────────────
   {
     id: 0,
-    pregunta: '👋 ¡Hola! ¿Cómo te llamas y cuál es tu número de celular?',
-    campoFormulario: 'contacto',
-    tipoInput: 'client-data',
-    validacion: z.object({
-      contacto: z.string().min(2, 'Mínimo 2 caracteres').max(200),
-      telefono: z.string().regex(/^\+?[1-9]\d{6,14}$/, 'Celular inválido. Ej: +573001234567 o 3001234567'),
-    }),
-  },
-
-  // ── PASO 1: Datos de empresa (opcionales) ─────────────────────────────────────
-  {
-    id: 1,
-    pregunta: '¿Tu envío va a nombre de una empresa? Agrega sus datos si quieres — puedes saltarte esto sin problema.',
-    campoFormulario: 'empresa',
-    tipoInput: 'company-data',
-    validacion: z.object({
-      empresa:         z.string().max(200).optional().or(z.literal('')),
-      email:           z.string().email('Correo inválido').optional().or(z.literal('')),
-      telefonoEmpresa: z.string().max(50).optional().or(z.literal('')),
-    }),
-  },
-
-  // ── PASO 2: Ruta ─────────────────────────────────────────────────────────────────────
-  {
-    id: 2,
-    pregunta: 'Perfecto. ¿Desde qué ciudad sale el envío y hacia dónde va?',
+    pregunta: '¿Desde qué ciudad sale el envío y hacia dónde va?',
     campoFormulario: 'origen',
     tipoInput: 'origin-destination',
     validacion: z.object({
@@ -52,9 +26,9 @@ export const PASOS: PasoConfig[] = [
     }),
   },
 
-  // ── PASO 3: Tipo de carga ──────────────────────────────────────────────────────────────
+  // ── PASO 1: Tipo de carga ──────────────────────────────────────────────────────────────
   {
-    id: 3,
+    id: 1,
     pregunta: '¿Qué tipo de carga vas a transportar?',
     campoFormulario: 'tipoCarga',
     tipoInput: 'buttons',
@@ -132,9 +106,9 @@ export const PASOS: PasoConfig[] = [
     ),
   },
 
-  // ── PASO 4: Peso + Dimensiones ‗ identifica vehículo mínimo ────────────────────────
+  // ── PASO 2: Peso + Dimensiones — identifica vehículo mínimo ────────────────────────
   {
-    id: 4,
+    id: 2,
     pregunta: 'Cuéntame sobre el tamaño de tu carga: ¿cuánto pesa y cuáles son sus dimensiones?',
     campoFormulario: 'pesoKg',
     tipoInput: 'weight-dimensions',
@@ -146,19 +120,31 @@ export const PASOS: PasoConfig[] = [
     }),
   },
 
-  // ── PASO 5: Fecha requerida ────────────────────────────────────────
+  // ── PASO 3: Fecha requerida ────────────────────────────────────────
   {
-    id: 5,
+    id: 3,
     pregunta: '¿Para qué fecha necesitas el servicio?',
     campoFormulario: 'fechaRequerida',
     tipoInput: 'date',
     validacion: z.date({ required_error: 'Selecciona una fecha' }),
   },
 
-  // ── PASO 6 (ÚLTIMO): Confirmación + enriquecimiento opcional ───────────────────────────────────────────
+  // ── PASO 4: Datos de contacto + empresa (fusionados) ← AQUÍ se crea la solicitud ───
   {
-    id: 6,
-    pregunta: '¡Ya casi! ¿Quieres agregar algo más a tu solicitud?',
+    id: 4,
+    pregunta: '¡Ya casi! ¿A nombre de quién va esta solicitud?',
+    campoFormulario: 'contacto',
+    tipoInput: 'client-company-data',
+    validacion: z.object({
+      contacto: z.string().min(2, 'Mínimo 2 caracteres').max(200),
+      telefono: z.string().regex(/^\+?[1-9]\d{6,14}$/, 'Celular inválido. Ej: +573001234567 o 3001234567'),
+    }),
+  },
+
+  // ── PASO 5 (ÚLTIMO): Confirmación + enriquecimiento opcional ──────────────────────
+  {
+    id: 5,
+    pregunta: '¿Quieres agregar algo más a tu solicitud?',
     campoFormulario: 'observaciones',
     tipoInput: 'confirmation-extras',
     validacion: z.object({
@@ -185,5 +171,5 @@ export function obtenerPasoConfig(pasoId: number): PasoConfig {
   return paso;
 }
 
-export const TOTAL_PASOS = PASOS.length;   // 7
-export const ULTIMO_PASO = PASOS.length - 1; // 6
+export const TOTAL_PASOS = PASOS.length;   // 6
+export const ULTIMO_PASO = PASOS.length - 1; // 5

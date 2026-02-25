@@ -508,23 +508,14 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
         },
       }));
     } else if (campo === 'contacto' && typeof valorLimpio === 'object' && valorLimpio !== null && 'telefono' in valorLimpio) {
-      // client-data: { contacto, telefono } — solo datos personales del paso 0
+      // client-company-data: { contacto, telefono, empresa?, email?, telefonoEmpresa? }
+      const cd = valorLimpio as { contacto: string; telefono: string; empresa?: string; email?: string; telefonoEmpresa?: string };
       setState(prev => ({
         ...prev,
         datosForm: {
           ...prev.datosForm,
-          contacto: (valorLimpio as any).contacto,
-          ...(( valorLimpio as any).telefono !== undefined ? { telefono: (valorLimpio as any).telefono } : {}),
-        },
-      }));
-    } else if (campo === 'empresa' && typeof valorLimpio === 'object' && valorLimpio !== null) {
-      // company-data: { empresa?, email?, telefonoEmpresa? } — todos opcionales del paso 1
-      // valorLimpio puede ser {} si el usuario no escribió nada
-      const cd = valorLimpio as { empresa?: string; email?: string; telefonoEmpresa?: string };
-      setState(prev => ({
-        ...prev,
-        datosForm: {
-          ...prev.datosForm,
+          contacto: cd.contacto,
+          ...(cd.telefono !== undefined ? { telefono: cd.telefono } : {}),
           ...(cd.empresa !== undefined ? { empresa: cd.empresa } : {}),
           ...(cd.email ? { email: cd.email } : {}),
           ...(cd.telefonoEmpresa !== undefined ? { telefonoEmpresa: cd.telefonoEmpresa } : {}),
@@ -584,49 +575,48 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
 
     // 1. Guardar en BD según el paso
     // ─────────────────────────────────────────────────────────────────────────
-    // Estrategia de guardado progresivo:
-    //   Paso 0  → POST optimista (fire-and-forget): avanza a paso 1 de inmediato,
-    //             guarda solicitudId cuando la respuesta llega. Sin bloqueo de UI.
-    //   Pasos 1-4 → PATCH campo a campo — NO bloqueante (fire-and-forget)
-    //   Paso 5  → PATCH de cierre con todos los campos — BLOQUEANTE (red de seguridad)
-    //   Paso 6  → local state (schema BD pendiente)
+    // Estrategia:
+    //   Pasos 0-3 → solo estado local, SIN llamadas a BD
+    //   Paso 4  → POST (crear solicitud) + PATCH con todos los datos acumulados — BLOQUEANTE
+    //   Paso 5  → PATCH extras + disparo cotización — fire-and-forget
     // ─────────────────────────────────────────────────────────────────────────
 
-    if (state.pasoActual === 0) {
-      // ── Paso 0: contacto + telefono → POST optimista ───────────────────────
-      const contactoVal = (typeof valorLimpio === 'object' && valorLimpio !== null && 'telefono' in valorLimpio)
-        ? (valorLimpio as { contacto: string; telefono: string }).contacto
-        : '';
-      const telefonoVal = (typeof valorLimpio === 'object' && valorLimpio !== null && 'telefono' in valorLimpio)
-        ? (valorLimpio as { contacto: string; telefono: string }).telefono
-        : '';
+    if (state.pasoActual < TOTAL_PASOS - 2) {
+      // ── Pasos 0-3: solo acumular en estado local, sin API ─────────────────
+      // fall-through al bloque de cálculo de siguiente paso
 
-      // Avanzar a paso 1 INMEDIATAMENTE — el usuario no espera la BD
-      setState(prev => ({ ...prev, pasoActual: 1 }));
+    } else if (state.pasoActual === TOTAL_PASOS - 2) {
+      // ── Paso 4: datos de contacto/empresa → POST + PATCH completo ─────────
+      const cd = typeof valorLimpio === 'object' && valorLimpio !== null
+        ? valorLimpio as { contacto: string; telefono: string; empresa?: string; email?: string; telefonoEmpresa?: string }
+        : { contacto: '', telefono: '' };
 
-      // Si ya tenemos ID (usuario volvió a paso 0): solo PATCH en background
-      if (state.solicitudId) {
-        fetch(`/api/solicitudes/${state.solicitudId}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contacto: contactoVal, telefono: telefonoVal }),
-        }).catch(err => console.error('[guardado] Re-PATCH paso 0 fallido:', err));
-        return;
-      }
+      // Datos acumulados en pasos anteriores
+      const d = state.datosForm;
 
-      // Primera vez → POST en background; guardar ID cuando llegue
-      fetch('/api/solicitudes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ telefono: telefonoVal, contacto: contactoVal, empresa: '' }),
-      })
-        .then(resp => resp.json())
-        .then(body => {
-          if (!body?.data?.id) return;
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      try {
+        // Si ya hay solicitudId (usuario volvió al paso 4), solo hacer PATCH
+        let solicitudId = state.solicitudId;
+        if (!solicitudId) {
+          const postResp = await fetch('/api/solicitudes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              telefono: cd.telefono,
+              contacto: cd.contacto,
+              empresa:  cd.empresa || '',
+            }),
+          });
+          if (!postResp.ok) {
+            const err = await postResp.json();
+            throw new Error(err.error || err.message || 'Error al crear solicitud');
+          }
+          const { data: postData, reanudada } = await postResp.json();
 
-          if (body.reanudada === true) {
-            // ── Solicitud EN_PROGRESO existente: reanudar desde el paso correcto ──
-            const sol = body.data as any;
+          if (reanudada === true) {
+            // Solicitud EN_PROGRESO existente encontrada: reanudar desde el paso correcto
+            const sol = postData as any;
             const datosReanudados = {
               contacto:     sol.contacto     || '',
               telefono:     sol.telefono     || '',
@@ -640,154 +630,65 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
               dimLargoCm:   sol.dimLargoCm   ?? 0,
               dimAnchoCm:   sol.dimAnchoCm   ?? 0,
               dimAltoCm:    sol.dimAltoCm    ?? 0,
-              ...(sol.distanciaKm      ? { distanciaKm:      sol.distanciaKm }      : {}),
-              ...(sol.tramoDistancia   ? { tramoDistancia:   sol.tramoDistancia }   : {}),
+              ...(sol.distanciaKm        ? { distanciaKm:        sol.distanciaKm }        : {}),
+              ...(sol.tramoDistancia     ? { tramoDistancia:     sol.tramoDistancia }     : {}),
               ...(sol.tiempoTransitoDesc ? { tiempoTransitoDesc: sol.tiempoTransitoDesc } : {}),
-              ...(sol.telefonoEmpresa  ? { telefonoEmpresa:  sol.telefonoEmpresa }  : {}),
-              ...(sol.vehiculoSugeridoId ? { vehiculoSugeridoId: sol.vehiculoSugeridoId } : {}),
+              ...(sol.telefonoEmpresa    ? { telefonoEmpresa:    sol.telefonoEmpresa }    : {}),
+              ...(sol.vehiculoSugeridoId     ? { vehiculoSugeridoId:     sol.vehiculoSugeridoId }     : {}),
               ...(sol.vehiculoSugeridoNombre ? { vehiculoSugeridoNombre: sol.vehiculoSugeridoNombre } : {}),
             };
 
-            // Determinar desde qué paso reanudar según los campos ya completados
-            const pasoReanudacion = !sol.origen || sol.origen === '' ? 2
-              : !sol.pesoKg || sol.pesoKg === 0 ? 3
-              : 5;
+            // Reanudar desde el paso correcto según los campos ya completados
+            const pasoReanudacion = !sol.origen || sol.origen === '' ? 0
+              : !sol.pesoKg || sol.pesoKg === 0 ? 2
+              : TOTAL_PASOS - 1;
 
             console.info('[reanudación] Retomando solicitud', sol.id, '→ paso', pasoReanudacion);
 
             setState(prev => ({
               ...prev,
               solicitudId: sol.id,
-              datosForm: { ...prev.datosForm, ...datosReanudados },
-              pasoActual: pasoReanudacion,
+              datosForm:   { ...prev.datosForm, ...datosReanudados },
+              pasoActual:  pasoReanudacion,
+              isLoading:   false,
             }));
-          } else {
-            // Solicitud nueva creada correctamente
-            setState(prev => ({ ...prev, solicitudId: body.data.id }));
+            return;
           }
-        })
-        .catch(err => console.error('[guardado] POST paso 0 fallido (no bloqueante):', err));
-      return;
 
-    } else if (state.pasoActual >= 1 && state.pasoActual < TOTAL_PASOS - 2) {
-      // ── Pasos 1-4: PATCH progresivo no-bloqueante (fire-and-forget) ───────
-      if (state.solicitudId) {
-        let payload: Record<string, any> = {};
-
-        if (campo === 'empresa') {
-          // Paso 1 — company-data: { empresa?, email?, telefonoEmpresa? }
-          const cd = typeof valorLimpio === 'object' && valorLimpio !== null
-            ? valorLimpio as { empresa?: string; email?: string; telefonoEmpresa?: string }
-            : {};
-          payload = {
-            ...(cd.empresa !== undefined           ? { empresa: cd.empresa }               : {}),
-            ...(cd.email                           ? { email: cd.email }                   : {}),
-            ...(cd.telefonoEmpresa !== undefined   ? { telefonoEmpresa: cd.telefonoEmpresa } : {}),
-          };
-        } else if (campo === 'origen') {
-          // Paso 2 — origin-destination: { origen, destino, distanciaKm?, tramoDistancia?, tiempoTransitoDesc? }
-          payload = {
-            origen:       (valorLimpio as any).origen,
-            destino:      (valorLimpio as any).destino,
-            tipoServicio: 'NACIONAL',
-            ...(typeof (valorLimpio as any).distanciaKm === 'number'
-              ? { distanciaKm: (valorLimpio as any).distanciaKm }
-              : {}),
-            ...((valorLimpio as any).tramoDistancia
-              ? { tramoDistancia: (valorLimpio as any).tramoDistancia }
-              : {}),
-            ...((valorLimpio as any).tiempoTransitoDesc
-              ? { tiempoTransitoDesc: (valorLimpio as any).tiempoTransitoDesc }
-              : {}),
-          };
-        } else if (campo === 'tipoCarga') {
-          // Paso 3
-          payload = { tipoCarga: valorLimpio };
-        } else if (campo === 'pesoKg') {
-          // Paso 4 — peso + dimensiones incluye derivados calculados
-          const dim = typeof valorLimpio === 'object' && valorLimpio !== null
-            ? valorLimpio as {
-                pesoKg: number; dimLargoCm: number; dimAnchoCm: number; dimAltoCm: number;
-                volumenM3?: number | null; vehiculoSugeridoId?: string | null; vehiculoSugeridoNombre?: string | null;
-              }
-            : { pesoKg: 0, dimLargoCm: 0, dimAnchoCm: 0, dimAltoCm: 0 };
-          payload = {
-            pesoKg:    dim.pesoKg,
-            dimLargoCm: dim.dimLargoCm,
-            dimAnchoCm: dim.dimAnchoCm,
-            dimAltoCm:  dim.dimAltoCm,
-            ...(dim.volumenM3 !== undefined && dim.volumenM3 !== null ? { volumenM3: dim.volumenM3 } : {}),
-            ...(dim.vehiculoSugeridoId   ? { vehiculoSugeridoId:     dim.vehiculoSugeridoId }     : {}),
-            ...(dim.vehiculoSugeridoNombre ? { vehiculoSugeridoNombre: dim.vehiculoSugeridoNombre } : {}),
-          };
-        } else {
-          payload = { [campo]: valorLimpio };
-        }
-
-        if (Object.keys(payload).length > 0) {
-          fetch(`/api/solicitudes/${state.solicitudId}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          }).catch(err => console.error('[guardado progresivo] PATCH fallido (no bloqueante):', err));
-        }
-      }
-      // Cae al bloque de cálculo de siguiente paso (sin return)
-
-    } else if (state.pasoActual === TOTAL_PASOS - 2) {
-      // ── Paso 5: PATCH de cierre con TODOS los campos obligatorios ─────────
-      // Aunque los pasos 1-4 ya guardaron progresivamente, aquí garantizamos
-      // que la solicitud esté completa aunque algún PATCH previo haya fallado.
-      const d = state.datosForm;
-      const fechaVal = valorLimpio instanceof Date
-        ? valorLimpio.toISOString()
-        : typeof valorLimpio === 'string' ? valorLimpio : null;
-
-      setState(prev => ({ ...prev, isLoading: true, error: null }));
-      try {
-        // Fallback: si el POST del paso 0 aún no resolvió (caso extremadamente raro),
-        // crear la solicitud ahora antes del PATCH de cierre.
-        let solicitudId = state.solicitudId;
-        if (!solicitudId) {
-          const d0 = state.datosForm;
-          const postResp = await fetch('/api/solicitudes', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ telefono: d0.telefono || '', contacto: d0.contacto || '', empresa: '' }),
-          });
-          if (!postResp.ok) {
-            const err = await postResp.json();
-            throw new Error(err.error || err.message || 'Error al crear solicitud');
-          }
-          const { data: d0data } = await postResp.json();
-          solicitudId = d0data.id as string;
+          solicitudId = postData.id as string;
           setState(prev => ({ ...prev, solicitudId }));
         }
 
+        // PATCH con todos los datos acumulados en pasos 0-3 + los del paso 4
         const patchResp = await fetch(`/api/solicitudes/${solicitudId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            empresa:        typeof d.empresa === 'string' ? d.empresa : '',
-            ...(d.telefonoEmpresa !== undefined ? { telefonoEmpresa: d.telefonoEmpresa } : {}),
-            ...(d.email     ? { email: d.email }   : {}),
-            origen:         d.origen,
-            destino:        d.destino,
-            tipoServicio:   'NACIONAL',
-            // Ruta calculada
-            ...(typeof d.distanciaKm === 'number' ? { distanciaKm: d.distanciaKm }         : {}),
-            ...(d.tramoDistancia                  ? { tramoDistancia: d.tramoDistancia }    : {}),
+            // Ruta (paso 0)
+            origen:       d.origen,
+            destino:      d.destino,
+            tipoServicio: 'NACIONAL',
+            ...(typeof d.distanciaKm === 'number' ? { distanciaKm: d.distanciaKm }             : {}),
+            ...(d.tramoDistancia                  ? { tramoDistancia: d.tramoDistancia }        : {}),
             ...(d.tiempoTransitoDesc              ? { tiempoTransitoDesc: d.tiempoTransitoDesc } : {}),
-            tipoCarga:      d.tipoCarga,
-            pesoKg:         d.pesoKg,
-            dimLargoCm:     d.dimLargoCm,
-            dimAnchoCm:     d.dimAnchoCm,
-            dimAltoCm:      d.dimAltoCm,
-            // Carga calculada
-            ...(d.volumenM3 !== undefined && d.volumenM3 !== null ? { volumenM3: d.volumenM3 }                 : {}),
-            ...(d.vehiculoSugeridoId                              ? { vehiculoSugeridoId: d.vehiculoSugeridoId }   : {}),
+            // Tipo de carga (paso 1)
+            tipoCarga: d.tipoCarga,
+            // Peso y dimensiones (paso 2)
+            pesoKg:     d.pesoKg,
+            dimLargoCm: d.dimLargoCm,
+            dimAnchoCm: d.dimAnchoCm,
+            dimAltoCm:  d.dimAltoCm,
+            ...(d.volumenM3 !== undefined && d.volumenM3 !== null ? { volumenM3: d.volumenM3 }                         : {}),
+            ...(d.vehiculoSugeridoId                              ? { vehiculoSugeridoId: d.vehiculoSugeridoId }       : {}),
             ...(d.vehiculoSugeridoNombre                          ? { vehiculoSugeridoNombre: d.vehiculoSugeridoNombre } : {}),
-            fechaRequerida: fechaVal,
+            // Fecha requerida (paso 3)
+            fechaRequerida: d.fechaRequerida instanceof Date
+              ? d.fechaRequerida.toISOString()
+              : d.fechaRequerida || null,
+            // Datos de empresa opcionales (paso 4)
+            empresa: cd.empresa || '',
+            ...(cd.email !== undefined                ? { email: cd.email }                              : {}),
+            ...(cd.telefonoEmpresa !== undefined      ? { telefonoEmpresa: cd.telefonoEmpresa }          : {}),
           }),
         });
         if (!patchResp.ok) {
@@ -797,11 +698,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
 
         setState(prev => ({
           ...prev,
-          datosForm: {
-            ...prev.datosForm,
-            fechaRequerida: valorLimpio instanceof Date ? valorLimpio : prev.datosForm.fechaRequerida,
-          },
-          pasoActual: TOTAL_PASOS - 1, // avanzar a paso 6 (confirmation-extras)
+          pasoActual: TOTAL_PASOS - 1,
           isLoading: false,
         }));
       } catch (error) {
@@ -811,7 +708,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
       return;
 
     } else {
-      // ── Paso 6: confirmation-extras → PATCH fire-and-forget + marcar completado
+      // ── Paso 5: confirmation-extras → PATCH fire-and-forget + marcar completado
       const ev = (typeof valorLimpio === 'object' && valorLimpio !== null)
         ? valorLimpio as {
             observaciones?: string; skip?: boolean;

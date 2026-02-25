@@ -613,6 +613,189 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
         );
       }
 
+      case 'client-company-data': {
+        // valor es { contacto, telefono, empresa?, email?, telefonoEmpresa? }
+        // Campos obligatorios: contacto + telefono. El resto es opcional (datos de empresa).
+        type CcdVal = { contacto: string; telefono: string; empresa?: string; email?: string; telefonoEmpresa?: string };
+        const ccd = (typeof valor === 'object' && valor !== null && 'contacto' in valor)
+          ? valor as CcdVal
+          : { contacto: '', telefono: '', empresa: '', email: '', telefonoEmpresa: '' };
+
+        const paisActualCcd = PAISES.find(p => p.code === prefijoCelular) ?? PAISES[0];
+        const numeroCelularCcd = ccd.telefono?.startsWith(prefijoCelular)
+          ? ccd.telefono.slice(prefijoCelular.length)
+          : ccd.telefono ?? '';
+
+        const handleNumeroCelularCcd = (num: string) => {
+          const limpio = num.replace(/[^0-9]/g, '').slice(0, paisActualCcd.maxLen);
+          setValor({ ...ccd, telefono: prefijoCelular + limpio });
+        };
+        const handlePrefijoCcd = (nuevoPrefijo: string) => {
+          setPrefijoCelular(nuevoPrefijo);
+          const numActual = ccd.telefono?.startsWith(prefijoCelular)
+            ? ccd.telefono.slice(prefijoCelular.length)
+            : ccd.telefono ?? '';
+          setValor({ ...ccd, telefono: nuevoPrefijo + numActual });
+        };
+        const numLenCcd = numeroCelularCcd.length;
+        const phoneOkCcd = numLenCcd === 0 || (numLenCcd >= paisActualCcd.minLen && numLenCcd <= paisActualCcd.maxLen);
+        const phoneHintCcd = numLenCcd > 0 && !phoneOkCcd
+          ? `${paisActualCcd.name} usa ${paisActualCcd.minLen === paisActualCcd.maxLen ? paisActualCcd.minLen : `${paisActualCcd.minLen}–${paisActualCcd.maxLen}`} dígitos (ingresaste ${numLenCcd})`
+          : null;
+
+        return (
+          <Stack spacing={2.5}>
+
+            {/* ── Nombre ──────────────────────────────────────────── */}
+            <TextField
+              fullWidth
+              label="Tu nombre completo"
+              value={ccd.contacto}
+              onChange={(e) => setValor({ ...ccd, contacto: e.target.value })}
+              onBlur={() => validar(valor)}
+              placeholder="Ej: María González"
+              disabled={isLoading}
+              autoFocus
+              size="medium"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Person />
+                  </InputAdornment>
+                ),
+                sx: { fontSize: '1.125rem', fontWeight: 500 },
+              }}
+            />
+
+            {/* ── Celular con selector de país ─────────────────────── */}
+            <Box>
+              <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
+                <FormControl size="medium" sx={{ minWidth: 140, flexShrink: 0 }}>
+                  <InputLabel>País</InputLabel>
+                  <Select
+                    value={prefijoCelular}
+                    label="País"
+                    onChange={(e) => handlePrefijoCcd(e.target.value)}
+                    disabled={isLoading}
+                    renderValue={() => (
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                        <img src={`https://flagcdn.com/20x15/${paisActualCcd.iso}.png`} width={20} height={15} alt={paisActualCcd.name} style={{ borderRadius: 2, objectFit: 'cover', flexShrink: 0 }} />
+                        <span style={{ fontWeight: 600, fontSize: '0.95rem' }}>{prefijoCelular}</span>
+                      </Box>
+                    )}
+                    MenuProps={{ PaperProps: { elevation: 2, sx: { maxHeight: 320 } } }}
+                  >
+                    {PAISES.map((pais, idx) => (
+                      <MenuItem key={`${pais.code}-${idx}`} value={pais.code}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, width: '100%' }}>
+                          <img src={`https://flagcdn.com/20x15/${pais.iso}.png`} width={20} height={15} alt={pais.name} style={{ borderRadius: 2, objectFit: 'cover', flexShrink: 0 }} />
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
+                            <span style={{ fontSize: '0.9rem' }}>{pais.name}</span>
+                            <span style={{ color: '#8895A2', fontWeight: 600, fontSize: '0.85rem' }}>{pais.code}</span>
+                          </Box>
+                        </Box>
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <TextField
+                  fullWidth
+                  type="tel"
+                  label="Celular"
+                  value={numeroCelularCcd}
+                  onChange={(e) => handleNumeroCelularCcd(e.target.value)}
+                  onBlur={() => validar(valor)}
+                  placeholder={paisActualCcd.placeholder}
+                  disabled={isLoading}
+                  size="medium"
+                  error={!!phoneHintCcd}
+                  inputProps={{ inputMode: 'numeric', maxLength: paisActualCcd.maxLen }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Phone sx={{ fontSize: '1.1rem', color: phoneOkCcd && numLenCcd > 0 ? 'success.main' : 'text.disabled' }} />
+                      </InputAdornment>
+                    ),
+                    sx: { fontSize: '1.125rem', fontWeight: 500 },
+                  }}
+                />
+              </Box>
+              {phoneHintCcd && (
+                <FormHelperText error sx={{ mt: 0.5, ml: 0.5 }}>{phoneHintCcd}</FormHelperText>
+              )}
+            </Box>
+
+            {/* ── Separador: datos de empresa opcionales ─────────── */}
+            <Divider>
+              <Typography variant="caption" color="text.secondary" sx={{ px: 1 }}>
+                Datos de empresa (opcionales)
+              </Typography>
+            </Divider>
+
+            {/* ── Empresa ─────────────────────────────────────────── */}
+            <TextField
+              fullWidth
+              label="Nombre de la empresa"
+              value={ccd.empresa ?? ''}
+              onChange={(e) => setValor({ ...ccd, empresa: e.target.value })}
+              placeholder="Ej: Transportes Andinos S.A.S."
+              disabled={isLoading}
+              size="medium"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Business sx={{ color: 'text.disabled' }} />
+                  </InputAdornment>
+                ),
+                sx: { fontSize: '1.125rem', fontWeight: 500 },
+              }}
+            />
+
+            {/* ── Correo ──────────────────────────────────────────── */}
+            <TextField
+              fullWidth
+              type="email"
+              label="Correo electrónico"
+              value={ccd.email ?? ''}
+              onChange={(e) => setValor({ ...ccd, email: e.target.value })}
+              placeholder="ejemplo@empresa.com"
+              disabled={isLoading}
+              size="medium"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email sx={{ color: 'text.disabled' }} />
+                  </InputAdornment>
+                ),
+                sx: { fontSize: '1.125rem', fontWeight: 500 },
+              }}
+            />
+
+            {/* ── Teléfono de la empresa ───────────────────────────── */}
+            <TextField
+              fullWidth
+              type="tel"
+              label="Teléfono de la empresa"
+              value={ccd.telefonoEmpresa ?? ''}
+              onChange={(e) => setValor({ ...ccd, telefonoEmpresa: e.target.value.replace(/[^0-9+\-\s()]/g, '') })}
+              placeholder="Ej: 601 123 4567"
+              disabled={isLoading}
+              size="medium"
+              inputProps={{ inputMode: 'tel' }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Phone sx={{ fontSize: '1.1rem', color: 'text.disabled' }} />
+                  </InputAdornment>
+                ),
+                sx: { fontSize: '1.125rem', fontWeight: 500 },
+              }}
+            />
+
+          </Stack>
+        );
+      }
+
       case 'origin-destination': {
         // valor es { origen: string (DANE 5 dígitos), destino: string }
         const ov = (typeof valor === 'object' && valor !== null && 'origen' in valor)
