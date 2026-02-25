@@ -101,14 +101,14 @@ export function PantallaCompletada({
               <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
                 <Typography sx={{ fontSize: '1.1rem', lineHeight: 1.5 }}>📋</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Nuestro equipo ya tiene tu solicitud y la revisará en los próximos minutos.
+                  Nuestro equipo ya recibió tu solicitud y la está revisando.
                 </Typography>
               </Box>
 
               <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
                 <Typography sx={{ fontSize: '1.1rem', lineHeight: 1.5 }}>👤</Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Un asesor se contactará contigo para enviarte la cotización.
+                  Un asesor se comunicará contigo para enviarte la cotización.
                 </Typography>
               </Box>
 
