@@ -118,23 +118,30 @@ export async function POST(
 
     // ── Fase SISETAC (default): calcular tarifa y crear cotización ────────────
 
-    // 4. Calcular cotización
-    const resultado = await calcularCotizacion({
-      distanciaKm:            solicitud.distanciaKm,
-      pesoKg:                 Number(solicitud.pesoKg),
-      tipoCarga:              solicitud.tipoCarga,
-      fechaRequerida:         solicitud.fechaRequerida,
-      origen:                 solicitud.origen,
-      destino:                solicitud.destino!,
-      configVehiculoOverride: body.configVehiculo,
-      margenOverride:         body.margen,
-    })
+    // 4. Calcular cotización SISETAC + consultar RNDC en paralelo
+    const [resultado, rndcResultado] = await Promise.all([
+      calcularCotizacion({
+        distanciaKm:            solicitud.distanciaKm,
+        pesoKg:                 Number(solicitud.pesoKg),
+        tipoCarga:              solicitud.tipoCarga,
+        fechaRequerida:         solicitud.fechaRequerida,
+        origen:                 solicitud.origen,
+        destino:                solicitud.destino!,
+        configVehiculoOverride: body.configVehiculo,
+        margenOverride:         body.margen,
+      }),
+      consultarRndc(
+        getNombreMunicipio(solicitud.origen) || solicitud.origen,
+        getNombreMunicipio(solicitud.destino!) || solicitud.destino!,
+        Number(solicitud.pesoKg),
+      ).catch(() => null),
+    ])
 
     const validezHasta = new Date()
     validezHasta.setHours(validezHasta.getHours() + 48)
 
     const [cotizacion] = await prisma.$transaction([
-      // 5a. Crear registro de cotización (RNDC se actualizará en fase 'rndc')
+      // 5a. Crear registro de cotización con SISETAC + RNDC juntos
       prisma.cotizacion.create({
         data: {
           solicitudId:             id,
@@ -152,12 +159,11 @@ export async function POST(
           parametrosUsados:        resultado.parametrosUsados as object,
           estado:                  'VIGENTE',
           validezHasta,
-          // RNDC se llenará en la fase 'rndc' (paso 5 del wizard)
-          rndcEstimado:        null,
-          rndcMediana:         null,
-          rndcConfianza:       null,
-          rndcViajesSimilares: null,
-          rndcNivelFallback:   null,
+          rndcEstimado:        rndcResultado?.estimado        ?? null,
+          rndcMediana:         rndcResultado?.mediana         ?? null,
+          rndcConfianza:       rndcResultado?.confianza       ?? null,
+          rndcViajesSimilares: rndcResultado?.viajesSimilares ?? null,
+          rndcNivelFallback:   rndcResultado?.nivelFallback   ?? null,
         },
       }),
       // 5b. Actualizar estado de la solicitud
@@ -177,8 +183,14 @@ export async function POST(
       fechaGeneracion: cotizacion.createdAt,
       validezHasta,
 
-      // RNDC se calcula de forma asíncrona en la fase siguiente
-      referenciaRndc: null,
+      referenciaRndc: rndcResultado ? {
+        estimado:        rndcResultado.estimado,
+        mediana:         rndcResultado.mediana,
+        confianza:       rndcResultado.confianza,
+        nivelFallback:   rndcResultado.nivelFallback,
+        nivelLabel:      rndcResultado.nivelLabel,
+        viajesSimilares: rndcResultado.viajesSimilares,
+      } : null,
 
       // ── Resumen ejecutivo ──────────────────────────────
       resumen: {

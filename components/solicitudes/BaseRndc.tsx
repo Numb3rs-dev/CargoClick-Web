@@ -102,7 +102,7 @@ export default function BaseRndc({ rndcData, fleteRef, tarifaSugerida }: BaseRnd
       <div style={{ background:'#FFFFFF', borderRadius:16, border:'1px solid #E5E7EB', overflow:'hidden' }}>
         <div style={{ padding:'14px 20px', background:'#F9FAFB', borderBottom:'1px solid #E5E7EB', display:'flex', alignItems:'center', gap:8 }}>
           <span style={{ fontSize:18 }}>📊</span>
-          <span style={{ fontSize:14, fontWeight:700, color:'#374151', flex:1 }}>Base Mercado RNDC</span>
+          <span style={{ fontSize:14, fontWeight:700, color:'#374151', flex:1 }}>Base Manifiestos</span>
           <span style={{ fontSize:11, color:'#9CA3AF', background:'#F3F4F6', padding:'3px 10px', borderRadius:12 }}>Sin datos</span>
         </div>
         <div style={{ padding:'20px 24px', textAlign:'center' }}>
@@ -133,7 +133,7 @@ export default function BaseRndc({ rndcData, fleteRef, tarifaSugerida }: BaseRnd
         }}
       >
         <span style={{ fontSize:18 }}>📊</span>
-        <span style={{ fontSize:14, fontWeight:700, color:'#374151', flex:1 }}>Base Mercado RNDC</span>
+        <span style={{ fontSize:14, fontWeight:700, color:'#374151', flex:1 }}>Base Manifiestos</span>
 
         <span style={{ fontSize:11, fontWeight:700, color:cfg.text, background:cfg.bg, padding:'3px 10px', borderRadius:12, display:'flex', alignItems:'center', gap:5 }}>
           <span style={{ width:6, height:6, borderRadius:'50%', background:cfg.dot, display:'inline-block' }} />

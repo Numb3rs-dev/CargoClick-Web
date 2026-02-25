@@ -386,8 +386,8 @@ export default async function CotizacionesPage({
                       <tr style={{ borderBottom: '2px solid #E5E7EB', background: '#F9FAFB' }}>
                         <SortHeader href={buildSortLink(currentParams, 'createdAt')} label="Fecha"          field="createdAt" sortBy={sortBy} sortDir={sortDir} align="left"   />
                         <SortHeader href={buildSortLink(currentParams, 'empresa')}   label="Cliente"        field="empresa"   sortBy={sortBy} sortDir={sortDir} align="left"   />
-                        <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>Piso SISETAC</th>
-                        <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>Piso manifiestos</th>
+                        <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>Base SISETAC</th>
+                        <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>Base Manifiestos</th>
                         <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'right' }}>Valor cotizado</th>
                         <SortHeader href={buildSortLink(currentParams, 'estado')}    label="Estado"         field="estado"    sortBy={sortBy} sortDir={sortDir} align="center" />
                         <th style={{ padding: '10px 14px', fontSize: 11, fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap', textAlign: 'center' }}>Negociación</th>
@@ -456,7 +456,7 @@ export default async function CotizacionesPage({
                                       </span>
                                       {esConfirmada && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#7C3AED' }}>Confirmada</p>}
                                       {esOfertada   && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#1D4ED8' }}>Ofertada</p>}
-                                      {!esConfirmada && !esOfertada && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#9CA3AF' }}>SISETAC</p>}
+                                      {!esConfirmada && !esOfertada && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#9CA3AF' }}>Base SISETAC</p>}
                                     </>
                                   )
                                 })()
