@@ -71,7 +71,7 @@ export const actualizarSolicitudSchema = z.object({
   empresa: z.string().max(200).trim().optional().or(z.literal('')),
   telefonoEmpresa: z.string().max(50).trim().optional().or(z.literal('')),
   contacto: z.string().min(2).max(200).trim().optional(),
-  email: emailSchema.optional(),
+  email: emailSchema.optional().or(z.literal('')),
   telefono: telefonoSchema.optional(),
   tipoServicio: z.enum(['URBANO', 'NACIONAL']).optional(),
   origen: z.string().min(3).max(200).trim().optional(),

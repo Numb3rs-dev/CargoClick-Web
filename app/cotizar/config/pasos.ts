@@ -137,7 +137,7 @@ export const PASOS: PasoConfig[] = [
     tipoInput: 'client-company-data',
     validacion: z.object({
       contacto: z.string().min(2, 'Mínimo 2 caracteres').max(200),
-      telefono: z.string().regex(/^\+?[1-9]\d{6,14}$/, 'Celular inválido. Ej: +573001234567 o 3001234567'),
+      telefono: z.string().min(1, 'Ingresa tu número de celular'),
     }),
   },
 

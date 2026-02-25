@@ -122,6 +122,15 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
     if (config.tipoInput === 'company-data') return true;
     try {
       config.validacion.parse(valor);
+      // Para client-company-data, también validar reglas del país en el celular
+      if (config.tipoInput === 'client-company-data') {
+        const ccdV = valor as any;
+        const pais = PAISES.find(p => p.code === prefijoCelular) ?? PAISES[0];
+        const numLen = typeof ccdV.telefono === 'string' && ccdV.telefono.startsWith(prefijoCelular)
+          ? ccdV.telefono.slice(prefijoCelular.length).length
+          : 0;
+        return numLen >= pais.minLen && numLen <= pais.maxLen;
+      }
       return true;
     } catch {
       return false;
@@ -142,6 +151,25 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
         setError('Error al guardar. Intenta nuevamente.');
       }
       return;
+    }
+
+    // Para client-company-data, bloquear si el celular no cumple la regla del país
+    // o si el correo tiene contenido pero formato inválido
+    if (config.tipoInput === 'client-company-data') {
+      const ccdV = valor as any;
+      const pais = PAISES.find(p => p.code === prefijoCelular) ?? PAISES[0];
+      const numLen = typeof ccdV.telefono === 'string' && ccdV.telefono.startsWith(prefijoCelular)
+        ? ccdV.telefono.slice(prefijoCelular.length).length
+        : 0;
+      if (numLen < pais.minLen || numLen > pais.maxLen) {
+        setError(`${pais.name} requiere ${pais.minLen === pais.maxLen ? pais.minLen : `${pais.minLen}–${pais.maxLen}`} dígitos (ingresaste ${numLen})`);
+        return;
+      }
+      const emailVal = typeof ccdV.email === 'string' ? ccdV.email.trim() : '';
+      if (emailVal !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        setError('El correo electrónico no es válido');
+        return;
+      }
     }
 
     if (!validar(valor)) return;
@@ -754,13 +782,13 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
             {/* ── Correo ──────────────────────────────────────────── */}
             <TextField
               fullWidth
-              type="email"
               label="Correo electrónico"
               value={ccd.email ?? ''}
               onChange={(e) => setValor({ ...ccd, email: e.target.value })}
               placeholder="ejemplo@empresa.com"
               disabled={isLoading}
               size="medium"
+              inputProps={{ inputMode: 'email' }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
