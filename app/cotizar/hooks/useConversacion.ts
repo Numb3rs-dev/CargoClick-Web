@@ -176,9 +176,9 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
 
         // Detectar el primer paso incompleto para reanudar ahí
         const pasoInicial =
-          !sol.origen || sol.origen === '' ? 1        // sin ruta → desde empresa (skippable)
-          : !sol.pesoKg || sol.pesoKg === 0 ? 3       // sin carga → tipo + peso
-          : 5;                                        // sin fecha → selector de fecha
+          !sol.origen || sol.origen === '' ? 0        // sin ruta → paso 0 (origen-destino)
+          : !sol.pesoKg || sol.pesoKg === 0 ? 2       // sin peso → paso 2 (peso+dimensiones)
+          : TOTAL_PASOS - 1;                          // todo completo → paso 5 (extras)
 
         console.info('[reanudar] Solicitud cargada, retomando desde paso', pasoInicial, '–', sol.id);
 
@@ -524,7 +524,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
     } else if (campo === 'observaciones' && typeof valorLimpio === 'object' && valorLimpio !== null) {
       // confirmation-extras: captura observaciones + checklist completo si el usuario no saltó
       const ev = valorLimpio as {
-        observaciones?: string; skip?: boolean;
+        observaciones?: string; skip?: boolean; servicioExpreso?: boolean;
         cargaPeligrosa?: boolean; ayudanteCargue?: boolean; ayudanteDescargue?: boolean;
         cargaFragil?: boolean; necesitaEmpaque?: boolean;
         multiplesDestinosEntrega?: boolean; requiereEscolta?: boolean;
@@ -538,6 +538,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
           datosForm: {
             ...prev.datosForm,
             observaciones:             ev.observaciones              ?? '',
+            servicioExpreso:           ev.servicioExpreso            ?? false,
             cargaPeligrosa:            ev.cargaPeligrosa             ?? false,
             ayudanteCargue:            ev.ayudanteCargue             ?? false,
             ayudanteDescargue:         ev.ayudanteDescargue          ?? false,
@@ -555,15 +556,18 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
         }));
       }
     } else if (campo === 'origen' && typeof valorLimpio === 'object' && valorLimpio !== null && 'destino' in valorLimpio) {
+      const rv = valorLimpio as { origen: string; destino: string; distanciaKm?: number; tramoDistancia?: string; tiempoTransitoDesc?: string };
+      const tipoServicio = rv.origen && rv.destino && rv.origen === rv.destino ? 'URBANO' : 'NACIONAL';
       setState(prev => ({
         ...prev,
         datosForm: {
           ...prev.datosForm,
-          origen: valorLimpio.origen,
-          destino: valorLimpio.destino,
-          ...(typeof valorLimpio.distanciaKm === 'number' ? { distanciaKm: valorLimpio.distanciaKm } : {}),
-          ...(valorLimpio.tramoDistancia           ? { tramoDistancia: valorLimpio.tramoDistancia }   : {}),
-          ...(valorLimpio.tiempoTransitoDesc       ? { tiempoTransitoDesc: valorLimpio.tiempoTransitoDesc } : {}),
+          origen: rv.origen,
+          destino: rv.destino,
+          tipoServicio,
+          ...(typeof rv.distanciaKm === 'number' ? { distanciaKm: rv.distanciaKm } : {}),
+          ...(rv.tramoDistancia           ? { tramoDistancia: rv.tramoDistancia }   : {}),
+          ...(rv.tiempoTransitoDesc       ? { tiempoTransitoDesc: rv.tiempoTransitoDesc } : {}),
         },
       }));
     } else {
@@ -711,7 +715,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
       // ── Paso 5: confirmation-extras → PATCH fire-and-forget + marcar completado
       const ev = (typeof valorLimpio === 'object' && valorLimpio !== null)
         ? valorLimpio as {
-            observaciones?: string; skip?: boolean;
+            observaciones?: string; skip?: boolean; servicioExpreso?: boolean;
             cargaPeligrosa?: boolean; ayudanteCargue?: boolean; ayudanteDescargue?: boolean;
             cargaFragil?: boolean; necesitaEmpaque?: boolean;
             multiplesDestinosEntrega?: boolean; requiereEscolta?: boolean;
@@ -727,6 +731,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
         datosForm: ev.skip ? prev.datosForm : {
           ...prev.datosForm,
           observaciones:            ev.observaciones             ?? '',
+          servicioExpreso:          ev.servicioExpreso           ?? false,
           cargaPeligrosa:           ev.cargaPeligrosa            ?? false,
           ayudanteCargue:           ev.ayudanteCargue            ?? false,
           ayudanteDescargue:        ev.ayudanteDescargue         ?? false,
@@ -760,6 +765,7 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             observaciones:            ev.observaciones             ?? '',
+            servicioExpreso:          ev.servicioExpreso           ?? false,
             cargaPeligrosa:           ev.cargaPeligrosa            ?? false,
             detalleCargaPeligrosa:    ev.detalleCargaPeligrosa     ?? '',
             ayudanteCargue:           ev.ayudanteCargue            ?? false,
@@ -820,6 +826,8 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
       setState(prev => ({
         ...prev,
         pasoActual: prev.pasoActual - 1,
+        error: null,
+        isLoading: false,
       }));
     }
   }, [state.pasoActual]);

@@ -96,6 +96,10 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
   const [prefijoCelular, setPrefijoCelular] = useState('+57');
   // Panel de info expandible para tarjetas de tipo de carga
   const [expandedInfo, setExpandedInfo] = useState<string | null>(null);
+  // Solo hace auto-submit si el usuario interactuó — evita avanzar al volver con ←
+  const [userInteracted, setUserInteracted] = useState(false);
+  // Wrapper: marca interacción explícita del usuario antes de actualizar valor
+  const setValorUser = (v: any) => { setUserInteracted(true); setValor(v); };
 
   // Reset cuando cambia el paso
   useEffect(() => {
@@ -103,6 +107,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
     setError(null);
     setPrefijoCelular('+57');
     setExpandedInfo(null);
+    setUserInteracted(false);
   }, [config.id, defaultValue]);
 
   // Validar con Zod
@@ -187,6 +192,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
   const autoSubmit = ['radio', 'buttons'].includes(config.tipoInput);
 
   useEffect(() => {
+    if (!userInteracted) return; // valor restaurado al volver ←, no auto-submit
     if (autoSubmit && valor && !isLoading) {
       const timer = setTimeout(() => {
         if (validar(valor)) {
@@ -195,7 +201,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [valor, autoSubmit, isLoading]);
+  }, [valor, autoSubmit, isLoading, userInteracted]);
 
   // Renderizar input según tipo
   const renderInput = () => {
@@ -831,15 +837,20 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
           : { origen: '', destino: '' };
 
         return (
-          <OriginDestinationDANE
-            valor={ov}
-            onChange={(nuevoValor) => {
-              setValor(nuevoValor);
-              // Disparar validación al actualizar
-              try { config.validacion.parse(nuevoValor); setError(null); } catch { /* pendiente */ }
-            }}
-            disabled={isLoading}
-          />
+          <Stack spacing={1.5}>
+            <OriginDestinationDANE
+              valor={ov}
+              onChange={(nuevoValor) => {
+                setValor(nuevoValor);
+                // Disparar validación al actualizar
+                try { config.validacion.parse(nuevoValor); setError(null); } catch { /* pendiente */ }
+              }}
+              disabled={isLoading}
+            />
+            <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5, pl: 0.5 }}>
+              💡 Si tu servicio es <strong>urbano</strong>, pon la misma ciudad en origen y destino.
+            </Typography>
+          </Stack>
         );
       }
 
@@ -908,7 +919,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
           <FormControl component="fieldset" fullWidth>
             <RadioGroup
               value={valor}
-              onChange={(e) => setValor(e.target.value)}
+              onChange={(e) => setValorUser(e.target.value)}
             >
               {opciones?.map((opcion) => (
                 <FormControlLabel
@@ -958,7 +969,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
               value={valor}
               exclusive
               onChange={(_, newValue) => {
-                if (newValue !== null) setValor(newValue);
+                if (newValue !== null) setValorUser(newValue);
               }}
               fullWidth
               color="primary"
@@ -1016,7 +1027,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
                   }}
                 >
                   <Box
-                    onClick={() => !isLoading && setValor(opcion.value)}
+                    onClick={() => !isLoading && setValorUser(opcion.value)}
                     sx={{
                       p: 2,
                       cursor: isLoading ? 'not-allowed' : 'pointer',
@@ -1284,8 +1295,8 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
 
         const items: { key: keyof ClVal; icon: string; label: string; sublabel: string }[] = [
           { key: 'cargaPeligrosa',    icon: '☢️', label: 'Carga peligrosa (HAZMAT)',     sublabel: 'Sustancias inflamables, corrosivas, tóxicas o explosivas' },
-          { key: 'ayudanteCargue',    icon: '🚵', label: 'Ayudante en el cargue',        sublabel: 'Necesitas personal para subir o cargar la mercancía' },
-          { key: 'ayudanteDescargue', icon: '🚵', label: 'Ayudante en el descargue',     sublabel: 'Necesitas personal para bajar o descargar la mercancía' },
+          { key: 'ayudanteCargue',    icon: '�', label: 'Ayudante en el cargue',        sublabel: 'Necesitas personal para subir o cargar la mercancía' },
+          { key: 'ayudanteDescargue', icon: '💪', label: 'Ayudante en el descargue',     sublabel: 'Necesitas personal para bajar o descargar la mercancía' },
           { key: 'cargaFragil',       icon: '🥚', label: 'Carga frágil',                  sublabel: 'Vidrio, cerámica, electrónicos, objetos delicados' },
           { key: 'necesitaEmpaque',   icon: '📦', label: 'Necesita embalaje',            sublabel: 'La carga llega sin empacar y hay que prepararla antes del viaje' },
         ];
@@ -1338,10 +1349,11 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
       }
 
       case 'confirmation-extras': {
-        type BoolKey = 'cargaPeligrosa' | 'ayudanteCargue' | 'ayudanteDescargue' | 'cargaFragil' | 'necesitaEmpaque' | 'multiplesDestinosEntrega' | 'requiereEscolta' | 'accesosDificiles' | 'cargaSobredimensionada';
+        type BoolKey = 'servicioExpreso' | 'cargaPeligrosa' | 'ayudanteCargue' | 'ayudanteDescargue' | 'cargaFragil' | 'necesitaEmpaque' | 'multiplesDestinosEntrega' | 'requiereEscolta' | 'accesosDificiles' | 'cargaSobredimensionada';
         type DetailKey = 'detalleCargaPeligrosa' | 'detalleMultiplesDestinos' | 'detalleAccesosDificiles' | 'detalleSobredimensionada';
         type ConfVal = {
           observaciones: string;
+          servicioExpreso: boolean;
           cargaPeligrosa: boolean; ayudanteCargue: boolean; ayudanteDescargue: boolean;
           cargaFragil: boolean; necesitaEmpaque: boolean;
           multiplesDestinosEntrega: boolean; requiereEscolta: boolean;
@@ -1352,6 +1364,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
         };
         const initConf: ConfVal = {
           observaciones: '',
+          servicioExpreso: false,
           cargaPeligrosa: false, ayudanteCargue: false, ayudanteDescargue: false,
           cargaFragil: false, necesitaEmpaque: false,
           multiplesDestinosEntrega: false, requiereEscolta: false,
@@ -1367,10 +1380,11 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
         const setDetalle = (key: DetailKey, val: string) => setValor({ ...conf, [key]: val });
 
         const confItems: { key: BoolKey; icon: string; label: string; sublabel: string; detalleKey?: DetailKey; detallePlaceholder?: string }[] = [
+          { key: 'servicioExpreso',           icon: '⚡', label: 'Servicio expreso',                      sublabel: 'Prioridad en asignación y despacho — ideal cuando el tiempo de entrega es crítico' },
           { key: 'cargaPeligrosa',           icon: '☢️', label: 'Carga peligrosa (HAZMAT)',           sublabel: 'Sustancias inflamables, corrosivas, tóxicas o explosivas',
             detalleKey: 'detalleCargaPeligrosa',    detallePlaceholder: '¿Qué tipo de material? (clase HAZMAT, número ONU si lo conoces)' },
-          { key: 'ayudanteCargue',           icon: '🧗', label: 'Ayudante en el cargue',              sublabel: 'Necesitas personal para subir o cargar la mercancía' },
-          { key: 'ayudanteDescargue',        icon: '🧗', label: 'Ayudante en el descargue',           sublabel: 'Necesitas personal para bajar o descargar la mercancía' },
+          { key: 'ayudanteCargue',           icon: '💪', label: 'Ayudante en el cargue',              sublabel: 'Necesitas personal para subir o cargar la mercancía' },
+          { key: 'ayudanteDescargue',        icon: '💪', label: 'Ayudante en el descargue',           sublabel: 'Necesitas personal para bajar o descargar la mercancía' },
           { key: 'cargaFragil',              icon: '🥚', label: 'Carga frágil',                      sublabel: 'Vidrio, cerámica, electrónicos, objetos delicados' },
           { key: 'necesitaEmpaque',          icon: '📦', label: 'Necesita embalaje',                   sublabel: 'La carga llega sin empacar y hay que prepararla antes del viaje' },
           { key: 'multiplesDestinosEntrega', icon: '🗺️', label: 'Entrega en más de un punto',        sublabel: 'El camión necesita hacer varias paradas de descargue en el mismo viaje',
@@ -1378,7 +1392,7 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
           { key: 'requiereEscolta',          icon: '🛡️', label: 'Requiere escolta de seguridad',     sublabel: 'Carga de alto valor: efectivo, joyería, electrónicos de alto costo' },
           { key: 'accesosDificiles',         icon: '🚧', label: 'Acceso difícil en origen o destino',  sublabel: 'Vía sin pavimento, puente con límite de peso, portería con altura máxima',
             detalleKey: 'detalleAccesosDificiles',   detallePlaceholder: 'Describe la restricción: puente límite 5t, calle sin pavimento, portería baja...' },
-          { key: 'cargaSobredimensionada',   icon: '🏗️', label: 'Carga sobredimensionada',            sublabel: 'Longitud o altura fuera de límites legales — puede requerir permiso INVIAS',
+          { key: 'cargaSobredimensionada',   icon: '📏', label: 'Carga sobredimensionada',            sublabel: 'Longitud o altura fuera de límites legales — puede requerir permiso INVIAS',
             detalleKey: 'detalleSobredimensionada',  detallePlaceholder: 'Dimensiones aproximadas que exceden lo normal (largo × ancho × alto)' },
         ];
 

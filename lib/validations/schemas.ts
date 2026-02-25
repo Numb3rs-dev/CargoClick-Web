@@ -89,6 +89,7 @@ export const actualizarSolicitudSchema = z.object({
   fechaRequerida: fechaRequeridaSchema.optional(),
   // Enriquecimiento paso 6
   observaciones:            z.string().max(2000).optional().or(z.literal('')),
+  servicioExpreso:          z.boolean().optional(),
   cargaPeligrosa:           z.boolean().optional(),
   detalleCargaPeligrosa:    z.string().max(1000).optional().or(z.literal('')),
   ayudanteCargue:           z.boolean().optional(),

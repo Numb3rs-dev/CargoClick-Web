@@ -425,11 +425,12 @@ export default async function SolicitudDetallePage(
                   <CondicionesEspeciales
                     embedded
                     condiciones={[
+                      { key: 'servicioExpreso',          icon: '⚡',  label: 'Servicio expreso',                                                              activo: !!solicitud.servicioExpreso,         sugerido: 0       },
                       { key: 'cargaPeligrosa',          icon: '☢️',  label: 'Carga peligrosa',           detail: solicitud.detalleCargaPeligrosa,    activo: !!solicitud.cargaPeligrosa,          sugerido: 150_000 },
                       { key: 'cargaFragil',              icon: '🥚',  label: 'Carga frágil',                                                              activo: !!solicitud.cargaFragil,             sugerido: 80_000  },
-                      { key: 'requiereEscolta',          icon: '🚔',  label: 'Requiere escolta',                                                          activo: !!solicitud.requiereEscolta,         sugerido: 350_000 },
+                      { key: 'requiereEscolta',          icon: '🛡️',  label: 'Requiere escolta',                                                          activo: !!solicitud.requiereEscolta,         sugerido: 350_000 },
                       { key: 'cargaSobredimensionada',   icon: '📏',  label: 'Carga sobredimensionada',    detail: solicitud.detalleSobredimensionada,  activo: !!solicitud.cargaSobredimensionada,  sugerido: 200_000 },
-                      { key: 'accesosDificiles',         icon: '🛤️', label: 'Accesos difíciles',           detail: solicitud.detalleAccesosDificiles,  activo: !!solicitud.accesosDificiles,        sugerido: 100_000 },
+                      { key: 'accesosDificiles',         icon: '🚧', label: 'Accesos difíciles',           detail: solicitud.detalleAccesosDificiles,  activo: !!solicitud.accesosDificiles,        sugerido: 100_000 },
                       { key: 'necesitaEmpaque',          icon: '📦',  label: 'Necesita empaque',                                                          activo: !!solicitud.necesitaEmpaque,         sugerido: 60_000  },
                       { key: 'multiplesDestinosEntrega', icon: '🗺️', label: 'Múltiples destinos',          detail: solicitud.detalleMultiplesDestinos, activo: !!solicitud.multiplesDestinosEntrega,sugerido: 120_000 },
                       { key: 'ayudanteCargue',           icon: '💪',  label: 'Ayudante en cargue',                                                        activo: !!solicitud.ayudanteCargue,          sugerido: 80_000  },
@@ -450,11 +451,12 @@ export default async function SolicitudDetallePage(
               {/* Build active conditions list for PanelComercial */}
               {(() => {
                 const condicionesActivas = [
+                  { key: 'servicioExpreso',          icon: '⚡',  label: 'Servicio expreso',          monto: 0,       activo: !!solicitud.servicioExpreso },
                   { key: 'cargaPeligrosa',          icon: '☢️',  label: 'Carga peligrosa',          monto: 150_000, activo: !!solicitud.cargaPeligrosa },
                   { key: 'cargaFragil',              icon: '🥚',  label: 'Carga frágil',              monto: 80_000,  activo: !!solicitud.cargaFragil },
-                  { key: 'requiereEscolta',          icon: '🚔',  label: 'Requiere escolta',          monto: 350_000, activo: !!solicitud.requiereEscolta },
+                  { key: 'requiereEscolta',          icon: '🛡️',  label: 'Requiere escolta',          monto: 350_000, activo: !!solicitud.requiereEscolta },
                   { key: 'cargaSobredimensionada',   icon: '📏',  label: 'Carga sobredimensionada',   monto: 200_000, activo: !!solicitud.cargaSobredimensionada },
-                  { key: 'accesosDificiles',         icon: '🛤️', label: 'Accesos difíciles',          monto: 100_000, activo: !!solicitud.accesosDificiles },
+                  { key: 'accesosDificiles',         icon: '🚧', label: 'Accesos difíciles',          monto: 100_000, activo: !!solicitud.accesosDificiles },
                   { key: 'necesitaEmpaque',          icon: '📦',  label: 'Necesita empaque',          monto: 60_000,  activo: !!solicitud.necesitaEmpaque },
                   { key: 'multiplesDestinosEntrega', icon: '🗺️', label: 'Múltiples destinos',         monto: 120_000, activo: !!solicitud.multiplesDestinosEntrega },
                   { key: 'ayudanteCargue',           icon: '💪',  label: 'Ayudante en cargue',        monto: 80_000,  activo: !!solicitud.ayudanteCargue },

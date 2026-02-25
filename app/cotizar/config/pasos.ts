@@ -17,7 +17,7 @@ export const PASOS: PasoConfig[] = [
   // ── PASO 0: Ruta ─────────────────────────────────────────────────────────────────────
   {
     id: 0,
-    pregunta: '¿Desde qué ciudad sale el envío y hacia dónde va?',
+    pregunta: 'Ruta: Origen y destino',
     campoFormulario: 'origen',
     tipoInput: 'origin-destination',
     validacion: z.object({
@@ -109,7 +109,7 @@ export const PASOS: PasoConfig[] = [
   // ── PASO 2: Peso + Dimensiones — identifica vehículo mínimo ────────────────────────
   {
     id: 2,
-    pregunta: 'Cuéntame sobre el tamaño de tu carga: ¿cuánto pesa y cuáles son sus dimensiones?',
+    pregunta: 'Peso y dimensiones aproximadas',
     campoFormulario: 'pesoKg',
     tipoInput: 'weight-dimensions',
     validacion: z.object({
@@ -132,7 +132,7 @@ export const PASOS: PasoConfig[] = [
   // ── PASO 4: Datos de contacto + empresa (fusionados) ← AQUÍ se crea la solicitud ───
   {
     id: 4,
-    pregunta: '¡Ya casi! ¿A nombre de quién va esta solicitud?',
+    pregunta: 'Datos de contacto',
     campoFormulario: 'contacto',
     tipoInput: 'client-company-data',
     validacion: z.object({
@@ -149,6 +149,7 @@ export const PASOS: PasoConfig[] = [
     tipoInput: 'confirmation-extras',
     validacion: z.object({
       observaciones:     z.string().optional(),
+      servicioExpreso:   z.boolean().optional(),
       cargaPeligrosa:    z.boolean().optional(),
       ayudanteCargue:    z.boolean().optional(),
       ayudanteDescargue: z.boolean().optional(),

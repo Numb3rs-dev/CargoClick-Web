@@ -126,6 +126,9 @@ model Solicitud {
   /// Observaciones libres del cliente sobre la carga o el servicio
   observaciones              String?  @db.Text
 
+  /// Servicio expreso — prioridad en asignación y despacho
+  servicioExpreso            Boolean? @default(false)  @map("servicio_expreso")
+
   /// Carga peligrosa HAZMAT — requiere permisos especiales y vehículo certificado
   cargaPeligrosa             Boolean? @default(false)  @map("carga_peligrosa")
   /// Detalle adicional de la carga peligrosa (tipo, clásificación, etc.)

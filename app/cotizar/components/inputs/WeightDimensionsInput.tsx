@@ -82,21 +82,20 @@ function BarraCapacidad({
   label: string;
   percent: number;
 }) {
-  const color = percent > 90 ? 'error' : percent > 70 ? 'warning' : 'success';
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.25 }}>
         <Typography variant="caption" color="text.secondary">
           {label}
         </Typography>
-        <Typography variant="caption" fontWeight={700} color={`${color}.main`}>
+        <Typography variant="caption" fontWeight={700} color="primary.main">
           {percent}%
         </Typography>
       </Box>
       <LinearProgress
         variant="determinate"
         value={Math.min(percent, 100)}
-        color={color}
+        color="primary"
         sx={{ borderRadius: 4, height: 6 }}
       />
     </Box>
@@ -255,8 +254,8 @@ export function WeightDimensionsInput({
       {/* ── DIMENSIONES ──────────────────────────────────────────────── */}
       <Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-          <StraightenOutlined sx={{ color: 'secondary.main', fontSize: 20 }} />
-          <Typography variant="subtitle1" fontWeight={700} color="secondary.main">
+          <StraightenOutlined sx={{ color: 'primary.main', fontSize: 20 }} />
+          <Typography variant="subtitle1" fontWeight={700} color="primary.main">
             Dimensiones de la carga
           </Typography>
           <Tooltip title="Mide el espacio total que ocupa la carga: largo (la dimensión más larga), ancho y alto en centímetros." arrow>
@@ -328,7 +327,7 @@ export function WeightDimensionsInput({
               icon={<StraightenOutlined sx={{ fontSize: '16px !important' }} />}
               label={`Volumen: ${volumenM3.toFixed(3)} m³`}
               variant="outlined"
-              color="secondary"
+              color="primary"
               sx={{ fontWeight: 600 }}
             />
             <Typography variant="caption" color="text.disabled">
@@ -355,8 +354,8 @@ export function WeightDimensionsInput({
             <Stack spacing={1.5}>
               {/* Barras de capacidad */}
               <Stack spacing={1}>
-                <BarraCapacidad label={`Peso: ${formatKg(valor.pesoKg)} / ${resultado.vehiculo.capacidadPesoKg.toLocaleString()} kg`} percent={resultado.usoPesoPercent} />
-                <BarraCapacidad label={`Volumen: ${volumenM3!.toFixed(2)} m³ / ${resultado.vehiculo.capacidadM3} m³`} percent={resultado.usoVolumenPercent} />
+                <BarraCapacidad label={`Capacidad estimada — peso: ${formatKg(valor.pesoKg)} / ${resultado.vehiculo.capacidadPesoKg.toLocaleString()} kg`} percent={resultado.usoPesoPercent} />
+                <BarraCapacidad label={`Capacidad estimada — volumen: ${volumenM3!.toFixed(2)} m³ / ${resultado.vehiculo.capacidadM3} m³`} percent={resultado.usoVolumenPercent} />
               </Stack>
 
               {/* Lista de vehículos — mínimo destacado */}
