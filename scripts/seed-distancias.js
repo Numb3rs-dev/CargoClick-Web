@@ -31,16 +31,16 @@ async function main() {
   const prisma = new PrismaClient();
 
   try {
-    if (!TRUNCATE) {
+    if (TRUNCATE) {
+      console.log('🗑  Truncando tabla distancias...');
+      await prisma.$executeRaw`TRUNCATE TABLE distancias`;
+    } else {
       const existentes = await prisma.distancia.count();
       console.log(`   Registros actuales en BD: ${existentes.toLocaleString()}`);
       if (existentes >= MINIMO_FILAS) {
         console.log('⚡ Tabla ya poblada — saltando seed.');
         return;
       }
-    } else {
-      console.log('🗑  Truncando tabla distancias...');
-      await prisma.$executeRawUnsafe('TRUNCATE TABLE distancias');
     }
 
     // ── 2. Leer y parsear distancias-tabla.ts ────────────────────────────
@@ -56,28 +56,24 @@ async function main() {
         origen:   m[1],
         destino:  m[2],
         km:       parseInt(m[3], 10),
-        validado: parseInt(m[4], 10),
+        validado: m[4] === '1',
       });
     }
 
     console.log(`✅ Pares extraídos: ${pares.length.toLocaleString()}`);
     console.log(`   Muestra: ${JSON.stringify(pares[0])} … ${JSON.stringify(pares[pares.length - 1])}`);
 
-    // ── 3. Insertar en batches ──────────────────────────────────────────
+    // ── 3. Insertar en batches con createMany (evita $executeRawUnsafe) ──
     let insertados = 0;
     const inicio = Date.now();
 
     for (let i = 0; i < pares.length; i += BATCH) {
-      const batch  = pares.slice(i, i + BATCH);
-      const values = batch
-        .map(p => `('${p.origen}','${p.destino}',${p.km},${p.validado})`)
-        .join(',');
+      const batch = pares.slice(i, i + BATCH);
 
-      await prisma.$executeRawUnsafe(`
-        INSERT INTO distancias (origen, destino, km, validado)
-        VALUES ${values}
-        ON CONFLICT (origen, destino) DO NOTHING
-      `);
+      await prisma.distancia.createMany({
+        data: batch,
+        skipDuplicates: true,
+      });
 
       insertados += batch.length;
       const pct     = Math.round((insertados / pares.length) * 100);
