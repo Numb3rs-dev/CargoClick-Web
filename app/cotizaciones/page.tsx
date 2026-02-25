@@ -444,23 +444,23 @@ export default async function CotizacionesPage({
                                 : <span style={{ color: '#D1D5DB' }}>—</span>}
                             </td>
                             <td style={{ padding: '12px 14px', textAlign: 'right' }}>
-                              {cot ? (
-                                (() => {
-                                  const valorFinal = ajuste?.tarifaConfirmadaCliente ?? ajuste?.tarifaOfertadaCliente ?? cot.tarifaSugerida
-                                  const esConfirmada = !!ajuste?.tarifaConfirmadaCliente
-                                  const esOfertada   = !!ajuste?.tarifaOfertadaCliente && !ajuste.tarifaConfirmadaCliente
-                                  return (
-                                    <>
-                                      <span style={{ fontWeight: 800, fontSize: 14, color: esConfirmada ? '#7C3AED' : esOfertada ? '#1D4ED8' : '#065F46' }}>
-                                        {formatCOP(Number(valorFinal))}
-                                      </span>
-                                      {esConfirmada && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#7C3AED' }}>Confirmada</p>}
-                                      {esOfertada   && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#1D4ED8' }}>Ofertada</p>}
-                                      {!esConfirmada && !esOfertada && <p style={{ margin: '2px 0 0', fontSize: 10, color: '#9CA3AF' }}>Base SISETAC</p>}
-                                    </>
-                                  )
-                                })()
-                              ) : <span style={{ color: '#D1D5DB' }}>—</span>}
+                              {(() => {
+                                const confirmada = ajuste?.tarifaConfirmadaCliente
+                                const ofertada   = ajuste?.tarifaOfertadaCliente && !ajuste.tarifaConfirmadaCliente ? ajuste.tarifaOfertadaCliente : null
+                                if (confirmada) return (
+                                  <>
+                                    <span style={{ fontWeight: 800, fontSize: 14, color: '#7C3AED' }}>{formatCOP(Number(confirmada))}</span>
+                                    <p style={{ margin: '2px 0 0', fontSize: 10, color: '#7C3AED' }}>Confirmada</p>
+                                  </>
+                                )
+                                if (ofertada) return (
+                                  <>
+                                    <span style={{ fontWeight: 800, fontSize: 14, color: '#1D4ED8' }}>{formatCOP(Number(ofertada))}</span>
+                                    <p style={{ margin: '2px 0 0', fontSize: 10, color: '#1D4ED8' }}>Ofertada</p>
+                                  </>
+                                )
+                                return <span style={{ color: '#D1D5DB' }}>—</span>
+                              })()}
                             </td>
                             <td style={{ padding: '12px 14px', textAlign: 'center' }}>
                               <Badge label={solEst.label} bg={solEst.bg} text={solEst.text} />
