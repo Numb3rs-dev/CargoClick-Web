@@ -88,6 +88,13 @@ function parseDate(str) {
 }
 
 async function main() {
+  // ── Early-exit si la tabla ya tiene datos
+  const existentes = await prisma.manifiestoRndc.count();
+  if (existentes > 0) {
+    console.log(`\u26a1 Tabla RNDC ya poblada (${existentes.toLocaleString()} manifiestos). Importaci\u00f3n omitida.`);
+    return;
+  }
+
   const excelPath = process.argv[2]
     || path.join(__dirname, '..', 'definicion-FuncionalyTecnica', 'Documento_RNDC (2).xls');
 
