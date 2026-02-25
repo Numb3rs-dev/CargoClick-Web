@@ -11,6 +11,7 @@ import { solicitudService } from '@/lib/services/solicitudService';
 import { ZodError } from 'zod';
 import { logger } from '@/lib/utils/logger';
 import { rateLimitCheck, getClientIp } from '@/lib/utils/ratelimit';
+import { BusinessError, GENERIC_ERROR } from '@/lib/utils/apiError';
 
 /**
  * POST /api/solicitudes
@@ -60,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     // Crear solicitud inicial (servicio valida con Zod)
     const solicitud = await solicitudService.crearSolicitudInicial(body);
-    const reanudada = (solicitud as any).reanudada === true;
+    const reanudada = solicitud.reanudada === true;
 
     // 200 si es reanudación de solicitud existente, 201 si es nueva
     return NextResponse.json(
@@ -90,20 +91,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Error de negocio (duplicados, validaciones del servicio)
-    if (error instanceof Error) {
+    // Error de negocio — mensaje seguro escrito por el servicio
+    if (error instanceof BusinessError) {
       return NextResponse.json(
         { success: false, error: error.message },
-        { status: 409 }
+        { status: error.statusCode }
       );
     }
 
-    // Error genérico del servidor
+    // Cualquier otro error (Prisma, red, etc.) — nunca exponer detalles técnicos
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Error interno del servidor',
-      },
+      { success: false, error: GENERIC_ERROR },
       { status: 500 }
     );
   }

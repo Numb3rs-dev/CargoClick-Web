@@ -49,7 +49,10 @@ export function normalizarCiudad(str: string): string {
     .replace(/[\u0300-\u036f]/g, '') // quitar diacríticos
     .toUpperCase()
     .replace(/\s+/g, ' ')  // normalizar espacios
-    .trim();
+    .trim()
+    // Quitar sufijo "D.C.", "D. C.", "DC" que incorporan algunos nombres de ciudad
+    // (ej: "BOGOTA D.C." → "BOGOTA" para coincidir con el campo `origen` del RNDC)
+    .replace(/\s+D\.?\s*C\.?$/, '');
 }
 
 // ── Funciones estadísticas ─────────────────────────────────────────────────────

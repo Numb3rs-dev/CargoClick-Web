@@ -14,6 +14,7 @@
  */
 
 import { Solicitud } from '.prisma/client';
+import { logger } from '@/lib/utils/logger';
 
 export class NotificacionService {
   /**
@@ -35,7 +36,7 @@ export class NotificacionService {
    * // Si alguna falla, se loguea pero no se propaga error
    */
   async enviarTodasLasNotificaciones(solicitud: Solicitud): Promise<void> {
-    console.log('[NotificacionService] Enviando notificaciones para solicitud:', solicitud.id);
+    logger.info('[NotificacionService]', `Enviando notificaciones para solicitud: ${solicitud.id}`);
 
     const promesas = [
       this.enviarEmailCliente(solicitud),
@@ -50,10 +51,10 @@ export class NotificacionService {
     resultados.forEach((resultado, index) => {
       if (resultado.status === 'rejected') {
         const tipo = ['Email Cliente', 'Email Admin', 'WhatsApp Admin'][index];
-        console.error(`❌ [NotificacionService] Error al enviar ${tipo}:`, resultado.reason);
+        logger.error(`[NotificacionService] Error al enviar ${tipo}`, resultado.reason);
       } else {
         const tipo = ['Email Cliente', 'Email Admin', 'WhatsApp Admin'][index];
-        console.log(`✅ [NotificacionService] ${tipo} enviado correctamente`);
+        logger.info('[NotificacionService]', `${tipo} enviado correctamente`);
       }
     });
   }

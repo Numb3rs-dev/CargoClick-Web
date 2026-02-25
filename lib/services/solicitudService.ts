@@ -19,6 +19,8 @@
 import { ulid } from 'ulid';
 import { Solicitud } from '.prisma/client';
 import { solicitudRepository } from '@/lib/repositories/solicitudRepository';
+import { logger } from '@/lib/utils/logger';
+import { BusinessError } from '@/lib/utils/apiError';
 import {
   crearSolicitudInicialSchema,
   actualizarSolicitudSchema,
@@ -50,22 +52,25 @@ export class SolicitudService {
    * // solicitud.estado = "EN_PROGRESO"
    */
   async crearSolicitudInicial(input: CrearSolicitudInicialInput): Promise<Solicitud & { reanudada?: boolean }> {
-    console.log('[SolicitudService] Creando solicitud inicial con datos:', input);
+    logger.info('[SolicitudService]', 'Creando solicitud inicial');
 
     // Validar con Zod
     const datosValidados = crearSolicitudInicialSchema.parse(input);
 
-    // VALIDACIÓN ANTI-DUPLICADOS: Verificar si existe solicitud reciente con mismo teléfono
+    // VALIDACIÓN ANTI-DUPLICADOS: Verificar si existe solicitud reciente del MISMO cliente
+    // (teléfono + contacto + empresa deben coincidir los tres; si cualquiera difiere es otro cliente)
     const hace24Horas = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const solicitudReciente = await solicitudRepository.buscarPorTelefonoReciente(
+    const solicitudReciente = await solicitudRepository.buscarClienteReciente(
       datosValidados.telefono,
-      hace24Horas
+      datosValidados.contacto,
+      datosValidados.empresa ?? '',
+      hace24Horas,
     );
 
     if (solicitudReciente) {
       // Si la solicitud está EN_PROGRESO, reanudarla en lugar de bloquear al usuario
       if (solicitudReciente.estado === 'EN_PROGRESO') {
-        console.info('[SolicitudService] Reanudando solicitud EN_PROGRESO:', solicitudReciente.id);
+        logger.info('[SolicitudService]', `Reanudando solicitud EN_PROGRESO: ${solicitudReciente.id}`);
         return { ...solicitudReciente, reanudada: true };
       }
 
@@ -77,18 +82,22 @@ export class SolicitudService {
         ? minutosDesde <= 1 ? 'hace menos de 1 minuto' : `hace ${minutosDesde} minuto(s)`
         : `hace ${horasDesde} hora(s)`;
 
-      throw new Error(
+      const refVisible = `#COT-${solicitudReciente.codigoRef}`;
+      throw new BusinessError(
         `Ya recibimos tu solicitud ${tiempoDesc}. ` +
-        `Nos comunicaremos contigo pronto. ID: ${solicitudReciente.id}`
+        `Nos comunicaremos contigo pronto. Ref: ${refVisible}`,
+        409
       );
     }
 
-    // Generar ID único
+    // Generar ID único y código de referencia externo
     const id = ulid();
+    const codigoRef = id.slice(-8).toUpperCase(); // últimos 8 chars del ULID — visible al cliente
 
     // Guardar en BD
     const solicitud = await solicitudRepository.guardar({
       id,
+      codigoRef,
       telefono: datosValidados.telefono,
       contacto: datosValidados.contacto,
       empresa: datosValidados.empresa || '', // Opcional
@@ -107,7 +116,7 @@ export class SolicitudService {
       revisionEspecial: false,
     });
 
-    console.info('[SolicitudService] Solicitud creada exitosamente:', solicitud.id);
+    logger.info('[SolicitudService]', `Solicitud creada exitosamente: ${solicitud.id}`);
     return solicitud;
   }
 
@@ -129,26 +138,28 @@ export class SolicitudService {
    * });
    */
   async actualizarSolicitud(id: string, input: ActualizarSolicitudInput): Promise<Solicitud> {
-    console.log('[SolicitudService] Actualizando solicitud:', id, input);
+    logger.info('[SolicitudService]', `Actualizando solicitud: ${id}`);
 
     // Validar con Zod (solo campos enviados)
     const datosValidados = actualizarSolicitudSchema.parse(input);
 
-    // Preparar datos para actualización
-    const dataUpdate: any = { ...datosValidados };
-
     // RN-05: Calcular revisionEspecial si se actualiza peso
-    if (datosValidados.pesoKg !== undefined) {
-      dataUpdate.revisionEspecial = datosValidados.pesoKg > 10000;
-      console.log(
-        `[SolicitudService] Peso ${datosValidados.pesoKg} kg → revisionEspecial = ${dataUpdate.revisionEspecial}`
-      );
+    const revisionEspecial =
+      datosValidados.pesoKg !== undefined
+        ? datosValidados.pesoKg > 10000
+        : undefined;
+
+    if (revisionEspecial !== undefined) {
+      logger.info('[SolicitudService]', `Peso ${datosValidados.pesoKg} kg → revisionEspecial = ${revisionEspecial}`);
     }
 
-    // Actualizar en BD
-    const solicitudActualizada = await solicitudRepository.actualizar(id, dataUpdate);
+    // Actualizar en BD (sin cast a any: campos son compatibles con Prisma update input)
+    const solicitudActualizada = await solicitudRepository.actualizar(id, {
+      ...datosValidados,
+      ...(revisionEspecial !== undefined ? { revisionEspecial } : {}),
+    });
 
-    console.info('[SolicitudService] Solicitud actualizada exitosamente:', id);
+    logger.info('[SolicitudService]', `Solicitud actualizada exitosamente: ${id}`);
     return solicitudActualizada;
   }
 
@@ -176,12 +187,12 @@ export class SolicitudService {
     id: string,
     camposFinales: Partial<ActualizarSolicitudInput>
   ): Promise<Solicitud> {
-    console.log('[SolicitudService] Completando solicitud:', id, camposFinales);
+    logger.info('[SolicitudService]', `Completando solicitud: ${id}`);
 
     // Obtener solicitud actual
     const solicitudActual = await solicitudRepository.obtenerPorId(id);
     if (!solicitudActual) {
-      throw new Error('Solicitud no encontrada');
+      throw new BusinessError('Solicitud no encontrada', 404);
     }
 
     // Combinar datos actuales con campos finales
@@ -201,15 +212,16 @@ export class SolicitudService {
     const textoCompleto = solicitudCompleta.tipoCarga.toLowerCase();
 
     if (textoCompleto.includes('hogar') || textoCompleto.includes('mudanza')) {
-      console.error('[SolicitudService] Solicitud rechazada: contiene palabras prohibidas');
-      throw new Error(
-        'No procesamos mudanzas de hogar. Nuestro servicio es exclusivo para transporte empresarial.'
+      logger.warn('[SolicitudService]', 'Solicitud rechazada: contiene palabras prohibidas');
+      throw new BusinessError(
+        'No procesamos mudanzas de hogar. Nuestro servicio es exclusivo para transporte empresarial.',
+        400
       );
     }
 
     // Validar solicitud completa con Zod
     const datosValidados = solicitudCompletaSchema.parse(solicitudCompleta);
-    console.log('[SolicitudService] Validación completa exitosa');
+    logger.info('[SolicitudService]', 'Validación completa exitosa');
 
     // RN-05: Verificar revisionEspecial
     const revisionEspecial = datosValidados.pesoKg > 10000;
@@ -221,7 +233,7 @@ export class SolicitudService {
       revisionEspecial,
     });
 
-    console.info('[SolicitudService] Solicitud completada exitosamente:', id);
+    logger.info('[SolicitudService]', `Solicitud completada exitosamente: ${id}`);
 
     // Disparar notificaciones (asíncrono, no bloqueante)
     this.dispararNotificaciones(solicitudFinal);
@@ -237,11 +249,11 @@ export class SolicitudService {
    * @throws Error si no existe
    */
   async obtenerPorId(id: string): Promise<Solicitud> {
-    console.log('[SolicitudService] Obteniendo solicitud:', id);
+    logger.info('[SolicitudService]', `Obteniendo solicitud: ${id}`);
 
     const solicitud = await solicitudRepository.obtenerPorId(id);
     if (!solicitud) {
-      throw new Error('Solicitud no encontrada');
+      throw new BusinessError('Solicitud no encontrada', 404);
     }
 
     return solicitud;
@@ -255,7 +267,7 @@ export class SolicitudService {
    * @returns Array de solicitudes
    */
   async listarPorEstado(estado: 'PENDIENTE' | 'COTIZADO' | 'RECHAZADO' | 'CERRADO', limit?: number): Promise<Solicitud[]> {
-    console.log('[SolicitudService] Listando solicitudes por estado:', estado, 'limit:', limit);
+    logger.info('[SolicitudService]', `Listando solicitudes por estado: ${estado} limit: ${limit}`);
 
     return await solicitudRepository.listarPorEstado(estado, limit);
   }
@@ -278,7 +290,7 @@ export class SolicitudService {
     id: string,
     nuevoEstado: 'PENDIENTE' | 'COTIZADO' | 'RECHAZADO' | 'CERRADO'
   ): Promise<Solicitud> {
-    console.log('[SolicitudService] Cambiando estado de solicitud:', id, '→', nuevoEstado);
+    logger.info('[SolicitudService]', `Cambiando estado de solicitud: ${id} → ${nuevoEstado}`);
 
     const solicitud = await this.obtenerPorId(id);
 
@@ -292,17 +304,16 @@ export class SolicitudService {
 
     const estadosPermitidos = transicionesValidas[solicitud.estado] || [];
     if (!estadosPermitidos.includes(nuevoEstado)) {
-      console.error(
-        `[SolicitudService] Transición no permitida: ${solicitud.estado} → ${nuevoEstado}`
-      );
-      throw new Error(
-        `Transición no permitida: ${solicitud.estado} → ${nuevoEstado}`
+      logger.warn('[SolicitudService]', `Transición no permitida: ${solicitud.estado} → ${nuevoEstado}`);
+      throw new BusinessError(
+        `Transición no permitida: ${solicitud.estado} → ${nuevoEstado}`,
+        400
       );
     }
 
     const solicitudActualizada = await solicitudRepository.actualizar(id, { estado: nuevoEstado });
 
-    console.info('[SolicitudService] Estado cambiado exitosamente:', id, '→', nuevoEstado);
+    logger.info('[SolicitudService]', `Estado cambiado exitosamente: ${id} → ${nuevoEstado}`);
     return solicitudActualizada;
   }
 
@@ -313,17 +324,17 @@ export class SolicitudService {
    * @private
    */
   private dispararNotificaciones(solicitud: Solicitud): void {
-    console.log('[SolicitudService] Disparando notificaciones para solicitud:', solicitud.id);
+    logger.info('[SolicitudService]', `Disparando notificaciones para solicitud: ${solicitud.id}`);
 
     // Importación dinámica para evitar dependencia circular
     // Se ejecuta en background, no bloquea respuesta al cliente
     import('@/lib/services/notificacionService').then(({ notificacionService }) => {
       notificacionService.enviarTodasLasNotificaciones(solicitud).catch((error: Error) => {
-        console.error('[SolicitudService] Error al enviar notificaciones:', error);
+        logger.error('[SolicitudService] Error al enviar notificaciones', error);
         // No propagar error, las notificaciones son secundarias
       });
     }).catch((error: Error) => {
-      console.error('[SolicitudService] NotificacionService no disponible:', error);
+      logger.error('[SolicitudService] NotificacionService no disponible', error);
     });
   }
 }

@@ -7,6 +7,7 @@
 import { Resend } from 'resend';
 import { Solicitud } from '.prisma/client';
 import { templateEmailCliente, templateEmailAdmin } from '@/lib/utils/emailTemplates';
+import { logger } from '@/lib/utils/logger';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -21,8 +22,8 @@ export class EmailService {
    * await emailService.enviarEmailCliente(solicitud);
    */
   async enviarEmailCliente(solicitud: Solicitud): Promise<void> {
-    const emailFrom = process.env.EMAIL_FROM!;
-    
+    const emailFrom = process.env.EMAIL_FROM;
+
     if (!emailFrom) {
       throw new Error('EMAIL_FROM no configurado en variables de entorno');
     }
@@ -39,9 +40,9 @@ export class EmailService {
         throw new Error(`Error al enviar email al cliente: ${error.message}`);
       }
 
-      console.log('✅ Email cliente enviado:', data?.id);
+      logger.info('[EmailService]', `Email cliente enviado: ${data?.id}`);
     } catch (error) {
-      console.error('❌ Error al enviar email al cliente:', error);
+      logger.error('[EmailService] Error al enviar email al cliente', error);
       throw error;
     }
   }
@@ -56,11 +57,14 @@ export class EmailService {
    * await emailService.enviarEmailAdmin(solicitud);
    */
   async enviarEmailAdmin(solicitud: Solicitud): Promise<void> {
-    const emailFrom = process.env.EMAIL_FROM!;
-    const emailAdmin = process.env.EMAIL_ADMIN!;
-    
-    if (!emailFrom || !emailAdmin) {
-      throw new Error('EMAIL_FROM o EMAIL_ADMIN no configurados en variables de entorno');
+    const emailFrom = process.env.EMAIL_FROM;
+    const emailAdmin = process.env.EMAIL_ADMIN;
+
+    if (!emailFrom) {
+      throw new Error('EMAIL_FROM no configurado en variables de entorno');
+    }
+    if (!emailAdmin) {
+      throw new Error('EMAIL_ADMIN no configurado en variables de entorno');
     }
 
     const asunto = solicitud.revisionEspecial
@@ -79,9 +83,9 @@ export class EmailService {
         throw new Error(`Error al enviar email al admin: ${error.message}`);
       }
 
-      console.log('✅ Email admin enviado:', data?.id);
+      logger.info('[EmailService]', `Email admin enviado: ${data?.id}`);
     } catch (error) {
-      console.error('❌ Error al enviar email al admin:', error);
+      logger.error('[EmailService] Error al enviar email al admin', error);
       throw error;
     }
   }

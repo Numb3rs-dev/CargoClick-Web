@@ -47,8 +47,14 @@ enum EstadoSolicitud {
 /// Almacena toda la información necesaria para generar una cotización de servicio de transporte
 model Solicitud {
   // === IDENTIFICACIÓN ===
-  /// ID único de la solicitud (ULID de 26 caracteres generado en código)
-  id              String   @id @default(cuid())
+  /// ID único ULID de 26 caracteres — generado en SolicitudService con ulid().
+  /// NO usar @default(): el ID siempre lo genera la aplicación, nunca Prisma.
+  id              String   @id
+
+  /// Código de referencia amigable para uso externo (últimos 8 chars del ULID en mayúsculas).
+  /// Visible para clientes y comerciales. El ULID interno nunca se expone al exterior.
+  /// Ejemplo: "GT3R48P3"  →  se muestra como  #COT-GT3R48P3
+  codigoRef       String   @unique @map("codigo_ref") @db.VarChar(8)
   
   // === DATOS DEL SERVICIO ===
   /// Tipo de servicio de transporte solicitado
@@ -190,6 +196,9 @@ model Solicitud {
   
   /// Índice para búsqueda por nombre de empresa
   @@index([empresa])
+
+  /// Índice para búsqueda por código de referencia externo
+  @@index([codigoRef])
 
   // === RELACIONES ===
   cotizaciones        Cotizacion[]
@@ -442,4 +451,25 @@ model ManifiestoRndc {
   @@index([pesoKg])
   @@index([fechaExpedicion])
   @@map("manifiestos_rndc")
+}
+
+// ============================================
+// TABLA DE DISTANCIAS VIALES
+// ============================================
+
+/// Par de municipios con distancia vial calculada por OSRM sobre OSM.
+/// Clave: (origen, destino) siempre en orden lexicográfico (menor primero)
+/// para garantizar simetría A→B = B→A sin duplicar filas.
+model Distancia {
+  /// Código DANE 5 dígitos — siempre el menor lexicográficamente
+  origen    String  @db.VarChar(5)
+  /// Código DANE 5 dígitos — siempre el mayor lexicográficamente
+  destino   String  @db.VarChar(5)
+  /// Distancia vial en kilómetros (redondeada al entero más cercano)
+  km        Int
+  /// 1 = validado manualmente, 0 = calculado automáticamente por OSRM
+  validado  Int     @default(0) @db.SmallInt
+
+  @@id([origen, destino])
+  @@map("distancias")
 }

@@ -150,7 +150,8 @@ export interface UseConversacionReturn {
   datosForm: DatosFormulario;
   
   // Configuración del paso
-  pasoConfig: PasoConfig;
+  /** null cuando pasoActual === -1 (landing) o >= TOTAL_PASOS (completado) */
+  pasoConfig: PasoConfig | null;
   mostrarPaso: boolean;
   progreso: number; // 0-100
   

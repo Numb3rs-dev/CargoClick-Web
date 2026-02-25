@@ -1,4 +1,11 @@
 /**
+ * @deprecated Este componente ya no está en uso activo.
+ * El componente vigente es DynamicInputMUI.tsx (versión Material-UI).
+ * Ver ConversacionCotizacion.tsx: import { DynamicInput } from './DynamicInputMUI'
+ *
+ * Este archivo se mantiene como referencia hasta ser eliminado.
+ * TODO: Eliminar en siguiente limpieza de código muerto.
+ *
  * DynamicInput - Componente que renderiza el tipo de input apropiado según el paso
  * 
  * Maneja 11 tipos de input diferentes:

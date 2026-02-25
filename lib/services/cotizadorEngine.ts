@@ -5,7 +5,7 @@
  * Flujo: datos de la solicitud → inferencias → CF + CV → flete SISETAC → tarifa sugerida
  */
 
-import { prisma } from '@/lib/db/prisma'
+import { cotizacionRepository } from '@/lib/repositories/cotizacionRepository'
 
 // ─────────────────────────────────────────────────────────────
 // TIPOS
@@ -148,14 +148,7 @@ async function inferirTerreno(
   config: ConfigVehiculo,
 ): Promise<TerrainResult> {
   // Buscar en tabla de corredores (bidireccional)
-  const corredor = await prisma.routeTerrain.findFirst({
-    where: {
-      OR: [
-        { origenDane: origen,  destinoDane: destino },
-        { origenDane: destino, destinoDane: origen  },
-      ],
-    },
-  })
+  const corredor = await cotizacionRepository.obtenerCorredorRuta(origen, destino)
 
   if (corredor) {
     return {
@@ -213,27 +206,15 @@ export async function calcularCotizacion(entrada: EntradaEngine): Promise<Result
   const periodoYyyyMm =
     fechaRequerida.getFullYear() * 100 + (fechaRequerida.getMonth() + 1)
 
-  let monthly = await prisma.monthlyParams.findUnique({ where: { periodoYyyyMm } })
-  if (!monthly) {
-    monthly = await prisma.monthlyParams.findFirst({ orderBy: { periodoYyyyMm: 'desc' } })
-  }
+  const monthly = await cotizacionRepository.obtenerParametrosMensuales(periodoYyyyMm)
   if (!monthly) throw new Error('PARAMS_NOT_FOUND: No hay monthly_params en la base de datos')
 
   // ── 3. Obtener parámetros vehiculares ────────────────────
-  let vehicleP = await prisma.vehicleParams.findUnique({
-    where: { configId_ano: { configId: configVehiculo, ano: fechaRequerida.getFullYear() } },
-  })
-  if (!vehicleP) {
-    // Fallback al año más reciente disponible para esa config
-    vehicleP = await prisma.vehicleParams.findFirst({
-      where: { configId: configVehiculo },
-      orderBy: { ano: 'desc' },
-    })
-  }
+  const vehicleP = await cotizacionRepository.obtenerParametrosVehiculo(configVehiculo, fechaRequerida.getFullYear())
   if (!vehicleP) throw new Error(`VEHICLE_PARAMS_NOT_FOUND: No hay parámetros para ${configVehiculo}`)
 
   // ── 4. Obtener parámetros comerciales ────────────────────
-  const commercial = await prisma.commercialParams.findFirst({ where: { activo: true }, orderBy: { vigenciaDesde: 'desc' } })
+  const commercial = await cotizacionRepository.obtenerParametrosComerciales()
   const margenPct  = entrada.margenOverride ?? (commercial ? Number(commercial.margenOperadorPercent) : 20)
   const redondeo   = commercial?.redondeoMilCop ?? 50000
   const validezH   = commercial?.validezCotizacionHoras ?? 48

@@ -1,29 +1,20 @@
 /**
- * Cálculo de distancias viales reales entre municipios de Colombia.
+ * Utilidades de cálculo de distancias y estimación logística entre municipios.
  *
- * Estrategia:
- *   1. LOOKUP TABLE completa (20,910 pares): distancias calculadas con OSRM
- *      sobre la red vial real de OpenStreetMap. Precisión ≈ 0%.
- *   2. HAVERSINE × 1.4: fallback para municipios fuera de la tabla
- *      (p.ej. San Andrés, municipios sin conexión vial). Precisión ±10–20%.
+ * La consulta de distancias reales (OSRM) se hace a través de la API Route:
+ *   GET /api/distancia?origen=XXXXX&destino=YYYYY
+ *
+ * Este módulo exporta funciones de cálculo puras usadas tanto por la API Route
+ * como por otros servicios del servidor.
  */
 
 import { COORDENADAS_MUNICIPIOS } from '@/app/cotizar/config/colombia-coordenadas';
-import { DISTANCIAS_REALES }       from './distancias-tabla';
 
 /** Radio de la Tierra en km */
 const RADIO_TIERRA_KM = 6371;
 
 /** Factor vial Colombia: fallback Haversine × FACTOR para municipios sin conexión vial */
 const FACTOR_VIAL_COLOMBIA = 1.4;
-
-/**
- * Genera la clave normalizada para buscar un par de municipios en DISTANCIAS_REALES.
- * Ordena los códigos para garantizar simetría (A→B = B→A).
- */
-function claveDistancia(cod1: string, cod2: string): string {
-  return [cod1, cod2].sort().join(':');
-}
 
 /**
  * Calcula la distancia en línea recta (Haversine) entre dos puntos geográficos.
@@ -52,22 +43,11 @@ export function haversineKm(lat1: number, lon1: number, lat2: number, lon2: numb
 export function calcularDistanciaKm(codigoOrigen: string, codigoDestino: string): number | null {
   if (codigoOrigen === codigoDestino) return 0;
 
-  // 1. ── Lookup de distancias reales ──────────────────────────────────────
-  const clave = claveDistancia(codigoOrigen, codigoDestino);
-  const entrada = DISTANCIAS_REALES[clave];
-  if (entrada !== undefined) {
-    // Soporta formato antiguo (number) y nuevo ([km, validado])
-    return Array.isArray(entrada) ? (entrada as [number, 0|1])[0] : (entrada as unknown as number);
-  }
-
-  // 2. ── Haversine × factor vial (fallback) ───────────────────────────────
+  // Haversine × factor vial (fallback cuando no hay datos OSRM en BD)
   const origen  = COORDENADAS_MUNICIPIOS[codigoOrigen];
   const destino = COORDENADAS_MUNICIPIOS[codigoDestino];
-
   if (!origen || !destino) return null;
-
-  const distanciaRecta = haversineKm(origen.lat, origen.lon, destino.lat, destino.lon);
-  return Math.round(distanciaRecta * FACTOR_VIAL_COLOMBIA);
+  return Math.round(haversineKm(origen.lat, origen.lon, destino.lat, destino.lon) * FACTOR_VIAL_COLOMBIA);
 }
 
 /**
@@ -158,6 +138,14 @@ export function estimarTiempoTransito(distanciaKm: number): TiempoTransito {
 }
 
 /**
+ * Fuente del dato de distancia:
+ *   'osrm'      → distancia vial real (tabla OSRM / OpenStreetMap)
+ *   'haversine' → estimación línea recta × 1.4 (municipios sin ruta vial en OSRM)
+ *   'sin_datos' → sin coordenadas disponibles, no se puede estimar
+ */
+export type FuenteDistancia = 'osrm' | 'haversine' | 'sin_datos';
+
+/**
  * Información completa de distancia entre dos municipios
  */
 export interface InfoDistancia {
@@ -165,19 +153,25 @@ export interface InfoDistancia {
   tramo: TramoDistancia;
   tiempoTransito: TiempoTransito;
   disponible: boolean; // false si algún código no tenía coordenadas
+  fuente: FuenteDistancia;
 }
 
 /**
  * Retorna distancia + tramo logístico + tiempo estimado entre dos municipios.
  */
 export function getInfoDistancia(codigoOrigen: string, codigoDestino: string): InfoDistancia {
-  const distanciaKm = calcularDistanciaKm(codigoOrigen, codigoDestino);
-  const disponible  = distanciaKm !== null;
-  const km          = distanciaKm ?? 500;
-  return {
-    distanciaKm: km,
-    tramo: clasificarTramo(km),
-    tiempoTransito: estimarTiempoTransito(km),
-    disponible,
-  };
+  if (codigoOrigen === codigoDestino) {
+    const km = 0;
+    return { distanciaKm: km, tramo: clasificarTramo(km), tiempoTransito: estimarTiempoTransito(km), disponible: true, fuente: 'osrm' };
+  }
+
+  // Haversine fallback (la consulta OSRM real se hace en /api/distancia)
+  const origen  = COORDENADAS_MUNICIPIOS[codigoOrigen];
+  const destino = COORDENADAS_MUNICIPIOS[codigoDestino];
+  if (!origen || !destino) {
+    const km = 500;
+    return { distanciaKm: km, tramo: clasificarTramo(km), tiempoTransito: estimarTiempoTransito(km), disponible: false, fuente: 'sin_datos' };
+  }
+  const km = Math.round(haversineKm(origen.lat, origen.lon, destino.lat, destino.lon) * FACTOR_VIAL_COLOMBIA);
+  return { distanciaKm: km, tramo: clasificarTramo(km), tiempoTransito: estimarTiempoTransito(km), disponible: true, fuente: 'haversine' };
 }

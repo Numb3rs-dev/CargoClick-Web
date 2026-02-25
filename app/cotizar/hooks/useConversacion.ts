@@ -199,20 +199,23 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
 
   // Obtener configuración del paso actual (solo si no está en landing o completado)
   const pasoConfig = useMemo(() => {
+    // Landing page (paso -1) o completado (paso >= TOTAL_PASOS) — estados válidos, retornar null.
+    // El componente consumidor debe guardar contra este caso.
     if (state.pasoActual < 0 || state.pasoActual >= TOTAL_PASOS) {
-      // Landing page o completado - retornar configuración vacía
-      return PASOS[0]; // Temporal para evitar errores
+      return null;
     }
     const paso = PASOS.find(p => p.id === state.pasoActual);
     if (!paso) {
-      throw new Error(`Paso ${state.pasoActual} no encontrado`);
+      // Este caso NO debería ocurrir. Si ocurre es un bug en la navegación del wizard.
+      console.warn(`[useConversacion] pasoActual ${state.pasoActual} no tiene configuración en PASOS`);
+      return null;
     }
     return paso;
   }, [state.pasoActual]);
 
   // Determinar si el paso actual debe mostrarse (manejo condicionales)
   const mostrarPaso = useMemo(() => {
-    if (!pasoConfig.condicional) return true;
+    if (!pasoConfig?.condicional) return true;
     return pasoConfig.condicional(state.datosForm);
   }, [pasoConfig, state.datosForm]);
 
@@ -469,6 +472,8 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
    * @throws Error si falla guardado crítico (paso 2 o 13)
    */
   const siguientePaso = useCallback(async (valor: any) => {
+    // Guardia: siguientePaso solo puede llamarse estando en un paso activo (0..TOTAL_PASOS-1)
+    if (!pasoConfig) return;
     const campo = pasoConfig.campoFormulario;
 
     // UX: Limpiar respuestas conversacionales para campos de texto
@@ -700,6 +705,14 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
           throw new Error(err.error || err.message || 'Error al guardar solicitud');
         }
 
+        // Disparar cálculo SISETAC de forma asíncrona (fire-and-forget)
+        // Los datos ya están guardados en BD → el endpoint puede calcular de inmediato
+        fetch(`/api/solicitudes/${solicitudId}/cotizar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fase: 'sisetac' }),
+        }).catch(err => console.error('[cotizar-sisetac] Error al generar cotización SISETAC:', err));
+
         setState(prev => ({
           ...prev,
           pasoActual: TOTAL_PASOS - 1,
@@ -749,12 +762,17 @@ export function useConversacion(initialSolicitudId?: string): UseConversacionRet
         pasoActual: TOTAL_PASOS, // >= TOTAL_PASOS = completado
       }));
 
-      // Disparar cotización SISETAC al finalizar el wizard (fire-and-forget)
+      // Actualizar cotización con datos RNDC de manifiestos (fire-and-forget)
+      // La cotización SISETAC ya fue creada al completar el paso anterior (paso 4)
       const solicitudIdFinal = state.solicitudId;
       const dispararCotizacion = () => {
         if (!solicitudIdFinal) return;
-        fetch(`/api/solicitudes/${solicitudIdFinal}/cotizar`, { method: 'POST' })
-          .catch(err => console.error('[cotizar] Error al generar cotización:', err));
+        fetch(`/api/solicitudes/${solicitudIdFinal}/cotizar`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fase: 'rndc' }),
+        })
+          .catch(err => console.error('[cotizar-rndc] Error al actualizar cotización con manifiestos RNDC:', err));
       };
 
       // PATCH fire-and-forget si el usuario envió detalles (no hizo "Listo, gracias")

@@ -13,7 +13,7 @@
 
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
 import {
   Autocomplete,
   TextField,
@@ -23,6 +23,8 @@ import {
   Typography,
   Chip,
   Paper,
+  Alert,
+  CircularProgress,
 } from '@mui/material';
 import {
   PlaceOutlined,
@@ -30,12 +32,19 @@ import {
   SwapVert,
   LocalShippingOutlined,
   AccessTimeOutlined,
+  ErrorOutline,
 } from '@mui/icons-material';
 import {
   getAllMunicipios,
   type MunicipioOption,
 } from '@/app/cotizar/config/colombia-dane';
-import { getInfoDistancia } from '@/lib/utils/distancias';
+import type { FuenteDistancia } from '@/lib/utils/distancias';
+
+// ── tipos API ──────────────────────────────────────────────────────────────
+
+type ApiDistancia =
+  | { km: number; fuente: 'osrm' | 'haversine'; tramo?: string; tiempoTransito?: { descripcion: string; tiempoViajeFormato: string } }
+  | { fuente: 'sin_datos' };
 
 // ── helpers ────────────────────────────────────────────────────────────────
 
@@ -59,6 +68,8 @@ interface OriginDestinationValue {
   distanciaKm?: number;
   tramoDistancia?: string;
   tiempoTransitoDesc?: string;
+  /** Fuente de la distancia: 'osrm' = ruta vial real, 'haversine' / 'sin_datos' = sin ruta */
+  rutaFuente?: FuenteDistancia;
 }
 
 interface OriginDestinationDANEProps {
@@ -195,30 +206,68 @@ export function OriginDestinationDANE({
   disabled,
 }: OriginDestinationDANEProps) {
 
-  const handleOrigenChange = (codigo: string) => {
-    const newValor = { ...valor, origen: codigo };
-    if (newValor.origen && newValor.destino) {
-      const info = getInfoDistancia(newValor.origen, newValor.destino);
-      onChange({ ...newValor, distanciaKm: info.distanciaKm, tramoDistancia: info.tramo, tiempoTransitoDesc: info.tiempoTransito.descripcion });
-    } else {
-      onChange(newValor);
+  // Estado local para la info de ruta (resultado de la API)
+  const [infoRuta, setInfoRuta] = useState<ApiDistancia | null>(() => {
+    // Restaurar desde valor si ya fue calculado (usuario volvió atrás en el wizard)
+    if (valor.rutaFuente === 'sin_datos') return { fuente: 'sin_datos' };
+    if (valor.distanciaKm !== undefined && valor.rutaFuente) {
+      return {
+        km: valor.distanciaKm,
+        fuente: valor.rutaFuente as 'osrm' | 'haversine',
+        tramo: valor.tramoDistancia,
+        tiempoTransito: valor.tiempoTransitoDesc
+          ? { descripcion: valor.tiempoTransitoDesc, tiempoViajeFormato: '' }
+          : undefined,
+      };
     }
+    return null;
+  });
+  const [rutaCargando, setRutaCargando] = useState(false);
+
+  // Llamada a la API de distancias (server-side via Next.js Route Handler)
+  const fetchDistancia = useCallback(async (
+    origen: string,
+    destino: string,
+    base: OriginDestinationValue,
+  ) => {
+    setRutaCargando(true);
+    setInfoRuta(null);
+    try {
+      const res  = await fetch(`/api/distancia?origen=${origen}&destino=${destino}`);
+      const data: ApiDistancia = await res.json();
+      setInfoRuta(data);
+      if ('km' in data) {
+        onChange({ ...base, distanciaKm: data.km, tramoDistancia: data.tramo, tiempoTransitoDesc: data.tiempoTransito?.descripcion, rutaFuente: data.fuente });
+      } else {
+        onChange({ ...base, rutaFuente: data.fuente, distanciaKm: undefined });
+      }
+    } catch {
+      setInfoRuta(null);
+    } finally {
+      setRutaCargando(false);
+    }
+  }, []); // sin deps — recibe todo por parámetro
+
+  // Fetch inicial si ambos ya están seleccionados pero aún sin distancia (e.g. estado restaurado sin rutaFuente)
+  useEffect(() => {
+    if (valor.origen && valor.destino && !valor.rutaFuente) {
+      fetchDistancia(valor.origen, valor.destino, valor);
+    }
+  }, []); // solo al montar
+
+  const handleOrigenChange = (codigo: string) => {
+    const base: OriginDestinationValue = { ...valor, origen: codigo, distanciaKm: undefined, tramoDistancia: undefined, tiempoTransitoDesc: undefined, rutaFuente: undefined };
+    onChange(base);
+    if (codigo && valor.destino) fetchDistancia(codigo, valor.destino, base);
+    else setInfoRuta(null);
   };
 
   const handleDestinoChange = (codigo: string) => {
-    const newValor = { ...valor, destino: codigo };
-    if (newValor.origen && newValor.destino) {
-      const info = getInfoDistancia(newValor.origen, newValor.destino);
-      onChange({ ...newValor, distanciaKm: info.distanciaKm, tramoDistancia: info.tramo, tiempoTransitoDesc: info.tiempoTransito.descripcion });
-    } else {
-      onChange(newValor);
-    }
+    const base: OriginDestinationValue = { ...valor, destino: codigo, distanciaKm: undefined, tramoDistancia: undefined, tiempoTransitoDesc: undefined, rutaFuente: undefined };
+    onChange(base);
+    if (valor.origen && codigo) fetchDistancia(valor.origen, codigo, base);
+    else setInfoRuta(null);
   };
-
-  const infoRuta = useMemo(() => {
-    if (!valor.origen || !valor.destino) return null;
-    return getInfoDistancia(valor.origen, valor.destino);
-  }, [valor.origen, valor.destino]);
 
   return (
     <Stack spacing={0}>
@@ -252,8 +301,27 @@ export function OriginDestinationDANE({
         icon={<PlaceTwoTone sx={{ color: 'success.main', fontSize: 20 }} />}
       />
 
-      {/* ── Tarjeta info de ruta (se muestra cuando ambos están elegidos) ── */}
-      {infoRuta && (
+      {/* ── Indicador de carga ──────────────────────────────────────────── */}
+      {rutaCargando && (
+        <Box sx={{ mt: 2.5, display: 'flex', alignItems: 'center', gap: 1.5, color: 'text.secondary' }}>
+          <CircularProgress size={16} thickness={4} />
+          <Typography variant="caption">Calculando distancia…</Typography>
+        </Box>
+      )}
+
+      {/* ── Alerta: ruta sin conexión vial en OSRM ───────────────────────── */}
+      {!rutaCargando && infoRuta && infoRuta.fuente !== 'osrm' && (
+        <Alert
+          severity="error"
+          icon={<ErrorOutline />}
+          sx={{ mt: 2.5, borderRadius: 2, fontSize: '0.85rem' }}
+        >
+          Ruta no disponible para estos municipios.
+        </Alert>
+      )}
+
+      {/* ── Tarjeta info de ruta (solo cuando fuente es OSRM) ────────────── */}
+      {!rutaCargando && infoRuta && infoRuta.fuente === 'osrm' && 'km' in infoRuta && (
         <Box
           sx={{
             mt: 2.5,
@@ -270,7 +338,7 @@ export function OriginDestinationDANE({
         >
           <Chip
             icon={<LocalShippingOutlined sx={{ fontSize: 16 }} />}
-            label={`${infoRuta.distanciaKm} km · ${infoRuta.tramo}`}
+            label={`${infoRuta.km} km · ${infoRuta.tramo ?? ''}`}
             size="small"
             variant="outlined"
             color="primary"
@@ -278,22 +346,24 @@ export function OriginDestinationDANE({
           />
           <Chip
             icon={<AccessTimeOutlined sx={{ fontSize: 16 }} />}
-            label={infoRuta.tiempoTransito.descripcion}
+            label={infoRuta.tiempoTransito?.descripcion ?? ''}
             size="small"
             variant="outlined"
             color="success"
             sx={{ fontWeight: 600 }}
           />
-          <Chip
-            label={`Manejo: ${infoRuta.tiempoTransito.tiempoViajeFormato}`}
-            size="small"
-            variant="filled"
-            sx={{
-              bgcolor: 'action.selected',
-              fontWeight: 500,
-              fontSize: '0.72rem',
-            }}
-          />
+          {infoRuta.tiempoTransito?.tiempoViajeFormato && (
+            <Chip
+              label={`Manejo: ${infoRuta.tiempoTransito.tiempoViajeFormato}`}
+              size="small"
+              variant="filled"
+              sx={{
+                bgcolor: 'action.selected',
+                fontWeight: 500,
+                fontSize: '0.72rem',
+              }}
+            />
+          )}
         </Box>
       )}
     </Stack>

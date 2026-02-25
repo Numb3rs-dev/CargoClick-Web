@@ -1,20 +1,28 @@
 /**
  * POST /api/solicitudes/:id/cotizar
  *
- * Genera una cotización SISETAC para una solicitud existente.
- * Guarda el resultado en la tabla `cotizaciones` y actualiza el estado
- * de la solicitud a COTIZADO.
+ * Genera una cotización para una solicitud existente.
+ * Soporta dos fases del flujo del wizard:
+ *
+ *   fase = 'sisetac' (default)
+ *     Calcula la tarifa SISETAC, crea el registro de cotización y actualiza
+ *     el estado de la solicitud a COTIZADO. Los campos RNDC quedan en null.
+ *
+ *   fase = 'rndc'
+ *     Busca la cotización existente de la solicitud, consulta el histórico RNDC
+ *     de manifiestos y actualiza los campos rndc* en la cotización.
  *
  * Body (todos opcionales):
- *   configVehiculo?: 'C2'|'C3'|'C2S2'|'C2S3'|'C3S2'|'C3S3'
- *   margen?: number  — % de margen sobre el piso SISETAC (override del commercial_params)
+ *   fase?:          'sisetac' | 'rndc'  — default: 'sisetac'
+ *   configVehiculo?: 'C2'|'C3'|'C2S2'|'C2S3'|'C3S2'|'C3S3'  (solo con fase sisetac)
+ *   margen?:         number  — % de margen sobre el piso SISETAC (override del commercial_params)
  */
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
-import { calcularCotizacion, inferirConfigVehiculo, type ConfigVehiculo } from '@/lib/services/cotizadorEngine'
+import { calcularCotizacion, type ConfigVehiculo } from '@/lib/services/cotizadorEngine'
 import { consultarRndc } from '@/lib/services/rndcEngine'
-import { logger } from '@/lib/utils/logger'
+import { getNombreMunicipio } from '@/app/cotizar/config/colombia-dane'
 
 // ─────────────────────────────────────────────────────────────
 // POST /api/solicitudes/[id]/cotizar
@@ -48,13 +56,67 @@ export async function POST(
     }
 
     // 3. Leer overrides opcionales del body
-    let body: { configVehiculo?: ConfigVehiculo; margen?: number } = {}
+    let body: { configVehiculo?: ConfigVehiculo; margen?: number; fase?: 'sisetac' | 'rndc' } = {}
     try {
       const text = await request.text()
       if (text.trim()) body = JSON.parse(text)
     } catch {
       // body vacío — OK
     }
+
+    // ── Fase RNDC: actualizar cotización existente con datos de manifiestos ──
+    if (body.fase === 'rndc') {
+      const cotizacionExistente = await prisma.cotizacion.findFirst({
+        where: { solicitudId: id },
+        orderBy: { createdAt: 'desc' },
+      })
+
+      if (!cotizacionExistente) {
+        // No hay cotización previa → responder sin error, el cliente puede reintentar
+        return NextResponse.json(
+          { error: 'COTIZACION_NOT_FOUND', message: 'Aún no existe cotización SISETAC para actualizar con RNDC' },
+          { status: 404 },
+        )
+      }
+
+      // Traducir códigos DANE a nombres de ciudad para el motor RNDC
+      const origenNombre = getNombreMunicipio(solicitud.origen) || solicitud.origen
+      const destinoNombre = getNombreMunicipio(solicitud.destino!) || solicitud.destino!
+
+      const rndcResultado = await consultarRndc(
+        origenNombre,
+        destinoNombre,
+        Number(solicitud.pesoKg),
+      ).catch(() => null)
+
+      if (rndcResultado) {
+        await prisma.cotizacion.update({
+          where: { id: cotizacionExistente.id },
+          data: {
+            rndcEstimado:        rndcResultado.estimado,
+            rndcMediana:         rndcResultado.mediana,
+            rndcConfianza:       rndcResultado.confianza,
+            rndcViajesSimilares: rndcResultado.viajesSimilares,
+            rndcNivelFallback:   rndcResultado.nivelFallback,
+          },
+        })
+      }
+
+      return NextResponse.json({
+        cotizacionId: cotizacionExistente.id,
+        solicitudId:  id,
+        referenciaRndc: rndcResultado ? {
+          estimado:        rndcResultado.estimado,
+          mediana:         rndcResultado.mediana,
+          confianza:       rndcResultado.confianza,
+          nivelFallback:   rndcResultado.nivelFallback,
+          nivelLabel:      rndcResultado.nivelLabel,
+          viajesSimilares: rndcResultado.viajesSimilares,
+        } : null,
+      }, { status: 200 })
+    }
+
+    // ── Fase SISETAC (default): calcular tarifa y crear cotización ────────────
 
     // 4. Calcular cotización
     const resultado = await calcularCotizacion({
@@ -68,18 +130,11 @@ export async function POST(
       margenOverride:         body.margen,
     })
 
-    // 5. Consultar histórico RNDC en paralelo con la preparación de la transacción
     const validezHasta = new Date()
     validezHasta.setHours(validezHasta.getHours() + 48)
 
-    const rndcResultado = await consultarRndc(
-      solicitud.origen,
-      solicitud.destino!,
-      Number(solicitud.pesoKg),
-    ).catch(() => null) // RNDC es best-effort — nunca bloquea la cotización SISETAC
-
     const [cotizacion] = await prisma.$transaction([
-      // 5a. Crear registro de cotización
+      // 5a. Crear registro de cotización (RNDC se actualizará en fase 'rndc')
       prisma.cotizacion.create({
         data: {
           solicitudId:             id,
@@ -97,12 +152,12 @@ export async function POST(
           parametrosUsados:        resultado.parametrosUsados as object,
           estado:                  'VIGENTE',
           validezHasta,
-          // ── Referencia de mercado RNDC (null si no hay datos suficientes)
-          rndcEstimado:            rndcResultado?.estimado        ?? null,
-          rndcMediana:             rndcResultado?.mediana         ?? null,
-          rndcConfianza:           rndcResultado?.confianza       ?? null,
-          rndcViajesSimilares:     rndcResultado?.viajesSimilares ?? null,
-          rndcNivelFallback:       rndcResultado?.nivelFallback   ?? null,
+          // RNDC se llenará en la fase 'rndc' (paso 5 del wizard)
+          rndcEstimado:        null,
+          rndcMediana:         null,
+          rndcConfianza:       null,
+          rndcViajesSimilares: null,
+          rndcNivelFallback:   null,
         },
       }),
       // 5b. Actualizar estado de la solicitud
@@ -122,15 +177,8 @@ export async function POST(
       fechaGeneracion: cotizacion.createdAt,
       validezHasta,
 
-      // ── Referencia de mercado RNDC ──────────────────────
-      referenciaRndc: rndcResultado ? {
-        estimado:        rndcResultado.estimado,
-        mediana:         rndcResultado.mediana,
-        confianza:       rndcResultado.confianza,
-        nivelFallback:   rndcResultado.nivelFallback,
-        nivelLabel:      rndcResultado.nivelLabel,
-        viajesSimilares: rndcResultado.viajesSimilares,
-      } : null,
+      // RNDC se calcula de forma asíncrona en la fase siguiente
+      referenciaRndc: null,
 
       // ── Resumen ejecutivo ──────────────────────────────
       resumen: {

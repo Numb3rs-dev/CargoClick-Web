@@ -12,6 +12,7 @@ import { solicitudService } from '@/lib/services/solicitudService';
 import { ZodError } from 'zod';
 import { logger } from '@/lib/utils/logger';
 import { rateLimitCheck, getClientIp } from '@/lib/utils/ratelimit';
+import { BusinessError, GENERIC_ERROR } from '@/lib/utils/apiError';
 
 /**
  * GET /api/solicitudes/:id
@@ -198,32 +199,17 @@ export async function PATCH(
       );
     }
 
-    // Error de negocio (mensaje descriptivo)
-    if (error instanceof Error) {
-      // Errores conocidos (mudanza, transición inválida, etc.)
-      if (
-        error.message.includes('mudanza') ||
-        error.message.includes('transición') ||
-        error.message.includes('destino') ||
-        error.message.includes('no encontrada')
-      ) {
-        const statusCode = error.message.includes('no encontrada') ? 404 : 400;
-        return NextResponse.json(
-          {
-            success: false,
-            error: error.message,
-          },
-          { status: statusCode }
-        );
-      }
+    // Error de negocio — mensaje seguro escrito por el servicio
+    if (error instanceof BusinessError) {
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: error.statusCode }
+      );
     }
 
-    // Error genérico
+    // Cualquier otro error (Prisma, red, etc.) — nunca exponer detalles técnicos
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Error interno del servidor',
-      },
+      { success: false, error: GENERIC_ERROR },
       { status: 500 }
     );
   }

@@ -125,6 +125,14 @@ export function DynamicInput({ config, onSubmit, isLoading, defaultValue, solici
   const esValorValido = (): boolean => {
     // Pasos 100% opcionales: el botón nunca se deshabilita
     if (config.tipoInput === 'company-data') return true;
+    // Origen-destino: bloquear si todavía cargando (rutaFuente undefined) o ruta sin datos viales
+    if (config.tipoInput === 'origin-destination') {
+      const ov = valor as any;
+      if (!ov?.origen || !ov?.destino) return false;  // sin municipios seleccionados
+      if (!ov.rutaFuente)              return false;  // fetch en progreso
+      if (ov.rutaFuente !== 'osrm')   return false;  // ruta no disponible
+      return true;
+    }
     try {
       config.validacion.parse(valor);
       // Para client-company-data, también validar reglas del país en el celular

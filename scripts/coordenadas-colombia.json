@@ -1,0 +1,6716 @@
+{
+  "11001": {
+    "lat": 4.6097,
+    "lon": -74.0817,
+    "nombre": "Bogotá D.C.",
+    "depto": "Bogotá D.C."
+  },
+  "13001": {
+    "lat": 10.391,
+    "lon": -75.4794,
+    "nombre": "Cartagena",
+    "depto": "Bolívar"
+  },
+  "13006": {
+    "lat": 8.5689588,
+    "lon": -74.5557643,
+    "nombre": "Achí",
+    "depto": ""
+  },
+  "13030": {
+    "lat": 8.7920971,
+    "lon": -74.1639876,
+    "nombre": "Altos del Rosario",
+    "depto": ""
+  },
+  "13042": {
+    "lat": 8.4593685,
+    "lon": -73.9429805,
+    "nombre": "Arenal",
+    "depto": ""
+  },
+  "13052": {
+    "lat": 10.2569,
+    "lon": -75.3569,
+    "nombre": "Arjona",
+    "depto": "Bolívar"
+  },
+  "13062": {
+    "lat": 10.2440244,
+    "lon": -75.028327,
+    "nombre": "Arroyohondo",
+    "depto": ""
+  },
+  "13074": {
+    "lat": 8.944353,
+    "lon": -74.1058201,
+    "nombre": "Barranco de Loba",
+    "depto": ""
+  },
+  "13140": {
+    "lat": 10.2526122,
+    "lon": -74.9146691,
+    "nombre": "Calamar",
+    "depto": ""
+  },
+  "13160": {
+    "lat": 7.3780007,
+    "lon": -73.9150265,
+    "nombre": "Cantagallo",
+    "depto": ""
+  },
+  "13188": {
+    "lat": 9.2771231,
+    "lon": -74.6436562,
+    "nombre": "Cícuco",
+    "depto": ""
+  },
+  "13212": {
+    "lat": 8.3344713,
+    "lon": -75.6666238,
+    "nombre": "Córdoba",
+    "depto": ""
+  },
+  "13222": {
+    "lat": 10.5618048,
+    "lon": -75.3295539,
+    "nombre": "Clemencia",
+    "depto": ""
+  },
+  "13244": {
+    "lat": 9.7159,
+    "lon": -75.1216,
+    "nombre": "El Carmen de Bolívar",
+    "depto": "Bolívar"
+  },
+  "13248": {
+    "lat": 10.0312607,
+    "lon": -74.9754413,
+    "nombre": "El Guamo",
+    "depto": ""
+  },
+  "13268": {
+    "lat": 5.2659174,
+    "lon": -74.2932066,
+    "nombre": "El Peñón",
+    "depto": ""
+  },
+  "13300": {
+    "lat": 8.9566235,
+    "lon": -74.0770262,
+    "nombre": "Hatillo de Loba",
+    "depto": ""
+  },
+  "13430": {
+    "lat": 9.2394,
+    "lon": -74.7539,
+    "nombre": "Magangué",
+    "depto": "Bolívar"
+  },
+  "13433": {
+    "lat": 10.234262,
+    "lon": -75.186894,
+    "nombre": "Mahates",
+    "depto": ""
+  },
+  "13440": {
+    "lat": 9.0574428,
+    "lon": -74.2208949,
+    "nombre": "Margarita",
+    "depto": ""
+  },
+  "13442": {
+    "lat": 10.0003,
+    "lon": -75.3219,
+    "nombre": "María la Baja",
+    "depto": "Bolívar"
+  },
+  "13458": {
+    "lat": 7.9305784,
+    "lon": -74.4074397,
+    "nombre": "Montecristo",
+    "depto": ""
+  },
+  "13468": {
+    "lat": 9.2415432,
+    "lon": -74.4251072,
+    "nombre": "Mompós",
+    "depto": ""
+  },
+  "13473": {
+    "lat": 9.2447,
+    "lon": -74.4264,
+    "nombre": "Morales",
+    "depto": "Bolívar"
+  },
+  "13549": {
+    "lat": 8.8647576,
+    "lon": -74.4050555,
+    "nombre": "Pinillos",
+    "depto": ""
+  },
+  "13580": {
+    "lat": 8.6650933,
+    "lon": -73.8224537,
+    "nombre": "Regidor",
+    "depto": ""
+  },
+  "13600": {
+    "lat": 8.5869742,
+    "lon": -73.8388939,
+    "nombre": "Río Viejo",
+    "depto": ""
+  },
+  "13620": {
+    "lat": 10.374308,
+    "lon": -75.0763405,
+    "nombre": "San Cristóbal",
+    "depto": ""
+  },
+  "13647": {
+    "lat": 10.3992064,
+    "lon": -75.1506023,
+    "nombre": "San Estanislao",
+    "depto": ""
+  },
+  "13650": {
+    "lat": 9.1078595,
+    "lon": -74.3798106,
+    "nombre": "San Fernando",
+    "depto": ""
+  },
+  "13654": {
+    "lat": 9.8296174,
+    "lon": -75.1218628,
+    "nombre": "San Jacinto",
+    "depto": ""
+  },
+  "13655": {
+    "lat": 8.2525295,
+    "lon": -74.7177669,
+    "nombre": "San Jacinto del Cauca",
+    "depto": ""
+  },
+  "13657": {
+    "lat": 9.9512143,
+    "lon": -75.0794539,
+    "nombre": "San Juan Nepomuceno",
+    "depto": ""
+  },
+  "13667": {
+    "lat": 8.9370479,
+    "lon": -74.038373,
+    "nombre": "San Martín de Loba",
+    "depto": ""
+  },
+  "13670": {
+    "lat": 1.6684528,
+    "lon": -77.0109928,
+    "nombre": "San Pablo",
+    "depto": ""
+  },
+  "13673": {
+    "lat": 13.3879875,
+    "lon": -81.375801,
+    "nombre": "Santa Catalina",
+    "depto": ""
+  },
+  "13683": {
+    "lat": 10.4458841,
+    "lon": -75.369519,
+    "nombre": "Santa Rosa de Lima",
+    "depto": ""
+  },
+  "13688": {
+    "lat": 7.9635222,
+    "lon": -74.0506379,
+    "nombre": "Santa Rosa del Sur",
+    "depto": ""
+  },
+  "13744": {
+    "lat": 7.9551827,
+    "lon": -73.9449234,
+    "nombre": "Simití",
+    "depto": ""
+  },
+  "13760": {
+    "lat": 10.3894704,
+    "lon": -75.1369206,
+    "nombre": "Soplaviento",
+    "depto": ""
+  },
+  "13780": {
+    "lat": 9.3032374,
+    "lon": -74.5654949,
+    "nombre": "Talaigua Nuevo",
+    "depto": ""
+  },
+  "13810": {
+    "lat": 8.5560603,
+    "lon": -74.2631684,
+    "nombre": "Tiquisio",
+    "depto": ""
+  },
+  "13836": {
+    "lat": 10.3339,
+    "lon": -75.4186,
+    "nombre": "Turbaco",
+    "depto": "Bolívar"
+  },
+  "13838": {
+    "lat": 10.233116,
+    "lon": -75.4487186,
+    "nombre": "Turbana",
+    "depto": ""
+  },
+  "13873": {
+    "lat": 6.6712394,
+    "lon": -73.1753984,
+    "nombre": "Villanueva",
+    "depto": ""
+  },
+  "13894": {
+    "lat": 9.7414779,
+    "lon": -74.8177731,
+    "nombre": "Zambrano",
+    "depto": ""
+  },
+  "15001": {
+    "lat": 5.5353,
+    "lon": -73.3678,
+    "nombre": "Tunja",
+    "depto": "Boyacá"
+  },
+  "15022": {
+    "lat": 4.971164,
+    "lon": -73.3788228,
+    "nombre": "Almeida",
+    "depto": ""
+  },
+  "15047": {
+    "lat": 5.5175808,
+    "lon": -72.88315,
+    "nombre": "Aquitania",
+    "depto": ""
+  },
+  "15051": {
+    "lat": 5.755207,
+    "lon": -73.4513711,
+    "nombre": "Arcabuco",
+    "depto": ""
+  },
+  "15087": {
+    "lat": 6.0169583,
+    "lon": -72.9172466,
+    "nombre": "Belén",
+    "depto": ""
+  },
+  "15090": {
+    "lat": 5.2296018,
+    "lon": -73.1262569,
+    "nombre": "Berbeo",
+    "depto": ""
+  },
+  "15092": {
+    "lat": 5.9223691,
+    "lon": -72.8590253,
+    "nombre": "Betéitiva",
+    "depto": ""
+  },
+  "15097": {
+    "lat": 6.3321613,
+    "lon": -72.6095101,
+    "nombre": "Boavita",
+    "depto": ""
+  },
+  "15104": {
+    "lat": 5.6278979,
+    "lon": -72.8268617,
+    "nombre": "Boyacá",
+    "depto": ""
+  },
+  "15106": {
+    "lat": 5.6620095,
+    "lon": -73.9208214,
+    "nombre": "Briceño",
+    "depto": ""
+  },
+  "15109": {
+    "lat": 5.4875315,
+    "lon": -73.9563076,
+    "nombre": "Buenavista",
+    "depto": ""
+  },
+  "15114": {
+    "lat": 5.8507677,
+    "lon": -72.8744038,
+    "nombre": "Busbanzá",
+    "depto": ""
+  },
+  "15131": {
+    "lat": 5.3302514,
+    "lon": -75.2873471,
+    "nombre": "Caldas",
+    "depto": ""
+  },
+  "15135": {
+    "lat": 4.9983987,
+    "lon": -73.1203366,
+    "nombre": "Campohermoso",
+    "depto": ""
+  },
+  "15162": {
+    "lat": 5.97103,
+    "lon": -72.9681475,
+    "nombre": "Cerinza",
+    "depto": ""
+  },
+  "15172": {
+    "lat": 5.2062439,
+    "lon": -73.3349582,
+    "nombre": "Chinavita",
+    "depto": ""
+  },
+  "15176": {
+    "lat": 5.6194,
+    "lon": -73.8197,
+    "nombre": "Chiquinquirá",
+    "depto": "Boyacá"
+  },
+  "15180": {
+    "lat": 6.6767804,
+    "lon": -72.4067439,
+    "nombre": "Chiscas",
+    "depto": ""
+  },
+  "15183": {
+    "lat": 6.0653731,
+    "lon": -72.4315575,
+    "nombre": "Chita",
+    "depto": ""
+  },
+  "15185": {
+    "lat": 6.0279763,
+    "lon": -73.4469335,
+    "nombre": "Chitaraque",
+    "depto": ""
+  },
+  "15187": {
+    "lat": 5.5803634,
+    "lon": -73.248662,
+    "nombre": "Chivatá",
+    "depto": ""
+  },
+  "15189": {
+    "lat": 5.388622,
+    "lon": -73.2780403,
+    "nombre": "Ciénega",
+    "depto": ""
+  },
+  "15204": {
+    "lat": 5.6916169,
+    "lon": -73.309147,
+    "nombre": "Cómbita",
+    "depto": ""
+  },
+  "15212": {
+    "lat": 5.4467242,
+    "lon": -74.0351572,
+    "nombre": "Coper",
+    "depto": ""
+  },
+  "15215": {
+    "lat": 5.8240048,
+    "lon": -72.8396951,
+    "nombre": "Corrales",
+    "depto": ""
+  },
+  "15218": {
+    "lat": 6.512004,
+    "lon": -72.7318322,
+    "nombre": "Covarachía",
+    "depto": ""
+  },
+  "15223": {
+    "lat": 7.0020076,
+    "lon": -72.1089218,
+    "nombre": "Cubará",
+    "depto": ""
+  },
+  "15224": {
+    "lat": 5.5252177,
+    "lon": -73.4481267,
+    "nombre": "Cucaita",
+    "depto": ""
+  },
+  "15226": {
+    "lat": 5.5872812,
+    "lon": -72.9500854,
+    "nombre": "Cuítiva",
+    "depto": ""
+  },
+  "15232": {
+    "lat": 5.6053336,
+    "lon": -73.4849171,
+    "nombre": "Chíquiza",
+    "depto": ""
+  },
+  "15236": {
+    "lat": 4.8600951,
+    "lon": -73.3543529,
+    "nombre": "Chivor",
+    "depto": ""
+  },
+  "15238": {
+    "lat": 5.8271,
+    "lon": -73.0289,
+    "nombre": "Duitama",
+    "depto": "Boyacá"
+  },
+  "15244": {
+    "lat": 6.3546936,
+    "lon": -72.4156711,
+    "nombre": "El Cocuy",
+    "depto": ""
+  },
+  "15248": {
+    "lat": 6.4825581,
+    "lon": -72.4952026,
+    "nombre": "El Espino",
+    "depto": ""
+  },
+  "15272": {
+    "lat": 5.6748886,
+    "lon": -73.0175711,
+    "nombre": "Firavitoba",
+    "depto": ""
+  },
+  "15276": {
+    "lat": 5.8628372,
+    "lon": -72.930006,
+    "nombre": "Floresta",
+    "depto": ""
+  },
+  "15293": {
+    "lat": 5.7422941,
+    "lon": -73.5360399,
+    "nombre": "Gachantivá",
+    "depto": ""
+  },
+  "15296": {
+    "lat": 5.8019513,
+    "lon": -72.8049747,
+    "nombre": "Gámeza",
+    "depto": ""
+  },
+  "15299": {
+    "lat": 5.0822246,
+    "lon": -73.3643092,
+    "nombre": "Garagoa",
+    "depto": ""
+  },
+  "15317": {
+    "lat": 6.4432371,
+    "lon": -72.5162424,
+    "nombre": "Guacamayas",
+    "depto": ""
+  },
+  "15322": {
+    "lat": 5.0226102,
+    "lon": -73.4919902,
+    "nombre": "Guateque",
+    "depto": ""
+  },
+  "15325": {
+    "lat": 4.937329,
+    "lon": -73.4996735,
+    "nombre": "Guayatá",
+    "depto": ""
+  },
+  "15332": {
+    "lat": 6.4616779,
+    "lon": -72.4119937,
+    "nombre": "Güicán",
+    "depto": ""
+  },
+  "15362": {
+    "lat": 5.6196675,
+    "lon": -72.9613928,
+    "nombre": "Iza",
+    "depto": ""
+  },
+  "15367": {
+    "lat": 5.3728385,
+    "lon": -73.3885247,
+    "nombre": "Jenesano",
+    "depto": ""
+  },
+  "15368": {
+    "lat": 5.7914622,
+    "lon": -75.7862133,
+    "nombre": "Jericó",
+    "depto": ""
+  },
+  "15377": {
+    "lat": 5.5453993,
+    "lon": -72.5974873,
+    "nombre": "Labranzagrande",
+    "depto": ""
+  },
+  "15380": {
+    "lat": 5.1111878,
+    "lon": -73.4566653,
+    "nombre": "La Capilla",
+    "depto": ""
+  },
+  "15401": {
+    "lat": 5.5152589,
+    "lon": -74.2354892,
+    "nombre": "La Victoria",
+    "depto": ""
+  },
+  "15403": {
+    "lat": 6.2665634,
+    "lon": -72.5413107,
+    "nombre": "La Uvita",
+    "depto": ""
+  },
+  "15407": {
+    "lat": 5.6619877,
+    "lon": -73.5283801,
+    "nombre": "Villa de Leyva",
+    "depto": ""
+  },
+  "15425": {
+    "lat": 4.9818504,
+    "lon": -73.2854607,
+    "nombre": "Macanal",
+    "depto": ""
+  },
+  "15442": {
+    "lat": 5.5495156,
+    "lon": -74.0046921,
+    "nombre": "Maripí",
+    "depto": ""
+  },
+  "15455": {
+    "lat": 5.1514125,
+    "lon": -73.1705152,
+    "nombre": "Miraflores",
+    "depto": ""
+  },
+  "15464": {
+    "lat": 5.697459,
+    "lon": -72.6859189,
+    "nombre": "Mongua",
+    "depto": ""
+  },
+  "15466": {
+    "lat": 5.6981559,
+    "lon": -72.8319267,
+    "nombre": "Monguí",
+    "depto": ""
+  },
+  "15469": {
+    "lat": 5.8763096,
+    "lon": -73.5732077,
+    "nombre": "Moniquirá",
+    "depto": ""
+  },
+  "15476": {
+    "lat": 5.6124102,
+    "lon": -73.3776615,
+    "nombre": "Motavita",
+    "depto": ""
+  },
+  "15480": {
+    "lat": 5.5321291,
+    "lon": -74.1027796,
+    "nombre": "Muzo",
+    "depto": ""
+  },
+  "15491": {
+    "lat": 5.7769,
+    "lon": -73.1139,
+    "nombre": "Nobsa",
+    "depto": "Boyacá"
+  },
+  "15494": {
+    "lat": 5.3528931,
+    "lon": -73.4476892,
+    "nombre": "Nuevo Colón",
+    "depto": ""
+  },
+  "15500": {
+    "lat": 5.6170796,
+    "lon": -73.2748492,
+    "nombre": "Oicatá",
+    "depto": ""
+  },
+  "15507": {
+    "lat": 5.6599976,
+    "lon": -74.1816643,
+    "nombre": "Otanche",
+    "depto": ""
+  },
+  "15511": {
+    "lat": 5.1496901,
+    "lon": -73.4044916,
+    "nombre": "Pachavita",
+    "depto": ""
+  },
+  "15514": {
+    "lat": 5.0943443,
+    "lon": -72.9879067,
+    "nombre": "Páez",
+    "depto": ""
+  },
+  "15516": {
+    "lat": 5.7812701,
+    "lon": -73.1176532,
+    "nombre": "Paipa",
+    "depto": ""
+  },
+  "15518": {
+    "lat": 5.3735455,
+    "lon": -72.675289,
+    "nombre": "Pajarito",
+    "depto": ""
+  },
+  "15522": {
+    "lat": 6.4426674,
+    "lon": -72.4590342,
+    "nombre": "Panqueba",
+    "depto": ""
+  },
+  "15531": {
+    "lat": 5.6929617,
+    "lon": -73.9931197,
+    "nombre": "Pauna",
+    "depto": ""
+  },
+  "15533": {
+    "lat": 5.6529253,
+    "lon": -72.3759215,
+    "nombre": "Paya",
+    "depto": ""
+  },
+  "15537": {
+    "lat": 6.0268293,
+    "lon": -72.7631496,
+    "nombre": "Paz de Río",
+    "depto": ""
+  },
+  "15542": {
+    "lat": 5.5582793,
+    "lon": -73.0514809,
+    "nombre": "Pesca",
+    "depto": ""
+  },
+  "15550": {
+    "lat": 5.7358931,
+    "lon": -72.4388765,
+    "nombre": "Pisba",
+    "depto": ""
+  },
+  "15572": {
+    "lat": 5.9756376,
+    "lon": -74.5882837,
+    "nombre": "Puerto Boyacá",
+    "depto": ""
+  },
+  "15580": {
+    "lat": 5.52297,
+    "lon": -74.1812499,
+    "nombre": "Quípama",
+    "depto": ""
+  },
+  "15599": {
+    "lat": 5.3291259,
+    "lon": -73.304206,
+    "nombre": "Ramiriquí",
+    "depto": ""
+  },
+  "15600": {
+    "lat": 5.5380119,
+    "lon": -73.6322224,
+    "nombre": "Ráquira",
+    "depto": ""
+  },
+  "15621": {
+    "lat": 5.3607436,
+    "lon": -73.1972901,
+    "nombre": "Rondón",
+    "depto": ""
+  },
+  "15632": {
+    "lat": 5.704371,
+    "lon": -73.741339,
+    "nombre": "Saboyá",
+    "depto": ""
+  },
+  "15638": {
+    "lat": 5.5777686,
+    "lon": -73.539933,
+    "nombre": "Sáchica",
+    "depto": ""
+  },
+  "15646": {
+    "lat": 5.4917892,
+    "lon": -73.48529,
+    "nombre": "Samacá",
+    "depto": ""
+  },
+  "15660": {
+    "lat": 5.2370004,
+    "lon": -73.0526646,
+    "nombre": "San Eduardo",
+    "depto": ""
+  },
+  "15664": {
+    "lat": 6.0004695,
+    "lon": -73.5363279,
+    "nombre": "San José de Pare",
+    "depto": ""
+  },
+  "15667": {
+    "lat": 4.8206297,
+    "lon": -73.1678724,
+    "nombre": "San Luis de Gaceno",
+    "depto": ""
+  },
+  "15673": {
+    "lat": 6.4167219,
+    "lon": -72.5768212,
+    "nombre": "San Mateo",
+    "depto": ""
+  },
+  "15676": {
+    "lat": 5.5189895,
+    "lon": -73.7229967,
+    "nombre": "San Miguel de Sema",
+    "depto": ""
+  },
+  "15681": {
+    "lat": 5.6577541,
+    "lon": -74.0625068,
+    "nombre": "San Pablo de Borbur",
+    "depto": ""
+  },
+  "15686": {
+    "lat": 6.0555992,
+    "lon": -73.4820924,
+    "nombre": "Santana",
+    "depto": ""
+  },
+  "15690": {
+    "lat": 5.8808,
+    "lon": -72.9979,
+    "nombre": "Santa María",
+    "depto": "Boyacá"
+  },
+  "15693": {
+    "lat": 5.8744825,
+    "lon": -72.9823638,
+    "nombre": "Santa Rosa de Viterbo",
+    "depto": ""
+  },
+  "15696": {
+    "lat": 5.7333558,
+    "lon": -73.6050053,
+    "nombre": "Santa Sofía",
+    "depto": ""
+  },
+  "15720": {
+    "lat": 6.1259742,
+    "lon": -72.7446893,
+    "nombre": "Sativanorte",
+    "depto": ""
+  },
+  "15723": {
+    "lat": 6.0625729,
+    "lon": -72.686072,
+    "nombre": "Sativasur",
+    "depto": ""
+  },
+  "15740": {
+    "lat": 5.4879559,
+    "lon": -73.2119851,
+    "nombre": "Siachoque",
+    "depto": ""
+  },
+  "15753": {
+    "lat": 6.3218894,
+    "lon": -72.7009715,
+    "nombre": "Soatá",
+    "depto": ""
+  },
+  "15755": {
+    "lat": 6.0412437,
+    "lon": -72.6365858,
+    "nombre": "Socotá",
+    "depto": ""
+  },
+  "15757": {
+    "lat": 5.997488,
+    "lon": -72.6911515,
+    "nombre": "Socha",
+    "depto": ""
+  },
+  "15759": {
+    "lat": 5.716,
+    "lon": -72.9303,
+    "nombre": "Sogamoso",
+    "depto": "Boyacá"
+  },
+  "15761": {
+    "lat": 4.9618617,
+    "lon": -73.4333556,
+    "nombre": "Somondoco",
+    "depto": ""
+  },
+  "15762": {
+    "lat": 5.5840044,
+    "lon": -73.4383989,
+    "nombre": "Sora",
+    "depto": ""
+  },
+  "15763": {
+    "lat": 5.7856809,
+    "lon": -73.2592117,
+    "nombre": "Sotaquirá",
+    "depto": ""
+  },
+  "15764": {
+    "lat": 5.4814276,
+    "lon": -73.3217772,
+    "nombre": "Soracá",
+    "depto": ""
+  },
+  "15774": {
+    "lat": 6.2322941,
+    "lon": -72.6918572,
+    "nombre": "Susacón",
+    "depto": ""
+  },
+  "15776": {
+    "lat": 5.637484,
+    "lon": -73.6275168,
+    "nombre": "Sutamarchán",
+    "depto": ""
+  },
+  "15778": {
+    "lat": 5.0243841,
+    "lon": -73.4267539,
+    "nombre": "Sutatenza",
+    "depto": ""
+  },
+  "15790": {
+    "lat": 5.8983538,
+    "lon": -72.7578745,
+    "nombre": "Tasco",
+    "depto": ""
+  },
+  "15798": {
+    "lat": 5.0763822,
+    "lon": -73.4173609,
+    "nombre": "Tenza",
+    "depto": ""
+  },
+  "15804": {
+    "lat": 5.3108664,
+    "lon": -73.391183,
+    "nombre": "Tibaná",
+    "depto": ""
+  },
+  "15806": {
+    "lat": 5.7480813,
+    "lon": -73.0127908,
+    "nombre": "Tibasosa",
+    "depto": ""
+  },
+  "15808": {
+    "lat": 5.572943,
+    "lon": -73.6709218,
+    "nombre": "Tinjacá",
+    "depto": ""
+  },
+  "15810": {
+    "lat": 6.4279842,
+    "lon": -72.7001078,
+    "nombre": "Tipacoque",
+    "depto": ""
+  },
+  "15814": {
+    "lat": 5.5771231,
+    "lon": -73.16845,
+    "nombre": "Toca",
+    "depto": ""
+  },
+  "15816": {
+    "lat": 5.9170442,
+    "lon": -73.4964349,
+    "nombre": "Togüí",
+    "depto": ""
+  },
+  "15820": {
+    "lat": 5.7664573,
+    "lon": -72.8403634,
+    "nombre": "Tópaga",
+    "depto": ""
+  },
+  "15822": {
+    "lat": 5.4766073,
+    "lon": -73.0133761,
+    "nombre": "Tota",
+    "depto": ""
+  },
+  "15832": {
+    "lat": 5.7173694,
+    "lon": -73.9312695,
+    "nombre": "Tununguá",
+    "depto": ""
+  },
+  "15835": {
+    "lat": 5.3240877,
+    "lon": -73.4905833,
+    "nombre": "Turmequé",
+    "depto": ""
+  },
+  "15837": {
+    "lat": 5.6786145,
+    "lon": -73.1870563,
+    "nombre": "Tuta",
+    "depto": ""
+  },
+  "15839": {
+    "lat": 6.0739913,
+    "lon": -72.8624193,
+    "nombre": "Tutazá",
+    "depto": ""
+  },
+  "15842": {
+    "lat": 5.22123,
+    "lon": -73.457038,
+    "nombre": "Úmbita",
+    "depto": ""
+  },
+  "15861": {
+    "lat": 5.3666155,
+    "lon": -73.5216361,
+    "nombre": "Ventaquemada",
+    "depto": ""
+  },
+  "15879": {
+    "lat": 5.4474928,
+    "lon": -73.2667175,
+    "nombre": "Viracachá",
+    "depto": ""
+  },
+  "15897": {
+    "lat": 5.2821538,
+    "lon": -73.1669653,
+    "nombre": "Zetaquira",
+    "depto": ""
+  },
+  "17001": {
+    "lat": 5.0703,
+    "lon": -75.5138,
+    "nombre": "Manizales",
+    "depto": "Caldas"
+  },
+  "17013": {
+    "lat": 5.613113,
+    "lon": -75.4575902,
+    "nombre": "Aguadas",
+    "depto": ""
+  },
+  "17042": {
+    "lat": 5.2337519,
+    "lon": -75.7856623,
+    "nombre": "Anserma",
+    "depto": ""
+  },
+  "17050": {
+    "lat": 5.2711368,
+    "lon": -75.4904079,
+    "nombre": "Aranzazu",
+    "depto": ""
+  },
+  "17088": {
+    "lat": 4.994718,
+    "lon": -75.8122627,
+    "nombre": "Belalcázar",
+    "depto": ""
+  },
+  "17174": {
+    "lat": 5.0025,
+    "lon": -75.6067,
+    "nombre": "Chinchiná",
+    "depto": "Caldas"
+  },
+  "17272": {
+    "lat": 5.2963713,
+    "lon": -75.5622217,
+    "nombre": "Filadelfia",
+    "depto": ""
+  },
+  "17380": {
+    "lat": 5.4567,
+    "lon": -74.67,
+    "nombre": "La Dorada",
+    "depto": "Caldas"
+  },
+  "17388": {
+    "lat": 5.3989301,
+    "lon": -75.54777,
+    "nombre": "La Merced",
+    "depto": ""
+  },
+  "17433": {
+    "lat": 5.2431,
+    "lon": -75.1534,
+    "nombre": "Manzanares",
+    "depto": "Caldas"
+  },
+  "17442": {
+    "lat": 5.4747,
+    "lon": -75.5972,
+    "nombre": "Marmato",
+    "depto": "Caldas"
+  },
+  "17444": {
+    "lat": 5.2966038,
+    "lon": -75.0546064,
+    "nombre": "Marquetalia",
+    "depto": ""
+  },
+  "17446": {
+    "lat": 5.2841208,
+    "lon": -75.2606169,
+    "nombre": "Marulanda",
+    "depto": ""
+  },
+  "17486": {
+    "lat": 5.1917458,
+    "lon": -75.5195162,
+    "nombre": "Neira",
+    "depto": ""
+  },
+  "17495": {
+    "lat": 5.5758643,
+    "lon": -74.8881645,
+    "nombre": "Norcasia",
+    "depto": ""
+  },
+  "17513": {
+    "lat": 5.5272323,
+    "lon": -75.4594449,
+    "nombre": "Pácora",
+    "depto": ""
+  },
+  "17524": {
+    "lat": 5.0639,
+    "lon": -75.66,
+    "nombre": "Palestina",
+    "depto": "Caldas"
+  },
+  "17541": {
+    "lat": 5.3833488,
+    "lon": -75.1609683,
+    "nombre": "Pensilvania",
+    "depto": ""
+  },
+  "17614": {
+    "lat": 5.4209549,
+    "lon": -75.7030623,
+    "nombre": "Riosucio",
+    "depto": ""
+  },
+  "17616": {
+    "lat": 5.2102948,
+    "lon": -75.9842236,
+    "nombre": "Risaralda",
+    "depto": ""
+  },
+  "17653": {
+    "lat": 5.4078495,
+    "lon": -75.4880496,
+    "nombre": "Salamina",
+    "depto": ""
+  },
+  "17662": {
+    "lat": 5.4127804,
+    "lon": -74.992031,
+    "nombre": "Samaná",
+    "depto": ""
+  },
+  "17665": {
+    "lat": 5.0808725,
+    "lon": -75.7918992,
+    "nombre": "San José",
+    "depto": ""
+  },
+  "17777": {
+    "lat": 5.4533321,
+    "lon": -75.651965,
+    "nombre": "Supía",
+    "depto": ""
+  },
+  "17867": {
+    "lat": 5.0694,
+    "lon": -75.8833,
+    "nombre": "Victoria",
+    "depto": "Caldas"
+  },
+  "17873": {
+    "lat": 5.0449697,
+    "lon": -75.5151258,
+    "nombre": "Villamaría",
+    "depto": ""
+  },
+  "17877": {
+    "lat": 5.0618565,
+    "lon": -75.8734996,
+    "nombre": "Viterbo",
+    "depto": ""
+  },
+  "18001": {
+    "lat": 1.6144,
+    "lon": -75.6062,
+    "nombre": "Florencia",
+    "depto": "Caquetá"
+  },
+  "18029": {
+    "lat": 5.7587654,
+    "lon": -73.9151617,
+    "nombre": "Albania",
+    "depto": ""
+  },
+  "18094": {
+    "lat": 1.4261,
+    "lon": -75.8772,
+    "nombre": "Belén de los Andaquíes",
+    "depto": "Caquetá"
+  },
+  "18150": {
+    "lat": 1.3345179,
+    "lon": -74.8414067,
+    "nombre": "Cartagena del Chairá",
+    "depto": ""
+  },
+  "18205": {
+    "lat": 4.6695744,
+    "lon": -71.9989819,
+    "nombre": "Currillo",
+    "depto": ""
+  },
+  "18247": {
+    "lat": 1.6815919,
+    "lon": -75.2844565,
+    "nombre": "El Doncello",
+    "depto": ""
+  },
+  "18256": {
+    "lat": 1.7736304,
+    "lon": -75.3743579,
+    "nombre": "El Paujil",
+    "depto": ""
+  },
+  "18410": {
+    "lat": 1.4817139,
+    "lon": -75.4356404,
+    "nombre": "La Montañita",
+    "depto": ""
+  },
+  "18460": {
+    "lat": 1.4758,
+    "lon": -75.4608,
+    "nombre": "Milán",
+    "depto": "Caquetá"
+  },
+  "18479": {
+    "lat": 1.4879,
+    "lon": -75.6956,
+    "nombre": "Morelia",
+    "depto": "Caquetá"
+  },
+  "18592": {
+    "lat": 2.9402122,
+    "lon": -73.2051337,
+    "nombre": "Puerto Rico",
+    "depto": ""
+  },
+  "18610": {
+    "lat": 1.3314207,
+    "lon": -75.9727503,
+    "nombre": "San José del Fragua",
+    "depto": ""
+  },
+  "18753": {
+    "lat": 2.1131213,
+    "lon": -74.7697347,
+    "nombre": "San Vicente del Caguán",
+    "depto": ""
+  },
+  "18756": {
+    "lat": 2.1113,
+    "lon": -74.7703,
+    "nombre": "Solano",
+    "depto": "Caquetá"
+  },
+  "18785": {
+    "lat": 0.8767264,
+    "lon": -75.6190438,
+    "nombre": "Solita",
+    "depto": ""
+  },
+  "18860": {
+    "lat": 5.6153841,
+    "lon": -75.6247028,
+    "nombre": "Valparaíso",
+    "depto": ""
+  },
+  "19001": {
+    "lat": 2.4419,
+    "lon": -76.6063,
+    "nombre": "Popayán",
+    "depto": "Cauca"
+  },
+  "19022": {
+    "lat": 1.9142744,
+    "lon": -76.8548514,
+    "nombre": "Almaguer",
+    "depto": ""
+  },
+  "19050": {
+    "lat": 5.7310785,
+    "lon": -75.1428525,
+    "nombre": "Argelia",
+    "depto": ""
+  },
+  "19075": {
+    "lat": 2.042096,
+    "lon": -77.2157842,
+    "nombre": "Balboa",
+    "depto": ""
+  },
+  "19100": {
+    "lat": 9.3660477,
+    "lon": -74.8023636,
+    "nombre": "Bolívar",
+    "depto": ""
+  },
+  "19110": {
+    "lat": 3.0165467,
+    "lon": -76.6406849,
+    "nombre": "Buenos Aires",
+    "depto": ""
+  },
+  "19130": {
+    "lat": 2.6231693,
+    "lon": -76.5693504,
+    "nombre": "Cajibío",
+    "depto": ""
+  },
+  "19137": {
+    "lat": 2.796326,
+    "lon": -76.4836526,
+    "nombre": "Caldono",
+    "depto": ""
+  },
+  "19142": {
+    "lat": 3.0439,
+    "lon": -76.3972,
+    "nombre": "Caloto",
+    "depto": "Cauca"
+  },
+  "19212": {
+    "lat": 3.1439306,
+    "lon": -76.2002489,
+    "nombre": "Corinto",
+    "depto": ""
+  },
+  "19256": {
+    "lat": 2.4511923,
+    "lon": -76.8117409,
+    "nombre": "El Tambo",
+    "depto": ""
+  },
+  "19290": {
+    "lat": 1.6158666,
+    "lon": -75.6143045,
+    "nombre": "Florencia",
+    "depto": ""
+  },
+  "19318": {
+    "lat": 2.5708069,
+    "lon": -77.882619,
+    "nombre": "Guapi",
+    "depto": ""
+  },
+  "19355": {
+    "lat": 2.5500211,
+    "lon": -76.0643978,
+    "nombre": "Inzá",
+    "depto": ""
+  },
+  "19364": {
+    "lat": 2.7776822,
+    "lon": -76.3243788,
+    "nombre": "Jambaló",
+    "depto": ""
+  },
+  "19392": {
+    "lat": 2.1763552,
+    "lon": -76.7634852,
+    "nombre": "La Sierra",
+    "depto": ""
+  },
+  "19397": {
+    "lat": 4.9997123,
+    "lon": -74.3395223,
+    "nombre": "La Vega",
+    "depto": ""
+  },
+  "19418": {
+    "lat": 2.847624,
+    "lon": -77.247802,
+    "nombre": "López",
+    "depto": ""
+  },
+  "19450": {
+    "lat": 1.7984873,
+    "lon": -77.1610748,
+    "nombre": "Mercaderes",
+    "depto": ""
+  },
+  "19455": {
+    "lat": 3.2511475,
+    "lon": -76.2291572,
+    "nombre": "Miranda",
+    "depto": ""
+  },
+  "19460": {
+    "lat": 3.2425,
+    "lon": -76.2342
+  },
+  "19473": {
+    "lat": 2.8438981,
+    "lon": -76.848882,
+    "nombre": "Morales",
+    "depto": ""
+  },
+  "19513": {
+    "lat": 3.2254364,
+    "lon": -76.3139739,
+    "nombre": "Padilla",
+    "depto": ""
+  },
+  "19517": {
+    "lat": 5.0943443,
+    "lon": -72.9879067,
+    "nombre": "Páez",
+    "depto": ""
+  },
+  "19532": {
+    "lat": 2.0628,
+    "lon": -76.9289,
+    "nombre": "Patía",
+    "depto": "Cauca"
+  },
+  "19533": {
+    "lat": 1.1185119,
+    "lon": -76.3265519,
+    "nombre": "Piamonte",
+    "depto": ""
+  },
+  "19548": {
+    "lat": 2.6404294,
+    "lon": -76.5325746,
+    "nombre": "Piendamó",
+    "depto": ""
+  },
+  "19573": {
+    "lat": 3.2294,
+    "lon": -76.4133,
+    "nombre": "Puerto Tejada",
+    "depto": "Cauca"
+  },
+  "19585": {
+    "lat": 2.3811038,
+    "lon": -76.4551183,
+    "nombre": "Purácé",
+    "depto": ""
+  },
+  "19622": {
+    "lat": 2.2621018,
+    "lon": -76.7392875,
+    "nombre": "Rosas",
+    "depto": ""
+  },
+  "19693": {
+    "lat": 1.8386665,
+    "lon": -76.7697662,
+    "nombre": "San Sebastián",
+    "depto": ""
+  },
+  "19698": {
+    "lat": 3.0122,
+    "lon": -76.4819,
+    "nombre": "Santander de Quilichao",
+    "depto": "Cauca"
+  },
+  "19701": {
+    "lat": 1.7018257,
+    "lon": -76.5725868,
+    "nombre": "Santa Rosa",
+    "depto": ""
+  },
+  "19743": {
+    "lat": 2.6115436,
+    "lon": -76.378424,
+    "nombre": "Silvia",
+    "depto": ""
+  },
+  "19760": {
+    "lat": 2.2248489,
+    "lon": -76.5924607,
+    "nombre": "Sotará",
+    "depto": ""
+  },
+  "19780": {
+    "lat": 2.9543543,
+    "lon": -76.6948801,
+    "nombre": "Suárez",
+    "depto": ""
+  },
+  "19785": {
+    "lat": 9,
+    "lon": -75,
+    "nombre": "Sucre",
+    "depto": ""
+  },
+  "19807": {
+    "lat": 2.3528374,
+    "lon": -76.683012,
+    "nombre": "Timbío",
+    "depto": ""
+  },
+  "19809": {
+    "lat": 2.7705138,
+    "lon": -77.6643122,
+    "nombre": "Timbiquí",
+    "depto": ""
+  },
+  "19821": {
+    "lat": 2.9554697,
+    "lon": -76.2686889,
+    "nombre": "Toribío",
+    "depto": ""
+  },
+  "19824": {
+    "lat": 2.5109533,
+    "lon": -76.4011501,
+    "nombre": "Totoró",
+    "depto": ""
+  },
+  "19845": {
+    "lat": 3.1765241,
+    "lon": -76.4637676,
+    "nombre": "Villa Rica",
+    "depto": ""
+  },
+  "20001": {
+    "lat": 10.4631,
+    "lon": -73.2532,
+    "nombre": "Valledupar",
+    "depto": "Cesar"
+  },
+  "20011": {
+    "lat": 8.309416,
+    "lon": -73.603699,
+    "nombre": "Aguachica",
+    "depto": ""
+  },
+  "20013": {
+    "lat": 10.0374894,
+    "lon": -73.2387011,
+    "nombre": "Agustín Codazzi",
+    "depto": ""
+  },
+  "20032": {
+    "lat": 9.4962322,
+    "lon": -73.9756293,
+    "nombre": "Astrea",
+    "depto": ""
+  },
+  "20045": {
+    "lat": 9.7032785,
+    "lon": -73.2786054,
+    "nombre": "Becerril",
+    "depto": ""
+  },
+  "20060": {
+    "lat": 9.9284449,
+    "lon": -73.8587145,
+    "nombre": "Bosconia",
+    "depto": ""
+  },
+  "20175": {
+    "lat": 9.2576662,
+    "lon": -73.8126883,
+    "nombre": "Chimichagua",
+    "depto": ""
+  },
+  "20178": {
+    "lat": 9.3636401,
+    "lon": -73.6016974,
+    "nombre": "Chiriguaná",
+    "depto": ""
+  },
+  "20228": {
+    "lat": 9.1995316,
+    "lon": -73.5440609,
+    "nombre": "Curumaní",
+    "depto": ""
+  },
+  "20238": {
+    "lat": 10.1492075,
+    "lon": -73.9611708,
+    "nombre": "El Copey",
+    "depto": ""
+  },
+  "20250": {
+    "lat": 9.6589481,
+    "lon": -73.7504695,
+    "nombre": "El Paso",
+    "depto": ""
+  },
+  "20295": {
+    "lat": 8.3201399,
+    "lon": -73.714785,
+    "nombre": "Gamarra",
+    "depto": ""
+  },
+  "20310": {
+    "lat": 8.3912927,
+    "lon": -73.3815389,
+    "nombre": "González",
+    "depto": ""
+  },
+  "20383": {
+    "lat": 8.6182682,
+    "lon": -73.8013876,
+    "nombre": "La Gloria",
+    "depto": ""
+  },
+  "20400": {
+    "lat": 9.5519,
+    "lon": -73.3308,
+    "nombre": "La Jagua de Ibirico",
+    "depto": "Cesar"
+  },
+  "20443": {
+    "lat": 10.3908,
+    "lon": -73.1856,
+    "nombre": "Manaure",
+    "depto": "Cesar"
+  },
+  "20517": {
+    "lat": 8.9589902,
+    "lon": -73.6216938,
+    "nombre": "Pailitas",
+    "depto": ""
+  },
+  "20550": {
+    "lat": 8.6857187,
+    "lon": -73.6690054,
+    "nombre": "Pelaya",
+    "depto": ""
+  },
+  "20570": {
+    "lat": 10.4119057,
+    "lon": -73.5909603,
+    "nombre": "Pueblo Bello",
+    "depto": ""
+  },
+  "20614": {
+    "lat": 8.2924446,
+    "lon": -73.385798,
+    "nombre": "Río de Oro",
+    "depto": ""
+  },
+  "20621": {
+    "lat": 8.0297,
+    "lon": -73.3914,
+    "nombre": "La Paz",
+    "depto": "Cesar"
+  },
+  "20710": {
+    "lat": 8.8683,
+    "lon": -73.8133,
+    "nombre": "San Alberto",
+    "depto": "Cesar"
+  },
+  "20750": {
+    "lat": 10.3326328,
+    "lon": -73.1796691,
+    "nombre": "San Diego",
+    "depto": ""
+  },
+  "20770": {
+    "lat": 3.6943897,
+    "lon": -73.6952914,
+    "nombre": "San Martín",
+    "depto": ""
+  },
+  "20787": {
+    "lat": 8.8568265,
+    "lon": -73.8157539,
+    "nombre": "Tamalameque",
+    "depto": ""
+  },
+  "23001": {
+    "lat": 8.7578,
+    "lon": -75.8814,
+    "nombre": "Montería",
+    "depto": "Córdoba"
+  },
+  "23068": {
+    "lat": 8.3116711,
+    "lon": -75.1445022,
+    "nombre": "Ayapel",
+    "depto": ""
+  },
+  "23079": {
+    "lat": 5.4875315,
+    "lon": -73.9563076,
+    "nombre": "Buenavista",
+    "depto": ""
+  },
+  "23090": {
+    "lat": 8.7128498,
+    "lon": -76.2520253,
+    "nombre": "Canalete",
+    "depto": ""
+  },
+  "23162": {
+    "lat": 8.78,
+    "lon": -76.03,
+    "nombre": "Cereté",
+    "depto": "Córdoba"
+  },
+  "23168": {
+    "lat": 9.1496167,
+    "lon": -75.629046,
+    "nombre": "Chimá",
+    "depto": ""
+  },
+  "23182": {
+    "lat": 9.1063553,
+    "lon": -75.3989007,
+    "nombre": "Chinú",
+    "depto": ""
+  },
+  "23189": {
+    "lat": 8.8836,
+    "lon": -75.7942,
+    "nombre": "Ciénaga de Oro",
+    "depto": "Córdoba"
+  },
+  "23300": {
+    "lat": 9.0400712,
+    "lon": -75.7863907,
+    "nombre": "Cotorra",
+    "depto": ""
+  },
+  "23350": {
+    "lat": 8.0484697,
+    "lon": -75.333651,
+    "nombre": "La Apartada",
+    "depto": ""
+  },
+  "23417": {
+    "lat": 9.2303,
+    "lon": -75.8189,
+    "nombre": "Lorica",
+    "depto": "Córdoba"
+  },
+  "23419": {
+    "lat": 8.8940761,
+    "lon": -76.3552617,
+    "nombre": "Los Córdobas",
+    "depto": ""
+  },
+  "23464": {
+    "lat": 9.2377862,
+    "lon": -75.6763936,
+    "nombre": "Momil",
+    "depto": ""
+  },
+  "23466": {
+    "lat": 7.9853,
+    "lon": -75.4328,
+    "nombre": "Montelíbano",
+    "depto": "Córdoba"
+  },
+  "23500": {
+    "lat": 9.2460394,
+    "lon": -76.1315965,
+    "nombre": "Moñitos",
+    "depto": ""
+  },
+  "23555": {
+    "lat": 8.4053,
+    "lon": -75.5831,
+    "nombre": "Planeta Rica",
+    "depto": "Córdoba"
+  },
+  "23570": {
+    "lat": 10.1393785,
+    "lon": -74.4152918,
+    "nombre": "Pueblo Nuevo",
+    "depto": ""
+  },
+  "23574": {
+    "lat": 9.0142629,
+    "lon": -76.2625983,
+    "nombre": "Puerto Escondido",
+    "depto": ""
+  },
+  "23580": {
+    "lat": 7.6960931,
+    "lon": -75.767573,
+    "nombre": "Puerto Libertador",
+    "depto": ""
+  },
+  "23586": {
+    "lat": 9.2375332,
+    "lon": -75.7236088,
+    "nombre": "Purísima",
+    "depto": ""
+  },
+  "23660": {
+    "lat": 8.9472964,
+    "lon": -75.4434972,
+    "nombre": "Sahagún",
+    "depto": ""
+  },
+  "23670": {
+    "lat": 9.2239832,
+    "lon": -75.5268761,
+    "nombre": "San Andrés Sotavento",
+    "depto": ""
+  },
+  "23672": {
+    "lat": 8.9508,
+    "lon": -75.4467,
+    "nombre": "San Antero",
+    "depto": "Córdoba"
+  },
+  "23675": {
+    "lat": 9.3306611,
+    "lon": -75.9945884,
+    "nombre": "San Bernardo del Viento",
+    "depto": ""
+  },
+  "23678": {
+    "lat": 6.1908026,
+    "lon": -74.9437879,
+    "nombre": "San Carlos",
+    "depto": ""
+  },
+  "23686": {
+    "lat": 8.9920713,
+    "lon": -75.9046272,
+    "nombre": "San Pelayo",
+    "depto": ""
+  },
+  "23807": {
+    "lat": 8.171791,
+    "lon": -76.0601328,
+    "nombre": "Tierralta",
+    "depto": ""
+  },
+  "23855": {
+    "lat": 8.1995857,
+    "lon": -76.203091,
+    "nombre": "Valencia",
+    "depto": ""
+  },
+  "25001": {
+    "lat": 4.3772853,
+    "lon": -74.6694759,
+    "nombre": "Agua de Dios",
+    "depto": ""
+  },
+  "25019": {
+    "lat": 4.8780617,
+    "lon": -74.4384462,
+    "nombre": "Albán",
+    "depto": ""
+  },
+  "25035": {
+    "lat": 4.5493011,
+    "lon": -74.5359119,
+    "nombre": "Anapoima",
+    "depto": ""
+  },
+  "25040": {
+    "lat": 4.7616096,
+    "lon": -74.4649986,
+    "nombre": "Anolaima",
+    "depto": ""
+  },
+  "25053": {
+    "lat": 4.2726798,
+    "lon": -74.4138217,
+    "nombre": "Arbeláez",
+    "depto": ""
+  },
+  "25086": {
+    "lat": 4.7993086,
+    "lon": -74.7408059,
+    "nombre": "Beltrán",
+    "depto": ""
+  },
+  "25095": {
+    "lat": 4.8720675,
+    "lon": -74.5392117,
+    "nombre": "Bituima",
+    "depto": ""
+  },
+  "25099": {
+    "lat": 4.6879214,
+    "lon": -74.3250022,
+    "nombre": "Bojacá",
+    "depto": ""
+  },
+  "25120": {
+    "lat": 3.9852044,
+    "lon": -74.4843363,
+    "nombre": "Cabrera",
+    "depto": ""
+  },
+  "25123": {
+    "lat": 4.7282676,
+    "lon": -74.4609777,
+    "nombre": "Cachipay",
+    "depto": ""
+  },
+  "25126": {
+    "lat": 4.9360114,
+    "lon": -74.0321163,
+    "nombre": "Cajicá",
+    "depto": ""
+  },
+  "25148": {
+    "lat": 5.3461338,
+    "lon": -74.4916464,
+    "nombre": "Caparrapi",
+    "depto": ""
+  },
+  "25151": {
+    "lat": 4.4057096,
+    "lon": -73.9459215,
+    "nombre": "Cáqueza",
+    "depto": ""
+  },
+  "25154": {
+    "lat": 5.3366152,
+    "lon": -73.9223268,
+    "nombre": "Carmen de Carupa",
+    "depto": ""
+  },
+  "25168": {
+    "lat": 4.9496796,
+    "lon": -74.5947984,
+    "nombre": "Chaguaní",
+    "depto": ""
+  },
+  "25175": {
+    "lat": 4.8594,
+    "lon": -74.0592,
+    "nombre": "Chía",
+    "depto": "Cundinamarca"
+  },
+  "25178": {
+    "lat": 4.4070793,
+    "lon": -74.0697039,
+    "nombre": "Chipaque",
+    "depto": ""
+  },
+  "25181": {
+    "lat": 4.5822005,
+    "lon": -73.9137287,
+    "nombre": "Choachí",
+    "depto": ""
+  },
+  "25183": {
+    "lat": 5.1459409,
+    "lon": -73.6839512,
+    "nombre": "Chocontá",
+    "depto": ""
+  },
+  "25200": {
+    "lat": 5.1085204,
+    "lon": -73.9599328,
+    "nombre": "Cogua",
+    "depto": ""
+  },
+  "25214": {
+    "lat": 4.8093624,
+    "lon": -74.1015739,
+    "nombre": "Cota",
+    "depto": ""
+  },
+  "25224": {
+    "lat": 5.2316116,
+    "lon": -73.7567465,
+    "nombre": "Cucunubá",
+    "depto": ""
+  },
+  "25245": {
+    "lat": 4.5802618,
+    "lon": -74.442374,
+    "nombre": "El Colegio",
+    "depto": ""
+  },
+  "25258": {
+    "lat": 5.2659174,
+    "lon": -74.2932066,
+    "nombre": "El Peñón",
+    "depto": ""
+  },
+  "25260": {
+    "lat": 4.884139,
+    "lon": -74.2362991,
+    "nombre": "El Rosal",
+    "depto": ""
+  },
+  "25269": {
+    "lat": 4.8097276,
+    "lon": -74.3541838,
+    "nombre": "Facatativá",
+    "depto": ""
+  },
+  "25279": {
+    "lat": 4.4871105,
+    "lon": -73.8935278,
+    "nombre": "Fómeque",
+    "depto": ""
+  },
+  "25281": {
+    "lat": 4.3389335,
+    "lon": -73.9385092,
+    "nombre": "Fosca",
+    "depto": ""
+  },
+  "25286": {
+    "lat": 4.7177471,
+    "lon": -74.2031547,
+    "nombre": "Funza",
+    "depto": ""
+  },
+  "25288": {
+    "lat": 5.4083822,
+    "lon": -73.7733941,
+    "nombre": "Fúquene",
+    "depto": ""
+  },
+  "25290": {
+    "lat": 4.3442,
+    "lon": -74.3639,
+    "nombre": "Fusagasugá",
+    "depto": "Cundinamarca"
+  },
+  "25293": {
+    "lat": 4.6642049,
+    "lon": -73.4911605,
+    "nombre": "Gachalá",
+    "depto": ""
+  },
+  "25295": {
+    "lat": 4.9920291,
+    "lon": -73.8721107,
+    "nombre": "Gachancipá",
+    "depto": ""
+  },
+  "25297": {
+    "lat": 4.8703697,
+    "lon": -73.6200143,
+    "nombre": "Gachetá",
+    "depto": ""
+  },
+  "25299": {
+    "lat": 4.7275587,
+    "lon": -73.6036607,
+    "nombre": "Gama",
+    "depto": ""
+  },
+  "25307": {
+    "lat": 4.3039,
+    "lon": -74.8027,
+    "nombre": "Girardot",
+    "depto": "Cundinamarca"
+  },
+  "25312": {
+    "lat": 6.1442998,
+    "lon": -75.1844057,
+    "nombre": "Granada",
+    "depto": ""
+  },
+  "25317": {
+    "lat": 5.3912899,
+    "lon": -73.6709806,
+    "nombre": "Guachetá",
+    "depto": ""
+  },
+  "25320": {
+    "lat": 5.0674669,
+    "lon": -74.5950774,
+    "nombre": "Guaduas",
+    "depto": ""
+  },
+  "25322": {
+    "lat": 4.8664391,
+    "lon": -73.8776944,
+    "nombre": "Guasca",
+    "depto": ""
+  },
+  "25324": {
+    "lat": 4.5181995,
+    "lon": -74.7899996,
+    "nombre": "Guataquí",
+    "depto": ""
+  },
+  "25326": {
+    "lat": 4.9343953,
+    "lon": -73.8353008,
+    "nombre": "Guatavita",
+    "depto": ""
+  },
+  "25328": {
+    "lat": 4.8782654,
+    "lon": -74.4675635,
+    "nombre": "Guayabal de Siquima",
+    "depto": ""
+  },
+  "25335": {
+    "lat": 4.2163422,
+    "lon": -73.8153965,
+    "nombre": "Guayabetal",
+    "depto": ""
+  },
+  "25339": {
+    "lat": 4.2545658,
+    "lon": -74.0031684,
+    "nombre": "Gutiérrez",
+    "depto": ""
+  },
+  "25368": {
+    "lat": 4.5623901,
+    "lon": -74.6942067,
+    "nombre": "Jerusalén",
+    "depto": ""
+  },
+  "25369": {
+    "lat": 4.6325,
+    "lon": -74.4625
+  },
+  "25372": {
+    "lat": 4.6899529,
+    "lon": -73.7133847,
+    "nombre": "Junín",
+    "depto": ""
+  },
+  "25377": {
+    "lat": 4.7068245,
+    "lon": -73.9320846,
+    "nombre": "La Calera",
+    "depto": ""
+  },
+  "25386": {
+    "lat": 4.6480047,
+    "lon": -74.489178,
+    "nombre": "La Mesa",
+    "depto": ""
+  },
+  "25394": {
+    "lat": 5.3606208,
+    "lon": -74.3905123,
+    "nombre": "La Palma",
+    "depto": ""
+  },
+  "25398": {
+    "lat": 5.1976554,
+    "lon": -74.3941494,
+    "nombre": "La Peña",
+    "depto": ""
+  },
+  "25402": {
+    "lat": 4.9997123,
+    "lon": -74.3395223,
+    "nombre": "La Vega",
+    "depto": ""
+  },
+  "25407": {
+    "lat": 5.3026458,
+    "lon": -73.6923453,
+    "nombre": "Lenguazaque",
+    "depto": ""
+  },
+  "25426": {
+    "lat": 5.0408099,
+    "lon": -73.6084047,
+    "nombre": "Macheta",
+    "depto": ""
+  },
+  "25430": {
+    "lat": 4.7067,
+    "lon": -74.2297,
+    "nombre": "Madrid",
+    "depto": "Cundinamarca"
+  },
+  "25436": {
+    "lat": 4.9946631,
+    "lon": -73.5509364,
+    "nombre": "Manta",
+    "depto": ""
+  },
+  "25438": {
+    "lat": 4.510562,
+    "lon": -73.3507441,
+    "nombre": "Medina",
+    "depto": ""
+  },
+  "25473": {
+    "lat": 4.8153,
+    "lon": -74.3567,
+    "nombre": "Mosquera",
+    "depto": "Cundinamarca"
+  },
+  "25483": {
+    "lat": 1.5842268,
+    "lon": -77.8585766,
+    "nombre": "Nariño",
+    "depto": ""
+  },
+  "25486": {
+    "lat": 5.0972332,
+    "lon": -73.8747341,
+    "nombre": "Nemocón",
+    "depto": ""
+  },
+  "25488": {
+    "lat": 4.3065906,
+    "lon": -74.6197608,
+    "nombre": "Nilo",
+    "depto": ""
+  },
+  "25489": {
+    "lat": 5.125392,
+    "lon": -74.3853502,
+    "nombre": "Nimaima",
+    "depto": ""
+  },
+  "25491": {
+    "lat": 5.0697674,
+    "lon": -74.3775222,
+    "nombre": "Nocaima",
+    "depto": ""
+  },
+  "25506": {
+    "lat": 5.9635386,
+    "lon": -75.7339175,
+    "nombre": "Venecia",
+    "depto": ""
+  },
+  "25513": {
+    "lat": 4.3033,
+    "lon": -74.6358,
+    "nombre": "Pacho",
+    "depto": "Cundinamarca"
+  },
+  "25518": {
+    "lat": 5.3708048,
+    "lon": -74.1528181,
+    "nombre": "Paime",
+    "depto": ""
+  },
+  "25524": {
+    "lat": 4.192251,
+    "lon": -74.4860101,
+    "nombre": "Pandi",
+    "depto": ""
+  },
+  "25530": {
+    "lat": 4.3765197,
+    "lon": -73.2125493,
+    "nombre": "Paratebueno",
+    "depto": ""
+  },
+  "25535": {
+    "lat": 4.3078299,
+    "lon": -74.3001795,
+    "nombre": "Pasca",
+    "depto": ""
+  },
+  "25572": {
+    "lat": 5.4636898,
+    "lon": -74.6501244,
+    "nombre": "Puerto Salgar",
+    "depto": ""
+  },
+  "25580": {
+    "lat": 4.6809255,
+    "lon": -74.7135542,
+    "nombre": "Pulí",
+    "depto": ""
+  },
+  "25592": {
+    "lat": 5.117231,
+    "lon": -74.4793643,
+    "nombre": "Quebradanegra",
+    "depto": ""
+  },
+  "25594": {
+    "lat": 4.3300288,
+    "lon": -73.8497961,
+    "nombre": "Quetame",
+    "depto": ""
+  },
+  "25596": {
+    "lat": 4.7112737,
+    "lon": -74.5493679,
+    "nombre": "Quipile",
+    "depto": ""
+  },
+  "25599": {
+    "lat": 4.520545,
+    "lon": -74.5938265,
+    "nombre": "Apulo",
+    "depto": ""
+  },
+  "25612": {
+    "lat": 4.2777357,
+    "lon": -74.7718165,
+    "nombre": "Ricaurte",
+    "depto": ""
+  },
+  "25645": {
+    "lat": 4.6161374,
+    "lon": -74.351691,
+    "nombre": "San Antonio del Tequendama",
+    "depto": ""
+  },
+  "25649": {
+    "lat": 4.1782821,
+    "lon": -74.4222732,
+    "nombre": "San Bernardo",
+    "depto": ""
+  },
+  "25653": {
+    "lat": 5.3330507,
+    "lon": -74.066783,
+    "nombre": "San Cayetano",
+    "depto": ""
+  },
+  "25658": {
+    "lat": 4.7156,
+    "lon": -74.2006,
+    "nombre": "San Francisco",
+    "depto": "Cundinamarca"
+  },
+  "25662": {
+    "lat": 10.6147804,
+    "lon": -73.2212815,
+    "nombre": "San Juan de Río Seco",
+    "depto": ""
+  },
+  "25718": {
+    "lat": 4.9645773,
+    "lon": -74.4331151,
+    "nombre": "Sasaima",
+    "depto": ""
+  },
+  "25736": {
+    "lat": 5.0447672,
+    "lon": -73.7955533,
+    "nombre": "Sesquilé",
+    "depto": ""
+  },
+  "25740": {
+    "lat": 4.4916256,
+    "lon": -74.2594306,
+    "nombre": "Sibaté",
+    "depto": ""
+  },
+  "25743": {
+    "lat": 4.4039016,
+    "lon": -74.3889251,
+    "nombre": "Silvania",
+    "depto": ""
+  },
+  "25745": {
+    "lat": 5.5152751,
+    "lon": -73.8376865,
+    "nombre": "Simijaca",
+    "depto": ""
+  },
+  "25754": {
+    "lat": 4.5789,
+    "lon": -74.2175,
+    "nombre": "Soacha",
+    "depto": "Cundinamarca"
+  },
+  "25758": {
+    "lat": 4.9079158,
+    "lon": -73.9402326,
+    "nombre": "Sopó",
+    "depto": ""
+  },
+  "25769": {
+    "lat": 4.9659026,
+    "lon": -74.1668581,
+    "nombre": "Subachoque",
+    "depto": ""
+  },
+  "25772": {
+    "lat": 5.1033413,
+    "lon": -73.7990059,
+    "nombre": "Suesca",
+    "depto": ""
+  },
+  "25777": {
+    "lat": 5.0572349,
+    "lon": -74.2322706,
+    "nombre": "Supatá",
+    "depto": ""
+  },
+  "25779": {
+    "lat": 5.4387941,
+    "lon": -73.839607,
+    "nombre": "Susa",
+    "depto": ""
+  },
+  "25781": {
+    "lat": 5.2377338,
+    "lon": -73.8549404,
+    "nombre": "Sutatausa",
+    "depto": ""
+  },
+  "25785": {
+    "lat": 4.9523895,
+    "lon": -74.0790067,
+    "nombre": "Tabio",
+    "depto": ""
+  },
+  "25793": {
+    "lat": 5.1949265,
+    "lon": -73.9563076,
+    "nombre": "Tausa",
+    "depto": ""
+  },
+  "25797": {
+    "lat": 4.6465802,
+    "lon": -74.4007804,
+    "nombre": "Tena",
+    "depto": ""
+  },
+  "25799": {
+    "lat": 4.8274537,
+    "lon": -74.1529851,
+    "nombre": "Tenjo",
+    "depto": ""
+  },
+  "25805": {
+    "lat": 4.3476755,
+    "lon": -74.45273,
+    "nombre": "Tibacuy",
+    "depto": ""
+  },
+  "25807": {
+    "lat": 5.0835428,
+    "lon": -73.5165105,
+    "nombre": "Tibirita",
+    "depto": ""
+  },
+  "25815": {
+    "lat": 4.4579274,
+    "lon": -74.6342234,
+    "nombre": "Tocaima",
+    "depto": ""
+  },
+  "25817": {
+    "lat": 4.97371,
+    "lon": -73.9211798,
+    "nombre": "Tocancipá",
+    "depto": ""
+  },
+  "25823": {
+    "lat": 5.3353896,
+    "lon": -74.3026812,
+    "nombre": "Topaipí",
+    "depto": ""
+  },
+  "25839": {
+    "lat": 4.745638,
+    "lon": -73.5329786,
+    "nombre": "Ubalá",
+    "depto": ""
+  },
+  "25841": {
+    "lat": 4.501443,
+    "lon": -73.9710295,
+    "nombre": "Ubaque",
+    "depto": ""
+  },
+  "25843": {
+    "lat": 5.3515325,
+    "lon": -73.8012686,
+    "nombre": "Ubaté",
+    "depto": ""
+  },
+  "25845": {
+    "lat": 4.2982261,
+    "lon": -74.0778924,
+    "nombre": "Une",
+    "depto": ""
+  },
+  "25851": {
+    "lat": 5.1879202,
+    "lon": -74.4814775,
+    "nombre": "Útica",
+    "depto": ""
+  },
+  "25862": {
+    "lat": 5.1183756,
+    "lon": -74.3451863,
+    "nombre": "Vergara",
+    "depto": ""
+  },
+  "25867": {
+    "lat": 4.87426,
+    "lon": -74.5624055,
+    "nombre": "Vianí",
+    "depto": ""
+  },
+  "25871": {
+    "lat": 5.2731679,
+    "lon": -74.1951778,
+    "nombre": "Villagómez",
+    "depto": ""
+  },
+  "25873": {
+    "lat": 5.2215207,
+    "lon": -73.58989,
+    "nombre": "Villapinzón",
+    "depto": ""
+  },
+  "25875": {
+    "lat": 5.0112575,
+    "lon": -74.4702304,
+    "nombre": "Villeta",
+    "depto": ""
+  },
+  "25878": {
+    "lat": 4.4388882,
+    "lon": -74.5233576,
+    "nombre": "Viotá",
+    "depto": ""
+  },
+  "25885": {
+    "lat": 5.4587905,
+    "lon": -74.3376099,
+    "nombre": "Yacopí",
+    "depto": ""
+  },
+  "25898": {
+    "lat": 4.7527665,
+    "lon": -74.3795688,
+    "nombre": "Zipacón",
+    "depto": ""
+  },
+  "25899": {
+    "lat": 5.0228,
+    "lon": -74.0044,
+    "nombre": "Zipaquirá",
+    "depto": "Cundinamarca"
+  },
+  "27001": {
+    "lat": 5.6944,
+    "lon": -76.6578,
+    "nombre": "Quibdó",
+    "depto": "Chocó"
+  },
+  "27006": {
+    "lat": 8.5115155,
+    "lon": -77.2790562,
+    "nombre": "Acandí",
+    "depto": ""
+  },
+  "27025": {
+    "lat": 5.6659771,
+    "lon": -77.079633,
+    "nombre": "Alto Baudó",
+    "depto": ""
+  },
+  "27050": {
+    "lat": 5.547474,
+    "lon": -76.6420872,
+    "nombre": "Atrato",
+    "depto": ""
+  },
+  "27073": {
+    "lat": 5.4116935,
+    "lon": -76.4159671,
+    "nombre": "Bagadó",
+    "depto": ""
+  },
+  "27075": {
+    "lat": 6.2245644,
+    "lon": -77.4034389,
+    "nombre": "Bahía Solano",
+    "depto": ""
+  },
+  "27077": {
+    "lat": 5.0018176,
+    "lon": -77.1580453,
+    "nombre": "Bajo Baudó",
+    "depto": ""
+  },
+  "27086": {
+    "lat": 6.9906,
+    "lon": -76.9853,
+    "nombre": "Belén de Bajirá",
+    "depto": "Chocó"
+  },
+  "27099": {
+    "lat": 6.8256,
+    "lon": -76.9928,
+    "nombre": "Bojayá",
+    "depto": "Chocó"
+  },
+  "27135": {
+    "lat": 5.3350691,
+    "lon": -76.7272132,
+    "nombre": "Cantón de San Pablo",
+    "depto": ""
+  },
+  "27150": {
+    "lat": 7.0404791,
+    "lon": -76.920595,
+    "nombre": "Carmen del Darién",
+    "depto": ""
+  },
+  "27160": {
+    "lat": 5.3719043,
+    "lon": -76.6085751,
+    "nombre": "Certeguí",
+    "depto": ""
+  },
+  "27205": {
+    "lat": 5.09568,
+    "lon": -76.5114837,
+    "nombre": "Condoto",
+    "depto": ""
+  },
+  "27245": {
+    "lat": 5.8389066,
+    "lon": -76.2079697,
+    "nombre": "El Carmen de Atrato",
+    "depto": ""
+  },
+  "27250": {
+    "lat": 4.2690022,
+    "lon": -76.9866315,
+    "nombre": "El Litoral del San Juan",
+    "depto": ""
+  },
+  "27361": {
+    "lat": 5.1597,
+    "lon": -76.6847,
+    "nombre": "Istmina",
+    "depto": "Chocó"
+  },
+  "27372": {
+    "lat": 7.1031695,
+    "lon": -77.7623252,
+    "nombre": "Juradó",
+    "depto": ""
+  },
+  "27413": {
+    "lat": 5.5158,
+    "lon": -76.5378,
+    "nombre": "Lloró",
+    "depto": "Chocó"
+  },
+  "27425": {
+    "lat": 6.0114997,
+    "lon": -76.6907282,
+    "nombre": "Medio Atrato",
+    "depto": ""
+  },
+  "27430": {
+    "lat": 5.1492979,
+    "lon": -76.9858805,
+    "nombre": "Medio Baudó",
+    "depto": ""
+  },
+  "27450": {
+    "lat": 4.8126231,
+    "lon": -76.8360843,
+    "nombre": "Medio San Juan",
+    "depto": ""
+  },
+  "27491": {
+    "lat": 4.8429779,
+    "lon": -76.6445335,
+    "nombre": "Nóvita",
+    "depto": ""
+  },
+  "27495": {
+    "lat": 5.707435,
+    "lon": -77.2710963,
+    "nombre": "Nuquí",
+    "depto": ""
+  },
+  "27580": {
+    "lat": 4.8438861,
+    "lon": -74.0733309,
+    "nombre": "Río Frío",
+    "depto": ""
+  },
+  "27600": {
+    "lat": 5.5515206,
+    "lon": -76.7931361,
+    "nombre": "Río Quito",
+    "depto": ""
+  },
+  "27615": {
+    "lat": 5.4209549,
+    "lon": -75.7030623,
+    "nombre": "Riosucio",
+    "depto": ""
+  },
+  "27660": {
+    "lat": 4.8950096,
+    "lon": -76.2350277,
+    "nombre": "San José del Palmar",
+    "depto": ""
+  },
+  "27745": {
+    "lat": 4.5649239,
+    "lon": -76.5209058,
+    "nombre": "Sipí",
+    "depto": ""
+  },
+  "27787": {
+    "lat": 5.263378,
+    "lon": -76.5621239,
+    "nombre": "Tadó",
+    "depto": ""
+  },
+  "27800": {
+    "lat": 8.0412373,
+    "lon": -77.0933751,
+    "nombre": "Unguía",
+    "depto": ""
+  },
+  "27810": {
+    "lat": 5.2813079,
+    "lon": -76.6293417,
+    "nombre": "Unión Panamericana",
+    "depto": ""
+  },
+  "41001": {
+    "lat": 2.9273,
+    "lon": -75.2819,
+    "nombre": "Neiva",
+    "depto": "Huila"
+  },
+  "41006": {
+    "lat": 1.8272,
+    "lon": -75.8989,
+    "nombre": "Acevedo",
+    "depto": "Huila"
+  },
+  "41013": {
+    "lat": 2.2632959,
+    "lon": -75.7150037,
+    "nombre": "Agrado",
+    "depto": ""
+  },
+  "41016": {
+    "lat": 3.2223559,
+    "lon": -75.239962,
+    "nombre": "Aipe",
+    "depto": ""
+  },
+  "41020": {
+    "lat": 2.5046806,
+    "lon": -75.3039481,
+    "nombre": "Algeciras",
+    "depto": ""
+  },
+  "41026": {
+    "lat": 2.0823259,
+    "lon": -75.7754794,
+    "nombre": "Altamira",
+    "depto": ""
+  },
+  "41078": {
+    "lat": 3.0892735,
+    "lon": -74.944835,
+    "nombre": "Baraya",
+    "depto": ""
+  },
+  "41132": {
+    "lat": 2.6864,
+    "lon": -75.3217,
+    "nombre": "Campoalegre",
+    "depto": "Huila"
+  },
+  "41206": {
+    "lat": 2.1981,
+    "lon": -75.6297,
+    "nombre": "Colombia",
+    "depto": "Huila"
+  },
+  "41244": {
+    "lat": 2.0136193,
+    "lon": -75.9392336,
+    "nombre": "Elías",
+    "depto": ""
+  },
+  "41298": {
+    "lat": 2.1960126,
+    "lon": -75.6274845,
+    "nombre": "Garzón",
+    "depto": ""
+  },
+  "41306": {
+    "lat": 2.3948453,
+    "lon": -75.5269239,
+    "nombre": "Gigante",
+    "depto": ""
+  },
+  "41319": {
+    "lat": 6.8149918,
+    "lon": -75.2403991,
+    "nombre": "Guadalupe",
+    "depto": ""
+  },
+  "41349": {
+    "lat": 2.5811045,
+    "lon": -75.4494997,
+    "nombre": "Hobo",
+    "depto": ""
+  },
+  "41357": {
+    "lat": 2.6499277,
+    "lon": -75.6352082,
+    "nombre": "Iquira",
+    "depto": ""
+  },
+  "41359": {
+    "lat": 2.0677463,
+    "lon": -76.3205577,
+    "nombre": "Isnos",
+    "depto": ""
+  },
+  "41378": {
+    "lat": 2.1985723,
+    "lon": -75.9791154,
+    "nombre": "La Argentina",
+    "depto": ""
+  },
+  "41396": {
+    "lat": 2.3894154,
+    "lon": -75.8926236,
+    "nombre": "La Plata",
+    "depto": ""
+  },
+  "41483": {
+    "lat": 2.5769586,
+    "lon": -75.7951201,
+    "nombre": "Nátaga",
+    "depto": ""
+  },
+  "41503": {
+    "lat": 2.0235756,
+    "lon": -75.995126,
+    "nombre": "Oporapa",
+    "depto": ""
+  },
+  "41518": {
+    "lat": 2.4487125,
+    "lon": -75.7747485,
+    "nombre": "Paicol",
+    "depto": ""
+  },
+  "41524": {
+    "lat": 2.9017,
+    "lon": -75.4297,
+    "nombre": "Palermo",
+    "depto": "Huila"
+  },
+  "41530": {
+    "lat": 5.0203683,
+    "lon": -75.6223394,
+    "nombre": "Palestina",
+    "depto": ""
+  },
+  "41548": {
+    "lat": 2.2574692,
+    "lon": -75.8339699,
+    "nombre": "Pital",
+    "depto": ""
+  },
+  "41551": {
+    "lat": 1.8171632,
+    "lon": -76.1021362,
+    "nombre": "Pitalito",
+    "depto": ""
+  },
+  "41615": {
+    "lat": 2.7828,
+    "lon": -75.2344,
+    "nombre": "Rivera",
+    "depto": "Huila"
+  },
+  "41660": {
+    "lat": 1.993142,
+    "lon": -76.0450355,
+    "nombre": "Saladoblanco",
+    "depto": ""
+  },
+  "41668": {
+    "lat": 1.9273077,
+    "lon": -76.4492841,
+    "nombre": "San Agustín",
+    "depto": ""
+  },
+  "41676": {
+    "lat": 4.8208423,
+    "lon": -73.2718839,
+    "nombre": "Santa María",
+    "depto": ""
+  },
+  "41770": {
+    "lat": 1.9772874,
+    "lon": -75.7946272,
+    "nombre": "Suaza",
+    "depto": ""
+  },
+  "41791": {
+    "lat": 1.8833,
+    "lon": -76.0519,
+    "nombre": "Tarqui",
+    "depto": "Huila"
+  },
+  "41797": {
+    "lat": 2.4855806,
+    "lon": -75.7273303,
+    "nombre": "Tesalia",
+    "depto": ""
+  },
+  "41799": {
+    "lat": 3.067211,
+    "lon": -75.1392845,
+    "nombre": "Tello",
+    "depto": ""
+  },
+  "41801": {
+    "lat": 2.7416333,
+    "lon": -75.5683448,
+    "nombre": "Teruel",
+    "depto": ""
+  },
+  "41807": {
+    "lat": 1.9501689,
+    "lon": -75.9265797,
+    "nombre": "Timaná",
+    "depto": ""
+  },
+  "41872": {
+    "lat": 3.2195402,
+    "lon": -75.2190257,
+    "nombre": "Villavieja",
+    "depto": ""
+  },
+  "41885": {
+    "lat": 2.6628774,
+    "lon": -75.516008,
+    "nombre": "Yaguárá",
+    "depto": ""
+  },
+  "44001": {
+    "lat": 11.5444,
+    "lon": -72.9072,
+    "nombre": "Riohacha",
+    "depto": "La Guajira"
+  },
+  "44035": {
+    "lat": 11.2233,
+    "lon": -72.4864,
+    "nombre": "Albania",
+    "depto": "La Guajira"
+  },
+  "44078": {
+    "lat": 10.9541684,
+    "lon": -72.7888637,
+    "nombre": "Barrancas",
+    "depto": ""
+  },
+  "44090": {
+    "lat": 11.2722465,
+    "lon": -73.3114396,
+    "nombre": "Dibulla",
+    "depto": ""
+  },
+  "44098": {
+    "lat": 10.9118556,
+    "lon": -72.9451254,
+    "nombre": "Distracción",
+    "depto": ""
+  },
+  "44110": {
+    "lat": 10.6284107,
+    "lon": -72.8730932,
+    "nombre": "El Molino",
+    "depto": ""
+  },
+  "44279": {
+    "lat": 10.7773005,
+    "lon": -72.7985609,
+    "nombre": "Fonseca",
+    "depto": ""
+  },
+  "44378": {
+    "lat": 11.0675576,
+    "lon": -72.7600808,
+    "nombre": "Hatonuevo",
+    "depto": ""
+  },
+  "44420": {
+    "lat": 11.7797,
+    "lon": -72.4536,
+    "nombre": "La Jagua del Pilar",
+    "depto": "La Guajira"
+  },
+  "44430": {
+    "lat": 11.3756,
+    "lon": -72.2478,
+    "nombre": "Maicao",
+    "depto": "La Guajira"
+  },
+  "44560": {
+    "lat": 10.7678,
+    "lon": -73.005,
+    "nombre": "Manaure",
+    "depto": "La Guajira"
+  },
+  "44650": {
+    "lat": 10.7735312,
+    "lon": -73.0019165,
+    "nombre": "San Juan del Cesar",
+    "depto": ""
+  },
+  "44847": {
+    "lat": 11.7131,
+    "lon": -72.2722,
+    "nombre": "Uribia",
+    "depto": "La Guajira"
+  },
+  "44855": {
+    "lat": 10.5555676,
+    "lon": -73.012513,
+    "nombre": "Urumita",
+    "depto": ""
+  },
+  "44874": {
+    "lat": 6.6712394,
+    "lon": -73.1753984,
+    "nombre": "Villanueva",
+    "depto": ""
+  },
+  "47001": {
+    "lat": 11.2408,
+    "lon": -74.199,
+    "nombre": "Santa Marta",
+    "depto": "Magdalena"
+  },
+  "47030": {
+    "lat": 10.1914131,
+    "lon": -74.0618168,
+    "nombre": "Algarrobo",
+    "depto": ""
+  },
+  "47053": {
+    "lat": 10.5906011,
+    "lon": -74.1876803,
+    "nombre": "Aracataca",
+    "depto": ""
+  },
+  "47058": {
+    "lat": 9.8005467,
+    "lon": -74.0599546,
+    "nombre": "Ariguaní",
+    "depto": ""
+  },
+  "47161": {
+    "lat": 10.3269546,
+    "lon": -74.8690124,
+    "nombre": "Cerro San Antonio",
+    "depto": ""
+  },
+  "47170": {
+    "lat": 10.0269357,
+    "lon": -74.6208028,
+    "nombre": "Chibolo",
+    "depto": ""
+  },
+  "47189": {
+    "lat": 11.0058,
+    "lon": -74.2525,
+    "nombre": "Ciénaga",
+    "depto": "Magdalena"
+  },
+  "47205": {
+    "lat": 6.0457595,
+    "lon": -75.9074199,
+    "nombre": "Concordia",
+    "depto": ""
+  },
+  "47245": {
+    "lat": 9.0049173,
+    "lon": -73.9738472,
+    "nombre": "El Banco",
+    "depto": ""
+  },
+  "47258": {
+    "lat": 10.4042864,
+    "lon": -74.8243075,
+    "nombre": "El Piñón",
+    "depto": ""
+  },
+  "47268": {
+    "lat": 10.612076,
+    "lon": -74.2695268,
+    "nombre": "El Retén",
+    "depto": ""
+  },
+  "47288": {
+    "lat": 10.5155669,
+    "lon": -74.1901088,
+    "nombre": "Fundación",
+    "depto": ""
+  },
+  "47318": {
+    "lat": 9.144026,
+    "lon": -74.2236605,
+    "nombre": "Guamal",
+    "depto": ""
+  },
+  "47460": {
+    "lat": 9.8018198,
+    "lon": -74.3923786,
+    "nombre": "Nueva Granada",
+    "depto": ""
+  },
+  "47541": {
+    "lat": 10.1901696,
+    "lon": -74.9141714,
+    "nombre": "Pedraza",
+    "depto": ""
+  },
+  "47545": {
+    "lat": 9.3304217,
+    "lon": -74.4535166,
+    "nombre": "Pijiño del Carmen",
+    "depto": ""
+  },
+  "47551": {
+    "lat": 10.4633,
+    "lon": -74.6178,
+    "nombre": "Pivijay",
+    "depto": "Magdalena"
+  },
+  "47555": {
+    "lat": 9.7904163,
+    "lon": -74.7820016,
+    "nombre": "Plato",
+    "depto": ""
+  },
+  "47570": {
+    "lat": 9.7922,
+    "lon": -74.7831,
+    "nombre": "Pueblo Viejo",
+    "depto": "Magdalena"
+  },
+  "47605": {
+    "lat": 10.7020154,
+    "lon": -74.7170111,
+    "nombre": "Remolino",
+    "depto": ""
+  },
+  "47660": {
+    "lat": 9.4733,
+    "lon": -74.5561,
+    "nombre": "Sabanas de San Ángel",
+    "depto": "Magdalena"
+  },
+  "47675": {
+    "lat": 9.3278,
+    "lon": -74.5753,
+    "nombre": "Salamina",
+    "depto": "Magdalena"
+  },
+  "47692": {
+    "lat": 9.2397583,
+    "lon": -74.3515536,
+    "nombre": "San Sebastián de Buenavista",
+    "depto": ""
+  },
+  "47703": {
+    "lat": 9.3550021,
+    "lon": -74.2763193,
+    "nombre": "San Zenón",
+    "depto": ""
+  },
+  "47707": {
+    "lat": 9.3229035,
+    "lon": -74.5696573,
+    "nombre": "Santa Ana",
+    "depto": ""
+  },
+  "47720": {
+    "lat": 9.4316572,
+    "lon": -74.70475,
+    "nombre": "Santa Bárbara de Pinto",
+    "depto": ""
+  },
+  "47745": {
+    "lat": 9.1366228,
+    "lon": -75.8136714,
+    "nombre": "Sitio Nuevo",
+    "depto": ""
+  },
+  "47798": {
+    "lat": 9.9003487,
+    "lon": -74.8589973,
+    "nombre": "Tenerife",
+    "depto": ""
+  },
+  "47960": {
+    "lat": 10.1368137,
+    "lon": -74.6873006,
+    "nombre": "Zapayán",
+    "depto": ""
+  },
+  "47980": {
+    "lat": 10.7968092,
+    "lon": -74.1807898,
+    "nombre": "Zona Bananera",
+    "depto": ""
+  },
+  "50001": {
+    "lat": 4.1533,
+    "lon": -73.635,
+    "nombre": "Villavicencio",
+    "depto": "Meta"
+  },
+  "50006": {
+    "lat": 3.9886,
+    "lon": -73.7578,
+    "nombre": "Acacías",
+    "depto": "Meta"
+  },
+  "50110": {
+    "lat": 4.5707393,
+    "lon": -72.963415,
+    "nombre": "Barranca de Upía",
+    "depto": ""
+  },
+  "50124": {
+    "lat": 3.8625,
+    "lon": -73.6731,
+    "nombre": "Cabuyaro",
+    "depto": "Meta"
+  },
+  "50150": {
+    "lat": 3.8275343,
+    "lon": -73.6892805,
+    "nombre": "Castilla la Nueva",
+    "depto": ""
+  },
+  "50223": {
+    "lat": 3.7943159,
+    "lon": -73.8390382,
+    "nombre": "San Luis de Cubarral",
+    "depto": ""
+  },
+  "50226": {
+    "lat": 4.2711674,
+    "lon": -73.4877694,
+    "nombre": "Cumaral",
+    "depto": ""
+  },
+  "50245": {
+    "lat": 4.3518203,
+    "lon": -73.7146617,
+    "nombre": "El Calvario",
+    "depto": ""
+  },
+  "50251": {
+    "lat": 3.5647959,
+    "lon": -73.7942913,
+    "nombre": "El Castillo",
+    "depto": ""
+  },
+  "50270": {
+    "lat": 3.7393505,
+    "lon": -73.8350537,
+    "nombre": "El Dorado",
+    "depto": ""
+  },
+  "50287": {
+    "lat": 3.4639497,
+    "lon": -73.6213964,
+    "nombre": "Fuente de Oro",
+    "depto": ""
+  },
+  "50313": {
+    "lat": 3.5364,
+    "lon": -73.72,
+    "nombre": "Granada",
+    "depto": "Meta"
+  },
+  "50318": {
+    "lat": 9.144026,
+    "lon": -74.2236605,
+    "nombre": "Guamal",
+    "depto": ""
+  },
+  "50325": {
+    "lat": 3.8819,
+    "lon": -73.7686,
+    "nombre": "Mapiripán",
+    "depto": "Meta"
+  },
+  "50330": {
+    "lat": 3.3840276,
+    "lon": -74.0438661,
+    "nombre": "Mesetas",
+    "depto": ""
+  },
+  "50350": {
+    "lat": 2.1833828,
+    "lon": -73.7857879,
+    "nombre": "La Macarena",
+    "depto": ""
+  },
+  "50370": {
+    "lat": 3.2413296,
+    "lon": -74.3510657,
+    "nombre": "La Uribe",
+    "depto": ""
+  },
+  "50400": {
+    "lat": 3.5269,
+    "lon": -73.9742,
+    "nombre": "Lejanías",
+    "depto": "Meta"
+  },
+  "50450": {
+    "lat": 2.7730746,
+    "lon": -72.6862902,
+    "nombre": "Puerto Concordia",
+    "depto": ""
+  },
+  "50568": {
+    "lat": 4.3120724,
+    "lon": -72.0829509,
+    "nombre": "Puerto Gaitán",
+    "depto": ""
+  },
+  "50573": {
+    "lat": 4.085013,
+    "lon": -72.9584671,
+    "nombre": "Puerto López",
+    "depto": ""
+  },
+  "50577": {
+    "lat": 3.2697276,
+    "lon": -73.3756016,
+    "nombre": "Puerto Lleras",
+    "depto": ""
+  },
+  "50590": {
+    "lat": 2.9402122,
+    "lon": -73.2051337,
+    "nombre": "Puerto Rico",
+    "depto": ""
+  },
+  "50606": {
+    "lat": 3.822009,
+    "lon": -76.5222535,
+    "nombre": "Restrepo",
+    "depto": ""
+  },
+  "50680": {
+    "lat": 3.835189,
+    "lon": -73.2598441,
+    "nombre": "San Carlos de Guaroa",
+    "depto": ""
+  },
+  "50683": {
+    "lat": 3.6958,
+    "lon": -73.6989,
+    "nombre": "San Juan de Arama",
+    "depto": "Meta"
+  },
+  "50686": {
+    "lat": 4.4585632,
+    "lon": -73.6771583,
+    "nombre": "San Juanito",
+    "depto": ""
+  },
+  "50689": {
+    "lat": 3.6943897,
+    "lon": -73.6952914,
+    "nombre": "San Martín",
+    "depto": ""
+  },
+  "50711": {
+    "lat": 2.7693935,
+    "lon": -73.6927545,
+    "nombre": "Vista Hermosa",
+    "depto": ""
+  },
+  "52001": {
+    "lat": 1.2136,
+    "lon": -77.2811,
+    "nombre": "Pasto",
+    "depto": "Nariño"
+  },
+  "52019": {
+    "lat": 4.8780617,
+    "lon": -74.4384462,
+    "nombre": "Albán",
+    "depto": ""
+  },
+  "52022": {
+    "lat": 0.8822547,
+    "lon": -77.7003164,
+    "nombre": "Aldana",
+    "depto": ""
+  },
+  "52036": {
+    "lat": 1.2615284,
+    "lon": -77.5147482,
+    "nombre": "Ancuyá",
+    "depto": ""
+  },
+  "52051": {
+    "lat": 1.4846286,
+    "lon": -77.121058,
+    "nombre": "Arboleda",
+    "depto": ""
+  },
+  "52079": {
+    "lat": 1.6741037,
+    "lon": -78.1364951,
+    "nombre": "Barbacoas",
+    "depto": ""
+  },
+  "52083": {
+    "lat": 6.0169583,
+    "lon": -72.9172466,
+    "nombre": "Belén",
+    "depto": ""
+  },
+  "52110": {
+    "lat": 1.3914,
+    "lon": -77.1561,
+    "nombre": "Buesaco",
+    "depto": "Nariño"
+  },
+  "52203": {
+    "lat": 1.1894909,
+    "lon": -76.9725122,
+    "nombre": "Colón",
+    "depto": ""
+  },
+  "52207": {
+    "lat": 1.2082795,
+    "lon": -77.4656149,
+    "nombre": "Consacá",
+    "depto": ""
+  },
+  "52210": {
+    "lat": 0.9275026,
+    "lon": -77.521693,
+    "nombre": "Contadero",
+    "depto": ""
+  },
+  "52215": {
+    "lat": 8.3344713,
+    "lon": -75.6666238,
+    "nombre": "Córdoba",
+    "depto": ""
+  },
+  "52224": {
+    "lat": 0.8750911,
+    "lon": -77.7420114,
+    "nombre": "Cuaspud",
+    "depto": ""
+  },
+  "52227": {
+    "lat": 0.9092082,
+    "lon": -77.788906,
+    "nombre": "Cumbal",
+    "depto": ""
+  },
+  "52233": {
+    "lat": 1.6473621,
+    "lon": -77.578094,
+    "nombre": "Cumbitara",
+    "depto": ""
+  },
+  "52240": {
+    "lat": 1.360752,
+    "lon": -77.2831744,
+    "nombre": "Chachagüí",
+    "depto": ""
+  },
+  "52250": {
+    "lat": 2.4798209,
+    "lon": -78.110793,
+    "nombre": "El Charco",
+    "depto": ""
+  },
+  "52254": {
+    "lat": 6.2542863,
+    "lon": -75.236776,
+    "nombre": "El Peñol",
+    "depto": ""
+  },
+  "52256": {
+    "lat": 1.7426237,
+    "lon": -77.3349654,
+    "nombre": "El Rosario",
+    "depto": ""
+  },
+  "52258": {
+    "lat": 1.6377965,
+    "lon": -76.9596243,
+    "nombre": "El Tablón de Gómez",
+    "depto": ""
+  },
+  "52260": {
+    "lat": 2.4511923,
+    "lon": -76.8117409,
+    "nombre": "El Tambo",
+    "depto": ""
+  },
+  "52287": {
+    "lat": 0.9987301,
+    "lon": -77.448542,
+    "nombre": "Funes",
+    "depto": ""
+  },
+  "52317": {
+    "lat": 0.9573434,
+    "lon": -77.7333581,
+    "nombre": "Guachucal",
+    "depto": ""
+  },
+  "52320": {
+    "lat": 1.1305245,
+    "lon": -77.5483421,
+    "nombre": "Guaitarilla",
+    "depto": ""
+  },
+  "52323": {
+    "lat": 0.9200211,
+    "lon": -77.5661383,
+    "nombre": "Gualmatan",
+    "depto": ""
+  },
+  "52352": {
+    "lat": 0.9698295,
+    "lon": -77.5201636,
+    "nombre": "Iles",
+    "depto": ""
+  },
+  "52354": {
+    "lat": 1.0693749,
+    "lon": -77.504296,
+    "nombre": "Imués",
+    "depto": ""
+  },
+  "52356": {
+    "lat": 0.8313,
+    "lon": -77.6442,
+    "nombre": "Ipiales",
+    "depto": "Nariño"
+  },
+  "52378": {
+    "lat": 1.6003354,
+    "lon": -76.9711667,
+    "nombre": "La Cruz",
+    "depto": ""
+  },
+  "52381": {
+    "lat": 1.2986074,
+    "lon": -77.4044845,
+    "nombre": "La Florida",
+    "depto": ""
+  },
+  "52385": {
+    "lat": 1.472721,
+    "lon": -77.5802015,
+    "nombre": "La Llanada",
+    "depto": ""
+  },
+  "52390": {
+    "lat": 2.3995791,
+    "lon": -78.1882925,
+    "nombre": "La Tola",
+    "depto": ""
+  },
+  "52399": {
+    "lat": 5.9737744,
+    "lon": -75.3613093,
+    "nombre": "La Unión",
+    "depto": ""
+  },
+  "52405": {
+    "lat": 1.9356061,
+    "lon": -77.3068188,
+    "nombre": "Leiva",
+    "depto": ""
+  },
+  "52411": {
+    "lat": 1.3516458,
+    "lon": -77.5235169,
+    "nombre": "Linares",
+    "depto": ""
+  },
+  "52418": {
+    "lat": 3.4113258,
+    "lon": -76.6119225,
+    "nombre": "Los Andes",
+    "depto": ""
+  },
+  "52427": {
+    "lat": 1.7651194,
+    "lon": -78.1800866,
+    "nombre": "Magüí",
+    "depto": ""
+  },
+  "52435": {
+    "lat": 1.1889966,
+    "lon": -77.8705652,
+    "nombre": "Mallama",
+    "depto": ""
+  },
+  "52473": {
+    "lat": 4.7002001,
+    "lon": -74.2385058,
+    "nombre": "Mosquera",
+    "depto": ""
+  },
+  "52480": {
+    "lat": 1.5842268,
+    "lon": -77.8585766,
+    "nombre": "Nariño",
+    "depto": ""
+  },
+  "52490": {
+    "lat": 2.310128,
+    "lon": -78.30421,
+    "nombre": "Olaya Herrera",
+    "depto": ""
+  },
+  "52506": {
+    "lat": 1.0297275,
+    "lon": -77.5481133,
+    "nombre": "Ospina",
+    "depto": ""
+  },
+  "52520": {
+    "lat": 0.8958,
+    "lon": -77.5167,
+    "nombre": "Francisco Pizarro",
+    "depto": "Nariño"
+  },
+  "52540": {
+    "lat": 1.3375,
+    "lon": -77.5869,
+    "nombre": "Policarpa",
+    "depto": "Nariño"
+  },
+  "52560": {
+    "lat": 0.7340175,
+    "lon": -77.4091765,
+    "nombre": "Potosí",
+    "depto": ""
+  },
+  "52565": {
+    "lat": 13.3531166,
+    "lon": -81.3749889,
+    "nombre": "Providencia",
+    "depto": ""
+  },
+  "52573": {
+    "lat": 0.7996157,
+    "lon": -77.2564469,
+    "nombre": "Puerres",
+    "depto": ""
+  },
+  "52585": {
+    "lat": 0.8707969,
+    "lon": -77.6419358,
+    "nombre": "Pupiales",
+    "depto": ""
+  },
+  "52612": {
+    "lat": 4.2777357,
+    "lon": -74.7718165,
+    "nombre": "Ricaurte",
+    "depto": ""
+  },
+  "52621": {
+    "lat": 1.8693439,
+    "lon": -78.3694293,
+    "nombre": "Roberto Payán",
+    "depto": ""
+  },
+  "52678": {
+    "lat": 1.3389525,
+    "lon": -77.5933795,
+    "nombre": "Samaniego",
+    "depto": ""
+  },
+  "52683": {
+    "lat": 1.2863843,
+    "lon": -77.4710722,
+    "nombre": "Sandoná",
+    "depto": ""
+  },
+  "52685": {
+    "lat": 4.1782821,
+    "lon": -74.4222732,
+    "nombre": "San Bernardo",
+    "depto": ""
+  },
+  "52687": {
+    "lat": 1.5031548,
+    "lon": -77.2153366,
+    "nombre": "San Lorenzo",
+    "depto": ""
+  },
+  "52693": {
+    "lat": 1.6684528,
+    "lon": -77.0109928,
+    "nombre": "San Pablo",
+    "depto": ""
+  },
+  "52694": {
+    "lat": 1.5524899,
+    "lon": -77.1200173,
+    "nombre": "San Pedro de Cartago",
+    "depto": ""
+  },
+  "52696": {
+    "lat": 5.8743766,
+    "lon": -75.5679573,
+    "nombre": "Santa Bárbara",
+    "depto": ""
+  },
+  "52699": {
+    "lat": 1.5191435,
+    "lon": -77.2796582,
+    "nombre": "Santa Cruz",
+    "depto": ""
+  },
+  "52720": {
+    "lat": 1.0418207,
+    "lon": -77.7062802,
+    "nombre": "Sapuyes",
+    "depto": ""
+  },
+  "52786": {
+    "lat": 1.5696216,
+    "lon": -77.2772963,
+    "nombre": "Taminango",
+    "depto": ""
+  },
+  "52788": {
+    "lat": 1.0944024,
+    "lon": -77.3948049,
+    "nombre": "Tangua",
+    "depto": ""
+  },
+  "52835": {
+    "lat": 1.7961,
+    "lon": -78.7994,
+    "nombre": "Tumaco",
+    "depto": "Nariño"
+  },
+  "52838": {
+    "lat": 1.0877024,
+    "lon": -77.6188242,
+    "nombre": "Túquerres",
+    "depto": ""
+  },
+  "52885": {
+    "lat": 1.1222843,
+    "lon": -77.4291925,
+    "nombre": "Yacuanquer",
+    "depto": ""
+  },
+  "54001": {
+    "lat": 7.8939,
+    "lon": -72.5078,
+    "nombre": "Cúcuta",
+    "depto": "Norte de Santander"
+  },
+  "54003": {
+    "lat": 8.0818887,
+    "lon": -73.2208717,
+    "nombre": "Ábrego",
+    "depto": ""
+  },
+  "54051": {
+    "lat": 7.6427256,
+    "lon": -72.7993408,
+    "nombre": "Arboledas",
+    "depto": ""
+  },
+  "54099": {
+    "lat": 7.61236,
+    "lon": -72.6471433,
+    "nombre": "Bochalema",
+    "depto": ""
+  },
+  "54109": {
+    "lat": 8.0394871,
+    "lon": -72.8669475,
+    "nombre": "Bucarasica",
+    "depto": ""
+  },
+  "54125": {
+    "lat": 7.2684542,
+    "lon": -72.6419655,
+    "nombre": "Cácota",
+    "depto": ""
+  },
+  "54128": {
+    "lat": 7.7419001,
+    "lon": -73.0485225,
+    "nombre": "Cachirá",
+    "depto": ""
+  },
+  "54172": {
+    "lat": 7.6084113,
+    "lon": -72.6002682,
+    "nombre": "Chinácota",
+    "depto": ""
+  },
+  "54174": {
+    "lat": 7.6086,
+    "lon": -72.615,
+    "nombre": "Chitagá",
+    "depto": "Norte de Santander"
+  },
+  "54206": {
+    "lat": 8.4689,
+    "lon": -73.3411,
+    "nombre": "Convención",
+    "depto": "Norte de Santander"
+  },
+  "54223": {
+    "lat": 7.539501,
+    "lon": -72.77276,
+    "nombre": "Cucutilla",
+    "depto": ""
+  },
+  "54239": {
+    "lat": 7.7141729,
+    "lon": -72.6566936,
+    "nombre": "Durania",
+    "depto": ""
+  },
+  "54245": {
+    "lat": 8.5108096,
+    "lon": -73.4468071,
+    "nombre": "El Carmen",
+    "depto": ""
+  },
+  "54250": {
+    "lat": 8.6145368,
+    "lon": -73.0330358,
+    "nombre": "El Tarra",
+    "depto": ""
+  },
+  "54261": {
+    "lat": 8.0954887,
+    "lon": -72.6463775,
+    "nombre": "El Zulia",
+    "depto": ""
+  },
+  "54313": {
+    "lat": 7.9155235,
+    "lon": -72.7865971,
+    "nombre": "Gramalote",
+    "depto": ""
+  },
+  "54344": {
+    "lat": 7.4992,
+    "lon": -72.4039,
+    "nombre": "Hacarí",
+    "depto": "Norte de Santander"
+  },
+  "54347": {
+    "lat": 7.5068955,
+    "lon": -72.4831948,
+    "nombre": "Herrán",
+    "depto": ""
+  },
+  "54377": {
+    "lat": 7.2990588,
+    "lon": -72.4957735,
+    "nombre": "Labateca",
+    "depto": ""
+  },
+  "54385": {
+    "lat": 7.6957401,
+    "lon": -73.3547071,
+    "nombre": "La Esperanza",
+    "depto": ""
+  },
+  "54398": {
+    "lat": 6.4655403,
+    "lon": -75.3347881,
+    "nombre": "La Playa",
+    "depto": ""
+  },
+  "54405": {
+    "lat": 7.8342202,
+    "lon": -72.5059128,
+    "nombre": "Los Patios",
+    "depto": ""
+  },
+  "54418": {
+    "lat": 7.9443819,
+    "lon": -72.8334804,
+    "nombre": "Lourdes",
+    "depto": ""
+  },
+  "54480": {
+    "lat": 7.3009393,
+    "lon": -72.7467237,
+    "nombre": "Mutiscua",
+    "depto": ""
+  },
+  "54498": {
+    "lat": 8.2351887,
+    "lon": -73.3538441,
+    "nombre": "Ocaña",
+    "depto": ""
+  },
+  "54518": {
+    "lat": 7.3769,
+    "lon": -72.6497,
+    "nombre": "Pamplona",
+    "depto": "Norte de Santander"
+  },
+  "54520": {
+    "lat": 7.437016,
+    "lon": -72.6380198,
+    "nombre": "Pamplonita",
+    "depto": ""
+  },
+  "54553": {
+    "lat": 8.3546568,
+    "lon": -72.4145867,
+    "nombre": "Puerto Santander",
+    "depto": ""
+  },
+  "54599": {
+    "lat": 7.5778992,
+    "lon": -72.4765555,
+    "nombre": "Ragonvalia",
+    "depto": ""
+  },
+  "54660": {
+    "lat": 7.7849895,
+    "lon": -72.8446028,
+    "nombre": "Salazar",
+    "depto": ""
+  },
+  "54670": {
+    "lat": 8.4028985,
+    "lon": -73.2075592,
+    "nombre": "San Calixto",
+    "depto": ""
+  },
+  "54673": {
+    "lat": 5.3330507,
+    "lon": -74.066783,
+    "nombre": "San Cayetano",
+    "depto": ""
+  },
+  "54680": {
+    "lat": 7.8644479,
+    "lon": -72.7165562,
+    "nombre": "Santiago",
+    "depto": ""
+  },
+  "54720": {
+    "lat": 8.6589,
+    "lon": -72.7289,
+    "nombre": "Sardinata",
+    "depto": "Norte de Santander"
+  },
+  "54743": {
+    "lat": 7.2054262,
+    "lon": -72.7562972,
+    "nombre": "Silos",
+    "depto": ""
+  },
+  "54800": {
+    "lat": 8.758691,
+    "lon": -73.1608877,
+    "nombre": "Teorama",
+    "depto": ""
+  },
+  "54810": {
+    "lat": 8.6371362,
+    "lon": -72.7344612,
+    "nombre": "Tibú",
+    "depto": ""
+  },
+  "54820": {
+    "lat": 7.0109536,
+    "lon": -75.6921058,
+    "nombre": "Toledo",
+    "depto": ""
+  },
+  "54871": {
+    "lat": 7.8372,
+    "lon": -72.4728,
+    "nombre": "Villa Caro",
+    "depto": "Norte de Santander"
+  },
+  "54874": {
+    "lat": 7.8318933,
+    "lon": -72.4717181,
+    "nombre": "Villa del Rosario",
+    "depto": ""
+  },
+  "63001": {
+    "lat": 4.5339,
+    "lon": -75.6811,
+    "nombre": "Armenia",
+    "depto": "Quindío"
+  },
+  "63111": {
+    "lat": 5.4875315,
+    "lon": -73.9563076,
+    "nombre": "Buenavista",
+    "depto": ""
+  },
+  "63130": {
+    "lat": 4.5331,
+    "lon": -75.6444,
+    "nombre": "Calarcá",
+    "depto": "Quindío"
+  },
+  "63190": {
+    "lat": 4.6175,
+    "lon": -75.6411,
+    "nombre": "Circasia",
+    "depto": "Quindío"
+  },
+  "63212": {
+    "lat": 4.4089,
+    "lon": -75.6797,
+    "nombre": "Córdoba",
+    "depto": "Quindío"
+  },
+  "63272": {
+    "lat": 4.6750767,
+    "lon": -75.6579957,
+    "nombre": "Filandia",
+    "depto": ""
+  },
+  "63302": {
+    "lat": 4.1929922,
+    "lon": -75.7448118,
+    "nombre": "Génova",
+    "depto": ""
+  },
+  "63401": {
+    "lat": 4.4464,
+    "lon": -75.7958,
+    "nombre": "La Tebaida",
+    "depto": "Quindío"
+  },
+  "63470": {
+    "lat": 4.5664176,
+    "lon": -75.7507081,
+    "nombre": "Montenegro",
+    "depto": ""
+  },
+  "63548": {
+    "lat": 4.6214,
+    "lon": -75.7636,
+    "nombre": "Pijao",
+    "depto": "Quindío"
+  },
+  "63594": {
+    "lat": 4.6231176,
+    "lon": -75.7637346,
+    "nombre": "Quimbaya",
+    "depto": ""
+  },
+  "63690": {
+    "lat": 4.6373012,
+    "lon": -75.569799,
+    "nombre": "Salento",
+    "depto": ""
+  },
+  "66001": {
+    "lat": 4.8133,
+    "lon": -75.6961,
+    "nombre": "Pereira",
+    "depto": "Risaralda"
+  },
+  "66045": {
+    "lat": 5.1025,
+    "lon": -75.9728,
+    "nombre": "Apía",
+    "depto": "Risaralda"
+  },
+  "66075": {
+    "lat": 5.0481,
+    "lon": -75.9617,
+    "nombre": "Balboa",
+    "depto": "Risaralda"
+  },
+  "66088": {
+    "lat": 5.2009093,
+    "lon": -75.8689928,
+    "nombre": "Belén de Umbría",
+    "depto": ""
+  },
+  "66170": {
+    "lat": 4.8478,
+    "lon": -75.6622,
+    "nombre": "Dosquebradas",
+    "depto": "Risaralda"
+  },
+  "66318": {
+    "lat": 5.2386,
+    "lon": -75.8031,
+    "nombre": "Guática",
+    "depto": "Risaralda"
+  },
+  "66383": {
+    "lat": 5.00335,
+    "lon": -76.0031995,
+    "nombre": "La Celia",
+    "depto": ""
+  },
+  "66400": {
+    "lat": 4.9906,
+    "lon": -75.9856,
+    "nombre": "La Virginia",
+    "depto": "Risaralda"
+  },
+  "66440": {
+    "lat": 4.9003,
+    "lon": -75.8781,
+    "nombre": "Marsella",
+    "depto": "Risaralda"
+  },
+  "66456": {
+    "lat": 4.9439,
+    "lon": -75.7433,
+    "nombre": "Mistrató",
+    "depto": "Risaralda"
+  },
+  "66572": {
+    "lat": 4.8681,
+    "lon": -75.6247,
+    "nombre": "Pueblo Rico",
+    "depto": "Risaralda"
+  },
+  "66594": {
+    "lat": 5.3261633,
+    "lon": -75.7218684,
+    "nombre": "Quinchía",
+    "depto": ""
+  },
+  "66682": {
+    "lat": 4.8650708,
+    "lon": -75.6211554,
+    "nombre": "Santa Rosa de Cabal",
+    "depto": ""
+  },
+  "66687": {
+    "lat": 5.0732065,
+    "lon": -75.9624682,
+    "nombre": "Santuario",
+    "depto": ""
+  },
+  "68001": {
+    "lat": 7.1198,
+    "lon": -73.1227,
+    "nombre": "Bucaramanga",
+    "depto": "Santander"
+  },
+  "68013": {
+    "lat": 6.162366,
+    "lon": -73.5215686,
+    "nombre": "Aguada",
+    "depto": ""
+  },
+  "68020": {
+    "lat": 5.7587654,
+    "lon": -73.9151617,
+    "nombre": "Albania",
+    "depto": ""
+  },
+  "68051": {
+    "lat": 6.6945729,
+    "lon": -73.0187027,
+    "nombre": "Aratoca",
+    "depto": ""
+  },
+  "68077": {
+    "lat": 6.4370185,
+    "lon": -75.3313779,
+    "nombre": "Barbosa",
+    "depto": ""
+  },
+  "68079": {
+    "lat": 6.6357156,
+    "lon": -73.2234417,
+    "nombre": "Barichara",
+    "depto": ""
+  },
+  "68081": {
+    "lat": 7.0647,
+    "lon": -73.8542,
+    "nombre": "Barrancabermeja",
+    "depto": "Santander"
+  },
+  "68092": {
+    "lat": 6.1134294,
+    "lon": -75.9845433,
+    "nombre": "Betulia",
+    "depto": ""
+  },
+  "68101": {
+    "lat": 9.3660477,
+    "lon": -74.8023636,
+    "nombre": "Bolívar",
+    "depto": ""
+  },
+  "68121": {
+    "lat": 3.9852044,
+    "lon": -74.4843363,
+    "nombre": "Cabrera",
+    "depto": ""
+  },
+  "68132": {
+    "lat": 7.3480915,
+    "lon": -72.9459294,
+    "nombre": "California",
+    "depto": ""
+  },
+  "68147": {
+    "lat": 5.4216244,
+    "lon": -74.5893563,
+    "nombre": "Cambrás",
+    "depto": ""
+  },
+  "68152": {
+    "lat": 6.5291798,
+    "lon": -72.6982619,
+    "nombre": "Capitanejo",
+    "depto": ""
+  },
+  "68160": {
+    "lat": 6.6273516,
+    "lon": -72.6260967,
+    "nombre": "Carcasí",
+    "depto": ""
+  },
+  "68162": {
+    "lat": 6.745901,
+    "lon": -72.9294288,
+    "nombre": "Cepitá",
+    "depto": ""
+  },
+  "68167": {
+    "lat": 6.8435992,
+    "lon": -72.6939627,
+    "nombre": "Cerrito",
+    "depto": ""
+  },
+  "68169": {
+    "lat": 6.2881742,
+    "lon": -73.148289,
+    "nombre": "Charalá",
+    "depto": ""
+  },
+  "68176": {
+    "lat": 6.3443969,
+    "lon": -73.3727428,
+    "nombre": "Chima",
+    "depto": ""
+  },
+  "68179": {
+    "lat": 6.0624774,
+    "lon": -73.6372532,
+    "nombre": "Chipatá",
+    "depto": ""
+  },
+  "68190": {
+    "lat": 6.3145415,
+    "lon": -73.9496809,
+    "nombre": "Cimitarra",
+    "depto": ""
+  },
+  "68207": {
+    "lat": 6.3953198,
+    "lon": -75.259323,
+    "nombre": "Concepción",
+    "depto": ""
+  },
+  "68211": {
+    "lat": 6.3559746,
+    "lon": -73.2409632,
+    "nombre": "Confines",
+    "depto": ""
+  },
+  "68217": {
+    "lat": 6.290737,
+    "lon": -73.4745564,
+    "nombre": "Contratación",
+    "depto": ""
+  },
+  "68229": {
+    "lat": 6.2956298,
+    "lon": -73.0407055,
+    "nombre": "Coromoro",
+    "depto": ""
+  },
+  "68235": {
+    "lat": 6.6067027,
+    "lon": -73.069209,
+    "nombre": "Curití",
+    "depto": ""
+  },
+  "68245": {
+    "lat": 6.6986924,
+    "lon": -73.5115695,
+    "nombre": "El Carmen de Chucurí",
+    "depto": ""
+  },
+  "68250": {
+    "lat": 6.2452658,
+    "lon": -73.4975606,
+    "nombre": "El Guacamayo",
+    "depto": ""
+  },
+  "68255": {
+    "lat": 5.2659174,
+    "lon": -74.2932066,
+    "nombre": "El Peñón",
+    "depto": ""
+  },
+  "68264": {
+    "lat": 7.5230008,
+    "lon": -73.1978659,
+    "nombre": "El Playón",
+    "depto": ""
+  },
+  "68266": {
+    "lat": 6.137825,
+    "lon": -73.0988367,
+    "nombre": "Encino",
+    "depto": ""
+  },
+  "68271": {
+    "lat": 6.6682065,
+    "lon": -72.699343,
+    "nombre": "Enciso",
+    "depto": ""
+  },
+  "68276": {
+    "lat": 7.0642,
+    "lon": -73.0892,
+    "nombre": "Florián",
+    "depto": "Santander"
+  },
+  "68296": {
+    "lat": 7.0625677,
+    "lon": -73.0859086,
+    "nombre": "Floridablanca",
+    "depto": ""
+  },
+  "68298": {
+    "lat": 6.6379098,
+    "lon": -73.2874531,
+    "nombre": "Galán",
+    "depto": ""
+  },
+  "68307": {
+    "lat": 7.0714,
+    "lon": -73.1689,
+    "nombre": "Gámbita",
+    "depto": "Santander"
+  },
+  "68318": {
+    "lat": 7.0732333,
+    "lon": -73.1689196,
+    "nombre": "Girón",
+    "depto": ""
+  },
+  "68320": {
+    "lat": 6.8760761,
+    "lon": -72.8557642,
+    "nombre": "Guaca",
+    "depto": ""
+  },
+  "68322": {
+    "lat": 6.8149918,
+    "lon": -75.2403991,
+    "nombre": "Guadalupe",
+    "depto": ""
+  },
+  "68324": {
+    "lat": 6.3082977,
+    "lon": -73.3212243,
+    "nombre": "Guapotá",
+    "depto": ""
+  },
+  "68327": {
+    "lat": 5.9542651,
+    "lon": -73.6997882,
+    "nombre": "Guavatá",
+    "depto": ""
+  },
+  "68344": {
+    "lat": 6.0357259,
+    "lon": -73.5663239,
+    "nombre": "Güepsa",
+    "depto": ""
+  },
+  "68368": {
+    "lat": 6.5621066,
+    "lon": -73.3647381,
+    "nombre": "Hato",
+    "depto": ""
+  },
+  "68370": {
+    "lat": 5.8489792,
+    "lon": -73.8310995,
+    "nombre": "Jesús María",
+    "depto": ""
+  },
+  "68377": {
+    "lat": 6.7127071,
+    "lon": -73.0924538,
+    "nombre": "Jordán",
+    "depto": ""
+  },
+  "68385": {
+    "lat": 5.8588396,
+    "lon": -73.9658291,
+    "nombre": "La Belleza",
+    "depto": ""
+  },
+  "68397": {
+    "lat": 6.2205334,
+    "lon": -73.8113754,
+    "nombre": "Landázuri",
+    "depto": ""
+  },
+  "68406": {
+    "lat": 6.1785935,
+    "lon": -73.5895841,
+    "nombre": "La Paz",
+    "depto": ""
+  },
+  "68418": {
+    "lat": 7.1138415,
+    "lon": -73.2174056,
+    "nombre": "Lebrija",
+    "depto": ""
+  },
+  "68425": {
+    "lat": 6.7559026,
+    "lon": -73.1018206,
+    "nombre": "Los Santos",
+    "depto": ""
+  },
+  "68432": {
+    "lat": 6.5061711,
+    "lon": -72.5928958,
+    "nombre": "Macaravita",
+    "depto": ""
+  },
+  "68444": {
+    "lat": 6.699661,
+    "lon": -72.7324563,
+    "nombre": "Málaga",
+    "depto": ""
+  },
+  "68464": {
+    "lat": 7.3230808,
+    "lon": -73.0155679,
+    "nombre": "Matanza",
+    "depto": ""
+  },
+  "68468": {
+    "lat": 6.5024406,
+    "lon": -72.976792,
+    "nombre": "Mogotes",
+    "depto": ""
+  },
+  "68498": {
+    "lat": 6.6361118,
+    "lon": -72.8214261,
+    "nombre": "Molagavita",
+    "depto": ""
+  },
+  "68500": {
+    "lat": 1.5842268,
+    "lon": -77.8585766,
+    "nombre": "Nariño",
+    "depto": ""
+  },
+  "68522": {
+    "lat": 6.3407198,
+    "lon": -73.1220259,
+    "nombre": "Ocamonte",
+    "depto": ""
+  },
+  "68533": {
+    "lat": 6.2314836,
+    "lon": -73.2740311,
+    "nombre": "Oiba",
+    "depto": ""
+  },
+  "68547": {
+    "lat": 6.9878,
+    "lon": -73.0525,
+    "nombre": "Onzaga",
+    "depto": "Santander"
+  },
+  "68549": {
+    "lat": 6.538635,
+    "lon": -73.2916928,
+    "nombre": "Palmar",
+    "depto": ""
+  },
+  "68551": {
+    "lat": 6.4066247,
+    "lon": -73.287918,
+    "nombre": "Palmas del Socorro",
+    "depto": ""
+  },
+  "68572": {
+    "lat": 5.8770962,
+    "lon": -73.6791063,
+    "nombre": "Puente Nacional",
+    "depto": ""
+  },
+  "68573": {
+    "lat": 6.416541,
+    "lon": -73.1693988,
+    "nombre": "Páramo",
+    "depto": ""
+  },
+  "68575": {
+    "lat": 6.9874808,
+    "lon": -73.0504129,
+    "nombre": "Piedecuesta",
+    "depto": ""
+  },
+  "68615": {
+    "lat": 5.8758,
+    "lon": -73.6872,
+    "nombre": "Rionegro",
+    "depto": "Santander"
+  },
+  "68655": {
+    "lat": 6.5561,
+    "lon": -73.1333,
+    "nombre": "Sabana de Torres",
+    "depto": "Santander"
+  },
+  "68669": {
+    "lat": 12.5375979,
+    "lon": -81.7204155,
+    "nombre": "San Andrés",
+    "depto": ""
+  },
+  "68673": {
+    "lat": 6.1032265,
+    "lon": -73.5301387,
+    "nombre": "San Benito",
+    "depto": ""
+  },
+  "68679": {
+    "lat": 5.9411,
+    "lon": -73.6183,
+    "nombre": "San Gil",
+    "depto": "Santander"
+  },
+  "68682": {
+    "lat": 6.427589,
+    "lon": -72.8676531,
+    "nombre": "San Joaquín",
+    "depto": ""
+  },
+  "68684": {
+    "lat": 6.6583869,
+    "lon": -72.7334887,
+    "nombre": "San José de Miranda",
+    "depto": ""
+  },
+  "68686": {
+    "lat": 6.5759286,
+    "lon": -72.6455489,
+    "nombre": "San Miguel",
+    "depto": ""
+  },
+  "68689": {
+    "lat": 6.9287793,
+    "lon": -73.5207543,
+    "nombre": "San Vicente de Chucurí",
+    "depto": ""
+  },
+  "68705": {
+    "lat": 5.8743766,
+    "lon": -75.5679573,
+    "nombre": "Santa Bárbara",
+    "depto": ""
+  },
+  "68720": {
+    "lat": 6.4706,
+    "lon": -73.2644,
+    "nombre": "Santa Helena del Opón",
+    "depto": "Santander"
+  },
+  "68745": {
+    "lat": 6.6824805,
+    "lon": -73.7916925,
+    "nombre": "Simacota",
+    "depto": ""
+  },
+  "68755": {
+    "lat": 6.470518,
+    "lon": -73.2623187,
+    "nombre": "Socorro",
+    "depto": ""
+  },
+  "68770": {
+    "lat": 6.1257536,
+    "lon": -73.3627147,
+    "nombre": "Suaita",
+    "depto": ""
+  },
+  "68773": {
+    "lat": 9,
+    "lon": -75,
+    "nombre": "Sucre",
+    "depto": ""
+  },
+  "68780": {
+    "lat": 7.3664929,
+    "lon": -72.9847362,
+    "nombre": "Suratá",
+    "depto": ""
+  },
+  "68820": {
+    "lat": 7.2020629,
+    "lon": -72.9663733,
+    "nombre": "Tona",
+    "depto": ""
+  },
+  "68855": {
+    "lat": 6.01,
+    "lon": -73.6778,
+    "nombre": "Valle de San José",
+    "depto": "Santander"
+  },
+  "68861": {
+    "lat": 6.0123632,
+    "lon": -73.6729598,
+    "nombre": "Vélez",
+    "depto": ""
+  },
+  "68867": {
+    "lat": 7.3092643,
+    "lon": -72.8718075,
+    "nombre": "Vetas",
+    "depto": ""
+  },
+  "68872": {
+    "lat": 6.6712394,
+    "lon": -73.1753984,
+    "nombre": "Villanueva",
+    "depto": ""
+  },
+  "68895": {
+    "lat": 6.8166596,
+    "lon": -73.2686529,
+    "nombre": "Zapatoca",
+    "depto": ""
+  },
+  "70001": {
+    "lat": 9.3047,
+    "lon": -75.3978,
+    "nombre": "Sincelejo",
+    "depto": "Sucre"
+  },
+  "70110": {
+    "lat": 9.4006,
+    "lon": -75.7033,
+    "nombre": "Buenavista",
+    "depto": "Sucre"
+  },
+  "70124": {
+    "lat": 8.790591,
+    "lon": -75.1163176,
+    "nombre": "Caimito",
+    "depto": ""
+  },
+  "70204": {
+    "lat": 9.4941082,
+    "lon": -75.3530874,
+    "nombre": "Colosó",
+    "depto": ""
+  },
+  "70215": {
+    "lat": 9.3192,
+    "lon": -75.2917,
+    "nombre": "Corozal",
+    "depto": "Sucre"
+  },
+  "70221": {
+    "lat": 9.4017581,
+    "lon": -75.6787017,
+    "nombre": "Coveñas",
+    "depto": ""
+  },
+  "70230": {
+    "lat": 9.5423971,
+    "lon": -75.3129471,
+    "nombre": "Chalán",
+    "depto": ""
+  },
+  "70233": {
+    "lat": 8.2412545,
+    "lon": -76.5042887,
+    "nombre": "El Palmito",
+    "depto": ""
+  },
+  "70235": {
+    "lat": 9.1037704,
+    "lon": -75.1952621,
+    "nombre": "El Roble",
+    "depto": ""
+  },
+  "70265": {
+    "lat": 1.2215268,
+    "lon": -77.3589636,
+    "nombre": "Galeras",
+    "depto": ""
+  },
+  "70400": {
+    "lat": 9.2622,
+    "lon": -75.3717,
+    "nombre": "La Unión",
+    "depto": "Sucre"
+  },
+  "70418": {
+    "lat": 9.3805529,
+    "lon": -75.2681334,
+    "nombre": "Los Palmitos",
+    "depto": ""
+  },
+  "70429": {
+    "lat": 8.5618708,
+    "lon": -74.7294456,
+    "nombre": "Majagual",
+    "depto": ""
+  },
+  "70473": {
+    "lat": 9.3344096,
+    "lon": -75.305435,
+    "nombre": "Morroa",
+    "depto": ""
+  },
+  "70508": {
+    "lat": 9.5289,
+    "lon": -75.2297,
+    "nombre": "Ovejas",
+    "depto": "Sucre"
+  },
+  "70523": {
+    "lat": 9.3318248,
+    "lon": -75.5422877,
+    "nombre": "Palmito",
+    "depto": ""
+  },
+  "70670": {
+    "lat": 9.1845583,
+    "lon": -75.3802368,
+    "nombre": "Sampués",
+    "depto": ""
+  },
+  "70678": {
+    "lat": 8.9293556,
+    "lon": -75.0269099,
+    "nombre": "San Benito Abad",
+    "depto": ""
+  },
+  "70702": {
+    "lat": 8.6633,
+    "lon": -75.1244,
+    "nombre": "San Juan de Betulia",
+    "depto": "Sucre"
+  },
+  "70708": {
+    "lat": 8.6618609,
+    "lon": -75.1307644,
+    "nombre": "San Marcos",
+    "depto": ""
+  },
+  "70713": {
+    "lat": 9.7386264,
+    "lon": -75.5234228,
+    "nombre": "San Onofre",
+    "depto": ""
+  },
+  "70717": {
+    "lat": 3.9955682,
+    "lon": -76.2280495,
+    "nombre": "San Pedro",
+    "depto": ""
+  },
+  "70742": {
+    "lat": 9.2191217,
+    "lon": -75.1292839,
+    "nombre": "San Luis de Sincé",
+    "depto": ""
+  },
+  "70771": {
+    "lat": 9.5197,
+    "lon": -75.5783,
+    "nombre": "Sucre",
+    "depto": "Sucre"
+  },
+  "70820": {
+    "lat": 9.5241138,
+    "lon": -75.5841794,
+    "nombre": "Santiago de Tolú",
+    "depto": ""
+  },
+  "70823": {
+    "lat": 9.21,
+    "lon": -75.4267,
+    "nombre": "Tolú Viejo",
+    "depto": "Sucre"
+  },
+  "73001": {
+    "lat": 4.4389,
+    "lon": -75.2322,
+    "nombre": "Ibagué",
+    "depto": "Tolima"
+  },
+  "73024": {
+    "lat": 3.4008,
+    "lon": -74.9536,
+    "nombre": "Alpujarra",
+    "depto": "Tolima"
+  },
+  "73026": {
+    "lat": 4.567169,
+    "lon": -74.9538251,
+    "nombre": "Alvarado",
+    "depto": ""
+  },
+  "73030": {
+    "lat": 4.7835866,
+    "lon": -74.7643927,
+    "nombre": "Ambalema",
+    "depto": ""
+  },
+  "73043": {
+    "lat": 4.6311631,
+    "lon": -75.094827,
+    "nombre": "Anzoátegui",
+    "depto": ""
+  },
+  "73055": {
+    "lat": 5.0301119,
+    "lon": -74.8835029,
+    "nombre": "Armero",
+    "depto": ""
+  },
+  "73067": {
+    "lat": 3.5912171,
+    "lon": -75.3819459,
+    "nombre": "Ataco",
+    "depto": ""
+  },
+  "73124": {
+    "lat": 4.4419656,
+    "lon": -75.4268205,
+    "nombre": "Cajamarca",
+    "depto": ""
+  },
+  "73148": {
+    "lat": 4.1578,
+    "lon": -74.7292,
+    "nombre": "Carmen de Apicalá",
+    "depto": "Tolima"
+  },
+  "73152": {
+    "lat": 5.0046769,
+    "lon": -75.1948929,
+    "nombre": "Casabianca",
+    "depto": ""
+  },
+  "73168": {
+    "lat": 3.7233,
+    "lon": -75.4897,
+    "nombre": "Chaparral",
+    "depto": "Tolima"
+  },
+  "73200": {
+    "lat": 4.2880723,
+    "lon": -74.8981694,
+    "nombre": "Coello",
+    "depto": ""
+  },
+  "73217": {
+    "lat": 3.7993906,
+    "lon": -75.1945858,
+    "nombre": "Coyaima",
+    "depto": ""
+  },
+  "73226": {
+    "lat": 3.9659435,
+    "lon": -74.7267615,
+    "nombre": "Cunday",
+    "depto": ""
+  },
+  "73236": {
+    "lat": 3.6275684,
+    "lon": -74.8097851,
+    "nombre": "Dolores",
+    "depto": ""
+  },
+  "73268": {
+    "lat": 4.1503044,
+    "lon": -74.8845895,
+    "nombre": "Espinal",
+    "depto": ""
+  },
+  "73270": {
+    "lat": 5.1240227,
+    "lon": -74.9516185,
+    "nombre": "Falan",
+    "depto": ""
+  },
+  "73275": {
+    "lat": 4.2864999,
+    "lon": -74.813697,
+    "nombre": "Flandes",
+    "depto": ""
+  },
+  "73283": {
+    "lat": 5.1516594,
+    "lon": -75.0366354,
+    "nombre": "Fresno",
+    "depto": ""
+  },
+  "73319": {
+    "lat": 4.0303906,
+    "lon": -74.9679007,
+    "nombre": "Guamo",
+    "depto": ""
+  },
+  "73347": {
+    "lat": 5.049223,
+    "lon": -75.2398685,
+    "nombre": "Herveo",
+    "depto": ""
+  },
+  "73349": {
+    "lat": 5.2094,
+    "lon": -74.7406,
+    "nombre": "Honda",
+    "depto": "Tolima"
+  },
+  "73352": {
+    "lat": 4.1776149,
+    "lon": -74.5330517,
+    "nombre": "Icononzo",
+    "depto": ""
+  },
+  "73408": {
+    "lat": 4.8625,
+    "lon": -74.9283,
+    "nombre": "Lérida",
+    "depto": "Tolima"
+  },
+  "73411": {
+    "lat": 4.9256,
+    "lon": -75.0628,
+    "nombre": "Líbano",
+    "depto": "Tolima"
+  },
+  "73443": {
+    "lat": 5.1994,
+    "lon": -74.8875,
+    "nombre": "Mariquita",
+    "depto": "Tolima"
+  },
+  "73449": {
+    "lat": 4.2075,
+    "lon": -74.6467,
+    "nombre": "Melgar",
+    "depto": "Tolima"
+  },
+  "73461": {
+    "lat": 4.8248173,
+    "lon": -75.2349544,
+    "nombre": "Murillo",
+    "depto": ""
+  },
+  "73483": {
+    "lat": 3.6241727,
+    "lon": -75.0930613,
+    "nombre": "Natagaima",
+    "depto": ""
+  },
+  "73504": {
+    "lat": 3.9340209,
+    "lon": -75.2212672,
+    "nombre": "Ortega",
+    "depto": ""
+  },
+  "73520": {
+    "lat": 5.1219918,
+    "lon": -75.0222273,
+    "nombre": "Palocabildo",
+    "depto": ""
+  },
+  "73547": {
+    "lat": 4.5429776,
+    "lon": -74.8788788,
+    "nombre": "Piedras",
+    "depto": ""
+  },
+  "73555": {
+    "lat": 3.0980307,
+    "lon": -75.856522,
+    "nombre": "Planadas",
+    "depto": ""
+  },
+  "73563": {
+    "lat": 3.7201711,
+    "lon": -74.8620019,
+    "nombre": "Prado",
+    "depto": ""
+  },
+  "73585": {
+    "lat": 3.8582108,
+    "lon": -74.9308216,
+    "nombre": "Purificación",
+    "depto": ""
+  },
+  "73616": {
+    "lat": 4.1867951,
+    "lon": -74.0905074,
+    "nombre": "Rio Blanco",
+    "depto": ""
+  },
+  "73622": {
+    "lat": 4.0111317,
+    "lon": -75.6051946,
+    "nombre": "Roncesvalles",
+    "depto": ""
+  },
+  "73624": {
+    "lat": 3.8597,
+    "lon": -74.9322,
+    "nombre": "Rovira",
+    "depto": "Tolima"
+  },
+  "73671": {
+    "lat": 3.9292831,
+    "lon": -75.0148462,
+    "nombre": "Saldaña",
+    "depto": ""
+  },
+  "73675": {
+    "lat": 3.971341,
+    "lon": -75.5145161,
+    "nombre": "San Antonio",
+    "depto": ""
+  },
+  "73678": {
+    "lat": 6.0428128,
+    "lon": -74.9944061,
+    "nombre": "San Luis",
+    "depto": ""
+  },
+  "73686": {
+    "lat": 4.714425,
+    "lon": -75.098832,
+    "nombre": "Santa Isabel",
+    "depto": ""
+  },
+  "73770": {
+    "lat": 2.9543543,
+    "lon": -76.6948801,
+    "nombre": "Suárez",
+    "depto": ""
+  },
+  "73854": {
+    "lat": 4.8619,
+    "lon": -75.1469,
+    "nombre": "Valle de San Juan",
+    "depto": "Tolima"
+  },
+  "73861": {
+    "lat": 3.6039,
+    "lon": -75.2019,
+    "nombre": "Venadillo",
+    "depto": "Tolima"
+  },
+  "73870": {
+    "lat": 4.9765885,
+    "lon": -75.1666117,
+    "nombre": "Villahermosa",
+    "depto": ""
+  },
+  "73873": {
+    "lat": 3.8455429,
+    "lon": -74.6185191,
+    "nombre": "Villarrica",
+    "depto": ""
+  },
+  "76001": {
+    "lat": 3.4516,
+    "lon": -76.5319,
+    "nombre": "Cali",
+    "depto": "Valle del Cauca"
+  },
+  "76020": {
+    "lat": 4.6748944,
+    "lon": -75.781669,
+    "nombre": "Alcalá",
+    "depto": ""
+  },
+  "76036": {
+    "lat": 4.1694199,
+    "lon": -76.1670623,
+    "nombre": "Andalucía",
+    "depto": ""
+  },
+  "76041": {
+    "lat": 4.7957054,
+    "lon": -75.9937832,
+    "nombre": "Ansermanuevo",
+    "depto": ""
+  },
+  "76054": {
+    "lat": 5.7310785,
+    "lon": -75.1428525,
+    "nombre": "Argelia",
+    "depto": ""
+  },
+  "76100": {
+    "lat": 9.3660477,
+    "lon": -74.8023636,
+    "nombre": "Bolívar",
+    "depto": ""
+  },
+  "76109": {
+    "lat": 3.8814,
+    "lon": -77.0325,
+    "nombre": "Buenaventura",
+    "depto": "Valle del Cauca"
+  },
+  "76111": {
+    "lat": 3.9003,
+    "lon": -76.2994,
+    "nombre": "Guadalajara de Buga",
+    "depto": "Valle del Cauca"
+  },
+  "76113": {
+    "lat": 4.2138883,
+    "lon": -76.1571129,
+    "nombre": "Bugalagrande",
+    "depto": ""
+  },
+  "76122": {
+    "lat": 4.3076028,
+    "lon": -75.8397908,
+    "nombre": "Caicedonia",
+    "depto": ""
+  },
+  "76126": {
+    "lat": 3.9318186,
+    "lon": -76.4842408,
+    "nombre": "Calima",
+    "depto": ""
+  },
+  "76130": {
+    "lat": 3.4090481,
+    "lon": -76.347379,
+    "nombre": "Candelaria",
+    "depto": ""
+  },
+  "76147": {
+    "lat": 4.7467,
+    "lon": -75.9119,
+    "nombre": "Cartago",
+    "depto": "Valle del Cauca"
+  },
+  "76233": {
+    "lat": 3.658161,
+    "lon": -76.6893973,
+    "nombre": "Dagua",
+    "depto": ""
+  },
+  "76243": {
+    "lat": 4.9381541,
+    "lon": -76.0602975,
+    "nombre": "El Águila",
+    "depto": ""
+  },
+  "76246": {
+    "lat": 4.7621884,
+    "lon": -76.2207611,
+    "nombre": "El Cairo",
+    "depto": ""
+  },
+  "76248": {
+    "lat": 3.6829185,
+    "lon": -76.3071487,
+    "nombre": "El Cerrito",
+    "depto": ""
+  },
+  "76250": {
+    "lat": 4.511899,
+    "lon": -76.238102,
+    "nombre": "El Dovio",
+    "depto": ""
+  },
+  "76275": {
+    "lat": 3.3004741,
+    "lon": -76.1897061,
+    "nombre": "Florida",
+    "depto": ""
+  },
+  "76306": {
+    "lat": 3.7433,
+    "lon": -76.2817,
+    "nombre": "Ginebra",
+    "depto": "Valle del Cauca"
+  },
+  "76318": {
+    "lat": 3.7630235,
+    "lon": -76.3344854,
+    "nombre": "Guacarí",
+    "depto": ""
+  },
+  "76364": {
+    "lat": 3.2606,
+    "lon": -76.5369,
+    "nombre": "Jamundí",
+    "depto": "Valle del Cauca"
+  },
+  "76377": {
+    "lat": 3.6505888,
+    "lon": -76.569897,
+    "nombre": "La Cumbre",
+    "depto": ""
+  },
+  "76400": {
+    "lat": 3.3272,
+    "lon": -76.2294,
+    "nombre": "La Unión",
+    "depto": "Valle del Cauca"
+  },
+  "76403": {
+    "lat": 5.5152589,
+    "lon": -74.2354892,
+    "nombre": "La Victoria",
+    "depto": ""
+  },
+  "76497": {
+    "lat": 4.5746578,
+    "lon": -75.9721783,
+    "nombre": "Obando",
+    "depto": ""
+  },
+  "76520": {
+    "lat": 3.5394,
+    "lon": -76.3033,
+    "nombre": "Palmira",
+    "depto": "Valle del Cauca"
+  },
+  "76563": {
+    "lat": 3.4269,
+    "lon": -76.2494,
+    "nombre": "Pradera",
+    "depto": "Valle del Cauca"
+  },
+  "76606": {
+    "lat": 3.822009,
+    "lon": -76.5222535,
+    "nombre": "Restrepo",
+    "depto": ""
+  },
+  "76616": {
+    "lat": 4.1071481,
+    "lon": -76.3839423,
+    "nombre": "Riofrío",
+    "depto": ""
+  },
+  "76622": {
+    "lat": 4.4091166,
+    "lon": -76.1543744,
+    "nombre": "Roldanillo",
+    "depto": ""
+  },
+  "76670": {
+    "lat": 4.0222,
+    "lon": -76.3839,
+    "nombre": "San Pedro",
+    "depto": "Valle del Cauca"
+  },
+  "76736": {
+    "lat": 4.2694,
+    "lon": -75.9325,
+    "nombre": "Sevilla",
+    "depto": "Valle del Cauca"
+  },
+  "76823": {
+    "lat": 4.0842,
+    "lon": -76.1961,
+    "nombre": "Toro",
+    "depto": "Valle del Cauca"
+  },
+  "76828": {
+    "lat": 4.2123039,
+    "lon": -76.3188928,
+    "nombre": "Trujillo",
+    "depto": ""
+  },
+  "76834": {
+    "lat": 4.0856667,
+    "lon": -76.1972779,
+    "nombre": "Tuluá",
+    "depto": ""
+  },
+  "76845": {
+    "lat": 4.7081028,
+    "lon": -75.7812539,
+    "nombre": "Ulloa",
+    "depto": ""
+  },
+  "76863": {
+    "lat": 4.6166441,
+    "lon": -76.2325677,
+    "nombre": "Versalles",
+    "depto": ""
+  },
+  "76869": {
+    "lat": 3.7003997,
+    "lon": -76.4428876,
+    "nombre": "Vijes",
+    "depto": ""
+  },
+  "76890": {
+    "lat": 3.897661,
+    "lon": -76.387873,
+    "nombre": "Yotoco",
+    "depto": ""
+  },
+  "76892": {
+    "lat": 3.5858,
+    "lon": -76.4961,
+    "nombre": "Yumbo",
+    "depto": "Valle del Cauca"
+  },
+  "76895": {
+    "lat": 4.393943,
+    "lon": -76.0706472,
+    "nombre": "Zarzal",
+    "depto": ""
+  },
+  "81001": {
+    "lat": 7.0897,
+    "lon": -70.7617,
+    "nombre": "Arauca",
+    "depto": "Arauca"
+  },
+  "81065": {
+    "lat": 7.0264,
+    "lon": -71.4267,
+    "nombre": "Arauquita",
+    "depto": "Arauca"
+  },
+  "81220": {
+    "lat": 6.3094,
+    "lon": -70.2203,
+    "nombre": "Cravo Norte",
+    "depto": "Arauca"
+  },
+  "81300": {
+    "lat": 6.8417,
+    "lon": -71.7581,
+    "nombre": "Fortul",
+    "depto": "Arauca"
+  },
+  "81591": {
+    "lat": 6.2908,
+    "lon": -71.1022,
+    "nombre": "Puerto Rondón",
+    "depto": "Arauca"
+  },
+  "81736": {
+    "lat": 6.9494,
+    "lon": -71.8681,
+    "nombre": "Saravena",
+    "depto": "Arauca"
+  },
+  "81794": {
+    "lat": 6.4608,
+    "lon": -71.7297,
+    "nombre": "Tame",
+    "depto": "Arauca"
+  },
+  "85001": {
+    "lat": 5.3378,
+    "lon": -72.3956,
+    "nombre": "Yopal",
+    "depto": "Casanare"
+  },
+  "85010": {
+    "lat": 5.1706,
+    "lon": -72.5494,
+    "nombre": "Aguazul",
+    "depto": "Casanare"
+  },
+  "85015": {
+    "lat": 4.9972,
+    "lon": -72.7017,
+    "nombre": "Chámeza",
+    "depto": "Casanare"
+  },
+  "85125": {
+    "lat": 6.1539,
+    "lon": -71.7628,
+    "nombre": "Hato Corozal",
+    "depto": "Casanare"
+  },
+  "85136": {
+    "lat": 5.9158,
+    "lon": -72.3006,
+    "nombre": "La Salina",
+    "depto": "Casanare"
+  },
+  "85139": {
+    "lat": 4.8167,
+    "lon": -72.2878,
+    "nombre": "Maní",
+    "depto": "Casanare"
+  },
+  "85162": {
+    "lat": 4.8831,
+    "lon": -72.8992,
+    "nombre": "Monterrey",
+    "depto": "Casanare"
+  },
+  "85225": {
+    "lat": 5.6417,
+    "lon": -72.2008,
+    "nombre": "Nunchía",
+    "depto": "Casanare"
+  },
+  "85230": {
+    "lat": 4.7933,
+    "lon": -71.3492,
+    "nombre": "Orocué",
+    "depto": "Casanare"
+  },
+  "85250": {
+    "lat": 5.8761,
+    "lon": -71.8908,
+    "nombre": "Paz de Ariporo",
+    "depto": "Casanare"
+  },
+  "85263": {
+    "lat": 5.7167,
+    "lon": -71.9967,
+    "nombre": "Pore",
+    "depto": "Casanare"
+  },
+  "85279": {
+    "lat": 5.0567,
+    "lon": -72.6906,
+    "nombre": "Recetor",
+    "depto": "Casanare"
+  },
+  "85300": {
+    "lat": 4.86,
+    "lon": -72.5281,
+    "nombre": "Sabanalarga",
+    "depto": "Casanare"
+  },
+  "85315": {
+    "lat": 5.9667,
+    "lon": -72.4833,
+    "nombre": "Sácama",
+    "depto": "Casanare"
+  },
+  "85325": {
+    "lat": 5.4628,
+    "lon": -71.7286,
+    "nombre": "San Luis de Palenque",
+    "depto": "Casanare"
+  },
+  "85400": {
+    "lat": 5.8297,
+    "lon": -72.1669,
+    "nombre": "Támara",
+    "depto": "Casanare"
+  },
+  "85410": {
+    "lat": 5.0181,
+    "lon": -72.7417,
+    "nombre": "Tauramena",
+    "depto": "Casanare"
+  },
+  "85430": {
+    "lat": 5.4156,
+    "lon": -71.6528,
+    "nombre": "Trinidad",
+    "depto": "Casanare"
+  },
+  "85440": {
+    "lat": 4.6211,
+    "lon": -72.9394,
+    "nombre": "Villanueva",
+    "depto": "Casanare"
+  },
+  "86001": {
+    "lat": 1.1522,
+    "lon": -76.6483,
+    "nombre": "Mocoa",
+    "depto": "Putumayo"
+  },
+  "86219": {
+    "lat": 1.1894909,
+    "lon": -76.9725122,
+    "nombre": "Colón",
+    "depto": ""
+  },
+  "86320": {
+    "lat": 0.4564,
+    "lon": -76.9028,
+    "nombre": "Orito",
+    "depto": "Putumayo"
+  },
+  "86568": {
+    "lat": 0.4979751,
+    "lon": -76.4951418,
+    "nombre": "Puerto Asís",
+    "depto": ""
+  },
+  "86569": {
+    "lat": 0.5031,
+    "lon": -76.5014,
+    "nombre": "Puerto Caicedo",
+    "depto": "Putumayo"
+  },
+  "86571": {
+    "lat": 0.9648984,
+    "lon": -76.407834,
+    "nombre": "Puerto Guzmán",
+    "depto": ""
+  },
+  "86573": {
+    "lat": 0.7017,
+    "lon": -76.5922,
+    "nombre": "Puerto Leguízamo",
+    "depto": "Putumayo"
+  },
+  "86749": {
+    "lat": 1.1214,
+    "lon": -76.87,
+    "nombre": "Sibundoy",
+    "depto": "Putumayo"
+  },
+  "86755": {
+    "lat": 0.3228,
+    "lon": -76.9019,
+    "nombre": "San Francisco",
+    "depto": "Putumayo"
+  },
+  "86757": {
+    "lat": 1.1369,
+    "lon": -76.8925,
+    "nombre": "San Miguel",
+    "depto": "Putumayo"
+  },
+  "86760": {
+    "lat": 7.8644479,
+    "lon": -72.7165562,
+    "nombre": "Santiago",
+    "depto": ""
+  },
+  "86865": {
+    "lat": 1.0261,
+    "lon": -76.6194,
+    "nombre": "Valle del Guamuez",
+    "depto": "Putumayo"
+  },
+  "86885": {
+    "lat": 1.0306708,
+    "lon": -76.61691,
+    "nombre": "Villagarzón",
+    "depto": ""
+  },
+  "88001": {
+    "lat": 12.5567,
+    "lon": -81.7185,
+    "nombre": "San Andrés",
+    "depto": "San Andrés y Providencia"
+  },
+  "88564": {
+    "lat": 13.3475,
+    "lon": -81.3756,
+    "nombre": "Providencia y Santa Catalina",
+    "depto": "San Andrés y Providencia"
+  },
+  "91001": {
+    "lat": -3.5855334,
+    "lon": -70.0893949,
+    "nombre": "Leticia",
+    "depto": ""
+  },
+  "91263": {
+    "lat": -1.7444574,
+    "lon": -73.2090566,
+    "nombre": "El Encanto",
+    "depto": ""
+  },
+  "91405": {
+    "lat": -1.4420148,
+    "lon": -72.7889364,
+    "nombre": "La Chorrera",
+    "depto": ""
+  },
+  "91407": {
+    "lat": -1.1950966,
+    "lon": -70.0887773,
+    "nombre": "La Pedrera",
+    "depto": ""
+  },
+  "91430": {
+    "lat": 5.5152589,
+    "lon": -74.2354892,
+    "nombre": "La Victoria",
+    "depto": ""
+  },
+  "91460": {
+    "lat": -0.8880777,
+    "lon": -70.9883084,
+    "nombre": "Mirití - Paraná",
+    "depto": ""
+  },
+  "91530": {
+    "lat": -1.0049233,
+    "lon": -74.0136193,
+    "nombre": "Puerto Alegría",
+    "depto": ""
+  },
+  "91536": {
+    "lat": -2.1475772,
+    "lon": -71.7540411,
+    "nombre": "Puerto Arica",
+    "depto": ""
+  },
+  "91540": {
+    "lat": -3.779943,
+    "lon": -70.3639773,
+    "nombre": "Puerto Nariño",
+    "depto": ""
+  },
+  "91669": {
+    "lat": 8.3546568,
+    "lon": -72.4145867,
+    "nombre": "Puerto Santander",
+    "depto": ""
+  },
+  "91798": {
+    "lat": -2.6100092,
+    "lon": -69.9341566,
+    "nombre": "Tarapacá",
+    "depto": ""
+  },
+  "94001": {
+    "lat": 3.8650368,
+    "lon": -67.9259848,
+    "nombre": "Inírida",
+    "depto": ""
+  },
+  "94343": {
+    "lat": 3.4905446,
+    "lon": -69.8094888,
+    "nombre": "Barranco Minas",
+    "depto": ""
+  },
+  "94663": {
+    "lat": 2.776245,
+    "lon": -70.4473347,
+    "nombre": "Mapiripana",
+    "depto": ""
+  },
+  "94883": {
+    "lat": 2.0570205,
+    "lon": -67.2116994,
+    "nombre": "San Felipe",
+    "depto": ""
+  },
+  "94884": {
+    "lat": 10.9891292,
+    "lon": -74.955414,
+    "nombre": "Puerto Colombia",
+    "depto": ""
+  },
+  "94885": {
+    "lat": 1.4315516,
+    "lon": -66.9984097,
+    "nombre": "La Guadalupe",
+    "depto": ""
+  },
+  "94886": {
+    "lat": 3.4452512,
+    "lon": -67.5555849,
+    "nombre": "Cacahual",
+    "depto": ""
+  },
+  "94887": {
+    "lat": 2.0633718,
+    "lon": -69.0848469,
+    "nombre": "Pana Pana",
+    "depto": ""
+  },
+  "94888": {
+    "lat": 5.2275696,
+    "lon": -72.389045,
+    "nombre": "Morichal",
+    "depto": ""
+  },
+  "95001": {
+    "lat": 2.5716141,
+    "lon": -72.6426515,
+    "nombre": "San José del Guaviare",
+    "depto": ""
+  },
+  "95015": {
+    "lat": 10.2526122,
+    "lon": -74.9146691,
+    "nombre": "Calamar",
+    "depto": ""
+  },
+  "95025": {
+    "lat": 2.3305016,
+    "lon": -72.6264183,
+    "nombre": "El Retorno",
+    "depto": ""
+  },
+  "95200": {
+    "lat": 5.1514125,
+    "lon": -73.1705152,
+    "nombre": "Miraflores",
+    "depto": ""
+  },
+  "97001": {
+    "lat": 1.2538499,
+    "lon": -70.2345576,
+    "nombre": "Mitú",
+    "depto": ""
+  },
+  "97161": {
+    "lat": 1.5370737,
+    "lon": -70.2054609,
+    "nombre": "Caruru",
+    "depto": ""
+  },
+  "97511": {
+    "lat": 0.0568157,
+    "lon": -71.220554,
+    "nombre": "Pacoa",
+    "depto": ""
+  },
+  "97666": {
+    "lat": -0.5630161,
+    "lon": -69.6340579,
+    "nombre": "Taraira",
+    "depto": ""
+  },
+  "97777": {
+    "lat": 2.0888893,
+    "lon": -70.111781,
+    "nombre": "Papunaua",
+    "depto": ""
+  },
+  "97889": {
+    "lat": 0.8314207,
+    "lon": -69.6342437,
+    "nombre": "Yavaraté",
+    "depto": ""
+  },
+  "99001": {
+    "lat": 6.1909225,
+    "lon": -67.4841891,
+    "nombre": "Puerto Carreño",
+    "depto": ""
+  },
+  "99524": {
+    "lat": 5.5511075,
+    "lon": -69.6162631,
+    "nombre": "La Primavera",
+    "depto": ""
+  },
+  "99624": {
+    "lat": 5.1412908,
+    "lon": -70.8574027,
+    "nombre": "Santa Rosalía",
+    "depto": ""
+  },
+  "99773": {
+    "lat": 4.4471495,
+    "lon": -69.7975845,
+    "nombre": "Cumaribo",
+    "depto": ""
+  },
+  "05001": {
+    "lat": 6.2442,
+    "lon": -75.5812,
+    "nombre": "Medellín",
+    "depto": "Antioquia"
+  },
+  "05088": {
+    "lat": 6.3356,
+    "lon": -75.5571,
+    "nombre": "Bello",
+    "depto": "Antioquia"
+  },
+  "05237": {
+    "lat": 6.1752,
+    "lon": -75.5939,
+    "nombre": "Don Matías",
+    "depto": "Antioquia"
+  },
+  "05360": {
+    "lat": 6.1845,
+    "lon": -75.6061,
+    "nombre": "Itagüí",
+    "depto": "Antioquia"
+  },
+  "05615": {
+    "lat": 6.1505,
+    "lon": -75.6156,
+    "nombre": "Rionegro",
+    "depto": "Antioquia"
+  },
+  "05607": {
+    "lat": 6.1546,
+    "lon": -75.3736,
+    "nombre": "Retiro",
+    "depto": "Antioquia"
+  },
+  "05045": {
+    "lat": 7.8833,
+    "lon": -76.6271,
+    "nombre": "Apartadó",
+    "depto": "Antioquia"
+  },
+  "05748": {
+    "lat": 8.0961,
+    "lon": -76.7278
+  },
+  "05154": {
+    "lat": 7.9818,
+    "lon": -75.1975,
+    "nombre": "Caucasia",
+    "depto": "Antioquia"
+  },
+  "05579": {
+    "lat": 6.4932,
+    "lon": -74.4033,
+    "nombre": "Puerto Berrío",
+    "depto": "Antioquia"
+  },
+  "05380": {
+    "lat": 6.1576,
+    "lon": -75.6443,
+    "nombre": "La Estrella",
+    "depto": "Antioquia"
+  },
+  "05440": {
+    "lat": 6.1777,
+    "lon": -75.3367,
+    "nombre": "Marinilla",
+    "depto": "Antioquia"
+  },
+  "05659": {
+    "lat": 6.5581,
+    "lon": -75.8273,
+    "nombre": "San Juan de Urabá",
+    "depto": "Antioquia"
+  },
+  "08001": {
+    "lat": 10.9639,
+    "lon": -74.7964,
+    "nombre": "Barranquilla",
+    "depto": "Atlántico"
+  },
+  "08758": {
+    "lat": 10.9178,
+    "lon": -74.7687,
+    "nombre": "Soledad",
+    "depto": "Atlántico"
+  },
+  "08433": {
+    "lat": 10.8597,
+    "lon": -74.7742,
+    "nombre": "Malambo",
+    "depto": "Atlántico"
+  },
+  "08573": {
+    "lat": 10.9917,
+    "lon": -74.9558,
+    "nombre": "Puerto Colombia",
+    "depto": "Atlántico"
+  },
+  "08638": {
+    "lat": 10.6269,
+    "lon": -74.9206,
+    "nombre": "Sabanalarga",
+    "depto": "Atlántico"
+  },
+  "08296": {
+    "lat": 10.8961,
+    "lon": -74.8847,
+    "nombre": "Galapa",
+    "depto": "Atlántico"
+  },
+  "08634": {
+    "lat": 10.7972,
+    "lon": -74.7528,
+    "nombre": "Sabanagrande",
+    "depto": "Atlántico"
+  },
+  "05266": {
+    "lat": 6.1701348,
+    "lon": -75.587415,
+    "nombre": "Envigado",
+    "depto": ""
+  },
+  "05631": {
+    "lat": 6.1515344,
+    "lon": -75.6153715,
+    "nombre": "Sabaneta",
+    "depto": ""
+  },
+  "05079": {
+    "lat": 6.4370185,
+    "lon": -75.3313779,
+    "nombre": "Barbosa",
+    "depto": ""
+  },
+  "05129": {
+    "lat": 5.3302514,
+    "lon": -75.2873471,
+    "nombre": "Caldas",
+    "depto": ""
+  },
+  "05212": {
+    "lat": 6.3461047,
+    "lon": -75.5080262,
+    "nombre": "Copacabana",
+    "depto": ""
+  },
+  "05308": {
+    "lat": 6.3773809,
+    "lon": -75.4459762,
+    "nombre": "Girardota",
+    "depto": ""
+  },
+  "05120": {
+    "lat": 7.577089,
+    "lon": -75.3514383,
+    "nombre": "Cáceres",
+    "depto": ""
+  },
+  "05250": {
+    "lat": 7.6977101,
+    "lon": -74.6222028,
+    "nombre": "El Bagre",
+    "depto": ""
+  },
+  "05495": {
+    "lat": 8.0938077,
+    "lon": -74.7751988,
+    "nombre": "Nechí",
+    "depto": ""
+  },
+  "05790": {
+    "lat": 7.5804751,
+    "lon": -75.3998498,
+    "nombre": "Tarazá",
+    "depto": ""
+  },
+  "05895": {
+    "lat": 7.4925154,
+    "lon": -74.8682314,
+    "nombre": "Zaragoza",
+    "depto": ""
+  },
+  "05142": {
+    "lat": 6.4092756,
+    "lon": -74.7566979,
+    "nombre": "Caracolí",
+    "depto": ""
+  },
+  "05425": {
+    "lat": 6.5535012,
+    "lon": -74.7877474,
+    "nombre": "Maceo",
+    "depto": ""
+  },
+  "05585": {
+    "lat": 6.1876653,
+    "lon": -74.5828711,
+    "nombre": "Puerto Nare",
+    "depto": ""
+  },
+  "05591": {
+    "lat": 5.8689335,
+    "lon": -74.6407965,
+    "nombre": "Puerto Triunfo",
+    "depto": ""
+  },
+  "05893": {
+    "lat": 7.0044426,
+    "lon": -73.9113922,
+    "nombre": "Yondó",
+    "depto": ""
+  },
+  "05031": {
+    "lat": 6.9070097,
+    "lon": -75.0735908,
+    "nombre": "Amalfi",
+    "depto": ""
+  },
+  "05040": {
+    "lat": 7.0736127,
+    "lon": -75.1466433,
+    "nombre": "Anorí",
+    "depto": ""
+  },
+  "05190": {
+    "lat": 6.5382418,
+    "lon": -75.0871316,
+    "nombre": "Cisneros",
+    "depto": ""
+  },
+  "05604": {
+    "lat": 7.0285327,
+    "lon": -74.695191,
+    "nombre": "Remedios",
+    "depto": ""
+  },
+  "05670": {
+    "lat": 6.4851146,
+    "lon": -75.0195044,
+    "nombre": "San Roque",
+    "depto": ""
+  },
+  "05690": {
+    "lat": 6.471221,
+    "lon": -75.1643724,
+    "nombre": "Santo Domingo",
+    "depto": ""
+  },
+  "05736": {
+    "lat": 7.081679,
+    "lon": -74.7009089,
+    "nombre": "Segovia",
+    "depto": ""
+  },
+  "05858": {
+    "lat": 6.7715902,
+    "lon": -74.7973449,
+    "nombre": "Vegachí",
+    "depto": ""
+  },
+  "05885": {
+    "lat": 6.675426,
+    "lon": -74.84226,
+    "nombre": "Yalí",
+    "depto": ""
+  },
+  "05890": {
+    "lat": 6.5981185,
+    "lon": -75.0108088,
+    "nombre": "Yolombó",
+    "depto": ""
+  },
+  "05038": {
+    "lat": 6.8858191,
+    "lon": -75.3349565,
+    "nombre": "Angostura",
+    "depto": ""
+  },
+  "05086": {
+    "lat": 6.606779,
+    "lon": -75.667459,
+    "nombre": "Belmira",
+    "depto": ""
+  },
+  "05107": {
+    "lat": 5.6620095,
+    "lon": -73.9208214,
+    "nombre": "Briceño",
+    "depto": ""
+  },
+  "05134": {
+    "lat": 6.9790857,
+    "lon": -75.2963715,
+    "nombre": "Campamento",
+    "depto": ""
+  },
+  "05150": {
+    "lat": 8.5113419,
+    "lon": -75.6181736,
+    "nombre": "Carolina",
+    "depto": ""
+  },
+  "05264": {
+    "lat": 6.5915992,
+    "lon": -75.5622405,
+    "nombre": "Entrerríos",
+    "depto": ""
+  },
+  "05310": {
+    "lat": 6.6815224,
+    "lon": -75.2194104,
+    "nombre": "Gómez Plata",
+    "depto": ""
+  },
+  "05315": {
+    "lat": 6.8149918,
+    "lon": -75.2403991,
+    "nombre": "Guadalupe",
+    "depto": ""
+  },
+  "05361": {
+    "lat": 7.1723319,
+    "lon": -75.7640925,
+    "nombre": "Ituango",
+    "depto": ""
+  },
+  "05647": {
+    "lat": 12.5375979,
+    "lon": -81.7204155,
+    "nombre": "San Andrés",
+    "depto": ""
+  },
+  "05658": {
+    "lat": 6.8169298,
+    "lon": -75.6756064,
+    "nombre": "San José de la Montaña",
+    "depto": ""
+  },
+  "05664": {
+    "lat": 3.9955682,
+    "lon": -76.2280495,
+    "nombre": "San Pedro",
+    "depto": ""
+  },
+  "05686": {
+    "lat": 6.6453171,
+    "lon": -75.4614576,
+    "nombre": "Santa Rosa de Osos",
+    "depto": ""
+  },
+  "05819": {
+    "lat": 7.0109536,
+    "lon": -75.6921058,
+    "nombre": "Toledo",
+    "depto": ""
+  },
+  "05854": {
+    "lat": 7.165519,
+    "lon": -75.438614,
+    "nombre": "Valdivia",
+    "depto": ""
+  },
+  "05887": {
+    "lat": 6.9625927,
+    "lon": -75.4165529,
+    "nombre": "Yarumal",
+    "depto": ""
+  },
+  "05004": {
+    "lat": 6.631864,
+    "lon": -76.0645258,
+    "nombre": "Abriaquí",
+    "depto": ""
+  },
+  "05044": {
+    "lat": 6.3034529,
+    "lon": -75.8540836,
+    "nombre": "Anza",
+    "depto": ""
+  },
+  "05059": {
+    "lat": 4.4919761,
+    "lon": -75.7413509,
+    "nombre": "Armenia",
+    "depto": ""
+  },
+  "05113": {
+    "lat": 6.719853,
+    "lon": -75.9068707,
+    "nombre": "Buriticá",
+    "depto": ""
+  },
+  "05138": {
+    "lat": 6.7519854,
+    "lon": -76.0261638,
+    "nombre": "Cañasgordas",
+    "depto": ""
+  },
+  "05234": {
+    "lat": 7.0015209,
+    "lon": -76.2666243,
+    "nombre": "Dabeiba",
+    "depto": ""
+  },
+  "05240": {
+    "lat": 6.3265312,
+    "lon": -75.7685045,
+    "nombre": "Ebéjico",
+    "depto": ""
+  },
+  "05284": {
+    "lat": 6.7721761,
+    "lon": -76.1311575,
+    "nombre": "Frontino",
+    "depto": ""
+  },
+  "05306": {
+    "lat": 6.6804539,
+    "lon": -75.95338,
+    "nombre": "Giraldo",
+    "depto": ""
+  },
+  "05347": {
+    "lat": 6.2076404,
+    "lon": -75.7339685,
+    "nombre": "Heliconia",
+    "depto": ""
+  },
+  "05411": {
+    "lat": 6.6781311,
+    "lon": -75.8112309,
+    "nombre": "Liborina",
+    "depto": ""
+  },
+  "05501": {
+    "lat": 6.6281792,
+    "lon": -75.8123079,
+    "nombre": "Olaya",
+    "depto": ""
+  },
+  "05543": {
+    "lat": 7.0216424,
+    "lon": -75.9095164,
+    "nombre": "Peque",
+    "depto": ""
+  },
+  "05628": {
+    "lat": 6.848687,
+    "lon": -75.8166534,
+    "nombre": "Sabanalarga",
+    "depto": ""
+  },
+  "05656": {
+    "lat": 6.4427228,
+    "lon": -75.727937,
+    "nombre": "San Jerónimo",
+    "depto": ""
+  },
+  "05042": {
+    "lat": 6.5564008,
+    "lon": -75.8277746,
+    "nombre": "Santafé de Antioquia",
+    "depto": ""
+  },
+  "05761": {
+    "lat": 6.5009582,
+    "lon": -75.7424979,
+    "nombre": "Sopetrán",
+    "depto": ""
+  },
+  "05842": {
+    "lat": 6.8993072,
+    "lon": -76.1742258,
+    "nombre": "Uramita",
+    "depto": ""
+  },
+  "05002": {
+    "lat": 5.7914299,
+    "lon": -75.4270381,
+    "nombre": "Abejorral",
+    "depto": ""
+  },
+  "05021": {
+    "lat": 6.3769175,
+    "lon": -75.1411601,
+    "nombre": "Alejandría",
+    "depto": ""
+  },
+  "05055": {
+    "lat": 5.7310785,
+    "lon": -75.1428525,
+    "nombre": "Argelia",
+    "depto": ""
+  },
+  "05148": {
+    "lat": 6.0833063,
+    "lon": -75.3353501,
+    "nombre": "Carmen de Viboral",
+    "depto": ""
+  },
+  "05197": {
+    "lat": 6.0580111,
+    "lon": -75.1859102,
+    "nombre": "Cocorná",
+    "depto": ""
+  },
+  "05206": {
+    "lat": 6.3953198,
+    "lon": -75.259323,
+    "nombre": "Concepción",
+    "depto": ""
+  },
+  "05313": {
+    "lat": 6.1442998,
+    "lon": -75.1844057,
+    "nombre": "Granada",
+    "depto": ""
+  },
+  "05318": {
+    "lat": 6.2800171,
+    "lon": -75.4426875,
+    "nombre": "Guarne",
+    "depto": ""
+  },
+  "05321": {
+    "lat": 6.2342179,
+    "lon": -75.1617452,
+    "nombre": "Guatapé",
+    "depto": ""
+  },
+  "05376": {
+    "lat": 5.9843082,
+    "lon": -75.4475229,
+    "nombre": "La Ceja",
+    "depto": ""
+  },
+  "05400": {
+    "lat": 5.9737744,
+    "lon": -75.3613093,
+    "nombre": "La Unión",
+    "depto": ""
+  },
+  "05483": {
+    "lat": 1.5842268,
+    "lon": -77.8585766,
+    "nombre": "Nariño",
+    "depto": ""
+  },
+  "05541": {
+    "lat": 6.2542863,
+    "lon": -75.236776,
+    "nombre": "Peñol",
+    "depto": ""
+  },
+  "05649": {
+    "lat": 6.1908026,
+    "lon": -74.9437879,
+    "nombre": "San Carlos",
+    "depto": ""
+  },
+  "05652": {
+    "lat": 5.8740017,
+    "lon": -74.9643254,
+    "nombre": "San Francisco",
+    "depto": ""
+  },
+  "05660": {
+    "lat": 6.0428128,
+    "lon": -74.9944061,
+    "nombre": "San Luis",
+    "depto": ""
+  },
+  "05667": {
+    "lat": 6.2954934,
+    "lon": -75.0280123,
+    "nombre": "San Rafael",
+    "depto": ""
+  },
+  "05674": {
+    "lat": 6.2826782,
+    "lon": -75.3318244,
+    "nombre": "San Vicente",
+    "depto": ""
+  },
+  "05697": {
+    "lat": 5.0732065,
+    "lon": -75.9624682,
+    "nombre": "Santuario",
+    "depto": ""
+  },
+  "05756": {
+    "lat": 5.7106659,
+    "lon": -75.3103532,
+    "nombre": "Sonsón",
+    "depto": ""
+  },
+  "05030": {
+    "lat": 6.0406977,
+    "lon": -75.7030694,
+    "nombre": "Amaga",
+    "depto": ""
+  },
+  "05034": {
+    "lat": 5.6556134,
+    "lon": -75.8776753,
+    "nombre": "Andes",
+    "depto": ""
+  },
+  "05036": {
+    "lat": 6.1115405,
+    "lon": -75.7102848,
+    "nombre": "Angelópolis",
+    "depto": ""
+  },
+  "05091": {
+    "lat": 5.7451779,
+    "lon": -75.9768362,
+    "nombre": "Betania",
+    "depto": ""
+  },
+  "05093": {
+    "lat": 6.1134294,
+    "lon": -75.9845433,
+    "nombre": "Betulia",
+    "depto": ""
+  },
+  "05125": {
+    "lat": 6.405955,
+    "lon": -75.9825592,
+    "nombre": "Caicedo",
+    "depto": ""
+  },
+  "05145": {
+    "lat": 5.5487065,
+    "lon": -75.6444056,
+    "nombre": "Caramanta",
+    "depto": ""
+  },
+  "05101": {
+    "lat": 5.8500342,
+    "lon": -76.0208666,
+    "nombre": "Ciudad Bolívar",
+    "depto": ""
+  },
+  "05209": {
+    "lat": 6.0457595,
+    "lon": -75.9074199,
+    "nombre": "Concordia",
+    "depto": ""
+  },
+  "05282": {
+    "lat": 5.9270644,
+    "lon": -75.6718221,
+    "nombre": "Fredonia",
+    "depto": ""
+  },
+  "05353": {
+    "lat": 5.799535,
+    "lon": -75.9073763,
+    "nombre": "Hispania",
+    "depto": ""
+  },
+  "05364": {
+    "lat": 5.5990503,
+    "lon": -75.8191833,
+    "nombre": "Jardín",
+    "depto": ""
+  },
+  "05368": {
+    "lat": 5.7914622,
+    "lon": -75.7862133,
+    "nombre": "Jericó",
+    "depto": ""
+  },
+  "05390": {
+    "lat": 5.7466446,
+    "lon": -75.6054273,
+    "nombre": "La Pintada",
+    "depto": ""
+  },
+  "05467": {
+    "lat": 5.9458633,
+    "lon": -75.5246825,
+    "nombre": "Montebello",
+    "depto": ""
+  },
+  "05576": {
+    "lat": 5.8194403,
+    "lon": -75.8592985,
+    "nombre": "Pueblorrico",
+    "depto": ""
+  },
+  "05642": {
+    "lat": 5.9631358,
+    "lon": -75.9791386,
+    "nombre": "Salgar",
+    "depto": ""
+  },
+  "05679": {
+    "lat": 5.8743766,
+    "lon": -75.5679573,
+    "nombre": "Santa Bárbara",
+    "depto": ""
+  },
+  "05789": {
+    "lat": 5.6652526,
+    "lon": -75.7139862,
+    "nombre": "Támesis",
+    "depto": ""
+  },
+  "05792": {
+    "lat": 5.864064,
+    "lon": -75.8217932,
+    "nombre": "Tarso",
+    "depto": ""
+  },
+  "05809": {
+    "lat": 6.0633763,
+    "lon": -75.79373,
+    "nombre": "Titiribí",
+    "depto": ""
+  },
+  "05847": {
+    "lat": 6.3168685,
+    "lon": -76.1344983,
+    "nombre": "Urrao",
+    "depto": ""
+  },
+  "05856": {
+    "lat": 5.6153841,
+    "lon": -75.6247028,
+    "nombre": "Valparaíso",
+    "depto": ""
+  },
+  "05861": {
+    "lat": 5.9635386,
+    "lon": -75.7339175,
+    "nombre": "Venecia",
+    "depto": ""
+  },
+  "05051": {
+    "lat": 8.8528266,
+    "lon": -76.4273168,
+    "nombre": "Arboletes",
+    "depto": ""
+  },
+  "05147": {
+    "lat": 7.7984516,
+    "lon": -76.7460389,
+    "nombre": "Carepa",
+    "depto": ""
+  },
+  "05172": {
+    "lat": 7.6129384,
+    "lon": -76.638426,
+    "nombre": "Chigorodó",
+    "depto": ""
+  },
+  "05475": {
+    "lat": 6.9782419,
+    "lon": -76.8192432,
+    "nombre": "Murindó",
+    "depto": ""
+  },
+  "05480": {
+    "lat": 7.2440678,
+    "lon": -76.436542,
+    "nombre": "Mutatá",
+    "depto": ""
+  },
+  "05490": {
+    "lat": 8.4242821,
+    "lon": -76.784019,
+    "nombre": "Necoclí",
+    "depto": ""
+  },
+  "05665": {
+    "lat": 8.2778883,
+    "lon": -76.3830793,
+    "nombre": "San Pedro de Urabá",
+    "depto": ""
+  },
+  "05837": {
+    "lat": 8.0952972,
+    "lon": -76.7289956,
+    "nombre": "Turbo",
+    "depto": ""
+  },
+  "05873": {
+    "lat": 6.5896299,
+    "lon": -76.8962209,
+    "nombre": "Vigía del Fuerte",
+    "depto": ""
+  },
+  "08137": {
+    "lat": 10.380131,
+    "lon": -74.8810622,
+    "nombre": "Campo de la Cruz",
+    "depto": ""
+  },
+  "08141": {
+    "lat": 3.4090481,
+    "lon": -76.347379,
+    "nombre": "Candelaria",
+    "depto": ""
+  },
+  "08421": {
+    "lat": 10.6104147,
+    "lon": -75.1427518,
+    "nombre": "Luruaco",
+    "depto": ""
+  },
+  "08436": {
+    "lat": 10.4470319,
+    "lon": -74.9594166,
+    "nombre": "Manatí",
+    "depto": ""
+  },
+  "08606": {
+    "lat": 10.4950081,
+    "lon": -75.1244823,
+    "nombre": "Repelón",
+    "depto": ""
+  },
+  "08675": {
+    "lat": 10.3244398,
+    "lon": -74.9610815,
+    "nombre": "Santa Lucía",
+    "depto": ""
+  },
+  "08770": {
+    "lat": 10.3047332,
+    "lon": -74.9140346,
+    "nombre": "Suán",
+    "depto": ""
+  },
+  "08078": {
+    "lat": 10.7935694,
+    "lon": -74.9152436,
+    "nombre": "Baranoa",
+    "depto": ""
+  },
+  "08520": {
+    "lat": 10.7410093,
+    "lon": -74.7534259,
+    "nombre": "Palmar de Varela",
+    "depto": ""
+  },
+  "08558": {
+    "lat": 10.7582877,
+    "lon": -74.8627369,
+    "nombre": "Polonuevo",
+    "depto": ""
+  },
+  "08560": {
+    "lat": 10.6396006,
+    "lon": -74.7501675,
+    "nombre": "Ponedera",
+    "depto": ""
+  },
+  "08685": {
+    "lat": 10.760241,
+    "lon": -74.7561781,
+    "nombre": "Santo Tomás",
+    "depto": ""
+  },
+  "08372": {
+    "lat": 10.8291974,
+    "lon": -75.0347039,
+    "nombre": "Juan de Acosta",
+    "depto": ""
+  },
+  "08549": {
+    "lat": 10.7483504,
+    "lon": -75.1081639,
+    "nombre": "Piojó",
+    "depto": ""
+  },
+  "08832": {
+    "lat": 10.8740849,
+    "lon": -74.9779428,
+    "nombre": "Tubará",
+    "depto": ""
+  },
+  "08849": {
+    "lat": 10.7423787,
+    "lon": -74.9778586,
+    "nombre": "Usiacurí",
+    "depto": ""
+  }
+}

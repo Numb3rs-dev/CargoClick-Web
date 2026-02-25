@@ -70,6 +70,10 @@ export function ConversacionCotizacion() {
   // Skip paso si no debe mostrarse (condicional)
   // Esto se maneja automáticamente en siguientePaso()
 
+  // Guardia de tipo: en este punto pasoActual ∈ [0, TOTAL_PASOS-1] por los early-returns
+  // anteriores, por lo que pasoConfig nunca es null aquí. Esta guardia es para TypeScript.
+  if (!pasoConfig) return null;
+
   // Renderizar paso actual (wizard)
   return (
     <Box

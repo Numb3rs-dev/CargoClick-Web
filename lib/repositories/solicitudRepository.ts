@@ -153,28 +153,41 @@ export class SolicitudRepository {
   }
 
   /**
+   * Busca una solicitud por su código de referencia externo (codigoRef).
+   * Usado en las rutas públicas /solicitudes/[ref] para no exponer el ULID interno.
+   */
+  async buscarPorCodigoRef(codigoRef: string): Promise<Solicitud | null> {
+    return await prisma.solicitud.findUnique({
+      where: { codigoRef: codigoRef.toUpperCase() },
+    });
+  }
+
+  /**
    * Busca si existe una solicitud reciente con el mismo teléfono
    * 
    * ANTI-DUPLICADOS: Usado para prevenir solicitudes spam/duplicadas
    * 
-   * @param telefono - Número de teléfono a buscar
+   * @param telefono  - Número de teléfono a buscar
+   * @param contacto  - Nombre del contacto
+   * @param empresa   - Nombre de la empresa (puede ser vacío)
    * @param fechaDesde - Fecha desde la cual buscar (típicamente hace 24h)
    * @returns Primera solicitud encontrada o null si no existe
-   * 
-   * @example
-   * const hace24h = new Date(Date.now() - 24 * 60 * 60 * 1000);
-   * const solicitudReciente = await repo.buscarPorTelefonoReciente('+573001234567', hace24h);
-   * if (solicitudReciente) {
-   *   throw new Error('Ya existe una solicitud reciente');
-   * }
+   *
+   * La coincidencia requiere que los TRES campos sean iguales.
+   * Si cualquiera difiere, se trata de un cliente distinto y no se bloquea.
    */
-  async buscarPorTelefonoReciente(telefono: string, fechaDesde: Date): Promise<Solicitud | null> {
+  async buscarClienteReciente(
+    telefono: string,
+    contacto: string,
+    empresa: string,
+    fechaDesde: Date,
+  ): Promise<Solicitud | null> {
     return await prisma.solicitud.findFirst({
       where: {
-        telefono: telefono,
-        createdAt: {
-          gte: fechaDesde,
-        },
+        telefono: { equals: telefono, mode: 'insensitive' },
+        contacto: { equals: contacto, mode: 'insensitive' },
+        empresa:  { equals: empresa,  mode: 'insensitive' },
+        createdAt: { gte: fechaDesde },
       },
       orderBy: { createdAt: 'desc' },
     });
