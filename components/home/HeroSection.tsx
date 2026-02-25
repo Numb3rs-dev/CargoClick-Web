@@ -108,7 +108,7 @@ export default function HeroSection() {
           {/* Botón CTA */}
           <div style={{ marginTop: '28px' }}>
             <Button variant="primary" size="lg" href="/cotizar">
-              Solicitar Servicio
+              Solicitar Cotización
             </Button>
           </div>
         </div>
