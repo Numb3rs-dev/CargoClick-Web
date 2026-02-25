@@ -56,7 +56,7 @@ async function main() {
         origen:   m[1],
         destino:  m[2],
         km:       parseInt(m[3], 10),
-        validado: m[4] === '1',
+        validado: parseInt(m[4], 10),   // SmallInt: 1 = validado, 0 = OSRM
       });
     }
 
