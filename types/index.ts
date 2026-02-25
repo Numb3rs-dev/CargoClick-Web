@@ -94,6 +94,7 @@ export interface DatosFormulario {
   condicionesCargue?: string[];
   fechaRequerida?: Date;
   // Checklist de detalles adicionales (paso 6 — enrichment)
+  servicioExpreso?: boolean;
   cargaPeligrosa?: boolean;
   ayudanteCargue?: boolean;
   ayudanteDescargue?: boolean;

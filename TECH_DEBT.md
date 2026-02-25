@@ -36,11 +36,7 @@ Requiere revisión del diseño y acuerdo del equipo.
 
 ## 🔜 Siguiente sesión (requieren contexto especial)
 
-### #1 · Dividir `useConversacion.ts` (872 líneas)
-Ver descripción original más abajo. Pospuesto para sesión dedicada.
-
-### #14 · `eslint-disable` en hook principal
-Depende de resolución del ítem #1.
+*(vacío - todos los ítems de esta categoría han sido resueltos)*
 
 ---
 
@@ -55,6 +51,16 @@ Depende de resolución del ítem #1.
 - [x] #11 — Notificaciones verificadas: ya son fire-and-forget + Promise.allSettled ✓
 - [x] #12 — Creado `cotizacionRepository.ts`, `cotizadorEngine` desacoplado de Prisma
 - [x] #15 — `.env.example` actualizado con pendientes
+
+## ✅ Resueltos en sesión siguiente (26/02/2026)
+
+- [x] #1 — `useConversacion.ts` dividido en 3 archivos:
+  - `conversacionUtils.ts` (~270 líneas): helpers puros (`interpolatePregunta`, `formatearRespuesta`, `limpiarRespuestaConversacional`, `aplicarValorAlForm`, `construirPayloadPaso4`, `construirPayloadExtras`)
+  - `solicitudApiClient.ts` (~95 líneas): clientes fetch puros (`apiCrearSolicitud`, `apiPatchSolicitud`, `apiDispararCotizacion`, `apiCargarSolicitud`)
+  - `useConversacion.ts` reducido a ~430 líneas — solo orquestación React
+  - Código muerto eliminado: `crearSolicitudInicial`, `actualizarSolicitud`, `completarSolicitud`
+  - `servicioExpreso` añadido a `DatosFormulario` (faltaba en el tipo)
+- [x] #14 — `eslint-disable` ya no es necesario en `useConversacion.ts` (la complejidad quedó en las funciones puras)
 
 ---
 
