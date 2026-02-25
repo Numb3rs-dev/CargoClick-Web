@@ -12,6 +12,7 @@ const isPublicRoute = createRouteMatcher([
   '/cotizar(.*)',         // Flujo de cotización para clientes
   '/sign-in(.*)',         // Página de login de Clerk
   '/api/health(.*)',      // Health check (no requiere auth)
+  '/api/distancia(.*)',   // Distancias entre municipios (uso interno del wizard)
   '/api/solicitudes',    // POST — crear solicitud (flujo público del wizard)
   '/api/solicitudes/:id', // GET/PATCH — guardado progresivo del wizard
   // /sign-up intencionalmente ausente: registro deshabilitado
