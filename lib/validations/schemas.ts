@@ -41,11 +41,16 @@ const fechaRequeridaSchema = z
   .transform((val) => (typeof val === 'string' ? new Date(val) : val))
   .refine(
     (date) => {
-      const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0);
-      const fecha = new Date(date);
-      fecha.setHours(0, 0, 0, 0);
-      return fecha >= hoy;
+      // Colombia = UTC-5 fijo (sin horario de verano)
+      // El servidor Railway corre en UTC — calculamos "hoy" en hora Bogotá
+      const BOGOTA_OFFSET_MS = 5 * 60 * 60 * 1000;
+      const ahoraEnBogota = new Date(Date.now() - BOGOTA_OFFSET_MS);
+      ahoraEnBogota.setUTCHours(0, 0, 0, 0); // medianoche Bogotá expresada en UTC
+
+      const fechaEnviada = new Date(date);
+      fechaEnviada.setUTCHours(0, 0, 0, 0);
+
+      return fechaEnviada.getTime() >= ahoraEnBogota.getTime();
     },
     { message: 'La fecha requerida no puede ser en el pasado' }
   );
