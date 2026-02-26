@@ -28,6 +28,7 @@
     "@mui/icons-material": "^7.3.8",
     "@mui/material": "^7.3.8",
     "@mui/x-date-pickers": "^8.27.0",
+    "@next/third-parties": "^16.1.6",
     "@prisma/client": "^5.0.0",
     "dayjs": "^1.11.19",
     "lucide-react": "^0.575.0",

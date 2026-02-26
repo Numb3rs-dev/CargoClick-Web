@@ -83,7 +83,7 @@ export default function ComoFuncionaSection() {
 
         {/* Cards siempre en fila con flechas entre ellas */}
         <div
-          style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 3, marginBottom: '-72px', paddingBottom: '72px' }}
+          style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 3, marginBottom: '-130px', paddingBottom: '130px' }}
           className="px-5 md:px-10"
         >
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'stretch' }}>

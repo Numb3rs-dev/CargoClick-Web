@@ -48,32 +48,6 @@ export const PASOS: PasoConfig[] = [
         ],
       },
       {
-        label: 'Carga refrigerada',
-        value: 'REFRIGERADA',
-        icon: '❄️',
-        subtexto: 'Alimentos frescos, medicamentos, flores — necesita frío',
-        descripcion: 'Aplica cuando tu carga se daña si no se mantiene fría durante el trayecto. El vehículo asignado es un furgón frigorífico con sistema de refrigeración.',
-        ejemplos: 'Carnes, lácteos, frutas y verduras frescas, mariscos, flores para exportación, vacunas e insulinas, helados y congelados, jugos y bebidas que deben ir en frío.',
-        checklist: [
-          'Tu producto tiene fecha de vencimiento corta y se deteriora sin frío',
-          'Necesitas cadena de frío durante todo el transporte',
-          'No aplica si el producto ya está enlatado, deshidratado o empacado al vacío sin requerir frío',
-        ],
-      },
-      {
-        label: 'Contenedor',
-        value: 'CONTENEDOR',
-        icon: '🚢',
-        subtexto: 'Contenedor sellado de importación o exportación (20\'  / 40\')',
-        descripcion: 'Aplica cuando tu mercancía viaja dentro de un contenedor metálico estándar, el tipo que se usa en barcos y puertos. El camión transporta el contenedor completo.',
-        ejemplos: 'Importaciones que llegan al puerto en contenedor y hay que llevarlas al almacén, exportaciones que se llevan al puerto, cargas consolidadas con varios clientes, contenedor propio de 20 o 40 pies.',
-        checklist: [
-          'Tu carga llegó o va a un puerto marítimo en contenedor',
-          'Tienes un contenedor ya asignado con número de booking',
-          'No aplica si tu carga va en un camión corriente aunque sea para exportar (eso es Mercancía general)',
-        ],
-      },
-      {
         label: 'Granel sólido',
         value: 'GRANEL_SOLIDO',
         icon: '🪨',
@@ -101,7 +75,7 @@ export const PASOS: PasoConfig[] = [
       },
     ],
     validacion: z.enum(
-      ['CARGA_GENERAL', 'REFRIGERADA', 'CONTENEDOR', 'GRANEL_SOLIDO', 'GRANEL_LIQUIDO'],
+      ['CARGA_GENERAL', 'GRANEL_SOLIDO', 'GRANEL_LIQUIDO'],
       { errorMap: () => ({ message: 'Selecciona un tipo de carga' }) }
     ),
   },

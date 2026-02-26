@@ -26,25 +26,30 @@ export default function CtaFinalSection() {
       aria-label="Llamada a la acción final"
       style={{ position: 'relative', background: BG_GRADIENT, paddingBottom: '0', zIndex: 1 }}
     >
-      {/* SVG: pinta el área SOBRE la ola con el color de la sección 4.
-          El gradiente del section ya corre de fondo de forma unificada — sin costura. */}
+      {/* Ola de entrada: doble capa con alta amplitud para máximo contraste */}
       <div style={{ lineHeight: 0, display: 'block' }}>
         <svg
-          viewBox="0 0 1440 72"
+          viewBox="0 0 1440 130"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          style={{ display: 'block', width: '100%', height: '72px' }}
+          style={{ display: 'block', width: '100%', height: '130px' }}
+          aria-hidden="true"
         >
-          {/* Zona SOBRE la ola → color de la sección anterior */}
+          {/* Capa trasera: navy suave desfasado, da sensación de relieve */}
           <path
-            d="M0,0 L1440,0 L1440,36 C1200,12 960,66 720,36 C480,6 240,66 0,36 Z"
+            d="M0,0 L1440,0 L1440,44 C1200,128 860,22 560,105 C260,138 90,38 0,44 Z"
+            fill="rgba(10,42,94,0.18)"
+          />
+          {/* Capa frontal: blanco sólido con curva de alta amplitud (~100px) */}
+          <path
+            d="M0,0 L1440,0 L1440,20 C1200,118 860,5 560,88 C260,128 90,18 0,20 Z"
             fill="#FDFCFE"
           />
         </svg>
       </div>
 
       {/* Contenido — sin background propio: el gradiente del section fluye sin interrupción */}
-      <div style={{ position: 'relative', padding: '80px 0 80px', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', padding: '80px 0 56px', overflow: 'hidden' }}>
 
         {/* Capas de luz y sombra radial para dar volumen al gradiente */}
         <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: RADIAL_HIGHLIGHT, pointerEvents: 'none' }} />
@@ -72,6 +77,22 @@ export default function CtaFinalSection() {
             </Button>
           </div>
         </FadeInSection>
+      </div>
+
+      {/* Ola inferior: transición suave hacia el Footer (#0A2A5E) */}
+      <div style={{ lineHeight: 0, display: 'block', marginTop: '-1px' }}>
+        <svg
+          viewBox="0 0 1440 80"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          style={{ display: 'block', width: '100%', height: '80px' }}
+          aria-hidden="true"
+        >
+          <path
+            d="M0,80 L1440,80 L1440,40 C1080,68 720,8 360,44 C180,62 90,32 0,40 Z"
+            fill="#0A2A5E"
+          />
+        </svg>
       </div>
     </section>
   );

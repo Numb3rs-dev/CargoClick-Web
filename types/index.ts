@@ -83,7 +83,7 @@ export interface DatosFormulario {
   tipoServicio?: 'URBANO' | 'NACIONAL';
   origen?: string;
   destino?: string;
-  tipoCarga?: 'CARGA_GENERAL' | 'REFRIGERADA' | 'CONTENEDOR' | 'GRANEL_SOLIDO' | 'GRANEL_LIQUIDO';
+  tipoCarga?: 'CARGA_GENERAL' | 'GRANEL_SOLIDO' | 'GRANEL_LIQUIDO';
   pesoKg?: number;
   dimLargoCm?: number;
   dimAnchoCm?: number;

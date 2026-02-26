@@ -61,25 +61,10 @@ export default function Footer() {
               }}
             >
               <a
-                href="mailto:info@cargoclick.com"
+                href="mailto:info@cargoclick.com.co"
                 style={{ color: 'inherit', textDecoration: 'none' }}
               >
-                info@cargoclick.com
-              </a>
-            </p>
-            <p
-              style={{
-                color: 'rgba(255,255,255,0.80)',
-                fontSize: '14px',
-                lineHeight: '1.8',
-                margin: 0,
-              }}
-            >
-              <a
-                href="tel:+573000000000"
-                style={{ color: 'inherit', textDecoration: 'none' }}
-              >
-                +57 300 000 0000
+                info@cargoclick.com.co
               </a>
             </p>
             <p
@@ -97,7 +82,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p
+        <div
           style={{
             borderTop: '1px solid rgba(255,255,255,0.15)',
             paddingTop: '24px',
@@ -106,10 +91,20 @@ export default function Footer() {
             color: 'rgba(255,255,255,0.60)',
             fontSize: '12px',
             marginBottom: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '8px',
+            alignItems: 'center',
           }}
         >
-          © 2026 CargoClick. Todos los derechos reservados.
-        </p>
+          <p style={{ margin: 0 }}>© 2026 CargoClick. Todos los derechos reservados.</p>
+          <a
+            href="/privacidad"
+            style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+          >
+            Política de Privacidad
+          </a>
+        </div>
 
       </div>
     </footer>
