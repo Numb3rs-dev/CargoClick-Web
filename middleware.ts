@@ -11,6 +11,9 @@ const isPublicRoute = createRouteMatcher([
   '/home(.*)',            // Landing / marketing page
   '/cotizar(.*)',         // Flujo de cotización para clientes
   '/sign-in(.*)',         // Página de login de Clerk
+  '/privacidad(.*)',      // Política de privacidad (pública)
+  '/sitemap.xml',         // SEO: Google Search Console
+  '/robots.txt',          // SEO: crawlers
   '/api/health(.*)',      // Health check (no requiere auth)
   '/api/distancia(.*)',   // Distancias entre municipios (uso interno del wizard)
   '/api/solicitudes',    // POST — crear solicitud (flujo público del wizard)
