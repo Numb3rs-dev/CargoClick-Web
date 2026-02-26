@@ -12,23 +12,36 @@
 // Detect Clerk mode by key prefix, not NODE_ENV.
 // pk_test_ = dev keys (use *.clerk.accounts.dev)
 // pk_live_ = prod keys (use *.clerk.accounts.com)
+// ─── Variables de ambiente ────────────────────────────────────────────────────
+// Railway Production debe tener:
+//   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = pk_live_...
+//   CLERK_FRONTEND_API_URL            = https://clerk.cargoclick.com.co
+//
+// Railway UAT no necesita CLERK_FRONTEND_API_URL (usa el default de dev)
+// ─────────────────────────────────────────────────────────────────────────────
 const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ?? ''
 const isClerkProd = clerkKey.startsWith('pk_live_')
-const clerkDomain = process.env.CLERK_FRONTEND_API_URL ?? 'https://clerk.accounts.dev'
 
-// Always include both dev and prod Clerk domains to avoid CSP issues when
-// NODE_ENV=production but using pk_test_ keys (e.g. Railway staging)
+// En prod: viene de la variable de ambiente (ej: https://clerk.cargoclick.com.co)
+// En UAT/local: usa el dominio de desarrollo de Clerk
+const clerkFrontendUrl = isClerkProd
+  ? (process.env.CLERK_FRONTEND_API_URL ?? '')
+  : 'https://clerk.accounts.dev'
+
 const clerkScriptSrc = isClerkProd
-  ? `${clerkDomain} https://*.clerk.accounts.com`
+  ? `${clerkFrontendUrl} https://*.clerk.accounts.com`
   : 'https://clerk.accounts.dev https://*.clerk.accounts.dev https://*.clerk.accounts.com'
 
 const clerkConnectSrc = isClerkProd
-  ? `${clerkDomain} https://api.clerk.com https://*.clerk.accounts.com`
+  ? `${clerkFrontendUrl} https://api.clerk.com https://*.clerk.accounts.com`
   : 'https://*.clerk.accounts.dev https://api.clerk.dev https://*.clerk.accounts.com https://api.clerk.com'
 
 const clerkFrameSrc = isClerkProd
-  ? `${clerkDomain} https://*.clerk.accounts.com`
+  ? `${clerkFrontendUrl} https://*.clerk.accounts.com`
   : 'https://clerk.accounts.dev https://*.clerk.accounts.dev https://*.clerk.accounts.com'
+
+// Google Analytics / Tag Manager
+const gaSrc = 'https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com'
 
 const securityHeaders = [
   // Evita MIME sniffing
@@ -51,12 +64,12 @@ const securityHeaders = [
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      // Clerk necesita unsafe-inline/eval para su widget
-      `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkScriptSrc}`,
+      // Clerk necesita unsafe-inline/eval para su widget; GA4 necesita gtm/ga
+      `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkScriptSrc} ${gaSrc}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://img.clerk.com https://flagcdn.com",
+      "img-src 'self' data: blob: https://img.clerk.com https://flagcdn.com https://www.google-analytics.com",
       "font-src 'self'",
-      `connect-src 'self' ${clerkConnectSrc}`,
+      `connect-src 'self' ${clerkConnectSrc} ${gaSrc}`,
       `frame-src ${clerkFrameSrc}`,
 
       "frame-ancestors 'self'",
