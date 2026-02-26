@@ -17,7 +17,6 @@ interface NavLinksProps {
 
 const NAV_LINKS = [
   { text: 'Inicio', href: '/home' },
-  { text: 'Cotizaciones', href: '/cotizaciones' },
 ];
 
 export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
