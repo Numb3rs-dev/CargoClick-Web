@@ -104,6 +104,24 @@ export default function ComoFuncionaSection() {
               </React.Fragment>
             ))}
           </div>
+
+          {/* Link a servicios */}
+          <div style={{ textAlign: 'center', paddingTop: '28px' }}>
+            <a
+              href="/servicios"
+              style={{
+                color: '#0B3D91',
+                fontWeight: 600,
+                fontSize: '15px',
+                textDecoration: 'none',
+                borderBottom: '1px solid rgba(11,61,145,0.3)',
+                paddingBottom: '2px',
+                transition: 'border-color 200ms ease',
+              }}
+            >
+              Ver todos nuestros servicios →
+            </a>
+          </div>
         </div>
     </section>
   );

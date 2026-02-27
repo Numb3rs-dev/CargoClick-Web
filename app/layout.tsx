@@ -40,12 +40,18 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/assets/CargoClickLogo.jpeg',
-        width: 120,
-        height: 36,
-        alt: 'CargoClick Logo',
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'CargoClick – Transporte de carga terrestre en Colombia',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CargoClick – Soluciones Logísticas con Visión Digital',
+    description: 'Transporte de carga terrestre para empresas en Colombia. Cotice en línea.',
+    images: ['/og-image.jpg'],
   },
   robots: isProduction
     ? { index: true, follow: true }
@@ -86,7 +92,9 @@ const organizationSchema = {
     taxID: '830068506-9',
     areaServed: 'CO',
   },
-  sameAs: [],
+  sameAs: [
+    'https://www.linkedin.com/company/cargo-click-logistica-inteligente',
+  ],
 };
 
 const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY

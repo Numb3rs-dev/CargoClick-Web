@@ -12,6 +12,9 @@ const isPublicRoute = createRouteMatcher([
   '/cotizar(.*)',         // Flujo de cotización para clientes
   '/sign-in(.*)',         // Página de login de Clerk
   '/privacidad(.*)',      // Política de privacidad (pública)
+  '/quienes-somos(.*)',   // Página pública corporativa
+  '/servicios(.*)',        // Servicios (pública)
+  '/brochure(.*)',          // Brochure (descargable)
   '/sitemap.xml',         // SEO: Google Search Console
   '/robots.txt',          // SEO: crawlers
   '/api/health(.*)',      // Health check (no requiere auth)

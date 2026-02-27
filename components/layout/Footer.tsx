@@ -98,12 +98,26 @@ export default function Footer() {
           }}
         >
           <p style={{ margin: 0 }}>© 2026 CargoClick. Todos los derechos reservados.</p>
-          <a
-            href="/privacidad"
-            style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
-          >
-            Política de Privacidad
-          </a>
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+            <a
+              href="/servicios"
+              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+            >
+              Servicios
+            </a>
+            <a
+              href="/quienes-somos"
+              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+            >
+              Quiénes Somos
+            </a>
+            <a
+              href="/privacidad"
+              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+            >
+              Política de Privacidad
+            </a>
+          </div>
         </div>
 
       </div>

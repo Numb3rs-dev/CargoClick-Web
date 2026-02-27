@@ -15,24 +15,24 @@ import FadeInSection from '@/components/ui/FadeInSection';
 
 const BULLETS_OPERACION: BulletData[] = [
   {
-    texto: '+20 años en transporte de carga',
+    texto: '+20 años en transporte de carga nacional',
     iconoSrc: '/assets/20AnosExp.png',
     iconoAlt: '20 años de experiencia',
   },
   {
-    texto: 'Flota confiable a nivel nacional',
+    texto: 'Clientes en banca, salud e industria',
     iconoSrc: '/assets/CoberturaNacional.png',
     iconoAlt: 'Cobertura nacional',
   },
   {
-    texto: 'Experiencia en operación de carga',
+    texto: 'Monitoreo satelital en cada despacho',
   },
 ];
 
 const BULLETS_DIGITAL: BulletData[] = [
-  { texto: 'Organización digital de servicios' },
-  { texto: 'Comunicación centralizada' },
-  { texto: 'Seguimiento más organizado' },
+  { texto: 'Cotización en línea en menos de 2 minutos' },
+  { texto: 'Sin intermediarios, precios transparentes' },
+  { texto: 'Rutas nacionales desde Bogotá' },
 ];
 
 export default function FortalezaDualSection() {
@@ -91,6 +91,26 @@ export default function FortalezaDualSection() {
             />
           </FadeInSection>
         </div>
+
+        {/* Link sutil hacia /quienes-somos */}
+        <div style={{ textAlign: 'center', marginTop: '28px' }}>
+          <a
+            href="/quienes-somos"
+            style={{
+              color: '#0B3D91',
+              fontSize: '14px',
+              fontWeight: 600,
+              textDecoration: 'none',
+              opacity: 0.75,
+              borderBottom: '1px solid rgba(11,61,145,0.3)',
+              paddingBottom: '2px',
+              transition: 'opacity 200ms ease',
+            }}
+          >
+            Conoce más sobre nuestra alianza →
+          </a>
+        </div>
+
       </div>
     </section>
   );

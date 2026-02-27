@@ -11,13 +11,15 @@
 | Dominio | `cargoclick.com.co` ✅ |
 | HTTPS / SSL | ✅ (Railway + Let's Encrypt) |
 | Meta tags OG | ✅ (definidos en `app/home/page.tsx`) |
-| `sitemap.xml` | ❌ Pendiente |
-| `robots.txt` | ❌ Pendiente |
-| Schema.org JSON-LD | ❌ Pendiente |
-| Google Search Console | ❌ Pendiente |
-| Google Analytics 4 | ❌ Pendiente |
+| `sitemap.xml` | ✅ Creado y enviado a Search Console |
+| `robots.txt` | ✅ Creado con protección UAT |
+| Schema.org JSON-LD | ✅ Organization + Service implementados |
+| Google Search Console | ✅ Dominio verificado, sitemap enviado |
+| Google Analytics 4 | ✅ G-FTLPNPL8YT activo en producción |
+| LinkedIn empresa | ✅ linkedin.com/company/cargo-click-logistica-inteligente |
+| Política de Privacidad | ✅ `/privacidad` (Ley 1581) |
 | Core Web Vitals | ⏳ Por medir |
-| Páginas de servicios indexables | ❌ Solo hay Home |
+| Páginas de servicios indexables | ❌ Solo hay Home + Cotizar |
 
 ---
 
@@ -206,27 +208,37 @@ Los links externos son votos de confianza para Google.
 ## Checklist de Implementación
 
 ### Semana 1 — Código
-- [ ] Crear `app/sitemap.ts`
-- [ ] Crear `app/robots.ts`
-- [ ] Crear componente `<JsonLd />` con Schema Organization + Service
-- [ ] Agregar `lang="es-CO"` en `app/layout.tsx`
-- [ ] Agregar meta `geo.region` y `canonical` en layout
-- [ ] Instalar Google Tag Manager en el layout
+- [x] Crear `app/sitemap.ts` ✅
+- [x] Crear `app/robots.ts` (con protección UAT) ✅
+- [x] Crear componente `<JsonLd />` con Schema Organization + Service ✅
+- [x] Agregar `lang="es-CO"` en `app/layout.tsx` ✅
+- [x] Agregar meta `geo.region` y `canonical` en layout ✅
+- [x] Instalar GA4 via `@next/third-parties` (en vez de GTM) ✅
+- [x] Crear página `/privacidad` (Ley 1581, requerida por GA4 TOS) ✅
+- [x] CSP corregido para Clerk producción y GA4 ✅
 
 ### Semana 1 — Plataformas
-- [ ] Verificar dominio en Google Search Console
-- [ ] Enviar sitemap.xml en Search Console
-- [ ] Crear cuenta GA4 + conectar via GTM
-- [ ] Crear Google Business Profile para CargoClick
+- [x] Verificar dominio en Google Search Console ✅
+- [x] Enviar sitemap.xml en Search Console ✅ (estado pendiente de revalidación ~horas)
+- [x] Crear cuenta GA4 — ID: `G-FTLPNPL8YT` ✅
+- [x] Crear página de empresa en LinkedIn ✅
+- [x] Agregar `sameAs` LinkedIn en Schema.org ✅
+- [ ] Crear Google Business Profile para CargoClick ⏳
 
 ### Semana 2 — Medición
-- [ ] Confirmar indexación de `/home` y `/cotizar` en Search Console
-- [ ] Verificar que eventos GA4 se disparan correctamente
+- [ ] Confirmar indexación de `/home` y `/cotizar` en Search Console ⏳
+- [ ] Verificar que eventos GA4 se disparan correctamente ⏳
+- [ ] Agregar eventos personalizados GA4 en cotizador (inicio, paso, completado)
 - [ ] Hacer test de schema.org en [schema.org/validator](https://validator.schema.org)
 - [ ] Hacer test de Core Web Vitals en PageSpeed Insights
 
+### Semana 2 — Pendientes de activos
+- [ ] `og:image` 1200x630px — falta imagen
+- [ ] Favicon personalizado con logo CargoClick — falta imagen
+- [ ] `sameAs` redes sociales adicionales (Instagram, etc.) — falta URL
+
 ### Semana 3-4 — Contenido
-- [ ] Escribir página "Quiénes Somos"
+- [ ] Escribir página `/quienes-somos`
 - [ ] Escribir primera página de servicio (`/servicios/carga-general`)
 - [ ] Escribir primer artículo de blog
 

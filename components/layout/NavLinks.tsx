@@ -17,6 +17,8 @@ interface NavLinksProps {
 
 const NAV_LINKS = [
   { text: 'Inicio', href: '/home' },
+  { text: 'Servicios', href: '/servicios' },
+  { text: 'Quiénes Somos', href: '/quienes-somos' },
 ];
 
 export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
