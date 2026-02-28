@@ -78,111 +78,58 @@ export default function BrochurePage() {
       ══════════════════════════════════════════════════════ */}
       <div className="page" style={{ display: 'flex', flexDirection: 'column' }}>
 
-        {/* Bloque superior azul */}
+        {/* Bloque superior — foto de camión con overlay */}
         <div style={{
-          flex: 1,
-          background: 'linear-gradient(160deg, #0A2A5E 0%, #0B3D91 100%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '48px 40px 40px',
+          height: '148mm',
           position: 'relative',
+          overflow: 'hidden',
+          flexShrink: 0,
         }}>
-          {/* Decoración geométrica */}
-          <div style={{
-            position: 'absolute', top: 0, right: 0,
-            width: '180px', height: '180px',
-            background: 'rgba(255,255,255,0.04)',
-            borderRadius: '0 0 0 100%',
-          }}/>
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0,
-            width: '120px', height: '120px',
-            background: 'rgba(255,255,255,0.04)',
-            borderRadius: '0 100% 0 0',
-          }}/>
+          <img
+            src="/assets/CamionConCarga.png"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+          />
+          {/* Overlay oscuro */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(10,42,94,0.90) 0%, rgba(11,61,145,0.75) 60%, rgba(10,42,94,0.60) 100%)' }} />
 
-          {/* Logo sobre pastilla blanca */}
-          <div style={{
-            background: '#FFFFFF',
-            borderRadius: '12px',
-            padding: '12px 28px',
-            marginBottom: '48px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.18)',
-          }}>
-            <img
-              src="/assets/CargoClickLogoNombre.png"
-              alt="CargoClick"
-              style={{ height: '44px', width: 'auto', display: 'block' }}
-            />
-          </div>
+          {/* Contenido sobre la foto */}
+          <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', flexDirection: 'column', padding: '32px 40px' }}>
+            {/* Logo en pastilla blanca */}
+            <div style={{ display: 'inline-flex', alignSelf: 'flex-start', background: '#FFFFFF', borderRadius: '10px', padding: '10px 24px', boxShadow: '0 4px 20px rgba(0,0,0,0.22)', marginBottom: 'auto' }}>
+              <img src="/assets/CargoClickLogoNombre.png" alt="CargoClick" style={{ height: '40px', width: 'auto', display: 'block' }} />
+            </div>
 
-          {/* Headline */}
-          <h1 style={{
-            color: '#FFFFFF',
-            fontSize: '36px',
-            fontWeight: 800,
-            textAlign: 'center',
-            lineHeight: 1.15,
-            marginBottom: '20px',
-            maxWidth: '440px',
-          }}>
-            Logística terrestre con tecnología de hoy
-          </h1>
-          <p style={{
-            color: 'rgba(255,255,255,0.72)',
-            fontSize: '17px',
-            textAlign: 'center',
-            lineHeight: 1.6,
-            maxWidth: '380px',
-            marginBottom: '40px',
-          }}>
-            Cotice, contrate y haga seguimiento de su carga — todo en línea, sin intermediarios.
-          </p>
+            {/* Headline */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ width: '44px', height: '4px', background: '#1F7A5C', borderRadius: '2px', marginBottom: '20px' }} />
+              <h1 style={{ color: '#FFFFFF', fontSize: '34px', fontWeight: 800, lineHeight: 1.15, marginBottom: '14px', maxWidth: '420px' }}>
+                Logística terrestre con tecnología de hoy
+              </h1>
+              <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '16px', lineHeight: 1.6, maxWidth: '360px' }}>
+                Cotice, contrate y haga seguimiento de su carga — todo en línea, sin intermediarios.
+              </p>
+            </div>
 
-          {/* Pill "Cobertura nacional" */}
-          <div style={{
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.25)',
-            borderRadius: '100px',
-            padding: '8px 24px',
-            color: '#FFFFFF',
-            fontSize: '13px',
-            fontWeight: 600,
-            letterSpacing: '1.5px',
-            textTransform: 'uppercase',
-          }}>
-            Cobertura Nacional · Colombia
+            {/* Pill */}
+            <div style={{ display: 'inline-flex', alignSelf: 'flex-start', background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.30)', borderRadius: '100px', padding: '7px 20px', color: '#FFFFFF', fontSize: '12px', fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase' as const }}>
+              Cobertura Nacional · Colombia
+            </div>
           </div>
         </div>
 
-        {/* Franja alianza */}
-        <div style={{
-          background: '#F5F7FA',
-          padding: '24px 40px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '24px',
-        }}>
-          <div style={{
-            width: '52px', height: '52px',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #0A2A5E, #0B3D91)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            flexShrink: 0,
-          }}>
-            <span style={{ fontSize: '24px' }}>🤝</span>
+        {/* Franja alianza con logos reales */}
+        <div style={{ background: '#F5F7FA', padding: '20px 40px', display: 'flex', alignItems: 'center', gap: '20px', borderTop: '1px solid #E5E7EB' }}>
+          <div style={{ background: '#fff', borderRadius: '8px', padding: '8px 16px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', flexShrink: 0 }}>
+            <img src="/assets/CargoClickLogoNombre.png" alt="CargoClick" style={{ height: '26px', display: 'block' }} />
           </div>
-          <div>
-            <p style={{ color: '#0A2A5E', fontWeight: 700, fontSize: '15px', marginBottom: '4px' }}>
-              Una alianza estratégica
-            </p>
-            <p style={{ color: '#6B7280', fontSize: '13px', lineHeight: 1.6 }}>
-              <strong style={{ color: '#374151' }}>CargoClick</strong> es la plataforma digital de transporte respaldada por{' '}
-              <strong style={{ color: '#374151' }}>Transportes Nuevo Mundo S.A.S.</strong>, empresa
-              con más de <strong style={{ color: '#0A2A5E' }}>20 años</strong> de operación continua en Colombia.
-            </p>
+          <div style={{ fontSize: '18px', color: '#9CA3AF', fontWeight: 300, flexShrink: 0 }}>+</div>
+          <div style={{ background: '#fff', borderRadius: '8px', padding: '8px 16px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', flexShrink: 0 }}>
+            <img src="/assets/NuevoMundoLogoNombreLadoDerecho.png" alt="Transportes Nuevo Mundo" style={{ height: '26px', display: 'block' }} />
+          </div>
+          <div style={{ flex: 1, paddingLeft: '8px', borderLeft: '2px solid #E5E7EB' }}>
+            <p style={{ color: '#0A2A5E', fontWeight: 700, fontSize: '13px', marginBottom: '3px' }}>Una alianza estratégica</p>
+            <p style={{ color: '#6B7280', fontSize: '12px', lineHeight: 1.5 }}>Más de <strong style={{ color: '#0A2A5E' }}>20 años</strong> de operación continua respaldan cada despacho en Colombia.</p>
           </div>
         </div>
 
@@ -286,24 +233,16 @@ export default function BrochurePage() {
             </div>
           </div>
 
-          {/* Cobertura banner */}
-          <div style={{
-            background: 'linear-gradient(90deg, #0A2A5E, #0B3D91)',
-            borderRadius: '12px',
-            padding: '20px 28px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '20px',
-          }}>
-            <span style={{ fontSize: '28px', flexShrink: 0 }}>🗺️</span>
-            <div>
-              <p style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '14px', marginBottom: '4px' }}>
-                Cobertura nacional desde Bogotá
-              </p>
-              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '12px', lineHeight: 1.6 }}>
-                Operamos hacia cualquier municipio con vía terrestre accesible en Colombia.
-                Bogotá · Medellín · Cali · Barranquilla · Bucaramanga y más destinos.
-              </p>
+          {/* Cobertura banner con imagen */}
+          <div style={{ borderRadius: '12px', overflow: 'hidden', position: 'relative', height: '72px', flexShrink: 0 }}>
+            <img src="/assets/CoberturaNacional.png" alt="Cobertura Nacional" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,42,94,0.88) 0%, rgba(11,61,145,0.70) 60%, rgba(10,42,94,0.50) 100%)' }} />
+            <div style={{ position: 'relative', zIndex: 2, height: '100%', display: 'flex', alignItems: 'center', padding: '0 24px', gap: '16px' }}>
+              <span style={{ fontSize: '22px', flexShrink: 0 }}>🗺️</span>
+              <div>
+                <p style={{ color: '#FFFFFF', fontWeight: 700, fontSize: '13px', marginBottom: '2px' }}>Cobertura nacional desde Bogotá</p>
+                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '11px', lineHeight: 1.5 }}>Bogotá · Medellín · Cali · Barranquilla · Bucaramanga y más destinos</p>
+              </div>
             </div>
           </div>
         </div>
@@ -343,14 +282,19 @@ export default function BrochurePage() {
 
         <div style={{ flex: 1, padding: '36px 40px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
 
-          {/* Diferenciadores */}
+          {/* Imagen de experiencia + diferenciadores */}
           <div>
-            <p style={{ color: '#0B3D91', fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>
-              Nuestros diferenciales
-            </p>
-            <h2 style={{ color: '#0A2A5E', fontSize: '22px', fontWeight: 800, marginBottom: '20px' }}>
-              Lo mejor de dos mundos
-            </h2>
+            <p style={{ color: '#0B3D91', fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' as const, marginBottom: '8px' }}>Nuestros diferenciales</p>
+            <h2 style={{ color: '#0A2A5E', fontSize: '22px', fontWeight: 800, marginBottom: '16px' }}>Lo mejor de dos mundos</h2>
+
+            {/* Imagen 20 años */}
+            <div style={{ borderRadius: '10px', overflow: 'hidden', height: '90px', position: 'relative', marginBottom: '16px' }}>
+              <img src="/assets/20AnosExp.png" alt="20 años de experiencia" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 30%' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(10,42,94,0.82) 0%, rgba(10,42,94,0.4) 60%, transparent 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', padding: '0 20px' }}>
+                <span style={{ color: '#fff', fontWeight: 800, fontSize: '15px' }}>+20 años de experiencia operacional en Colombia</span>
+              </div>
+            </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
               {[
                 { n: '01', titulo: 'Experiencia comprobada', desc: 'Más de 20 años de operación continua respaldan cada despacho. Conocemos las rutas y tiempos del territorio colombiano.' },
@@ -413,10 +357,16 @@ export default function BrochurePage() {
             </div>
           </div>
 
-          {/* CTA final */}
+          {/* CTA final con imagen de fondo */}
           <div style={{
-            background: 'linear-gradient(135deg, #0A2A5E, #0B3D91)',
             borderRadius: '14px',
+            overflow: 'hidden',
+            position: 'relative',
+          }}>
+            <img src="/assets/AtencionPersonalizada.png" alt="" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(10,42,94,0.93), rgba(11,61,145,0.88))' }} />
+          <div style={{
+            position: 'relative', zIndex: 2,
             padding: '28px 32px',
             textAlign: 'center',
           }}>
@@ -438,6 +388,7 @@ export default function BrochurePage() {
             }}>
               cargoclick.com.co/cotizar
             </div>
+          </div>
           </div>
         </div>
 
