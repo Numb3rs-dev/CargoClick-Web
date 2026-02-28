@@ -15,6 +15,7 @@ const isPublicRoute = createRouteMatcher([
   '/quienes-somos(.*)',   // Página pública corporativa
   '/servicios(.*)',        // Servicios (pública)
   '/brochure(.*)',          // Brochure (descargable)
+  '/carrusel(.*)',          // Carruseles para redes sociales
   '/sitemap.xml',         // SEO: Google Search Console
   '/robots.txt',          // SEO: crawlers
   '/api/health(.*)',      // Health check (no requiere auth)
