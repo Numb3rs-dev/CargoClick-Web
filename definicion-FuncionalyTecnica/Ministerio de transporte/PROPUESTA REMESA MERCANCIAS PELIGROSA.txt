@@ -1,0 +1,51 @@
+=== PROPUESTA REMESA MERCANCIAS PELIGROSA.xlsx ===
+Sheets: MODELO REMESA
+
+--- SHEET: MODELO REMESA ---
+"REMESA 
+NOMBRE EMPRESA DE TRANSPORTE
+Nit: XXXXXXXXXX
+DIRECCION XXXXXXX
+Tel: XXXXXXXX
+CIUDAD",,,,,,,"CONSECUTIVO REMESA
+XXXXXXXXX
+
+NÚMERO AUTORIZACION
+XXXXXXXXXXXXXX"
+,,,,,,,
+Tipo de Operación:,,,Tipo Empaque:,,,Orden de servicio generador:,
+XXXXXXXXXX,,,XXXXXXXX,,,xxxx,
+,,,,,,,
+Propietario/Contratante/Generador:,,,,,,,
+Identificación:,,,,,,,
+Teléfono del contratante:,,,,E-mail del contratante,,,
+,,,,,,,
+Remitente / Lugar de Cargue:,,,,Destinatario / Lugar de Descargue:,,,
+Tipo de identificación ,,,,Tipo de identificación ,,,
+Número de identificación,,,,Número de identificación,,,
+Sede:,,,,Sede:,,,
+Código sede:,,,,Código sede:,,,
+Nombre:,,,,Nombre:,,,
+Dirección:,,,,Dirección:,,,
+Municipio:,,,,Municipio:,,,
+Coordenadas:,Latitud:,,,Coordenadas:,,Latitud:,
+,Longitud:,,,,,Longitud:,
+Fecha cita:,,,,Fecha cita:,,,
+Hora:,,,,Hora:,,,
+Tiempo espera de cargue: ,(Hora/minutos),,,Tiempo de espera de descargue: ,,(Hora/minutos),
+,,,,,,,
+INFORMACIÓN DE LA CARGA,,,,,,,
+Naturaleza Carga,,,,Código Producto (Armonizado): ,,,
+Código UN (Naciones Unidas),,Estado del producto,,,,Grupo embalaje envase ,
+Designación Mercancía Peligrosa y/o Descripción detallada Residuo peligroso,"UN 3082, SUSTANCIA LIQUIDA PELIGROSA PARA EL MEDIO AMBIENTA N.E.P, 9, GE III",,,,,,
+Caracteristica Peligrosidad,,,,Cantidad ,,Unidad de medida,
+,,,,,,,
+SEGURO DE LA MERCANCÍA,,,,,,,
+Tipo Póliza,Tomador de la póliza,,Número,,Fecha Vencimiento,Aseguradora,Nit Aseguradora
+General,Empresa de Transporte,,3000257,,,LA EQUIDAD SEGUROS GENERALES ORGANISMO COOPERATIVO 8600284155,8600284155
+Peligrosa ,Empresa de Transporte,,3000257,,,LA EQUIDAD SEGUROS GENERALES ORGANISMO COOPERATIVO,8600284155
+,,,,,,,
+Observaciones: ,,,,,,,
+,,,,,,,
+,,,,,,,
+

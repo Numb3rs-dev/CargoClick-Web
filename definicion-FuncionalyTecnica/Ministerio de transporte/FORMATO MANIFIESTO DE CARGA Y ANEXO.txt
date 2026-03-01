@@ -1,0 +1,65 @@
+=== FORMATO MANIFIESTO DE CARGA Y ANEXO.xlsx ===
+Sheets: Manifiesto, Hoja1, Anexo
+
+--- SHEET: Manifiesto ---
+#VALUE!,,,,,MANIFIESTO ELECTRONICO DE CARGA,,,,,"La impresión en soporte cartular (papel) de este acto administrativo producido por medios electrónicos en cumplimiento de la ley 527 de 1999 (Articulos 6 al 13) y de la ley 962 de 2005 (Articulo 6), es una reproducción del documento original que se encuentra en formato electrónico firmado digitalmente en la base de datos del RNDC del Ministerio de Transporte, cuya representación digital goza de autenticidad, integridad y no repudio""",,,,,
+,,,,,NOMBRE EMPRESA,,,,,,,,,,
+,,,,,NIT: NIT EMPRESA,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,DIRECCIÓN EMPRESA ,,,,,,Manifiesto: XXXXXXXX,,,,
+,,,,,TELEFÓNO EMPRESA ,,,,,,,,,,
+,,,,,MUNCIPIO Y DEPARTAMENTO EMPRESA,,,,,,Autorización: 00000000,,,,
+,,,,,,,,,,,,,,,
+FECHA DE EXPEDICIÓN,,FECHA y HORA RADICACIÓN,,Tipo Manifiesto,,ORIGEN DEL VIAJE,,,,,DESTINO DEL VIAJE,,,,
+AAAA/MM/DD,,AAAA/MM/DD hh:mm,,XXXXXXXXXXXX,,Vereda Municipio Departamento,,,,,Vereda Municipio Departamento,,,,
+INFORMACION DEL VEHICULO Y CONDUCTOR,,,,,,,,,,,,,,,
+TITULAR MANIFIESTO,,,,,DOCUMENTO IDENTIFICACIÓN,,DIRECCION,,,,TELÉFONO,CIUDAD,,,
+XXXXXXXXXXXXXXXX XXXXXXXXXXX,,,,,000000000,,XXXXXXXXX XXXXX XXXXXXX XXXXXXX,,,,0000000000,Vereda Municipio Depto,,,
+PLACA,,MARCA,,PLACA REMOLQUE,PLACA REMOLQUE-2,CONFIGURACION,PESO VACIO,PESO VACIO REMOLQUE,COMPAÑÍA SEGUROS SOAT,,,Nro. Poliza SOAT,F.Vencimiento/ SOAT,,
+XXX999,,XXXXXXXXXXXX,,X99999,X99999,XXXX,99999,99999,XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX,,,999999999999999,AAAA/MM/DD,,
+CONDUCTOR,,,,DOCUMENTO IDENTIFICACIÓN,,DIRECCIÓN,,,,,TELEFONO,No de LICENCIA,CIUDAD,,
+XXXXXXXX XXXXXXXX XXXXXXX,,,,999999999,,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,9999999999,999999999,Vereda Municipio Depto,,
+CONDUCTOR-2,,,,DOCUMENTO IDENTIFICACIÓN,,DIRECCIÓN,,,,,TELEFONO,No de LICENCIA,CIUDAD,,
+XXXXXXX XXXXXXXXX XXXXXXX ,,,,999999999,,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,9999999999,999999999,Vereda Municipio Depto,,
+POSEEDOR o TENEDOR VEHICULO,,,,DOCUMENTO IDENTIFICACIÓN,,DIRECCIÓN,,,,,TELEFONO,CIUDAD,,,
+XXXXXXXXX XXXXXX XXXXXXX,,,,999999999,,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,9999999999,Vereda Municipio Depto,,,
+INFORMACION DE LA MERCANCIA TRANSPORTADA,,,,,,,,,,,,,,,
+Información Mercancía,,,,,,,,Información Remitente,,,,Información Destinatario,,Dueño Poliza,
+Nro. Remesa,,UnidadMedida,Cantidad,Naturaleza Carga,,Empaque - Producto Transportado,,Identificación - Nombre - Direccion - Vereda - Municipio - Depto,,,,Identificación - Nombre - Direccion - Vereda - Municipio - Depto,,,
+XXXXXXXXXXX,,XXXXXXXX,999999,XXXXXXXXX,,XXX ,99999,9999999999  XXXXXXXXXXXXXX XXXXXXX    YYYYYYYY YYYYYYYY  ZZZZZZZZZ ZZZZZZZZ ZZZZZZ,,,,9999999999  XXXXXXXXXXXXXX XXXXXXX    YYYYYYYY YYYYYYYY  ZZZZZZZZZ ZZZZZZZZ ZZZZZZ,,XXXXXXX XXXXX,
+,,,,Permiso INVIAS,,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,,,,,
+XXXXXXXXXXX,,XXXXXXXX,999999,XXXXXXXXX,,XXX ,99999,9999999999  XXXXXXXXXXXXXX XXXXXXX    YYYYYYYY YYYYYYYY  ZZZZZZZZZ ZZZZZZZZ ZZZZZZ,,,,9999999999  XXXXXXXXXXXXXX XXXXXXX    YYYYYYYY YYYYYYYY  ZZZZZZZZZ ZZZZZZZZ ZZZZZZ,,XXXXXXX XXXXX,
+,,,,Permiso INVIAS,,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,,,,,
+VALORES,,,,,,,,,,,OBSERVACIONES,,,,
+VALOR TOTAL A PAGAR,,,,"9,999,999,999.00",,LUGAR DE PAGO,XXXXXXXXXXXXXXX,,FECHA DE PAGO,AAAA/MM/DD,,,,,
+RETENCION EN LA FUENTE,,,,"9,999,999,999.00",,,,,,,,,,,
+RETENCIÓN ICA,,,,"9,999,999,999.00",,CARGUE PAGADO POR ,,,,,,,,,
+VALOR NETO A PAGAR,,,,"9,999,999,999.00",,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,,,,,
+VALOR ANTICIPO,,,,"9,999,999,999.00",,DESCARGUE PAGADO POR ,,,,,,,,,
+SALDO A PAGAR,,,,"9,999,999,999.00",,XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXX,,,,,,,,,
+"RECUERDE: El Manifiesto de carga es el documento que ampara el transporte de mercancías y los ÚNICOS DESCUENTOS que  podrán efectuarse por parte de la empresa de transporte al propietario, poseedor o tenedor del vehículo del servicio público de transporte terrestre automotor de carga,  serán los derivados en la retención en la fuente por concepto de renta y del Impuesto de Industria y Comercio, Avisos y Tableros – ICA.
+Lo anterior de conformidad con lo dispuesto en el Decreto 1079 de 2015.",,,,,,,,,,,,,,,
+VALOR TOTAL DEL VIAJE EN LETRAS:  XXXXXX XXXXXXX XXXXXX XXXXXXX XXXXXXX XXXXXXXXXXX,,,,,,,,,,,,,,,
+"Documento firmado digitalmente por la empresa: NOMBRE EMPRESA, NOMBRE FUNCIONARIO",,,,,,Firma TITULAR MANIFIESTO o ACEPTACION DIGITAL ,,,,,Firma del CONDUCTOR o ACEPTACION DIGITAL,,,,
+,,,,,,,,,,,,,,,
+
+--- SHEET: Hoja1 ---
+DESTINATARIO
+REMITENTE
+
+--- SHEET: Anexo ---
+#VALUE!,,,MANIFIESTO ELECTRONICO DE CARGA,,,,,,,,Hoja 2,,,
+,,,<< NOMBRE EMPRESA >>,,,,,,,,,,,
+,,,NIT: << NIT EMPRESA >>,,,,,,,,,,,
+,,,<<DIRECCIÓN EMPRESA >>,,,,,,,,,,,
+,,,<<TELEFÓNO EMPRESA >>,,,,,,,,,Manifiesto: ,,
+,,,<<MUNCIPIO Y DEPARTAMENTO EMPRESA >>,,,,,,,,,Autorización:,,
+,,,Anexo: Tiempos y Plazos para cargue y descargue,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Placa Vehículo: ,,,Nombre del Conductor: ,,,,,,,C.C:,,,,
+,,,,,,,,,,,,,,
+Número de Remesa,Horas Pactadas,,Llegada al lugar del Cargue,,Salida del lugar de Cargue,,Firma del Remitente,Firma del Conductor,Llegada al lugar Descargue,,Salida del lugar Descargue,,Firma Destinatario,Firma del Conductor
+,Cargue,Descargue,Fecha,Hora,Fecha,Hora,,,Fecha,Hora,Fecha,Hora,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+

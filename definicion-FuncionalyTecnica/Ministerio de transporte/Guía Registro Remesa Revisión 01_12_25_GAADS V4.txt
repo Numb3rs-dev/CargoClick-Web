@@ -1,0 +1,1382 @@
+Pag. 1
+GUÍA
+REGISTRO REMESA
+SISTEMA RNDC
+
+-- 1 of 56 --
+
+Pag. 2
+CONTROL DE CAMBIOS
+Versión: 4
+CONTROL DE CAMBIOS
+Versión: 4
+Elaborado por:
+Edna Lorena Gutiérrez
+Revisado por:
+Jairo Vesga
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Alexandra Hernández
+Fecha de Aprobación y Descripción de las modificaciones:
+Fecha Modificación
+31/10/2024 Borrador
+09/02/2025 Revisión Final
+27/02/2025 XML - web
+08/04/2025 Codificación de Subpartida y Código Arancel
+12/06/2025 XML de Residuos Peligrosos
+22/07/2025 Nueva tipología de embalajes o envases
+Grupo de Logística
+
+-- 2 of 56 --
+
+Pag. 3
+TABLA DE CONTENIDO
+INTRODUCCIÓN ................................................................................................................................... 4
+1. REMESA ................................................................................................................................................ 4
+2. INGRESO AL SISTEMA RNDC ................................................................................................. 4
+3. MÓDULO DE REMESA ................................................................................................................. 5
+4. EXPEDIR REMESA .......................................................................................................................... 5
+4.1. CONTRATANTE DE LA REMESA................................................................................................. 5
+4.2 DATOS GENERALES DE LA REMESA ........................................................................................... 7
+4.3 PUNTO DE CARGUE Y DESCARGUE.......................................................................................... 10
+4.4 PRODUCTO – MERCANCIA ...................................................................................................... 14
+4.5 EMPAQUES Y CANTIDADES DEL PRODUCTO ........................................................................... 34
+4.6 OPERACIONES DE TRASBORDO ............................................................................................... 47
+4.7 OBSERVACIONES ..................................................................................................................... 47
+4.8 GUARDAR REMESA .................................................................................................................. 47
+5. WEB SERVICE ................................................................................................................................ 47
+6. Residuos Peligrosos.................................................................................................................... 52
+7. DICCIONARIO DE ERRORES ................................................................................................ 55
+
+-- 3 of 56 --
+
+Pag. 4
+INTRODUCCIÓN
+Este documento permitirá conocer el proceso a seguir para el reporte o registro de la remesa en
+el sistema Registro Nacional de Despachos de Carga-RNDC.
+1. REMESA
+Registro de Remesa: Es el registro obligatorio de la información que permite a la empresa de
+transporte generar el documento remesa, y en donde se especifica quién es el contratante o
+generador de carga, lugar de cargue, lugar del descargue y todos los datos referentes a la
+mercancía a transportar, así como los pactos de los tiempos logísticos y las citas para el cargue y
+descargue. Esos pactos sirven a la empresa de transporte y al transportador para hacer la
+planeación del viaje y contar con ellos en los valores pactados por el servicio en el manifiesto de
+carga o en el registro viaje municipal.
+2. INGRESO AL SISTEMA RNDC
+Las empresas de transporte pueden enviar la información de la remesa usando el portal web
+interactivo del RNDC o usando el webservice del RNDC. Si usa el portal web interactivo, la empresa
+de transporte puede hacer el registro de la remesa ingresando al portal del RNDC con el siguiente
+enlace
+https://rndc2.mintransporte.gov.co/Ingresar/Iniciar-Sesi%C3%B3n
+Figura No. 01
+
+-- 4 of 56 --
+
+Pag. 5
+Debe ingresar el usuario y la contraseña, se puede utilizar el usuario Principal o los usuarios
+dependientes para el ingreso al sistema y dar clic en INGRESAR.
+Las empresas que usen el webservice deben accesar el archivo wsdl en:
+rndcws.mintransporte.gov.co:8080/ws o rndcws2.mintransporte.gov.co:8080/ws
+3. MÓDULO DE REMESA
+En los módulos disponibles del sistema debe dar clic en el módulo de EXPEDIR y allí le despliega
+la opción de Remesa y manifiesto electrónico de carga.
+Figura No. 02
+Debe dar clic en la opción REMESA.
+4. EXPEDIR REMESA
+Al dar clic en la opción de remesa el sistema le muestra la información que debe diligenciar en
+cada una de las casillas, de acuerdo con la tipología de las mercancías le despliega más opciones
+según corresponda.
+4.1. CONTRATANTE DE LA REMESA
+Figura No. 03
+En la parte superior puede visualizar el nombre de la Empresa de Transporte con su respectivo
+Nit, el usuario debe revisar que los datos coincidan con los de la empresa.
+En la segunda parte se debe digitar la información del Contratante o Generador de Carga o cliente
+de la empresa de transporte cuando expida la factura electrónica.
+
+-- 5 of 56 --
+
+Pag. 6
+El primer paso es escoger el TIPO DE IDENTIFICACIÓN del (Propietario de la Carga/Generador de
+Carga/Contratante) y seleccionar una de las opciones según esté creado en el sistema como
+tercero. La identificación extranjera permite que las empresas de transporte sean contratadas por
+Generador extranjero.
+Figura No. 04
+Al escoger la opción y digitar el número de la identificación, el sistema de manera automática
+muestra la información que ya se ha registrado con anterioridad lo primero que muestra el sistema
+es la lista de sedes que están creadas en la lista de terceros en el sistema, el usuario debe escoger
+una de ellas y así el sistema selecciona el nombre y el municipio.
+Es la identificación de contratante a quien la empresa de transporte debe reportar como cliente
+en la factura electrónica que envía a la DIAN y luego al RNDC.
+El sistema RNDC permitirá visualizar las sedes que se han registrado para el propietario de la
+carga en el sistema y seleccionar la que corresponda.
+Figura No. 05
+Orden de servicio expedida por el Generador: En esta casilla la Empresa de Transporte podrá
+escribir el numero de la Orden de servicio (Orden de Compra, Orden de Pedido), con el fin de
+poder integrar los sistemas del generador con los sistemas de información de la Empresa de
+Transporte en caso en el que en la remesa se digite, en la factura también deberá colocarse el
+dato de la Orden de Servicio de acuerdo con lo definido por la DIAN.
+
+-- 6 of 56 --
+
+Pag. 7
+4.2 DATOS GENERALES DE LA REMESA
+Figura No. 06
+Una remesa de carga puede ser creada a partir del REGISTRO DE INFORMACIÓN DE CARGA o
+partir de otro REGISTRO DE REMESA previamente creado en el sistema, estas posibilidades
+permiten agilizar el proceso de registro de los datos de la nueva remesa con registros previamente
+creados.
+• Consecutivo Información de Carga: Si con anterioridad se ha registrado la información
+de carga por parte de empresas de transporte o por parte del Generador de Carga, se
+puede reportar este consecutivo y el sistema hará una ligación entre ese consecutivo de
+la información de carga y la nueva remesa. El sistema valida, que ese consecutivo si esté
+registrado por el respectivo Generador o por la misma Empresa de Transporte.
+• Consecutivo de Remesa a Copiar: Si desea copiar la información de una remesa
+anterior puede hacerlo, llamando con el número consecutivo de la remesa de la cual va a
+tomar la información y el sistema muestra esta información para que la modifique según
+sea la necesidad.
+La Empresa de transporte debe diligenciar el Número del Consecutivo de remesa, este debe estar
+compuesto por números y letras y podrá tener hasta 15 caracteres. El sistema valida, que no se
+repita ese consecutivo dentro de la Empresa de Transporte. Es llamado consecutivo interno de la
+empresa de transporte.
+El usuario puede escribir el número de la Orden de Servicio de Transporte expedida por el
+Generador de Carga, también llamado Orden de Compra, Orden de Trabajo, etc, cuya finalidad es
+formalizar un contrato entre el Generador y la Empresa de Transporte.
+Tipo de operación
+El usuario debe escoger o seleccionar el tipo de Operación a ejecutar con la remesa de las
+siguientes opciones:
+Figura No. 08
+
+-- 7 of 56 --
+
+Pag. 8
+• General
+La tipología de operación GENERAL aplica a aquella remesa que no corresponda a contenedores ni
+mercancía consolidada.
+• Mercancía Consolidada
+Es la consolidación en una sola remesa de la información de varios paquetes pequeños de
+diferentes Generadores de carga o de un solo Generador y en los que la operación de transporte
+corresponde a una distribución de los paquetes en varias direcciones de un mismo municipio o a
+la recogida de los paquetes en varias direcciones del mismo municipio y llevarlos a una sola
+dirección de destino.
+Si los paquetes son de varios generadores, el contratante o cliente debe ser la misma identificación
+de la Empresa de Transporte. Si los paquetes son del mismo generador, entonces la identificación
+del contratante es la de ese Generador.
+• Contenedor Cargado
+Son las remesas en la cual el embalaje/envase externo de la carga transportada es un contenedor
+de 20 pies o de 40 pies o de cualquier otro tamaño, pero con la tipología de Contenedor.
+• Contenedor Vacío
+Son las remesas que transportan el embalaje/envase del tipo Contenedor, sin carga en su interior.
+TIPO DE EMPAQUE
+El siguiente dato se denomina Tipo Empaque. La lista de los posibles valores del Tipo de Empaque
+varía dependiendo del tipo de Operación seleccionado.
+Figura No. 09
+Si el usuario selecciona tipo de Operación General entonces en la lista desplegable del tipo de
+empaque aparecen las siguientes opciones:
+General Fraccionada, Granel líquido, Granel Sólido, Unidad sin empaque.
+Un ejemplo de Unidad sin empaque es el transporte de automóviles en un vehículo con remolque
+de cama baja o en una niñera.
+
+-- 8 of 56 --
+
+Pag. 9
+GRANEL SÓLIDO GRANEL LÍQUIDO
+UNIDAD SIN EMPAQUE GENERAL FRACCIONADA
+Si el usuario selecciona tipo de Operación Mercancía Consolidada entonces en la lista desplegable
+del tipo de empaque aparecen las siguientes opciones:
+Paquetes general Fraccionada en máximo 2 Kgs por unidad de empaque, Varios.
+Figura No. 10
+Si el usuario selecciona tipo de Operación Contenedor Cargado entonces en la lista desplegable
+del tipo de empaque aparecen las siguientes opciones:
+Un contenedor de 20 pies, Dos contenedores de 20 pies, Un contenedor de 40 pies, Un contenedor
+de 45 pies.
+
+-- 9 of 56 --
+
+Pag. 10
+Figura No. 11
+Si el usuario selecciona tipo de Operación Contenedor Vacío entonces en la lista desplegable del
+tipo de empaque aparecen las siguientes opciones:
+Son las mismas del contendor cargado: Un tenedor de 20 pies, Dos contenedores de 20 pies, Un
+contenedor de 40 pies, Un contenedor de 45 pies.
+4.3 PUNTO DE CARGUE Y DESCARGUE
+Punto de CARGUE Punto de
+DESCARGUE
+
+-- 10 of 56 --
+
+Pag. 11
+Figura No. 12
+En esta sección de la remesa, el usuario debe diligenciar la información de dos terceros: uno para
+el SITIO DE CARGUE y otro para el SITIO DE DESCARGUE, estos terceros deben estar creados
+previamente en el maestro de terceros en el sistema RNDC.
+Para cada uno de estos debe digitar el tipo de identificación, el número de identificación y escoger
+la SEDE del tercero.
+• Escoja el Tipo de Identificación
+Figura No. 07
+Figura No. 13
+
+-- 11 of 56 --
+
+Pag. 12
+• Digite el número de la identificación
+Figura No. 14
+SEDE: El usuario escoge la sede del tercero en la lista desplegable
+Figura No. 15
+CÓDIGO DE SEDE: El sistema RNDC permite digitar el código de la sede en vez de seleccionar en
+la lista desplegable.
+Las sedes creadas para un número de identificación deben tener nombres distintos y claros que le
+permita al usuario caracterizar cada tercero para asignar la información a cada remesa de manera
+correcta y que los SITIOS DE CARGUE Y SITIOS DE DESCARGUE estén bien definidos. Información
+vital para que el conductor llegue a esos lugares con puntualidad.
+El sistema muestra la información extraída del maestro de terceros: Nombre, dirección, municipio
+y coordenadas geo-referenciadas.
+El municipio del SITIO DE CARGUE puede ser igual al municipio del SITIO DE DESCARGUE.
+La dirección del SITIO DE CARGUE debe ser distinta a la dirección del SITIO DE DESCARGUE.
+CODIFICACION GEOREFENCIADA: La Codificación geográfica o geo-codificación le asigna
+coordenadas de Latitud-Longitud y agrega información inteligente a sus direcciones o Puntos
+geográficos de interés.
+Figura No. 16
+
+-- 12 of 56 --
+
+Pag. 13
+• La latitud debe ser un número entre -5.000000 y 14.000000 debe llevar mínimo 6
+decimales.
+• La longitud deber ser un número entre -79.000000 y -66.000000 con mínimo 6 decimales.
+• Si alguno de los dos datos no está en ese rango, posiblemente es una ubicación por fuera
+de los límites de Colombia.
+Fecha Cita Cargue
+Figura No. 17
+El Generador de carga debe entregar a la empresa de transporte la fecha y hora en que será
+atendido el vehículo en el punto de cargue. La empresa de transporte debe registrar esa fecha y
+hora de cita, con el fin de que el conductor llegue puntual con su vehículo, para Cargar las
+mercancías. La fecha en formato dd/mm/aaaa y la hora en formato militar, desde las 00:00 hasta
+las 23:59
+Así mismo el generador debe entregar a la empresa de transporte el tiempo que le tomará al
+vehículo recibir las mercancías en su interior. Ese tiempo lo debe digitar la empresa en horas y
+minutos (Números enteros: sin decimales).
+Fecha Cita Descargue
+Para el sitio de Descargue, también se aplica los mismos datos que el sitio de Cargue.
+Figura No. 18
+
+-- 13 of 56 --
+
+Pag. 14
+4.4 PRODUCTO – MERCANCIA
+El usuario debe seguir con el registro de la información en la remesa con la siguiente información:
+PRODUCTO – MERCANCIA y dependiendo de la opción que escoja en NATURALEZA DE LA CARGA
+se activará o no las casillas en las que deberá registrar información, se puede trasladar en las
+casillas obligatorias con la tecla TABULAR.
+Figura No. 19
+
+-- 14 of 56 --
+
+Pag. 15
+Naturaleza de la Carga
+Al escoger la Naturaleza de la Carga el sistema oculta unos campos a diligenciar porque no todos
+los campos aplican para ciertas naturalezas.
+Figura No. 20
+El código del producto es un dato obligatorio para todas las naturalezas, y se valida contra el
+Maestro de la Codificación Armonizada de Productos, también llamado Posiciones arancelarias.
+En la codificación armonizada existen 4 conceptos aplicables en el RNDC: Capítulo, Partida,
+Subpartida y Código Arancel. Cada uno de esos conceptos está representado por un código de 2
+dígitos.
+En el RNDC, el código del producto debe tener los primeros 4 dígitos: Capítulo y Partida. Los otros
+4 dígitos: Subpartida y Código Arancel, son obligatorios como datos adicionales para ciertos casos
+de mercancías en donde se necesite precisar con más detalle esa mercancía. El RNDC los exige en
+campos adicionales al código del producto.
+Se necesita detallar más el código en el caso de mercancías especiales como las Mercancías
+Peligrosas, porque es posible que a nivel de Capítulo y Partida existan algunas subpartidas
+peligrosas y otras no.
+La empresa de transporte puede consultar en el RNDC los 4 maestros que contienen la Codificación
+Armonizada.
+- Capítulos Codificación de Productos
+- Codificación de Productos (Partidas)
+- Subpartidas Productos
+- Códigos de Arancel
+El usuario que use el portal interactivo y no conozca la codificación armonizada puede usar las
+listas desplegables que muestra este programa de Remesas (Capítulo y Partida), para deducir el
+código del producto. También puede hacer uso de las otras dos listas desplegables (Subpartida y
+Código Arancel) para deducir los otros dos datos de código de subpartida y código de Arancel.
+El dato de Código de Producto debe tener un “00” a la izquierda, pero en caso de no reportar esos
+dos ceros, el RNDC los incluye automáticamente. Eso se necesita para poder diferenciar la
+Codificación Armonizada de la Codificación del Código UN de las Recomendaciones relativas al
+transporte de Mercancías Peligrosas conocido como Libro Naranja de las Naciones Unidas.
+En el maestro de Codificación de Productos se puede ver la marca de cuales Partidas el RNDC
+exige que se debe definir el código de la Subpartida, el dato se llama: “Necesita Subpartida”. A
+continuación, un ejemplo de la partida 2710:
+
+-- 15 of 56 --
+
+Pag. 16
+Figura No. 21
+
+-- 16 of 56 --
+
+Pag. 17
+En ese caso el RNDC exige que se reporten los siguientes dos dígitos de la codificación armonizada:
+Subpartida. Pero el código 2711 no tiene la marca y por eso allí no se necesita la subpartida.
+Para el ejemplo, la consulta de las subpartidas de la 2710
+Figura No. 22
+Se pueden ver 4 códigos de subpartidas. Pero cada subpartida también tiene su marca de si
+necesita otro nivel: “Necesita Código Arancel”. Se observa que las subpartidas 271012 y 271019,
+el RNDC exige los siguientes dos dígitos del Código Arancel.
+Consulta de los códigos de Arancel de la subpartida 271012
+
+-- 17 of 56 --
+
+Pag. 18
+Figura No. 23
+Se observan varios códigos de Arancel, entre ellos por ejemplo el 27101219: “GASOLINA SIN
+TETRAETILO DE PLOMO PARA OTROS DIFERENTES A MOTORES DE AVIACION Y VEHICULOS
+AUTOMOTORES”
+Si la empresa de transporte va a transportar como mercancía: “Gasolina para motores de aviación”
+entonces debe reportar en el Código del Producto: “002710”, en la Subpartida: “12” y en el Código
+del Arancel: “19”. El RNDC exige los tres datos.
+Si va a transportar como mercancía: “ACEITES DE PETROLEO O DE MINERALES BITUMINOSOS
+EXCEPTO LOS ACEITES CRUDOS Y PREPARACIONES NO EXPRESADAS NI COMPRENDIDAS EN
+OTRA PARTE, CON UN CONTENIDO DE ACEITES DE PETROLEO O DE MINERALES BITUMINOSOS
+EN PESO SUPERIOR O IGUAL AL 70 % EN PESO, EN LAS QUE ESTOS ACEITES CONSTITUYAN EL
+ELEMENTO BASE, QUE CONTENGAN BIODIESEL EXCEPTO LOS DESECHOS DE ACEITES” entonces
+debe reportar en el Código del Producto: “002710”, en la Subpartida: “12” y no más, es decir, no
+debe reportar código de Arancel.
+Si va a transportar como mercancía:” MEZCLAS BITUMINOSAS A BASE DE ASFALTO O DE BETUN
+NATURALES; DE BETUN DE PETROLEO” entonces debe reportar en el Código del Producto:
+“002715” y no más, no debe reportar Subpartida.
+Lo anterior se explica con las siguientes pantallas:
+Caso de un código de mercancía de solo 4 dígitos: 0201 (Capítulo y Partida)
+
+-- 18 of 56 --
+
+Pag. 19
+Figura No. 24
+Caso de un código de mercancía de 6 dígitos: Los primeros cuatro: 2710 (Capítulo y Partida) y
+los siguientes dos: 20 (Subpartida)
+Figura No. 25
+Figura No. 26
+
+-- 19 of 56 --
+
+Pag. 20
+Caso de un código de mercancía de 8 dígitos: Los primeros cuatro: 2710 (Capítulo y Partida), los
+siguientes dos: 12 (Subpartida) y los siguientes dos: 11 (Código Arancel)
+Figura No. 27
+Figura No. 28
+Carga General
+Es todo tipo de carga diferente a Mercancías Peligrosas - Residuos Peligrosos, Carga
+Extradimensionada - Extrapesada, Refrigerada, Semovientes.
+Si el código de la mercancía incluyendo el Capítulo, Partida, Subpartida y Código Arancelario está
+clasificado como Mercancías Peligrosas el usuario debe digitar adicionalmente el Código UN del
+libro naranja de las Naciones Unidas.
+Pero si el usuario seleccionó en Naturaleza de la Carga, en la opción la Carga General, no le
+permitirá ver el campo código UN lo cual obliga a que el usuario seleccione en Naturaleza de la
+Carga la opción de Mercancías Peligrosas.
+
+-- 20 of 56 --
+
+Pag. 21
+Figura No. 29
+En Carga General es obligatorio escribir el campo: Descripción Producto o también llamado:
+Descripción Corta del Producto.
+La descripción del producto es un dato obligatorio para los productos diferentes a las Mercancías
+y Residuos Peligrosos, y es de un tamaño de máximo 60 caracteres, se solicita ese dato con el fin
+de precisar con más detalle el producto, más allá de la Partida.
+Cuando se digite el Código del producto en forma incorrecta el sistema muestra un texto debajo
+del código del producto, con lo cual el usuario debe hacer la corrección.
+Figura No. 30
+Mercancía Peligrosa
+Para clasificar la Naturaleza de Carga – Mercancía Peligrosa es obligatorio escribir el (Código del
+producto) y adicional debe escribir el código UN el cual es un número de cuatro dígitos que se
+utiliza para identificar las mercancías peligrosas. Este código se encuentra establecido en las
+Recomendaciones Relativas al Transporte de Mercancías Peligrosas conocido como Libro Naranja
+de las Naciones Unidas.
+Se define como Mercancías peligrosas según el Decreto 1079 de 2015 o de la norma que lo
+modifique o sustituya:
+
+-- 21 of 56 --
+
+Pag. 22
+“Artículo 2.2.1.7.8.3. Definiciones Mercancías Peligrosas: Materiales
+perjudiciales que durante la fabricación, manejo, transporte, almacenamiento o
+uso, pueden generar o desprender polvos, humos, gases, líquidos, vapores o
+fibras infecciosas, irritantes, inflamables, explosivos, corrosivos, asfixiantes,
+tóxicos o de otra naturaleza peligrosa, o radiaciones ionizantes en cantidades que
+puedan afectar la salud de las personas que entran en contacto con éstas, o que
+causen daño material.”
+El código de producto no dependerá de la marcación de las mercancías peligrosas, en consideración
+a que existen códigos de productos que pueden ser o no mercancías peligrosas (lo pueden ver en
+los maestros mencionados previamente), el sistema no permitirá el registro de la remesa.
+A continuación, usamos el código de producto 1202 que corresponde al GASÓLEO.
+Figura No. 31
+El sistema solicita el código UN (Naciones Unidas) de mercancía peligrosa.
+El usuario puede consultar en la opción de Consulta de Maestros del RNDC, en el maestro de
+Codificación de productos, todos los códigos de Naciones Unidas.
+Figura No. 32
+
+-- 22 of 56 --
+
+Pag. 23
+En la ventana del filtro y en el campo: TIPO, escribimos CP (Carga Peligrosa)
+Figura No. 33
+Luego filtramos por la palabra %GASÓLEO% con el fin de ver todos los posibles códigos de
+Naciones Unidas que mencionen al Gasóleo.
+Figura No. 34
+Seleccionamos el código 1209 y lo escribimos en el programa de la Remesa en el campo de
+CODIGO UN.
+Figura No. 35
+
+-- 23 of 56 --
+
+Pag. 24
+El sistema encuentra que efectivamente ese es un código de Naciones Unidas y arma la Descripción
+de la mercancía automáticamente, por lo tanto, el usuario no debe digitar la descripción. En
+cambio, cuando seleccionamos Naturaleza: Carga General, si es obligatorio escribir en ese campo.
+Hay ciertos productos de mercancías peligrosas que se encuentran prohibidas para el transporte,
+como es el caso del mercurio elemental (UN 2809), por tal motivo no se permitirá generar la
+remesa.
+Caso excepcional: Cuando una mercancía peligrosa aparezca en la lista de mercancías peligrosas
+con el número UN repetido, (dos o tres veces, como se muestra en el siguiente ejemplo), y la
+diferencia es el grupo de embalaje/envase ONU, el usuario debe obligatoriamente seleccionar en
+el campo Grupo Embalaje Envase correcto (I, II o III).
+Figura No. 36
+(La imagen es tomada del capítulo 3.2 del listado de mercancías peligrosas de las
+Recomendaciones Relativas al Transporte de Mercancías Peligrosas de Naciones
+Unidas (Libro Naranja).
+Figura No. 37
+En el maestro de productos se puede ver de la siguiente forma:
+
+-- 24 of 56 --
+
+Pag. 25
+Figura No. 38
+Grupos de embalaje/envase I: Sustancias que presentan gran peligro
+Grupos de embalaje/envase II: Sustancias que presentan peligro intermedio
+Grupos de embalaje/envase I: Sustancias que presentan un peligro escaso
+• Estado del Producto
+El usuario debe seleccionar del listado desplegado una de las tres opciones disponibles para ir
+caracterizando el producto a transportar de manera detallada.
+Figura No. 39
+La casilla “Descripción del Producto” cambia de nombre para las Mercancías Peligrosas y para los
+residuos peligrosos, la cual se denomina “Designación Mercancía Peligrosa”.
+En esta casilla aparece automáticamente la información de las columnas 1 a la 5 de la Lista de
+Mercancías Peligrosas del capítulo 3.2 de las Recomendaciones Relativas al Transporte de
+Mercancías Peligrosas de las Naciones Unidas - Libro Naranja, correspondiente al número UN
+digitado por el usuario. La casilla presenta la siguiente información: el número UN – Nombre y
+descripción – Clase – Peligro secundario (si aplica) – Grupo de embalaje/envase (Si aplica).
+
+-- 25 of 56 --
+
+Pag. 26
+Figura No. 41
+(La imagen es tomada del capítulo 3.2 del listado de mercancías peligrosas de las
+Recomendaciones Relativas al Transporte de Mercancías Peligrosas de Naciones
+Unidas (Libro Naranja).
+Detalle de cómo quedaría la información: Sigla UN -espacio- número (de 4 dígitos) -coma- nombre
+y descripción (tal cual como aparece en el listado) -coma- número de 1 dígito (representa la clase)
+-coma- entre paréntesis (cuando aplique) número de un dígito (peligro secundario) – cuando
+aplique otro número entre paréntesis (peligro terciario) – ambos separados por coma -coma- sigla
+GE – espacio- número en romano (si aplica) de uno, dos o tres dígitos (I, o II o III).
+Ejemplo No. 1: Sustancia explosiva:
+UN 0174, REMACHES EXPLOSIVOS, 1.4S /Un solo peligro -1.4.S, no tiene GE.
+Ejemplo No. 2: UN 1072, OXÍGENO COMPRIMIDO, 2.2, (5.1) /Dos peligros -2.2 y 5.1, no tienen
+Grupo de embalaje/envase (GE)
+Ejemplo No. 3: UN 1154, DIETILAMINA, 3, (8), GE II/Dos peligros 3 y 8, presenta GE
+
+-- 26 of 56 --
+
+Pag. 27
+Ejemplo No. 4: UN 2965, DIMETILETERATO DE TRIFLUORUO DE BORO, 4.3, (3), (8), GE I/Tres
+peligros 4.3, 3 y 8, presentan GE.
+Cuando un producto de Mercancía Peligrosa tiene bajo el mismo código dos o más descripciones
+de la mercancía, se debe usar una letra como sufijo para diferenciarlos correctamente en la
+remesa, empezando en la letra A, B, C…
+Ejemplo de cómo se ve en el maestro el UN 2031 correspondiente al Ácido Nítrico en donde cambia
+la concentración.
+Figura No. 42
+Al digitar el código UN se escribe con la letra respectiva a la derecha del código
+Figura No. 43
+
+-- 27 of 56 --
+
+Pag. 28
+Carga Extra Dimensionada
+La tipología de carga se encuentra bajo la Resolución No. 004959 de 2006 del Ministerio de
+Transporte, normativa que indica los requerimientos para el transporte de estas mercancías para
+lo cual se debe expedir un permiso:
+“ARTÍCULO 3º. Definiciones. Para la interpretación y aplicación de la presente
+Resolución, además de las previstas en la Ley 769 de 2002 y en la Resolución No.
+004100 del 28 de diciembre de 2004, se tendrán en cuenta las siguientes
+definiciones:”
+CARGA INDIVISIBLE: Carga que por sus características no puede ser fraccionada
+para su transporte.
+CARGA EXTRADIMENSIONADA: Carga indivisible que excede las dimensiones de la
+carrocería de los vehículos convencionales homologados por el Ministerio de
+Transporte para la movilización de carga en tránsito normal por las vías públicas.
+“ARTÍCULO 5º. Competencia. La facultad de conceder o negar los permisos para el
+transporte de carga que exceda las dimensiones de los vehículos de carga
+autorizados para la circulación por las vías públicas del país corresponde, en las
+vías a cargo de la Nación, al Instituto Nacional de Vías ya sean éstas concesionadas
+o no concesionadas, en el primer caso, en coordinación con el Instituto Nacional de
+Concesiones. Cuando se trate de vías departamentales, metropolitanas,
+municipales o distritales, le corresponde a las autoridades de los entes territoriales,
+distritales o áreas metropolitanas ajustándose a lo contemplado en el artículo 6º de
+la presente Resolución.”
+Es obligatorio digitar el código del producto y la descripción del producto, similar a la naturaleza
+General.
+Carga Extrapesada
+La tipología de carga se encuentra bajo la RESOLUCIÓN No. 004959 DE 2006 normativa que indica
+los requerimientos para el transporte de estas mercancías para lo cual se debe expedir un permiso:
+CARGA EXTRAPESADA: Carga indivisible que una vez montada en vehículos convencionales
+homologados por el Ministerio de Transporte, excede el peso bruto vehicular o los límites de peso
+por eje autorizados en las normas vigentes para el tránsito normal por las vías públicas
+“ARTÍCULO 5º. Competencia. La facultad de conceder o negar los permisos para el
+transporte de carga que exceda las dimensiones de los vehículos de carga
+autorizados para la circulación por las vías públicas del país corresponde, en las
+vías a cargo de la Nación, al Instituto Nacional de Vías ya sean éstas concesionadas
+o no concesionadas, en el primer caso, en coordinación con el Instituto Nacional de
+Concesiones. Cuando se trate de vías departamentales, metropolitanas,
+municipales o distritales, le corresponde a las autoridades de los entes territoriales,
+distritales o áreas metropolitanas ajustándose a lo contemplado en el artículo 6º de
+la presente Resolución.”
+Es obligatorio digitar el código del producto y la descripción del producto, similar a la naturaleza
+General.
+Mercancía Peligrosa-Residuos Peligrosos
+Según el Decreto 1079 de 2015 o en la norma que lo modifique, adicione o sustituya, indica sobre
+residuos peligrosos:
+
+-- 28 of 56 --
+
+Pag. 29
+“Artículo 2.2.1.7.8.6.5. Desechos (Residuos)- Los desechos que se generen
+por cualquier proceso productivo, incluyendo los envases y embalajes, adquieren
+las características de mercancía peligrosa. Por lo tanto, su manejo y transporte
+se debe realizar cumpliendo los mismos requisitos y obligaciones contemplados
+en esta Sección de acuerdo con la clasificación dada en el literal F, numeral 3
+del artículo 2.2.1.7.8.1.1.del presente decreto.”
+Adicional, el artículo 2.2.6.1.1.3. del Decreto 1076 de 2015 “Por medio del cual se expide
+el Decreto Único Reglamentario del Sector Ambiente y Desarrollo Sostenible” define
+como residuos peligrosos:
+“Artículo 2.2.6.1.1.3. Definiciones. Para los efectos del cumplimiento del
+presente decreto se adoptan las siguientes definiciones: (…) Residuo Peligroso.
+Es aquel residuo o desecho que por sus características corrosivas, reactivas,
+explosivas, tóxicas, inflamables, infecciosas o radiactivas, puede causar riesgos,
+daños o efectos no deseados, directos e indirectos, a la salud humana y el
+ambiente. Así mismo, se considerará residuo peligroso los empaques, envases
+y embalajes que estuvieron en contacto con ellos.”
+La codificación de las Naciones Unidas se debe usar para la Mercancía Peligrosa y para Residuos
+Peligrosos. Por lo tanto, además de digitar el código de la mercancía (Codificación Armonizada)
+hay que digitar también el Código UN de las Naciones Unidas
+Si digitamos, por ejemplo, el código UN 1091
+Figura No. 44
+Al ser Naturaleza: “Residuos Peligrosos” el sistema procede a solicitar la Descripción detallada del
+Residuo Peligroso. Texto libre que debe digitar la empresa de transporte y a la derecha se solicita
+la Peligrosidad.
+
+-- 29 of 56 --
+
+Pag. 30
+Figura No. 45
+En la casilla Peligrosidad aparece una lista con las características de peligrosidad del residuo a
+transportar, según el Título 6 del Decreto 1076 de 2015, de las cuales deberá seleccionar la
+característica de peligro más relevante del residuo (el usuario solo podrá elegir una opción):
+Hay 7 posibles valores para seleccionar de Peligrosidad: Corrosivo, Reactivo, Explosivo, Toxico,
+Inflamable, Infeccioso, Radioactivo.
+La casilla “característica de peligrosidad” se dejará como OBLIGATORIO para su diligenciamiento.
+Cuando en la Designación del Residuo Peligroso, el nombre de la sustancia contenga la sigla
+N.E.P., se habilita en la parte inferior una casilla denominada “Nombre Técnico o Grupo
+Químico del N.E.P” en donde el usuario digita el nombre o grupo químico de la sustancia que le
+aporta el peligro.
+En esta casilla se describe el nombre o grupo químico de la sustancia que le aporta el peligro, por
+tratarse de un No Especificado en otra Parte (N.E.P.).
+Figura No. 46
+Ahora, el usuario debe seleccionar el código de la Corriente de Residuo Peligroso. Esos códigos
+se pueden consultar en el Maestro de Codificación de Productos, digitando en el filtro las letras
+DP
+
+-- 30 of 56 --
+
+Pag. 31
+Figura No. 47
+Eso significa, que el usuario deberá seleccionar los códigos de los Residuos Peligrosos, los cuales
+empiezan por la letra Y o la letra A.
+Figura No. 48
+En el programa de Remesas, el sistema muestra la misma consulta de esos códigos Y o A, como
+una lista desplegable para que el usuario seleccione, pero previamente debe seleccionar la
+Corriente de Residuo Peligroso Y o A.
+
+-- 31 of 56 --
+
+Pag. 32
+Si escogió la letra Y solo se muestra en la lista esas corrientes.
+Figura No. 49
+Después de seleccionado el código de la corriente de Residuo Peligroso el usuario debe seleccionar
+la Desagregación del Residuo Peligroso (si aplica). En el siguiente ejemplo se seleccionó el código
+de Residuo Peligroso Y1 y ahora los códigos posibles de la Desagregación son Y1.1 Y1.2 Y1.3.
+
+-- 32 of 56 --
+
+Pag. 33
+Figura No. 50
+Los datos se ven así:
+Figura No. 51
+Hay algunos Residuos Peligrosos que no tienen desagregación y por lo tanto el código de la
+Desagregación no se debe enviar.
+Semovientes
+En el sistema RNDC las empresas de transporte que transporten semovientes deben cumplir con
+la normatividad vigente como lo indica el DECRETO 1766 de 2016:
+“- ARTÍCULO 2.13.5.2.1. Requisitos para la movilización y transporte de
+ganado en el territorio nacional. Los requisitos para la movilización fluvial,
+marítima o terrestre de ganado en el territorio nacional serán los siguientes:
+
+-- 33 of 56 --
+
+Pag. 34
+1. Guía Sanitaria de Movilización Interna — GSMI, expedida por la
+autoridad competente.
+2. Manifiesto de carga expedido únicamente por la empresa de transporte
+público terrestre automotor de carga, legalmente constituida y habilitada,
+o documento que haga sus veces en los demás modos de transporte.”
+Es obligatorio digitar el código del producto y la descripción del producto, similar a la naturaleza:
+General.
+Refrigerada
+El transporte refrigerado se refiere al transporte de mercancías perecederas
+en vehículos equipados con sistemas de refrigeración para mantener una temperatura controlada
+durante el transporte.
+Es obligatorio digitar el código del producto y la descripción del producto, similar a la naturaleza:
+General.
+4.5 EMPAQUES Y CANTIDADES DEL PRODUCTO
+La empresa debe tener claridad que el empaque primario es aquel donde el producto tiene contacto
+directo con el material del envase y el empaque externo o secundario es aquel que contiene uno
+o varios envases primarios y proporciona protección adicional durante el transporte, su función
+principal es proteger el empaque primario y facilitar el transporte, distribución y comercialización
+del producto.
+Las Empresas de Transporte deben reconocer la importancia de indicar claramente en el
+documento la información relacionada con los empaques y embalajes, para garantizar la seguridad
+y el cumplimiento de las regulaciones aplicables durante el transporte de mercancías peligrosas.
+Incluir las siguientes definiciones:
+
+-- 34 of 56 --
+
+Pag. 35
+Tipo de
+embalaje/envase Nombre Definición Ubicación del libro
+Naranja Imagen
+E/E Simple
+Los e/e simple se
+define como uno o
+más recipientes y
+todos los demás
+elementos o
+materiales
+necesarios para que
+el o los recipientes
+puedan desempeñar
+su función de
+contención y demás
+funciones de
+seguridad. En el
+RNDC el usuario
+podrá encontrar el
+listado de los
+siguientes e/e
+simples:
+Uno o más
+Bidón
+Un embalaje/envase cilíndrico de
+fondo plano o convexo, hecho de
+metal, cartón, plástico, madera
+contrachapada u otro material
+apropiado. Esta definición incluye
+también los embalajes/envases que
+tengan otras formas, por ejemplo, los
+embalajes/envases redondos de cuello
+cónico o los embalajes/envases en
+forma de cubo. Los toneles de madera
+y los jerricanes no están incluidos en
+esta definición.
+Volúmen 1) Capítulo
+1.2. Definiciones
+Volúmen 2) 6.1.2.5 Pag.
+216
+Jerricán
+Un embalaje/envase de metal o de
+plástico de sección transversal
+rectangular o poligonal.
+Volúmen 1) Capítulo
+1.2. Definiciones
+Volúmen 2) 6.1.2.5 Pag.
+216
+
+-- 35 of 56 --
+
+Pag. 36
+recipientes y todos
+los demás
+elementos o
+materiales
+necesarios para que
+el o los recipientes
+puedan desempeñar
+su función de
+contención y demás
+funciones de
+seguridad
+Caja
+Un embalaje/envase de caras
+compactas rectangulares o
+poligonales, hecho de metal, madera,
+madera contrachapada, aglomerado
+de madera, cartón, plástico u otro
+material apropiado. Se podrán realizar
+pequeños orificios para facilitar la
+manipulación o la apertura o para
+responder a los criterios de
+clasificación, siempre que no pongan
+en peligro la integridad del
+embalaje/envase durante el transporte.
+Volúmen 1) Capítulo
+1.2. Definiciones
+Volúmen 2) 6.1.2.5 Pag.
+216
+Saco
+Un embalaje/envase flexible de papel,
+láminas de plástico, textil, material
+tejido u otro material apropiado.
+Volúmen 1) Capítulo
+1.2. Definiciones
+Volúmen 2) 6.1.2.5 Pag.
+216
+
+-- 36 of 56 --
+
+Pag. 37
+E/E Compuestos,
+Interior y exterior -
+Embalaje/ envases compuesto: Un
+embalaje/envase constituido por un
+embalaje/envase exterior y un
+recipiente interior unidos de modo que
+el recipiente interior y el
+embalaje/envase exterior formen un
+embalaje/envase integral; una vez
+montado, dicho embalaje/envase
+constituye un todo indisociable que se
+llena, se almacena, se transporta y se
+vacía como tal.
+Embalaje/envase interior: Un
+embalaje/envase que ha de estar
+provisto de un embalaje/envase
+exterior para el transporte.
+Embalaje/envase exterior: La
+protección exterior de un
+embalaje/envase compuesto o de un
+embalaje/envase combinado, junto con
+los materiales absorbentes, los
+materiales de relleno y cualquier otro
+elemento necesario para contener y
+proteger los recipientes interiores o los
+embalajes/envases interiores
+Volúmen 1) Capítulo
+1.2. Definiciones
+E/E Específicos
+para gases
+Botella de
+gas
+(Cilindro)
+Recipiente a presión con una
+capacidad (en agua) no superior a 150
+litros. El término Botella se encuentra
+definido en las Recomendaciones
+Relativas al Transporte de Mercancías
+Peligrosas de Naciones Unidas (Libro
+Naranja) conocido comúnmente como
+cilindros.
+Volúmen 1) Capítulo
+1.2. Definiciones
+
+-- 37 of 56 --
+
+Pag. 38
+Tubo
+(Gases)
+Recipiente a presión sin soldadura o
+de construcción compuesta, con una
+capacidad (en agua) superior a 150
+litros y no superior a 3000 litros.
+Volúmen 1) Capítulo
+1.2. Definiciones
+Bloque de
+botellas
+(Gases)
+Recipiente a presión compuesto por un
+conjunto de botellas o de carcasas de
+botellas unidas e interconectadas por
+una tubería colectora y transportadas
+como un conjunto indisociable. La
+capacidad total (en agua) no será
+superior a 3000 litros excepto en el
+caso de bloques destinados al
+transporte de gases de la división 2.3.,
+en cuyo caso el límite será de 1000
+litros de capacidad (en agua). Volúmen 1) Capítulo
+1.2. Definiciones
+Contenedor
+de gas de
+elementos
+múltiples
+(CGEM)
+Es un montaje multimodal de botellas,
+tubos o bloques de botellas
+interconectadas por una tubería
+colectora y montados en un cuadro,
+éste incluye el equipo de servicio y los
+elementos estructurales necesarios
+para el transporte de gases.
+Volúmen 1) Capítulo
+1.2. Definiciones
+
+-- 38 of 56 --
+
+Pag. 39
+Bidones a
+presión
+(Gases)
+Recipiente a presión transportable
+soldado con capacidad superior a 150
+y menor de 1000 litros. Existen
+recipientes criogénicos cerrados a
+presión, térmicamente aislados y
+destinados al transporte de gases
+licuados refrigerados, de una
+capacidad (en agua) no superior a
+1.000 litros
+Volúmen 1) Capítulo
+1.2. Definiciones
+E/E Específicos
+para materiales
+radiactivos
+Bulto para
+materiales
+radiactivos
+Por bulto, el producto final de la
+operación de embalaje/envasado,
+constituido por el embalaje/envase y
+su contenido preparados para el
+transporte.
+Definición, Capítulo 1.2.
+/ 1.2.1. Pag. 28
+4.1.9 Página 129
+
+-- 39 of 56 --
+
+Pag. 40
+E/E Recipientes
+intermedios para
+graneles (RIG)
+Recipiente
+intermedio
+para
+graneles -
+RIG (IBC,
+Big Bag)
+Incluye los recipientes intermedios
+para graneles (RIG), un
+embalaje/envase portátil, rígido o
+flexible, metálicos, de plástico rígido o
+compuestos.
+6.5.1.3.1 Por RIG metálico se entiende
+un cuerpo de metal, junto con el
+equipo de servicio y los elementos
+estructurales apropiados.
+6.5.1.3.2 Por RIG flexible se entiende
+un cuerpo constituido por una película,
+por un tejido o por algún otro material
+flexible, o por una combinación de
+materiales de ese tipo, y, de ser
+necesario, un revestimiento interior o
+forro, junto con los equipos de servicio
+y los dispositivos de manipulación
+apropiados.
+6.5.1.3.3 Por RIG de plástico rígido se
+entiende un cuerpo de plástico rígido,
+que puede estar provisto de elementos
+estructurales, a la vez que de equipos
+de servicio apropiados.
+6.5.1.3.4 Por RIG compuesto se
+entiende un conjunto estructural
+constituido por un receptáculo exterior
+rígido en el que va alojado un
+recipiente interior de plástico,
+comprendidos cualesquiera equipos de
+servicio o elementos estructurales, y
+construido de manera que, una vez
+montados, el recipiente interior y el
+receptáculo exterior constituyen -y
+como tal se utilizan- un todo integrado,
+que se llena, almacena, transporta y
+vacía como tal.
+6.5.1.3.5 Por RIG de cartón se
+entiende un cuerpo construido con ese
+Volúmen 2, Numeral
+6.5.1.3/ Página 322
+
+-- 40 of 56 --
+
+Pag. 41
+material, provisto o no de tapas
+separables en la parte superior y en la
+base y, si es necesario, de un forro
+interior (pero no de embalajes/envases
+interiores), así como de equipos de
+servicio y elementos estructurales
+apropiados.
+6.5.1.3.6 Por RIG de madera se
+entiende un cuerpo rígido o
+desarmable construido con ese
+material, y provisto de un forro interior
+(pero no de embalajes/envases
+interiores) y de equipos de servicio y
+elementos estructurales apropiados.
+
+-- 41 of 56 --
+
+Pag. 42
+E/E Grandes
+embalajes y
+envases
+-
+Grandes e/e Rígidos: Pueden ser en
+aluminio, acero, metálicos
+Grandes e/e Flexibles (plástico, cartón,
+madera y papel)
+CAPÍTULO 6.6
+PRESCRIPCIONES
+RELATIVAS A LA
+CONSTRUCCIÓN Y EL
+ENSAYO DE
+GRANDES
+EMBALAJES/ENVASES
+6.6.1 Generalidades
+E/E Cisternas
+portátiles
+Cirterna
+Portátil
+(Isotanque)
+Por cisterna, una cisterna portátil,
+incluido un contenedor cisterna, un
+camión o vagón cisterna o un
+recipiente para contener líquidos,
+sólidos o gases y con una capacidad
+no inferior a 450 litros cuando se use
+para el transporte de los gases
+definidos en 2.2.1.1;
+Por cisterna portátil:
+a) A los efectos del transporte de
+sustancias de la clase 1 y de las
+clases 3 a 9, una cisterna portátil
+multimodal. Comprende un depósito
+provisto del equipo de servicio y
+elementos estructurales necesarios
+para el transporte de sustancias
+peligrosas;
+b) A los efectos del transporte de
+gases licuados no refrigerados de la
+clase 2, una cisterna multimodal con
+una capacidad de más de 450 litros.
+Comprende un depósito con el equipo
+de servicio y elementos estructurales
+necesarios para el transporte de
+gases;
+c) A los efectos del transporte de
+gases licuados refrigerados, una
+cisterna con aislamiento térmico con
+Volúmen 1) Capítulo
+1.2. Definiciones (Pag.
+28)
+
+-- 42 of 56 --
+
+Pag. 43
+una capacidad de más de 450 litros,
+con el equipo de servicio y elementos
+estructurales necesarios para el
+transporte de gases licuados
+refrigerados;
+E/E Contenedores
+para graneles Contenedor
+Todo elemento de transporte que
+revista carácter permanente y sea, por
+lo tanto, lo bastante resistente para
+permitir su utilización reiterada,
+especialmente concebido para facilitar
+el transporte de mercancías, sin
+operaciones intermedias de carga y
+descarga, por uno o varios modos de
+transporte, que cuenta con dispositivos
+que facilitan su estiba y manipulación y
+que ha sido aprobado de conformidad
+con el "Convenio internacional sobre la
+seguridad de los contenedores" (CSC),
+de 1972, en su forma enmendada. El
+término "contenedor" no engloba a los
+vehículos ni al embalaje. Sin embargo,
+comprende los contenedores
+transportados sobre un chasis. Para
+los contenedores para el transporte de
+materiales radiactivos, podrá utilizarse
+un contenedor como embalaje/envase;
+Además, por contenedor pequeño se
+entenderá un contenedor cuyo
+Volúmen 1) Capítulo
+1.2. Definiciones.
+
+-- 43 of 56 --
+
+Pag. 44
+volumen interno no exceda de 3 m3 .
+Por contenedor grande se entenderá
+un contenedor cuyo volumen interno
+sea superior a 3 m3 ; Por contenedor
+para graneles, todo sistema de
+contención (incluido cualquier
+revestimiento o forro) destinado a
+transportar sustancias sólidas que
+están en contacto directo con dicho
+sistema de contención. No comprende
+los embalajes, los recipientes
+intermedios para graneles (RIG), los
+grandes embalajes/envases y las
+cisternas portátiles. Los contenedores
+para graneles: - serán de carácter
+permanente y, por tanto,
+suficientemente resistentes para
+permitir su utilización reiterada; -
+estarán especialmente concebidos
+para facilitar el transporte de
+mercancías, sin operaciones
+intermedias de carga y descarga, por
+uno o varios modos de transporte; -
+contarán con dispositivos que faciliten
+su manipulación; - tendrán una
+capacidad no inferior a 1,0 m3 .
+Ejemplos de contenedores para
+graneles son los contenedores que se
+usan en el transporte marítimo,
+incluidos aquellos que se usan para
+recibir mercancías a granel mar
+adentro, los contenedores con
+volquete, las tolvas, las cajas
+amovibles, los acanalados, los
+contenedores con sistema de
+rodadura, los compartimentos de carga
+de vehículos y los contenedores para
+graneles flexibles;
+
+-- 44 of 56 --
+
+Pag. 45
+Figura No. 52
+Hay dos unidades de medida: La del Producto y la del Transporte. La de Transporte es solo en
+Kilogramos y su objetivo es controlar el peso total del vehículo para vigilar en las carreteras,
+puentes y otros elementos que sean afectados por el peso del vehículo.
+La unidad de medida del Producto es la unidad en la cual el Generador define la cantidad real del
+producto o también llamada unidad de medida comercial.
+Ejemplo: Si se transporta un derivado del petróleo en un carrotanque la unidad de medida del
+transporte se debe registrar los kilos de la mercancía y en Unidad de medida del producto se debe
+seleccionar una unidad de medida de volumen (Galón o Barril). Esta condición de las dos unidades
+de medida es obligatoria para cuando en tipo de empaque es Granel Líquido, en las otras opciones
+de tipo de empaque es opcional.
+Figura No. 53
+El empaque Primario o Interno es un dato opcional que permite saber cuál es el tipo de empaque
+que tiene contacto con la mercancía o producto.
+
+-- 45 of 56 --
+
+Pag. 46
+Después de seleccionar el empaque primario y el material el sistema muestra el código del
+empaque en la casilla de la derecha. Si el usuario conoce el código, no necesita seleccionar el
+nombre del empaque primario ni el material, el sistema lo muestra al digitar el código.
+Lo anterior plica también para el empaque externo el cual también es opcional y es el que se
+puede observar y normalmente sirve para contener varios empaques primarios.
+Si, se transporta granel liquido o granel solido los códigos de empaque primario interno y externo
+no se deben digitar.
+Ejemplo: Si se transporta un producto liquido en tambores, se puede digitar la unidad de medida
+del producto en Litros y la unidad del empaque seria Tambor y se puede reportar como unidad
+de empaque externa la Estiba.
+
+-- 46 of 56 --
+
+Pag. 47
+4.6 OPERACIONES DE TRASBORDO
+Figura No. 54
+4.7 OBSERVACIONES
+El usuario puede escribir información aclaratoria o según la necesidad a la remesa que está
+registrando, en el campo de observaciones.
+4.8 GUARDAR REMESA
+El usuario debe dar clic en la opción de GUARDAR REMESA cuando haya terminado de digitar la
+información requerida en cada uno de los campos anteriormente descritos, al dar clic obtendrá el
+número de radicado o autorización asignada a la remesa registrada por el sistema RNDC.
+5. WEB SERVICE
+Ejemplo de una Mercancía peligrosa sencilla
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password>PASSWORD1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>3</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATRANSPORTE>
+<CONSECUTIVOREMESA>REM54321</CONSECUTIVOREMESA>
+<CODOPERACIONTRANSPORTE>G</CODOPERACIONTRANSPORTE>
+<CODNATURALEZACARGA>2</CODNATURALEZACARGA>
+<MERCANCIAREMESA>002701</MERCANCIAREMESA>
+
+-- 47 of 56 --
+
+Pag. 48
+<DESCRIPCIONCORTAPRODUCTO>IGIYG IYGI YIUIU HK IJKKKK
+</DESCRIPCIONCORTAPRODUCTO>
+<CODIGOUN>0107</CODIGOUN>
+<GRUPOEMBALAJEENVASE>II</GRUPOEMBALAJEENVASE>
+<ESTADOMERCANCIA>L</ESTADOMERCANCIA>
+<UNIDADMEDIDACAPACIDAD>1</UNIDADMEDIDACAPACIDAD>
+<CANTIDADCARGADA>2500</CANTIDADCARGADA>
+<UNIDADMEDIDAPRODUCTO>GLL</UNIDADMEDIDAPRODUCTO>
+<CANTIDADPRODUCTO>800</CANTIDADPRODUCTO>
+<CODTIPOEMPAQUE>0</CODTIPOEMPAQUE>
+<EMPAQUEPRIMARIO>4G</EMPAQUEPRIMARIO>
+<CODTIPOIDREMITENTE>C</CODTIPOIDREMITENTE>
+<NUMIDREMITENTE>19258361</NUMIDREMITENTE>
+<CODSEDEREMITENTE>0</CODSEDEREMITENTE>
+<CODTIPOIDDESTINATARIO>C</CODTIPOIDDESTINATARIO>
+<NUMIDDESTINATARIO>19258361</NUMIDDESTINATARIO>
+<CODSEDEDESTINATARIO>4</CODSEDEDESTINATARIO>
+<HORASPACTOCARGA>4</HORASPACTOCARGA>
+<MINUTOSPACTOCARGA>0</MINUTOSPACTOCARGA>
+<HORASPACTODESCARGUE>4</HORASPACTODESCARGUE>
+<MINUTOSPACTODESCARGUE>0</MINUTOSPACTODESCARGUE>
+<CODTIPOIDPROPIETARIO>N</CODTIPOIDPROPIETARIO>
+<NUMIDPROPIETARIO>9003010078</NUMIDPROPIETARIO>
+<CODSEDEPROPIETARIO>0</CODSEDEPROPIETARIO>
+<ORDENSERVICIOGENERADOR>XXXXX</ORDENSERVICIOGENERADOR>
+<FECHACITAPACTADACARGUE>14/02/2025</FECHACITAPACTADACARGUE>
+<HORACITAPACTADACARGUE>08:00</HORACITAPACTADACARGUE>
+<FECHACITAPACTADADESCARGUE>15/02/2025</FECHACITAPACTADADESCARGUE>
+<HORACITAPACTADADESCARGUEREMESA>09:00</HORACITAPACTADADESCARGUEREMESA>
+</variables>
+</root>
+La etiqueta que se encuentra en color amarillo: <DESCRIPCIONCORTAPRODUCTO> no se debe
+enviar, para mercancía peligrosa.
+Las etiquetas en color rojo son las nuevas etiquetas
+La etiqueta: <GRUPOEMABALAJEENVASE> permite los valores: I, II, III
+La etiqueta <ESTADOMERCANCIA> permite los valores: S, L, G (SOLIDO, LIQUIDO, GASEOSO)
+La etiqueta <UNIDADMEDIDAPRODUCTO> permite los valores:
+KGM para Kilogramo
+GLL para Galon
+MTQ para MetroCubico
+CMQ para CentimetroCubico
+LTR para Litro
+MLT para MiliLitro
+BLL para Barril
+UN para Unidad
+La etiqueta <EMPAQUEPRIMARIO> permite los códigos del Maestro de Empaques que se
+encuentra publicado en el RNDC pero que estén permitidas en las mercancías peligrosas.
+
+-- 48 of 56 --
+
+Pag. 49
+Figura No. 55
+Figura No. 56
+Observar la columna que se llama: “Mercancía Peligrosa”
+La etiqueta que se encuentra en color azul: <ORDENSERVICIOGENERADOR> es opcional, pero si
+el Generador la exige como parte de los datos de la facturación electrónica, entonces es
+obligatoria. Pueden hacer hasta 20 caracteres. Este dato, se le mostrará al generador cuando
+ellos estén aprobando la factura.
+Cuando el Código de Capitulo y Partida de la mercancía está marcado de que necesita código de
+Subpartida, el usuario de webservice debe enviar la etiqueta
+<SUBPARTIDA_CODE>XX</SUBPARTIDA_CODE>
+XX es un Código numérico de 2 dígitos el cual corresponde al tercer nivel de la codificación
+armonizada.
+Un ejemplo de una mercancía que obliga la subpartida es la 002710, mirar la columna que dice:
+NECESITA SUBPARTIDA, tiene un SI.
+
+-- 49 of 56 --
+
+Pag. 50
+Figura No. 57
+Las posibles Subpartidas son, por ejemplo: 12, 19, 20 y 91
+Figura No. 58
+Si el usuario no envía el código de la subpartida, el RNDC enviará un mensaje de error.
+Cuando el código de la Subpartida está con la marca de que necesita el Código de Arancel, el
+usuario de webservice debe enviar la etiqueta:
+<CODIGOARANCEL_CODE>YY</CODIGOARANCEL_CODE>
+YY es un código numérico de 2 dígitos el cual corresponde al cuarto nivel de la codificación
+armonizada.
+Un ejemplo de una subpartida que obliga el código Arancel es: 00271012
+
+-- 50 of 56 --
+
+Pag. 51
+Figura No. 59
+y los posibles códigos de arancel son, por ejemplo: 11, 13, 19, 20
+Figura No. 60
+Si el usuario no envía el código del Arancel, el RNDC enviará un mensaje de error.
+Un ejemplo de xml para reportar una remesa de transporte de Gasolina para automóviles:
+<MERCANCIAREMESA>002710</MERCANCIAREMESA>
+<CODIGOUN>1203</CODIGOUN>
+<SUBPARTIDA_CODE>12</SUBPARTIDA_CODE>
+<CODIGOARANCEL_CODE>13</CODIGOARANCEL_CODE>
+
+-- 51 of 56 --
+
+Pag. 52
+6. Residuos Peligrosos
+Ejemplo de una Mercancía peligrosa – Residuo Peligroso: Desechos Clínicos
+Figura No. 61
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password>PASSWORD1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>3</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>XXXXXX</NUMNITEMPRESATRANSPORTE>
+<CONSECUTIVOREMESA>XXXXXXX</CONSECUTIVOREMESA>
+<CODOPERACIONTRANSPORTE>G</CODOPERACIONTRANSPORTE>
+<CODNATURALEZACARGA>5</CODNATURALEZACARGA>
+<MERCANCIAREMESA>002701</MERCANCIAREMESA>
+<CODTIPOEMPAQUE>0</CODTIPOEMPAQUE>
+<UNIDADMEDIDACAPACIDAD>1</UNIDADMEDIDACAPACIDAD>
+<CANTIDADCARGADA>2500</CANTIDADCARGADA>
+<CODIGOUN>3895</CODIGOUN>
+<ESTADOMERCANCIA>S</ESTADOMERCANCIA>
+<NOMBRENEP>JERINGAS</NOMBRENEP>
+<DESCRIPCIONDETALLADARESIDUO>AGUJAS</ DESCRIPCIONDETALLADARESIDUO
+<RESIDUO>Y1</RESIDUO>
+<RESIDUODESAGREGACION>Y1.3</RESIDUODESAGREGACION>
+<PELIGROSIDAD>IFC</PELIGROSIDAD>
+</variables>
+</root>
+Las etiquetas NOMBRENEP y DESCRIPCIONDETALLADARESIDUO reciben textos libres de máximo
+80 caracteres.
+
+-- 52 of 56 --
+
+Pag. 53
+Los posibles valores permitidos para la PELIGROSIDAD son los siguientes códigos de 3 letras:
+COR : Corrosivo
+REA : Reactivo
+EXP : Explosivo
+TOX : Toxico
+IFM : Inflamable
+IFC : Infeccioso
+RAD : Radiactivo
+La etiqueta RESIDUO corresponde al código de la Corriente del Residuo Peligroso y corresponde
+a la codificación de los Residuos Peligrosos de Convenio de Basilea, Anexo I y Anexo VIII
+
+-- 53 of 56 --
+
+Pag. 54
+Anexo VIII LISTA A:
+Los desechos enumerados en este anexo están caracterizados como peligrosos de conformidad
+con el apartado a) del párrafo 1 del presente Convenio, y su inclusión en este anexo no obsta
+para que se use el anexo III para demostrar que un desecho no es peligroso.
+A1 : Desechos metálicos o que contengan metales.
+A1010 Desechos metálicos y desechos que contengan aleaciones de cualquiera de las sustancias
+siguientes (pero excluidos los desechos que figuran específicamente en la lista B): • Antimonio •
+Arsénico • Berilio • Cadmio • Plomo • Mercurio • Selenio • Telurio • Talio
+A1020 Desechos que tengan como constituyentes o contaminantes, excluidos los desechos de
+metal en forma masiva, cualquiera de las sustancias siguientes: • Antimonio; compuestos de
+antimonio • Berilio; compuestos de berilio • Cadmio; compuestos de cadmio • Plomo;
+compuestos de plomo • Selenio; compuestos de selenio • Telurio; compuestos de telurio
+A1030 Desechos que tengan como constituyentes o contaminantes cualquiera de las sustancias
+siguientes: • Arsénico; compuestos de arsénico • Mercurio; compuestos de mercurio • Talio;
+compuestos de talio
+A1040 Desechos que tengan como constituyentes: • Carbonilos de metal • Compuestos de
+cromo hexavalente
+A1050 Lodos galvánicos
+A1060 Líquidos de desecho del decapaje de metales
+A1070 Residuos de lixiviación del tratamiento del zinc, polvos y lodos como jarosita, hematites,
+etc.
+A1080 Residuos de desechos de zinc no incluidos en la lista B, que contengan plomo y cadmio en
+concentraciones tales que presenten características del anexo III
+A1090 Cenizas de la incineración de cables de cobre recubiertos
+A1100 Polvos y residuos de los sistemas de depuración de gases de las fundiciones de cobre
+A1110 Soluciones electrolíticas usadas de las operaciones de refinación y extracción electrolítica
+del cobre
+A1120 Lodos residuales, excluidos los fangos anódicos, de los sistemas de depuración
+electrolítica de las operaciones de refinación y extracción electrolítica del cobre
+A1130 Soluciones de ácidos para grabar usadas que contengan cobre disuelto A1140 Desechos
+de catalizadores de cloruro cúprico y cianuro de cobre
+A1150 Cenizas de metales preciosos procedentes de la incineración de circuitos impresos no
+incluidos en la lista B2
+A1160 Acumuladores de plomo de desecho, enteros o triturados.
+A1170 Acumuladores de desecho sin seleccionar excluidas mezclas de acumuladores sólo de la
+lista B. Los acumuladores de desecho no incluidos en la lista B que contengan constituyentes del
+anexo I en tal grado que los conviertan en peligrosos
+A1180 Montajes eléctricos y electrónicos de desecho o restos de éstos3 que contengan
+componentes como acumuladores y otras baterías incluidos en la lista A, interruptores de
+mercurio, vidrios de tubos de rayos catódicos y otros vidrios activados y capacitadores de PCB, o
+contaminados con constituyentes del anexo I (por ejemplo, cadmio, mercurio, plomo, bifenilo
+policlorado) en tal grado que posean alguna de las características del anexo III (véase la entrada
+correspondiente en la lista B B1110)
+A2 : Desechos que contengan principalmente constituyentes orgánicos, que puedan contener
+metales o materia orgánica
+A2010 Desechos de vidrio de tubos de rayos catódicos y otros vidrios activados
+
+-- 54 of 56 --
+
+Pag. 55
+A2020 Desechos de compuestos inorgánicos de flúor en forma de líquidos o lodos, pero excluidos
+los desechos de ese tipo especificados en la lista B
+A2030 Desechos de catalizadores, pero excluidos los desechos de este tipo especificados en la
+lista B
+A2040 Yeso de desecho procedente de procesos de la industria química, si contiene
+constituyentes del anexo I en tal grado que presenten una característica peligrosa del anexo III
+(véase la entrada correspondiente en la lista B B2080)
+A2050 Desechos de amianto (polvo y fibras)
+A2060 Cenizas volantes de centrales eléctricas de carbón que contengan sustancias del anexo I
+en concentraciones tales que presenten características del anexo III (véase la entrada
+correspondiente en la lista B B2050)
+A3 : Desechos que contengan principalmente constituyentes orgánicos, que puedan contener
+metales y materia inorgánica
+A3010 Desechos resultantes de la producción o el tratamiento de coque de petróleo y asfalto
+A3020 Aceites minerales de desecho no aptos para el uso al que estaban destinados
+A3030 Desechos que contengan, estén integrados o estén contaminados por lodos de
+compuestos antidetonantes con plomo
+A3040 Desechos de líquidos térmicos (transferencia de calor)
+…… continúa la codificación del Anexo VIII …….
+No todos los Residuos del Anexo I y Anexo VIII , tienen Desagregación. Por ejemplo para el Y1
+las Desagregaciones son:
+Y1.1. Desechos clínicos ANATOMOPATOLÓGICOS resultantes de la atención en salud en
+hospitales, consultorios, clínicas y otros
+Y1.2. Desechos clínicos BIOSANITARIOS resultantes de la atención en salud en hospitales,
+consultorios, clínicas y otros
+Y1.3. Desechos clínicos CORTOPUNZANTES resultantes de la atención en salud en hospitales,
+consultorios, clínicas y otros
+Y1.4. Residuos de ANIMALES – residuos decomisos NO aprovechables
+Por ejemplo el Y2 no tiene Desagregación.
+7. DICCIONARIO DE ERRORES
+El sistema RNDC tiene descrito en sus bases de datos en CONSULTAR- CONSULTAR MAESTROS
+el diccionario de errores, puede visualizar el error con su código y la solución para subsanar y
+que el sistema le permita radicar el registro.
+Para consultar los mensajes de error de las remesas se digita el proceso 3, Ejemplo:
+
+-- 55 of 56 --
+
+Pag. 56
+Figura No. 62
+Figura No. 63
+EJEMPLO DE CONSULTA DE ERRORES
+Figura No. 64
+
+-- 56 of 56 --
+

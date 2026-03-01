@@ -23,7 +23,7 @@ soluciones mediocres...
 
 **¡Así de fácil!** No scripts, no configuraciones complejas. Solo di la frase mágica y la transformación es instantánea.
 
-## 🎭 Modo Disponible
+## 🎭 Modos Disponibles
 
 ### 🔥 Java Expert Developer
 **Activación:** `"Activa modo java-expert"`  
@@ -43,9 +43,63 @@ soluciones mediocres...
 - Necesitas código que pase revisiones de arquitectura
 - Proyectos críticos que requieren alta calidad
 - Quieres aprender mejores prácticas Java
-- Refactoring de código legacy
-- Implementación de nuevas funcionalidades
-- Revisión y mejora de código existente
+
+---
+
+### ⚙️ Next.js Backend Expert Developer
+**Activación:** `"Activa modo backend"` / `"backend-expert"`  
+**Personalidad:** Backend Senior especializado en Next.js + TypeScript + Prisma. Rechaza prompts vagos.  
+**Aliases:** backend, backend-expert, nextjs-backend, api-expert  
+**Especialidades:**
+- Clean Architecture (API → Service → Repository)
+- Zod doble validación (cliente + servidor)
+- Prisma ORM + PostgreSQL
+- Error handling y HTTP status codes RFC
+- JSDoc obligatorio en todas las funciones
+
+---
+
+### 🎨 Next.js Frontend UX Expert Developer
+**Activación:** `"Activa modo frontend"` / `"ux-expert"`  
+**Personalidad:** Frontend Senior obsesionado con la experiencia del usuario. Mobile-first siempre.  
+**Aliases:** frontend, frontend-expert, ux-expert, ui-expert, react-expert  
+**Especialidades:**
+- Mobile-first responsive (WCAG 2.1 AA)
+- Todos los estados UI: loading, error, success, empty
+- shadcn/ui + Tailwind CSS
+- Framer Motion (animaciones que mejoran, no distraen)
+
+---
+
+### 🏠 Next.js Marketing Page Expert
+**Activación:** `"Activa modo marketing"` / `"landing-page"`  
+**Personalidad:** Especialista en páginas de marketing pixel-perfect con design system propio de CargoClick.  
+**Aliases:** marketing, marketing-expert, landing-page, design-system  
+**Especialidades:**
+- Design system tokens `--cg-*`
+- Animaciones scroll-triggered (Framer Motion)
+- Páginas de marketing sin shadcn/ui (tokens propios)
+- Implementa prompts HOME_01 a HOME_08
+
+---
+
+### 🚛 Operacional Implementador
+**Activación:** `"Activa modo operacional"` / `"modo rndc"`  
+**Personalidad:** Implementador full-stack del Módulo Operacional de CargoClick. Domina el RNDC del Ministerio de Transporte y ejecuta las 9 fases de implementación en orden estricto.  
+**Aliases:** operacional, implementador-operacional, rndc, modulo-operacional  
+**Especialidades:**
+- RNDC Ministerio de Transporte (SOAP, ISO-8859-1, procesoids)
+- Fases A-I: Schema → Repos → RNDC SOAP → Services → API → Frontend
+- Conductores, Vehículos, Remesas, ManifiestoOperativo, NuevoNegocio
+- SeguimientoCliente + EncuestaPostEntrega (ruta pública sin Clerk)
+- SyncRndc append-only con contraseña enmascarada
+
+**¿Cuándo usarlo?**
+- Implementando el módulo operacional de CargoClick
+- Trabajando con la integración RNDC (SOAP, XML, procesoids)
+- Creando conductores, vehículos, remesas o manifiestos
+- Refinando el seguimiento de carga o la encuesta post-entrega
+- Cualquier archivo en `app/api/conductores/`, `app/api/manifiestos/`, `lib/services/rndcClient.ts`, etc.
 
 ## 📁 Estructura del Sistema
 

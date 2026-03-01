@@ -1,0 +1,2691 @@
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+ANEXO 1
+MANUAL DE DESCRIPCIÓN E INSTRUCCIONES PARA LA OPERACIÓN GENERAL DEL
+REGISTRO NACIONAL DE DESPACHOS DE CARGA RNDC
+Contenido
+GENERALIDADES DEL SISTEMA RNDC ........................................................................................ 19
+1. GENERALIDADES...................................................................................................................... 19
+2. ALCANCE FUNCIONAL Y ORGANIZACIONAL. .................................................................... 19
+3. REGISTROS. .............................................................................................................................. 19
+4. ACCESO AL SISTEMA RNDC Y CREACION DE USUARIOS. ................................................. 22
+4.1. Canales de comunicación del RNDC ................................................................................ 22
+4.2. Actores del sistema RNDC ................................................................................................ 23
+4.2.1. Roles del sistema del Registro Nacional de Despachos de Carga-RNDC....... 23
+4.2.2. Creación de usuarios y solicitud de alta en el sistema......................................26
+4.2.2.1. Usuario principal .................................................................................................................. 27
+4.2.2.2 Usuario dependiente. .......................................................................................................... 27
+4.2.2.3 Usuario de Facturación Electrónica ................................................................................ 27
+4.2.2.4 Usuario de Consultas Generales......................................................................................28
+4.2.2.5 Solicitar restauración de contraseña ....................................................................29
+TÍTULO 2 ..............................................................................................................................................29
+PROCESOS FUNCIONALES DEL SISTEMA RNDC .......................................................................29
+5.. PROCESOS FUNCIONALES .........................................................................................................29
+5.1. Creación de terceros y registro de vehículos. ...............................................................30
+5.1.1 Registrar terceros y conductores ................................................................................30
+5.1.2. Registrar vehículos y remolques ............................................................................... 31
+5.1.3. Control de empresas. ........................................................................................................ 32
+5.1.4. Solicitar información de las remesas por parte de la empresa GPS. ................. 32
+5.2. Manifiesto electrónico de carga. ..................................................................................... 33
+5.2.1. Registro opcional información preliminar de carga. ................................................ 33
+5.2.2. Registro opcional Información de Viaje. ................................................................34
+5.2.3. Registro obligatorio remesa terrestre de carga. .................................................. 35
+5.2.4 Registro obligatorio manifiesto electrónico de carga. ........................................39
+5.2.5. Registro de firma electrónica del manifiesto electrónico de carga. ............. 46
+5.3. Registros finalización de viaje. .........................................................................................47
+5.3.1. Registro opcional cumplido inicial de remesa terrestre de carga. ...................47
+5.3.1.1. Registro opcional de cumplido inicial de remesa por parte del Conductor. . 49
+5.3.1.2 Registro opcional cumplido inicial de remesa por parte de la Empresa de
+servicios logísticos para el control vehicular (Empresa GPS). .........................................50
+
+-- 1 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+5.3.1.3. Registro novedades de la empresa de GPS ............................................................. 52
+5.3.2. Registro obligatorio cumplido de remesa terrestre de carga. .......................... 52
+5.3.3. Registro cumplido de manifiesto electrónico de carga. ...................................54
+5.4. Registro obligatorio dato del flete. ..................................................................................56
+5.4.1. Empresa de transporte. ...............................................................................................56
+5.4.2. Generador de carga. ..................................................................................................... 57
+5.4.2.1. Registro dato del flete a través del archivo XML de la Factura Electrónica. .59
+5.4.2.2. Registrar tarifa de fletes para un periodo de tiempo a través de lista de
+tarifas pactadas ............................................................................................................................59
+5.4.2.3. Registro datos del flete por cada remesa............................................................. 60
+5.4.2.4. Cargue masivo mediante archivo plano. .................................................................. 61
+5.5. Viaje Municipal ..................................................................................................................62
+5.5.1 Registro obligatorio datos de remesa municipal. ..................................................62
+5.5.2. Registro obligatorio viaje municipal ....................................................................... 64
+5.5.3. Registro de cumplido de viaje municipal. .............................................................65
+5.6. Registro de contratación directa ..................................................................................... 66
+5.6.1. Autorizar al conductor a realizar viaje de contratación directa ...................... 66
+5.6.2. Registro de contratación directa .............................................................................. 67
+5.6.3. Finalizar o anular el viaje de Contratación Directa. ........................................... 68
+TÍTULO 3 ............................................................................................................................................. 69
+OTRAS FUNCIONALIDADES DEL SISTEMA RNDC ..................................................................... 69
+6. OTRAS FUNCIONALIDADES. ...................................................................................................... 69
+6.1. Anulación de registros. ....................................................................................................... 69
+6.1.1. Anular o corregir registro remesa terrestre de carga. ......................................... 69
+6.1.2. Anular registro de cumplido de remesa terrestre de carga...............................70
+6.1.3. Anular registro opcional cumplido inicial de remesa terrestre de carga. ...... 71
+6.1.4. Anular registro opcional de información preliminar de carga. .......................... 72
+6.1.5. Anular registro opcional de información de viaje. ................................................ 73
+6.1.6. Anular registro manifiesto electrónico de carga. ..................................................74
+6.1.7. Anular registro cumplido del manifiesto electrónico de carga........................ 76
+6.1.8. Anular registro de Valor de Flete. ............................................................................. 76
+6.2. Reporte no registro de viajes en el mes. ........................................................................ 76
+7. COMPARACIÓN DE INFORMACIÓN ENTRE SISTEMAS. ........................................................ 77
+8. CONSULTAS.................................................................................................................................... 77
+8.1. Empresa de Transporte. ...................................................................................................... 77
+8.2. Generador. ..............................................................................................................................78
+8.3. Entidades Públicas. ..............................................................................................................78
+8.4. Propietario o conductor. .....................................................................................................78
+8.5. Consulta pública. ..................................................................................................................78
+8.6. Puertos. ...................................................................................................................................79
+9. PLAN DE CONTINGENCIA. ...........................................................................................................79
+10. CONTROL PARA EL INGRESO DE INFORMACIÓN. .............................................................. 80
+
+-- 2 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+11. SISTEMA DE AYUDA. ................................................................................................................... 80
+11.1. Preguntas frecuentes.......................................................................................................... 80
+11.2. Solución de problemas. ...................................................................................................... 81
+11.3. Diccionario de errores......................................................................................................... 81
+11.4. Diccionario de datos. .......................................................................................................... 81
+11.5. Consultas. .............................................................................................................................. 81
+11.6. Datos de contacto. .............................................................................................................. 81
+
+-- 3 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+TÍTULO 1
+GENERALIDADES DEL SISTEMA RNDC
+1. 1. GENERALIDADES.
+Por medio de este documento se expone de manera general el funcionamiento y
+utilización del sistema de información del Registro Nacional de Despachos de Carga –
+RNDC, con la descripción de sus principales funciones secuencialmente, y los requisitos
+necesarios para su operación.
+Este manual permite orientar al usuario sobre los módulos, fundamentos conceptuales
+y funcionalidades que componen el sistema RNDC. De igual manera, se encontrarán
+instrucciones para el ingreso al aplicativo y ruta de acceso, descripción desde el punto
+de vista funcional de los flujos de trabajo, procesos o cálculos automáticos efectuados
+por el sistema, aspectos de seguridad relacionados con la administración de perfiles
+del usuario, solución de problemas, preguntas frecuentes, datos de contacto y glosario.
+2. 2. ALCANCE FUNCIONAL Y ORGANIZACIONAL.
+El RNDC es el medio desarrollado, operado y mantenido por el Ministerio de Transporte
+para que los usuarios obligados registren los datos relacionados con la prestación del
+Servicio Público de Transporte de Carga por Carretera y, además, evidencie la evolución
+de la información de esta operación. De igual manera, brinda información a las
+entidades del Estado, encabezadas por el Ministerio de Transporte y la
+Superintendencia de Transporte, a fin de que puedan ejercer sus funciones de
+formulación de política pública e inspección, vigilancia y control, respectivamente.
+En este sentido, las empresas de transporte habilitadas por el Ministerio de Transporte,
+el generador de carga, los propietarios, poseedores o tenedores de un vehículo de carga
+deben diligenciar, expedir y remitir la información exacta y fidedigna, según
+corresponda, a través del sistema RNDC, en los términos definidos en la presente
+resolución y en el presente manual, así como la información referente a las relaciones
+económicas derivadas de la prestación del servicio.
+Es así como, el reporte de la información se realiza por medio de un portal interactivo,
+servicios de interoperabilidad o aplicaciones de dispositivos móviles, de manera que,
+independiente del mecanismo de envío de información utilizado por el usuario, la
+transmisión de la información es en tiempo real, por lo tanto, debe hacerse de manera
+oportuna y rigurosa. Los permisos para la transmisión, el registro y el acceso a la
+información para el RNDC a través de cada uno de los medios se encuentran definidos
+en el presente manual.
+3. 3
+. REGISTROS.
+Dentro del sistema Registro Nacional de Despachos de Carga se tendrán en cuenta los
+siguientes registros:
+▪ Registro Información Preliminar de Carga: Consiste en el registro
+opcional por parte de la empresa de transporte de los datos relacionados con
+el sitio de cargue y el de descargue, tipo y cantidad estimada de mercancía, el
+tiempo total pactado para el cargue y para el descargue de la mercancía. Los
+datos del Registro de Información Preliminar de Carga se entienden como datos
+válidos para diligenciar posteriormente el Registro Remesa Terrestre de Carga.
+
+-- 4 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+▪ Registro Información de Viaje: Consiste en el registro opcional por parte
+de la empresa de transporte de los datos relacionados con la placa del vehículo
+y la del remolque o semirremolque, la identificación del conductor y el Registro
+Información Preliminar de Carga. Los datos del Registro de Información de viaje
+se entienden como datos válidos para diligenciar posteriormente el registro
+Manifiesto Electrónico de Carga.
+▪ Registro Remesa Terrestre de Carga: Es el registro obligatorio de la
+información que permite a la empresa de transporte generar el documento
+remesa terrestre de carga, y en donde se especifica quien es el contratante o
+generador de carga, lugar de cargue, lugar del descargue y todos los datos
+referentes a la mercancía a transportar, así como los pactos de los tiempos
+logísticos y las citas para el cargue y descargue. Esos pactos sirven a la empresa
+de transporte y al transportador hacer la planeación del viaje y contar con ellos
+en los valores a pagar por el servicio.
+▪ Registro Manifiesto Electrónico de Carga: Es el registro obligatorio de la
+información que permite a la empresa de transporte generar el documento
+manifiesto electrónico de carga a través del sistema del Registro Nacional de
+Despachos de Carga -RNDC-, el cual ampara el transporte de mercancías ante
+las distintas autoridades, por lo tanto, debe ser portado por el conductor del
+vehículo durante todo el recorrido. El manifiesto electrónico de carga en formato
+“pdf” debe ser portado por el conductor en carretera en forma electrónica o de
+forma física.
+Con la expedición del manifiesto electrónico de carga, el sistema Registro
+Nacional de Despachos de Carga -RNDC- generará un código de seguridad
+cifrado que deberá ser parte del contenido del código, cuya representación
+gráfica debe aparecer en el formato “pdf” del manifiesto electrónico de carga y
+servirá para la validación de la operación y la autenticidad del documento por
+parte de las autoridades de control en carretera.
+▪ Registro Cumplido Inicial de Remesa: Consiste en el registro opcional por
+parte de la empresa de transporte de los datos relacionados con la hora y fecha
+realmente ejecutadas, para cada uno de los siguientes eventos: llegada al lugar
+del cargue, entrada al lugar del cargue, salida del lugar del cargue, llegada al
+lugar del descargue, entrada al lugar del descargue y salida del lugar del
+descargue. Estos registros pueden ser enviados al RNDC por el Conductor o por
+la empresa de servicios logísticos de GPS. Si la empresa de transporte optó por
+diligenciar el registro cumplido inicial de remesa, los datos de los tiempos
+logísticos allí registrados priman sobre los datos que reporten en el Cumplido
+de Remesa.
+▪ Registro Cumplido de Remesa Terrestre de Carga: Corresponde al
+registro obligatorio realizado por la empresa de transporte de los datos
+relacionados con los tiempos reales (fecha y hora) ejecutados de cargue y
+descargue de la mercancía (Lo que significa incluir los tiempos de espera):
+llegada al lugar del cargue, entrada al lugar del cargue, salida del lugar del
+cargue, llegada al lugar del descargue, entrada al lugar del descargue y salida
+del lugar de descargue (Los cuales pueden ser tomados del registro Cumplido
+Inicial de Remesa cuando la empresa de transporte haya optado por realizarlo),
+más los datos relacionados con la cantidad real entregada en el lugar de
+descargue. Los datos del Cumplido de Remesa Terrestre de Carga permiten que
+la empresa de transporte pueda obtener la información necesaria para generar
+la factura al generador de carga o contratante para el cobro del servicio público
+de transporte de carga por carretera.
+
+-- 5 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+▪ Registro Cumplido de Manifiesto Electrónico de Carga: Es el registro
+obligatorio realizado por la empresa de transporte para modificar los valores a
+pagar correspondientes a eventos presentados durante el viaje indicando sus
+causales, que se descontarán o adicionarán del Valor a Pagar pactado reportado
+en el manifiesto electrónico de carga. Este registro hace uso de los datos
+reportados por la empresa de transporte en el Cumplido de Remesa Terrestre
+de Carga y permite obtener el dato del Valor a Pagar definitivo y con ello el saldo
+que debe cancelar al titular del manifiesto electrónico de carga.
+▪ Registro de Flete en la Facturación Electrónica de Transporte: Es el
+registro obligatorio que debe realizar la empresa de transporte, obligada a
+expedir factura electrónica según la normatividad vigente de la Dirección de
+Impuestos y Aduanas Nacionales (DIAN), en el anexo técnico vigente de la
+facturación electrónica para el sector transporte. Ese registro se realiza
+cargando en el RNDC el archivo de tipo “xml” que genera y firma la DIAN en
+señal de aceptación de la factura electrónica expedida por la empresa de
+transporte por el servicio de transporte prestado al adquirente, llamado
+generador de carga. Las características y datos del archivo “xml” que envía la
+empresa de transporte a la DIAN, debe cumplir lo definido y publicado por la
+DIAN en el mencionado anexo técnico.
+▪ Registro Flete: Es el registro obligatorio que debe realizar el generador
+de carga en el sistema Registro Nacional de Despachos de Carga – RNDC,
+relacionado con el dato del flete, es decir, el precio establecido entre el
+remitente o destinatario de la carga con la empresa de transporte por concepto
+del contrato de transporte terrestre automotor de carga.
+▪ Registro de Remesa Municipal: Corresponde al registro de la mercancía
+que debe ser transportada desde un punto de cargue hacia un punto de
+descargue dentro de un radio de acción municipal. La empresa de transporte
+debe registrar entre otros datos, quien lo contrata (Generador), el tipo de
+mercancía y la Cantidad.
+▪ Registro Viaje Municipal: Corresponde al registro obligatorio que debe
+realizar la empresa de transporte para todo viaje de radio de acción municipal.
+▪ Registro Cumplido de Viaje Municipal: Corresponde al registro obligatorio
+que debe realizar la empresa de transporte para informar que el viaje municipal
+se realizó y se entregó la mercancía al destinatario.
+▪ Registro Viaje Contratación Directa: Corresponde al registro que debe
+realizar el propietario del vehículo que ha sido contratado directamente por el
+Generador o Propietario de la Carga correspondiente al transporte de
+mercancías definidas en el Decreto 2044 de 1988 “por el cual se dictan
+disposiciones sobre el acarreo de productos especiales, en vehículos de servicio
+público de transporte de carga”. El propietario puede autorizar al conductor a
+enviar el registro de Contratación Directa.
+Los datos o variables o campos de cada registro son descritos en el documento
+“Diccionario de Datos del RNDC” en la versión vigente que haya publicado el Ministerio
+de Transporte. Por cada registro que reciba el RNDC, entregará un número de radicado
+en señal de aceptación de los datos.
+4. ACCESO AL SISTEMA RNDC Y CREACION DE USUARIOS.
+El RNDC está compuesto de un conjunto de funciones denominadas procesos, que el
+usuario dependiendo de su rol puede ejecutar dentro del sistema. Este apartado
+
+-- 6 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+permite diferenciar las entradas y salidas que comprenden cada uno de estos procesos
+y los requisitos por los cuales se realizan las comprobaciones de ingreso de datos en
+la aplicación, de esta forma se brinda al usuario una perspectiva general de los
+resultados obtenidos por la utilización de cada uno de los procesos enumerados en
+esta sección.
+Adicionalmente, se brinda la guía para la solicitud de usuario y la autorización para que
+inicien la interacción con el sistema, así como las diferentes formas de acceso al
+mismo. Se entenderá como vigente la guía que se encuentre publicada en el portal del
+RNDC.
+4. 4.1. Canales de comunicación del RNDC
+El sistema RNDC cuenta con los siguientes canales de comunicación, a través de los
+cuales los usuarios pueden intercambiar información con el sistema:
+4.1.1. Interoperabilidad: Es una tecnología que utiliza un conjunto de protocolos
+y estándares que sirven para intercambiar datos entre aplicaciones. El servicio
+web se encuentra establecido por dos canales con protocolo http, la tecnología
+SOAP y REST. También se encuentra disponible el protocolo https.
+A través de la Tecnología conocida como webservice u otras que cumplan con
+el objetivo de intercambio de información, se podrán enviar los registros y
+también hacer consultas de cada uno de ellos. El Ministerio de Transporte creará
+y actualizará las guía de “Usuario de webservice” con el detalle de las url o
+direcciones electrónicas vigentes. Se entenderá como vigente la guía que se
+encuentre publicada en el portal del RNDC.
+4.1.2. Plataforma dispuesta por el Ministerio de Transporte: Es un sistema de
+información electrónica capaz de contener texto, recibir y entregar datos a los
+roles del sistema de forma interactiva para ser accedida a través de un
+navegador web. Este sistema se presenta en una página principal, la cual se
+encuentra en la dirección https://rndc.mintransporte.gov.co, y una página
+secundaria en la dirección https://plc.mintransporte.gov.co, o en las direcciones
+electrónicas que se indiquen en la guía de “Usuario de portal Interactivo”, que
+para tal efecto expida y actualice el Ministerio de Transporte.
+4.1.3. Aplicaciones de uso móvil para el sistema RNDC: Es una funcionalidad del
+sistema del Registro Nacional de Despacho de Carga -RNDC- que permite desde
+dispositivos móviles consultar y enviar información al sistema. Esta Aplicación
+para Dispositivos Móviles permite registrar información en el Registro Nacional
+de Despachos de Carga.
+4.1.4. Transmisión de archivo plano: Método de entrega de información al
+sistema RNDC a través de archivos sin formato donde cada línea es un registro
+y campos separados por delimitadores, como comas o tabuladores.
+Nota: El usuario final, de acuerdo con su rol dentro del sistema, puede acceder al
+mismo por los canales habilitados para tal fin.
+5. 4.2. Actores del sistema RNDC
+El ecosistema del RNDC, siendo el conjunto de actores, canales de comunicación y el
+propio sistema de información, se encuentra delimitado y organizado de acuerdo con
+la gráfica que aparece a continuación:
+
+-- 7 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+Ilustración ecosistema del sistema RNDC.
+4.2.1. Roles del sistema del Registro Nacional de Despachos de Carga-RNDC
+Los roles o tipos de usuarios en el RNDC están conformado por 3 grupos de usuarios:
+i. Los Obligados:
+• Empresas de transporte
+• Generador de carga
+• Propietarios de vehículos (titulares de manifiesto electrónico de carga)
+ii. Los opcionales que interactúan enviando información al RNDC:
+• Los puertos autorizados (marítimos y fluviales)
+• Los municipios
+• Los conductores
+• Las empresas de Seguimiento Satelital -GPS
+• INVIAS
+iii. Los opcionales que solo consultan la información del RNDC:
+• Superintendencia de Transporte
+• Dirección de Tránsito y Transporte de la Policía Nacional -DITRA
+• Unidad de Gestión Pensional y Parafiscales -UGPP
+• Fiscalía General de la Nación
+• Otras entidades Gubernamentales
+Para los 2 primeros grupos la asignación de los usuarios se aplica el mismo
+procedimiento a través del cual el usuario ingresa a realizar la solicitud de usuario al
+
+-- 8 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+portal plc.mintransporte.gov.co. Para el grupo 3, la asignación de usuario se realizará
+cumpliendo con el protocolo de interoperabilidad establecido por la Entidad conforme
+las disposiciones del marco legal aplicable a la interoperabilidad entre sistemas de
+información que se encuentre vigente.
+Al respecto, los usuarios del grupo 2, toman datos de sus sistemas de información y la
+reportan al RNDC a través del portal interactivo y/o webservice y/o la aplicación de
+dispositivos móviles. El detalle de la forma en que se realizan estos reportes se
+encuentra en las guías de cada uno de los usuarios, las cuales serán publicadas en la
+página web del RNDC.
+Respecto a los usuarios del grupo 3, el Grupo de Logística del Ministerio diseña y define
+de común acuerdo con estos usuarios, los tipos de registros y los datos que podrán
+consultar a través de webservice o del portal web interactivo.
+Para efectos del sistema RNDC, los roles del sistema son los siguientes:
+1. Generador de carga: Es el titular del contrato de transporte o remitente, de
+conformidad con los artículos 1008 y 1009 del Código de Comercio y se obliga
+por cuenta propia o ajena, a entregar las cosas para la conducción, en las
+condiciones, lugar y tiempo convenidos. Podrá ser el destinatario de la carga
+cuando acepte el contrato de transporte.
+El generador de carga cuenta con un usuario principal y con usuarios
+dependientes. El usuario principal tiene la posibilidad de configurar los
+siguientes parámetros en el sistema RNDC: registrar fletes pactados, anular
+fletes, administrar usuarios, realizar consultas, administrar parámetros. Los
+usuarios dependientes únicamente pueden registrar y consultar información.
+La empresa de transporte registrará en cada remesa terrestre de carga el
+número y tipo de identificación de la persona (natural o jurídica) que tiene la
+calidad de generador de carga frente al contrato de transporte.
+2. Empresa de servicio público de transporte terrestre automotor de carga: Es
+aquella persona natural o jurídica legalmente constituida y debidamente
+habilitada por el Ministerio de Transporte, cuyo objeto social es la movilización
+de cosas de un lugar a otro en vehículos automotores apropiados y registrados
+para dicho servicio en condiciones de libertad de acceso, calidad y seguridad de
+los usuarios.
+La empresa de transporte cuenta con usuario principal y usuarios dependientes.
+Este usuario principal tiene las funcionalidades de crear usuarios dependientes,
+consultar todos los documentos registrados por los usuarios dependientes,
+modificar las contraseñas de los usuarios dependientes, registrar datos como
+cualquier usuario dependiente. El usuario principal de la empresa de transporte
+puede designar más de 1 usuario dependiente. Los usuarios dependientes
+únicamente pueden registrar y consultar información.
+3. Conductor: Es la persona designada por el propietario del vehículo como el
+autorizado para desarrollar la actividad de conducción operando un vehículo de
+servicio público de carga.
+Es un único usuario que tiene acceso al sistema RNDC, allí tiene la posibilidad
+de configurar los parámetros de firma electrónica, además de las otras
+funciones operativas definidas en el sistema. Este rol únicamente puede
+acceder a través de la aplicación de uso móvil del RNDC.
+4. Propietario, poseedor o tenedor de un vehículo de servicio público de carga: Es
+el titular de manifiesto electrónico de carga, es a él a quien se le cancela el
+Valor a Pagar.
+
+-- 9 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+Es un único usuario que tiene acceso al RNDC, allí tiene la posibilidad de
+configurar parámetros de firma electrónica y delegación de firma electrónica de
+manifiestos al transportador, además de las otras funciones operativas
+definidas en el sistema. Este rol únicamente puede acceder a través de la
+aplicación de uso móvil del RNDC.
+5. Empresa de servicios logísticos para el control vehicular (Empresa GPS): Es un
+tercero que presta los servicios de seguimiento logístico de los vehículos con
+tecnología de GPS o con el uso de otros periféricos electrónicos, previamente
+autorizado por la Empresa de Transporte en cada remesa para transmitir
+información de tiempos logísticos al RNDC.
+Este rol tiene un usuario principal, allí tiene la posibilidad de configurar
+parámetros, registrar información y gestionar usuarios. Además de las otras
+funcionalidades operativas definidas en el sistema.
+6. Puertos Autorizados (Terminal Fluvial o marítima): Aquellos titulares de
+concesión portuaria, homologaciones, autorizaciones temporales, licencias
+portuarias, prestadores de servicios portuarios, operadores portuarios o
+cualquier otro tipo de permiso portuario establecido en la Ley 1 de 1991, en la
+Ley 1242 de 2008 y en sus decretos reglamentarios que tenga a su cargo el
+Sistema de Información para el Enturnamiento Portuario para el ingreso al
+Puerto.
+La terminal portuaria cuenta con un usuario principal y más de un usuario
+dependiente si así lo define. El usuario principal tiene la posibilidad de configurar
+los siguientes parámetros en el sistema RNDC: Crear usuarios dependientes,
+crear terminal portuaria, modificar terminal portuaria, crear sistemas de
+enturnamiento, modificar sistemas de enturnamiento. El usuario principal no
+puede ingresar información de los registros RIEN como un usuario dependiente.
+Son únicamente los usuarios dependientes quienes pueden registrar
+información de los registros RIEN.
+7. Dirección de Tránsito y Transportes de la Policía Nacional (DITRA): Es un usuario
+de consulta única y no requiere creación de usuario. Su funcionalidad principal
+es la consulta de la información de los manifiestos. Puede verificar la
+autenticidad del manifiesto electrónico de carga.
+8. Municipio: Es un único usuario que tiene acceso al RNDC, no tiene la posibilidad
+de configurar parámetros, solamente tiene las funcionalidades operativas
+definidas en el sistema. Este rol únicamente puede acceder a través del portal
+web interactivo.
+9. Puestos de Control en Carretera:: Instituto Nacional de vías -INVIAS y/o la
+Agencia Nacional de Infraestructura -ANI, enviando información de los pasos de
+los vehículos por los puestos de control en carretera como básculas y gálibos.
+Es un único usuario que tiene acceso al RNDC para enviar información desde los
+puestos de control en carretera a través de los servicios Web.
+10. Sistemas para comparación de información: Sistema de información de
+empresas públicas o privadas que permiten al RNDC realizar la comparación de
+información ingresada por todos los usuarios. El RNDC provee la consulta de
+esa información enviada por las empresas públicas y privadas.
+4.2.2. Creación de usuarios y solicitud de alta en el sistema
+El sistema RNDC requiere de la creación de usuarios de acuerdo con los roles
+
+-- 10 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+presentados en la sección anterior. Para la creación de usuarios, se debe tener en
+cuenta el procedimiento de solicitud, los procesos funcionales y los niveles de usuarios
+que interactúan con el sistema, teniendo en cuenta las características de los roles y
+las actividades necesarias para ingresar al sistema.
+▪ Niveles de usuario
+El sistema RNDC cuenta con dos niveles de perfil de usuario, estos perfiles tienen la
+capacidad de gestionar funcionalidades propias de acuerdo con cada nivel del usuario
+en el sistema.
+4.2.2.1. Usuario principal
+Se encuentra un usuario principal el cual es el primer usuario creado en el sistema
+RNDC, quien, dependiendo del rol asignado, tiene la capacidad de crear usuarios
+dependientes de este usuario principal y configurar parámetros e instancias de su rol.
+Tabla 1. Esquema de usuarios principales y dependientes en RNDC
+Rol Usuario
+principal
+Usuarios
+dependientes
+Parámetros
+adicionales
+Generador de carga Sí Más de 1 (opcional) Sí
+Empresa de transporte Sí Más de 1 (opcional) Sí
+Conductor Único No Sí
+Titular de manifiesto Único No Sí
+Empresa GPS Sí No No
+Terminal fluvial o
+marítima
+Sí Obligatorio Sí
+DITRA Único No No
+Municipio Único No Sí
+Control en Carretera Único No No
+4.2.2.2 Usuario dependiente.
+Si el usuario principal requiere la designación de usuarios que realicen la actividad de
+envío de información al sistema RNDC, se debe crear uno o varios usuarios
+dependientes que van a estar ligados a cada usuario principal respectivamente. Un
+usuario dependiente es un usuario que se encuentra relacionado con un usuario
+principal, el cual es solicitante de vinculación a nombre de una persona (natural o
+jurídica).
+El usuario principal tiene la capacidad de crear los usuarios dependientes de acuerdo
+con el perfil del rol definido en la sección anterior. En el sistema RNDC, el usuario
+cuenta con una sección definida para crear y administrar los respectivos usuarios
+dependientes que sean relacionados con el usuario principal. Un usuario dependiente
+debe diligenciarse únicamente a través de un usuario principal. Son usuarios operativos
+que ingresan información, pero no tienen capacidad de modificar parámetros o
+
+-- 11 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+instancias dentro del RNDC.
+4.2.2.3 Usuario de Facturación Electrónica
+Es un tipo de usuario dependiente creado únicamente por los usuarios principales de
+las empresas de transporte, que tiene los privilegios de registrar la información de las
+facturas electrónicas.
+4.2.2.4 Usuario de Consultas Generales
+Es un tipo de usuario dependiente que tiene los privilegios de consultar la información
+que hayan registrado todos los otros usuarios dependientes. Un usuario dependiente
+normal solo puede consultar la información registrada por sí mismo.
+▪ Procedimiento de solicitud y alta en el sistema.
+El procedimiento para la solicitud del usuario principal y recuperación de contraseña
+se presenta a continuación.
+a) Un usuario principal, dependiendo de su rol, puede acceder al sistema
+RNDC para desarrollar las funciones que a este se le autorizan. Para acceder
+por primera vez al sistema RNDC es necesario obtener las respectivas
+credenciales a través de la solicitud de asignación de usuario, la cual se debe
+realizar a través de los canales definidos por el Ministerio de Transporte.
+b) Por parte del solicitante se debe verificar el cumplimiento de los
+requisitos de acuerdo con el tipo de rol, allegar la documentación solicitada y
+diligenciar el formulario dispuesto para la solicitud. En este sentido, el
+solicitante dentro de su proceso de asignación de usuario deberá adjuntar la
+documentación descrita en la guía de alta de usuario que se encuentra en el
+portal web interactivo del RNDC y el Portal Logístico de Colombia.
+c) Luego de diligenciar el formulario, el Ministerio de Transporte verifica el
+cumplimiento de los requisitos y genera un correo de notificación de creación
+de usuario.
+d) Este usuario debe completar el proceso de solicitud de acceso a través
+de la página del Portal Logístico de Colombia y finalmente dependiendo del rol,
+puede ingresar para iniciar su interacción con el sistema RNDC teniendo en
+cuenta las formas de acceso definidas en el presente manual de usuario y la
+resolución.
+e) El usuario principal debe actualizar sus datos de contacto como mínimo
+una vez cada año corriente de uso del sistema RNDC. Los datos de contacto
+que deben actualizar son: 1. el correo electrónico de usuario principal, 2.
+dirección de sede principal de la empresa, 3. ciudad y 4. teléfono de contacto.
+Mientras los datos se encuentren en proceso de verificación por parte de la
+entidad, el usuario podrá ingresar al sistema RNDC sin ningún inconveniente.
+f) El usuario de cualquier rol cuenta con una función para recuperar la
+contraseña en caso de olvidarla, esta funcionalidad se encuentra en la misma
+caja de texto de ingreso al sistema en el portal web interactivo del RNDC.
+g) Los usuarios del sistema RNDC, cuentan con un historial de registro de
+datos de solicitudes, así como registros de información que realiza cada usuario
+dentro del sistema. Estos registros se almacenan de forma permanente.
+h) En la sección de activación, el sistema le proporcionará la información
+del usuario principal generado y adicionalmente un campo para la creación de
+la contraseña de acceso al sistema la cual debe cumplir con los requisitos de
+
+-- 12 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+seguridad que son los siguientes: Contener una mayúscula y una minúscula,
+mínimo 8 caracteres de longitud, contener un número.
+i) Para diligenciar el formulario de activación se debe ingresar el correo
+electrónico al cual se recibió el nombre de usuario y el enlace que debe seguir
+para la creación de su contraseña, se confirma la contraseña, adicionalmente
+de realizar la operación matemática de seguridad. De esta forma se tendrá el
+proceso completado.
+j) Luego, el usuario podrá acceder a través de las páginas oficiales del
+RNDC a realizar las funciones de expedición de información siguiendo los
+lineamientos de las relaciones económicas y de operación del servicio público
+de transporte terrestre automotor de carga.
+4.2.2.5 Solicitar restauración de contraseña
+-Nombre del proceso: Solicitar restauración de contraseña.
+-Objetivo del proceso: Es el proceso mediante el cual los usuarios principales del RNDC
+solicitan la recuperación de la contraseña que utilizan para el acceso al sistema.
+-Proceso precedente: Ninguno.
+-Entrada de información: Usuario.
+-Control de entrada de información: Se valida que el usuario exista en la base de datos
+de usuarios principales para proceder a enviar el correo de recuperación de contraseña.
+-Salida de información: Notificación de envío exitoso de correo electrónico al correo
+asociado a la cuenta.
+-Control de salida de información: Formulario de recuperación de contraseña.
+-Proceso siguiente: Ninguno.
+TÍTULO 2
+PROCESOS FUNCIONALES DEL SISTEMA RNDC
+5.. PROCESOS FUNCIONALES
+El sistema del RNDC cuenta con un conjunto de procesos funcionales que permiten al
+usuario sin importar su rol en la plataforma, la realización de los procesos de acuerdo
+con lo establecido en la normatividad aplicable al sistema RNDC.
+Los procesos funcionales se dividen en tres grupos:
+• Los principales los cuales son los procesos encargados de recibir o
+procesar información directamente relacionada con la operación de transporte.
+• El segundo grupo, corresponde a las anulaciones de los procesos
+principales
+• El tercer grupo corresponde a los procesos auxiliares que se encargan
+de definir o parametrizar los diferentes valores dentro del sistema RNDC.
+Funcionalidad y servicios ofrecidos.
+
+-- 13 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+En la lectura de los procesos del Sistema del Registro Nacional de Despachos de Carga
+– RNDC se tienen de la siguiente forma:
+- Título: corresponde a la designación del usuario responsable y el nombre
+del proceso relacionado con el actor.
+- Nombre del proceso: Nombre que se le asigna al proceso.
+- Objetivo del proceso: Permite identificar la intensión y la finalidad del
+proceso hacia el cual se dirigen los esfuerzos para lograr una meta de usuario
+especifica dentro del modelo de procesos del sistema RNDC.
+- Proceso precedente: proceso que se encuentra inmediatamente antes
+del proceso actual.
+- Entrada de información: Contexto de información relacionada con los
+datos que recibe el proceso mencionado del RNDC.
+- Control de entrada de información: conjunto de tareas internas del RNDC
+donde valida que la información recibida cuenta con el tipo, rango, restricciones,
+estructura, codificación, combinación paramétrica o comprobación de presencia
+de los datos ingresados en las interfaces del RNDC o través del canal definido
+en el proceso.
+- Salidas de información: Contexto de información relacionada con los
+datos que genera el proceso mencionado en el RNDC.
+- Control de salida de información: Conjunto de tareas internas del RNDC
+donde permite al usuario tener la capacidad consultar el resultado del proceso
+de ingreso de datos al RNDC.
+- Proceso siguiente: Proceso que se encuentra inmediatamente después
+del proceso actual.
+6. 5.1. Creación de terceros y registro de vehículos.
+5.1.1 Registrar terceros y conductores
+a) Nombre del proceso: Registrar terceros y conductores.
+b) Objetivo del proceso: Para la implementación del RNDC en una empresa
+de transporte se deben registrar todos los terceros que puedan ser actores
+dentro del proceso. Los tipos de terceros en el RNDC son: conductor,
+destinatario, remitente, tenedor de vehículo, propietario de vehículo, titular de
+manifiesto y generador de carga.
+c) Proceso precedente: Ninguno
+d) Entrada de información:
+- Datos generales del tercero (tipo de identificación, número de
+identificación, nombre, primer apellido, segundo apellido)
+- Datos obligatorios de ubicación.
+- Datos obligatorios de conductor.
+e) Control de entrada de información.
+Se validan cada uno de los campos descritos en el diccionario de datos
+publicado por el Ministerio.
+
+-- 14 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+f) Salida de información:
+- Número de radicado de registro de terceros.
+g) Control de salida de información: el usuario podrá consultar la
+información recibida por el sistema a través del número de radicado
+presentado por el sistema.
+h) Proceso siguiente: ninguno.
+5.1.2. Registrar vehículos y remolques
+a) Nombre del proceso: Registrar vehículos y remolques.
+b) Objetivo del proceso: Para la implementación del RNDC en una empresa
+de transporte se deben registrar todos los automotores y remolques. Se pueden
+registrar: camionetas, camiones rígidos, tractocamiones, semirremolques,
+remolques y remolques balanceados. Algo que puede generar confusión es crear
+remolques y semirremolques como vehículos, ya que no son propiamente
+vehículos motorizados, pero se registran en el sistema por la misma opción.
+Para crear un vehículo se debe haber creado anteriormente como tercero al
+tenedor y el propietario. Siempre debe haber tenedor y propietario asignado a
+un vehículo. En el caso de un leasing, la empresa de leasing figura como
+propietario y el tomador del leasing es el tenedor.
+Este registro constituirá la base de datos que contiene a los vehículos
+registrados por la empresa para la operación que podrán ser vehículos propios
+o vinculados de terceros. Esta información estará sincronizada con la
+información del registro único nacional de transporte (RUNT) para efectos de
+calidad de la información.
+c) Proceso precedente: ninguno.
+d) Entrada de información:
+- Placa
+- Características generales como la configuración.
+- SOAT.
+- Propietario.
+- Tenedor.
+e) Control de entrada de información:
+- Se valida contra el RUNT algunos datos
+- Se validan cada uno de los campos descritos en la guía Diccionario de
+Datos publicado por el Ministerio.
+- Debe existir un propietario por cada vehículo.
+- Debe existir un tenedor para cada vehículo.
+f) Salida de información: número de radicado de registro de vehículo.
+g) Control de salida de información: el usuario podrá consultar la
+información recibida por el sistema a través del número de radicado presentado
+por el sistema.
+
+-- 15 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+h) Proceso siguiente: ninguno.
+7. 5.1.3. Control de empresas.
+a) Nombre del proceso: Controlar empresas.
+b) Objetivo del proceso: Realizar de forma voluntaria la selección de las
+empresas de transporte que podrán registrar remesas terrestres de carga al NIT
+del Generador de Carga o excluir del listado aquellas que ya no cuentan con
+autorización.
+c) Proceso precedente: Ninguno
+d) Entrada de información:
+- NIT Empresa de Transporte con digito de verificación.
+e) Control de entrada de información (validación de ingreso):
+- Se validan cada uno de los campos descritos en el diccionario de datos
+publicado por el Ministerio.
+f) Salidas de información:
+- NIT de la empresa
+- Nombre de la empresa
+- Plazo acordado para la expedición de la factura
+g) Control de salida de información: lista actualizada de empresas de
+transporte.
+h) Proceso siguiente: Registrar tarifa de fletes para un periodo de tiempo.
+8. 5.1.4. Solicitar información de las remesas por parte de la empresa
+GPS.
+a) Nombre del proceso: Reporte de tiempos logísticos
+b) Objetivo del proceso: Solicitar la información de las remesas para las
+cuales se realiza el seguimiento satelital por parte de la empresa de GPS, para
+poder enviar el registro de los tiempos logísticos de las remesas, que han sido
+autorizadas por la empresa de transporte al momento de expedir la remesa.
+c) Proceso precedente: Registrar datos del manifiesto.
+d) Entrada de información:
+- NIT empresa de servicios logísticos para el control vehicular (Empresa
+GPS)
+e) Control de entrada de información. Se validan los siguientes datos para
+la entrega de información:
+
+-- 16 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- La consulta de información de remesas no se podrá hacer en intervalos
+inferiores a 15 minutos por consulta.
+- Los datos correspondan a la empresa de GPS autorizada por las
+empresas de transporte.
+- Se validan cada uno de los campos descritos en la guía Diccionario de
+Datos publicado por el Ministerio.
+f) Salida de información:
+- Placa de vehículo y la información de la remesa con los puntos de Cargue
+y Descargue
+g) Control de salida de información: la empresa de GPS puede consultar las
+remesas a través de la página principal del portal interactivo del RNDC.
+h) Proceso siguiente: registrar datos de avance de remesa GPS, Cumplido
+Inicial de Remesa.
+9. 5.2. Manifiesto electrónico de carga.
+La empresa de transporte habilitada, persona natural o jurídica, deberá diligenciar de
+manera completa y fidedigna los datos mínimos y obligatorios requeridos en el registro
+Manifiesto Electrónico de Carga, a través del sistema del Registro Nacional de
+Despachos de Carga -RNDC.
+10. 5.2.1. Registro opcional información preliminar de carga.
+a) Nombre del proceso: Registro opcional información preliminar de carga.
+b) Alcance: La empresa de transporte, de forma opcional podrá reportar en el
+sistema del Registro Nacional de Despachos de Carga – RNDC los datos requeridos
+para el registro: Información Preliminar de Carga.
+c) Objetivo del proceso: Consiste en el registro opcional por parte de la empresa
+de transporte de los datos relacionados con el sitio de cargue y el de descargue,
+tipo y cantidad estimada de mercancía, el tiempo total pactado para el cargue y
+para el descargue de la mercancía. Los datos del Registro de Información Preliminar
+de Carga se entienden como datos válidos para diligenciar el Registro Remesa
+Terrestre de Carga.
+d) Proceso precedente: Ninguno
+e) Entrada de información:
+- Consecutivo interno de la empresa de transporte.
+- El sitio de Cargue.
+- El sitio de descargue.
+- El tipo de mercancía.
+- La cantidad estimada de mercancía.
+
+-- 17 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- El tiempo total pactado para el cargue.
+- El tiempo total pactado para el descargue de la mercancía.
+- Los demás datos definidos en la guía Diccionario de Datos previamente
+elaborado y publicado por el Ministerio de Transporte.
+Nota: Antes de ingresar la información al proceso, se requiere “registrar terceros”,
+correspondiente a remitente, destinatario y generador de acuerdo con los parámetros
+solicitados.
+f) Control de entrada de la información (validación de ingreso):
+- Consecutivo de la información preliminar de carga. Es obligatorio y debe
+corresponder a un consecutivo único asignado por cada empresa de transporte.
+Una cadena de hasta 15 caracteres alfanuméricos. (se verifica que no se repita).
+o Se validan cada uno de los campos definidos en la guía
+Diccionario de Datos publicado por el Ministerio de Transporte.
+g) Salidas de información: Número de radicado de información preliminar de carga.
+h) Control de salida de información (validación de salida): Número de radicado de
+información preliminar de carga. El usuario podrá hacer uso de la opción de consulta
+de documentos de este proceso, en un intervalo de tiempo con el fin de revisar
+validaciones.
+i) Proceso siguiente: registrar información de viaje, para posteriormente registrar
+información de Remesa.
+5.2.2. Registro opcional Información de Viaje.
+a) Nombre del proceso: Registrar información de viaje.
+b) Alcance: La empresa de transporte, de forma opcional podrá reportar en el
+sistema de información Registro Nacional de Despachos de Carga – RNDC-, los
+datos requeridos para el registro: Información de Viaje.
+c) Objetivo del proceso: Consiste en el registro opcional por parte de la empresa
+de transporte de los datos relacionados con la placa del vehículo y la del remolque
+o semirremolque, la identificación del conductor y la información del Registro
+Información Preliminar de Carga. Los datos del Registro de Información de viaje se
+entienden como datos válidos para diligenciar el registro Manifiesto Electrónico de
+Carga.
+d) Proceso precedente: Registrar información preliminar de carga.
+e) Entrada de información:
+- Consecutivo de viaje
+- Información preliminar de carga
+- Placa del vehículo.
+- Placa del remolque o semirremolque.
+
+-- 18 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- La identificación del conductor.
+- Los demás datos definidos en la guía Diccionario de Datos previamente
+elaborado y publicado por el Ministerio de Transporte.
+- Información previa: Antes de ingresar la información al proceso, se requiere a
+través de la actividad de “registrar terceros” e ingresar los datos de conductor y
+vehículos de acuerdo con los parámetros solicitados.
+f) Control de entrada de información (validación de ingreso). Los siguientes
+campos son validados:
+- Consecutivo de la información del viaje. Es obligatorio y debe corresponder a un
+consecutivo único asignado por cada empresa de transporte. Una cadena de hasta
+15 caracteres alfanuméricos. (se verifica que no se repita)
+- Información preliminar de carga (consecutivo)
+- Se validan cada uno de los campos definidos en la guía Diccionario de Datos
+publicado por el Ministerio de Transporte.
+g) Salidas de información:
+- Número de radicado de información de viaje
+h) Control de salida de información: Número de radicado de información de viaje
+i) Proceso siguiente: Registrar datos remesa
+5.2.3. Registro obligatorio remesa terrestre de carga.
+a) Nombre del proceso: registrar remesa terrestre de carga.
+b) Alcance:
+La empresa de transporte realizará el/los registro(s) de Remesa Terrestre de Carga
+en el sistema del Registro Nacional de Despachos de Carga – RNDC-, que se
+vincularán a un Manifiesto Electrónico de Carga. El sistema del Registro Nacional de
+Despachos de Carga – RNDC- procederá con la asignación de número de radicado
+que corresponde a cada registro Remesa Terrestre de Carga. Una vez una Remesa
+ha sido asociada a un Manifiesto Electrónico de Carga, no puede ser asociada a otro
+viaje, excepto en los casos de trasbordo de mercancía.
+c) Objetivo del proceso:
+Es el registro obligatorio de la información que permite a la empresa de transporte
+generar el documento remesa terrestre de carga, conforme a lo establecido en el
+artículo 2.2.1.7.5.5. del Decreto 1079 de 2015, el cual contiene los datos relacionados
+con el nombre e identificación del generador de carga (remitente o destinatario);
+nombre y dirección de la sede del lugar de cargue y lugar de descargue, la
+naturaleza, código y descripción de la mercancía; el peso o el volumen; los tiempos
+totales pactados para el cargue y el descargue (En horas y minutos); información
+sobre la cita del cargue y del descargue; la unidad de empaque y cantidad de
+unidades de empaque y de manera opcional la información del seguro que ampara
+la mercancía objeto de transporte, cuando este exista.
+Tipos de Operaciones de Remesa:
+- General: Es toda aquella remesa que no corresponda a contenedores ni
+mercancía consolidada.
+
+-- 19 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Mercancía consolidada: Es la consolidación en una sola remesa de la
+información de varios paquetes de diferentes generadores de carga, en los que la
+operación de transporte corresponde al mismo punto de cargue y el mismo punto
+de descargue. En este caso el remitente de la carga corresponderá al mismo NIT
+de la empresa de transporte responsable de la operación de transporte, es decir
+la empresa de transporte.
+- Contenedor Cargado: Son las remesas en la cual la carga transportada se lleva
+dentro de un contenedor.Contenedor Vacío: Son las remesas que transportan los
+contenedores sin carga.
+d) Proceso precedente: Registrar información de carga (opcional)
+e) Entrada de información:
+- Consecutivo interno de la empresa
+- Información preliminar de carga (opcional).
+- Nombre e identificación del generador de carga (remitente o destinatario).
+- Nombre y dirección de la sede del lugar de cargue y lugar de descargue, así
+como las coordenadas geo-referenciadas cuando el control de los tiempos
+logísticos se realice con tecnología de GPS o con el uso de otros periféricos
+electrónicos.
+- La naturaleza, código y descripción de la mercancía.
+- El peso o el volumen.
+- El tiempo total pactado para el cargue de la mercancía (En horas y minutos).
+- El tiempo total pactado descargue de la mercancía (En horas y minutos).
+- La información sobre la cita del cargue y la cita del descargue.
+- La unidad de empaque y cantidad de unidades de empaque.
+- De manera opcional la empresa de transporte podrá registrar la información del
+seguro que ampara la mercancía objeto de transporte, cuando este exista.
+- Peso del contenedor vacío, en las remesas con operación de contenedor cargado
+o contenedor vacío.
+- Los demás datos definidos en la guía Diccionario de Datos previamente
+elaborado y publicado por el Ministerio de Transporte.
+f) Control de entrada de la información (validación de ingreso):
+- La empresa de transporte debe tener la habilitación activa.
+- Consecutivo de la Remesa. Es obligatorio y debe corresponder a un consecutivo
+único asignado por cada empresa de transporte. Una cadena de hasta 15
+caracteres alfanuméricos. (se verifica que no se repita)
+- No se permiten registros duplicados, es decir, que el RNDC vigila que no se repita
+el consecutivo de la remesa.
+- Código de la Mercancía. Debe coincidir con la Codificación Armonizada según
+sea el caso, y debe ingresarse dos (02) ceros antes o Codificación de las Naciones
+Unidas cuando se trate de mercancías peligrosas y desechos peligrosos.
+
+-- 20 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Si la operación de la remesa es de contenedor, se debe escribir el peso vacío
+del contenedor. Ese peso vacío se valida contra la tabla paramétrica que tiene el
+RNDC para cada tipo de empaque de categoría contenedor, la cual puede ser
+consultada en el portal web interactivo o por web-services.
+- Si la operación de la remesa es de contenedor vacío, la cantidad de la mercancía
+debe ser 0 y en las otras operaciones debe ser mayor a 0.
+- La unidad de empaque debe pertenecer a la lista de unidades de empaque
+publicada por el RUNT y el RNDC.
+- La naturaleza de la carga corresponderá a una de las listadas en la tabla
+paramétrica que para el efecto se publique en portal web interactivo del RNDC.
+- Si el código de la mercancía corresponde a mercancía que puede ser extra-
+pesada o extra-dimensionada, se habilita el campo de validación del respectivo
+permiso del INVIAS. Se permite la naturaleza extrapesada o extra dimensionada
+si el código de la mercancía está marcado con tal naturaleza. Estos códigos son
+consultables en el portal del RNDC en el maestro de Codificación Armonizada y
+de Mercancía Peligrosa de las Naciones Unidas.
+- Algunas mercancías tienen definida su única unidad de medida permitida:
+Galones o Kilogramos. Consultable en el portal del RNDC en el maestro de
+Codificación Armonizada y de Mercancía Peligrosa.
+- La descripción corta del producto es un texto libre para detallar mejor la
+mercancía y debe ser de mínimo 4 caracteres y máximo 60.
+- Cuando el generador de carga registre en el módulo de control de empresas
+cada una de las empresas de transporte que están autorizadas como proveedor
+del servicio público de transporte de carga por carretera y que pueden registrar
+sus datos como generador de carga en las remesas de terrestres de carga, el
+RNDC realizará esta validación. En el evento en qué el generador de carga no
+maneje el listado de empresas de transporte autorizadas el RNDC no realiza
+validación.
+- La cabecera municipal del sitio de cargue o descargue, según la División Política
+Administrativa, no puede hacer parte de los municipios marcados como de acceso
+imposible por carretera. Consultable en el portal del RNDC. Ejemplo: Islas.
+- Los puntos de cargue y descargue deben tener definidas las coordenadas geo-
+referenciadas cuando la empresa de transporte autoriza enviar información de
+los tiempos logísticos directamente al RNDC para la remesa a través de una
+Empresa de Servicios Logísticos para el Control Vehicular.
+- Los municipios de cargue y descargue no pueden ser iguales, excepto cuando
+se transporten desechos peligrosos. Cuando se trate de viajes de radio de acción
+municipal (Transporte Municipal), no se registran datos para remesa de transporte
+de carga a vincular con un manifiesto electrónico de carga, en estos eventos, se
+debe realizar el registro de remesa municipal vinculada a un registro de Viaje
+Municipal.
+- La duración del tiempo pactado para efectuar el cargue y el tiempo pactado
+para efectuar el descargue se deben especificar a nivel de horas y minutos.
+- Las fechas de cita del cargue y cita del descargue se registran Fecha y Hora en
+formato de hora militar= hh:mm.
+- No se permite en la hora de las citas de cargue y descargue, las 12 de la noche
+= 24:00. Deberá usarse de 00:00 a 23:59.
+- No se permiten en las citas de cargue y descargue fechas futuras mayores a 30
+días.
+
+-- 21 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- La diferencia en días entre la cita del descargue y la cita del cargue no puede
+ser mayor a 6 días (Duración del viaje en carretera), excepto en el transporte de
+maquinaria, código: 84 y que sea extradimensionada el cual la diferencia es de
+máximo 30 días. Si la empresa necesita reportar fechas de cita con diferencia
+mayor a lo estipulado anteriormente, deberá registrar previamente esta excepción
+en el RNDC asumiendo la responsabilidad sobre este dato.
+- La fecha de cita del cargue no puede ser anterior a 30 días calendario atrás. Si
+la empresa de transporte necesita reportar fecha de cita del cargue con más de
+30 días calendario hacia atrás deberá registrar previamente esta excepción en el
+RNDC asumiendo la responsabilidad sobre este dato.
+- El municipio de trasbordo planeado no puede coincidir con los municipios de
+cargue o descargue.
+- Otras validaciones están definidas en el Diccionario de Datos publicado por el
+Ministerio de Transporte.
+g) Salidas de información:
+- Número de radicado de remesa terrestre de carga.
+- Remesa terrestre de carga: La empresa de transporte podrá hacer uso de los
+datos del registro remesa terrestre de carga radicado en el sistema y bajo su
+responsabilidad podrá generar un documento en formato pdf.
+h) Control de salida de información (validación de salida):
+- El usuario podrá consultar con el número de radicado de remesa terrestre de
+carga entregado por el sistema de información RNDC que la información guardada
+en la base de datos coincide con los datos por él registrados. Esta consulta se
+puede hacer por el portal interactivo o por web-services.
+i) Proceso siguiente: Registrar datos manifiesto electrónico de carga.
+5.2.4 Registro obligatorio manifiesto electrónico de carga.
+a) Nombre del proceso: Registro y expedición de datos de manifiesto electrónico
+de carga.
+b) Alcance:
+La empresa de transporte habilitada, persona natural o jurídica, deberá diligenciar
+de manera completa y fidedigna los datos mínimos y obligatorios requeridos en el
+registro Manifiesto Electrónico de Carga, a través del sistema del Registro Nacional
+de Despachos de Carga –RNDC. Una vez la empresa de transporte ha consignado
+todos los datos mínimos y obligatorios, el sistema del Registro Nacional de
+Despachos de Carga -RNDC- generará un número de radicación y un código de
+seguridad cifrado que deberá ser parte del contenido del código cuya
+representación gráfica debe aparecer tanto en el formato electrónico/digital o en el
+formato impreso del manifiesto electrónico de carga. El manifiesto electrónico de
+carga que expida la empresa de transporte con esa información inicial será el
+documento que ampara el transporte de mercancías ante las distintas autoridades.
+El código de seguridad cifrado que contiene el manifiesto electrónico de carga,
+servirá para la validación de la operación y la autenticidad del documento de
+transporte por parte de las autoridades de control en vía.
+
+-- 22 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+c) Objetivo del proceso:
+- Manifiesto Electrónico de Carga: Es el registro de la información que permite a
+la empresa de transporte generar el documento manifiesto electrónico de carga
+a través del sistema del Registro Nacional de Despachos de Carga -RNDC, el cual
+ampara el transporte de mercancías ante las distintas autoridades, por lo tanto,
+debe ser portado por el conductor del vehículo durante todo el recorrido. El
+manifiesto electrónico de carga en formato “pdf” puede ser portado por el
+conductor en carretera en forma electrónica en un dispositivo móvil.
+Con la expedición del Manifiesto Electrónico de Carga, el sistema de información
+Registro Nacional de Despachos de Carga -RNDC generará un código de seguridad
+cifrado que deberá ser parte del contenido del código, cuya representación gráfica
+debe aparecer en el formato “pdf” o en el formato impreso del Manifiesto
+Electrónico de Carga y servirá para la validación de la operación y la autenticidad
+del documento por parte de las autoridades de control en carretera.
+- Los datos mínimos que contendrá el Manifiesto Electrónico de Carga
+corresponderán a los establecidos en el formato de Manifiesto Electrónico de
+Carga definido en la “Guía del Usuario del RNDC”.
+- Los datos de la información del viaje serán heredados por el manifiesto de carga,
+razón por la cual la empresa de transporte podrá reportar el consecutivo asignado
+a la información del viaje en este paso, pero si no registró información de viaje,
+puede dejar en blanco ese dato y el manifiesto necesitará todos los datos
+obligatorios sin heredar.
+- Adicionalmente, el manifiesto de carga requerirá un consecutivo propio y único
+para la empresa de transporte. El RNDC valida que no se repitan.
+- El RNDC validará la suma de las cantidades de carga de las remesas con la
+capacidad máxima del vehículo a realizar el viaje. La capacidad del vehículo será
+según la configuración resultante de la combinación de las placas registradas, la
+cual podrá ser consultada en el portal del RNDC.
+- Adicionalmente, en el manifiesto de carga se debe reportar la información
+detallada del valor del viaje, con sus respetivas retenciones en la fuente, retención
+de ICA, anticipo y los compromisos de pago del saldo. De conformidad con el
+artículo 2.2.1.7.5.2. del Decreto 1079 de 2015, el manifiesto electrónico de carga
+será firmado por la empresa de transporte y por el propietario o conductor del
+vehículo, según corresponda. La expedición del manifiesto electrónico de carga a
+través del sistema del Registro Nacional de Despachos de Carga -RNDC-, hace las
+veces de firma de la empresa de transporte cuando el sistema del Registro
+Nacional de Despachos de Carga -RNDC-, asigne al Manifiesto Electrónico de
+Carga el número de radicado de aceptación.
+- El propietario del vehículo en su condición del titular del Manifiesto Electrónico
+de Carga podrá realizar la firma del mismo a través de la aplicación para
+dispositivos móviles del sistema del Registro Nacional de Despachos de Carga –
+RNDC TRANSPORTADOR. El titular del Manifiesto Electrónico de Carga podrá a
+través de la aplicación para dispositivos móviles del sistema del Registro Nacional
+de Despachos de Carga – RNDC TRANSPORTADOR- autorizar al conductor para
+que realice en su nombre y representación la firma del Manifiesto Electrónico de
+Carga.
+- El Manifiesto Electrónico de Carga que sea portado por el conductor en formato
+pdf en forma electrónica en un dispositivo móvil debe cumplir el requisito de la
+firma por parte del propietario o conductor, según corresponda.
+- Tipos de Manifiesto electrónico de carga son:
+
+-- 23 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+a) General: Es el manifiesto que ampara la operación de transporte
+en un viaje diferente a las operaciones: varios viajes en el día, en vacío,
+multiparada y de ida y regreso.
+b) Varios viajes en el día: Es el manifiesto que ampara la operación
+de transporte que se desarrolla en un mismo día y en un único vehículo,
+para trasladar una cantidad de carga que requiera varios viajes en una
+misma ruta origen - destino. En este manifiesto solo se podrá asociar
+una sola remesa.
+c) Multiparada: Es el manifiesto que ampara la operación de
+transporte en un viaje que incluye paradas en municipios intermedios de
+la ruta origen y destino del manifiesto, para hacer operaciones de cargue
+o descargue. Para el viaje multiparada se debe asociar más de una
+remesa, las cuales pueden ser de generadores de carga distintos.
+d) Ida y Regreso: Es el manifiesto que ampara la operación de
+transporte correspondiente a aquel viaje de ida y regreso en el que el
+origen y destino es un mismo municipio, y para el que la empresa de
+transporte debe definir cuál es el municipio intermedio o de retorno,
+ejecutado por un mismo vehículo de servicio público de transporte de
+carga. El viaje de ida y regreso transporta mínimo dos remesas, las cuales
+pueden ser de generadores de carga distintos.
+d) Proceso precedente: Registrar remesa terrestre de carga
+e) Entrada de información:
+- Consecutivo del Manifiesto (Consecutivo interno asignado por la empresa)
+- Información preliminar (Consecutivo de información de viaje) Opcional
+- Nombre empresa de transporte.
+- Número de Identificación Tributaria de la empresa de transporte– NIT-
+- Características generales del manifiesto electrónico de carga (Tipo de
+manifiesto electrónico de carga, fecha de expedición, origen y destino del viaje).
+- Cuando el origen – destino del viaje se encuentre definida dentro del sistema
+Sicetac la empresa de transporte debe indicar si usa una vía alterna definida
+también en el SiceTac.
+- Viajes en el día, para cuando el tipo de manifiesto de carga sea “varios viajes en
+el día”.
+- Datos del titular del manifiesto electrónico de carga (Tipo de identificación y
+número de identificación, nombre, teléfono, dirección y municipio y sede).
+- Placa vehículo del vehículo automotor.
+- Placa remolque.
+- Placa segundo remolque (Opcional).
+
+-- 24 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Datos del conductor (Tipo de identificación y número de identificación, nombre,
+dirección, teléfono y municipio y categoría licencia de conducción y su
+vencimiento.).
+- Datos del segundo conductor (Opcional) (Tipo de identificación y número de
+identificación, nombre, dirección, teléfono y municipio y categoría licencia de
+conducción y su vencimiento.).
+- Datos del Valor a Pagar (Valor a pagar por el viaje, tipo Valor Pactado (Viaje, Kilo,
+Galón), lugar del Pago, retención ICA (%x1000), fecha de pago, neto a pagar, valor
+anticipo y saldo valor a pagar).
+- Información Remesas Terrestres de Carga vinculadas al Manifiesto Electrónico
+de Carga.
+- Indicar si la firma de aceptación del manifiesto electrónico de carga será por
+medios electrónicos, a través de la aplicación para dispositivos móviles del RNDC.
+- El detalle de cada uno de los otros datos requeridos se encuentra en la guía
+Diccionario de Datos publicado por el Ministerio de Transporte.
+f) Control de entrada de la información:
+- La empresa de Transporte debe tener la habilitación activa.
+- Consecutivo del Manifiesto debe corresponder a un consecutivo único de cada
+empresa de transporte. Una cadena de hasta 15 caracteres alfanuméricos.
+- El consecutivo del manifiesto debe estar en el rango autorizado por la empresa
+de transporte para el usuario que intenta expedir el manifiesto. Este control es
+opcional.
+- No se permiten manifiestos duplicados, es decir, el RNDC vigila que el
+consecutivo del manifiesto no se repita.
+- La fecha de expedición del manifiesto (fecha pactada para el inicio del viaje), no
+puede ser una fecha futura mayor de 30 días. No puede ser anterior a 90 días
+atrás. Si la empresa de transporte necesita reportar fecha de expedición del
+manifiesto con más de 90 días hacia atrás deberá registrar previamente esta
+excepción en el RNDC asumiendo la responsabilidad sobre este dato.
+- La empresa de transporte debe definir si autoriza o no, al conductor, a que envíe
+los tiempos logísticos (Cumplido Inicial de Remesa), desde la aplicación para
+dispositivos móviles APP RNDC Transportador.
+- La empresa de transporte debe definir si autoriza o no, al propietario y
+conductor, a que firmen electrónicamente el manifiesto de carga, desde la
+aplicación para dispositivos móviles del RNDC.
+- Si en la operación de transporte vinculada al manifiesto tiene como
+característica hacer un trasbordo, la empresa de transporte debe digitar el
+consecutivo interno asignado al manifiesto que transporta la mercancía desde el
+punto de cargue hasta el punto de transbordo y el RNDC valida que se encuentre
+pendiente de iniciar el viaje (transbordo planeado) o cumplido con tipología de
+suspensión del viaje (transbordo no planeado). Para estos casos la remesa
+terrestre de carga es la misma para los dos manifiestos (no se debe generar una
+nueva remesa).
+- Cada vez que una empresa de transporte desee expedir un nuevo manifiesto, el
+sistema verificará que la cantidad de registros de Cumplido de Manifiestos
+pendientes por registrar por parte de la Empresa de Transporte que tengan más
+
+-- 25 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+de 5 días hábiles contados a partir de la fecha de entrega de la mercancía
+registrada en el Cumplido de Remesa (Fecha y hora de salida del descargue) o
+cita pactada para el descargue si no ha reportado el Cumplido de Remesa, no
+supere el 20% del número total de Manifiestos Electrónicos de Carga expedidos
+en los últimos 30 días calendario. De superarse el 20%, el sistema anunciará a la
+Empresa de Transporte que no se permitirá la generación de nuevos Manifiestos
+Electrónicos de Carga. Como prevención y para evitar llegar a este límite, el
+sistema provee a la empresa de transporte de una funcionalidad que le permite
+consultar la lista de los manifiestos que están pendientes de cumplir y cuya fecha
+ya expiró.
+- No se permite la expedición de más de 10 manifiestos para la misma fecha de
+expedición de una placa de automotor. De requerirse más manifiestos
+electrónicos de carga para el mismo día la Empresa de Transporte deberá
+registrar previamente la excepción en el RNDC asumiendo la responsabilidad
+sobre este dato.
+- Si el tipo de manifiesto es Varios Viajes en el día (misma ruta y remesa a
+transportar), la empresa de transporte debe definir cuántos viajes se planean
+realizar en la fecha planeada o fecha de expedición.
+- El municipio de Origen del Viaje y el municipio Destino del Viaje son obligatorios.
+Pueden ser Veredas utilizando los 3 últimos dígitos del código de la división
+política administrativa. El municipio Origen debe coincidir con mínimo un sitio de
+cargue de alguna de las remesas a transportar. El municipio Destino debe coincidir
+con mínimo un sitio de descargue de alguna de las remesas a transportar.
+- El municipio de Origen debe ser distinto al municipio Destino, excepto para el
+transporte de desechos peligrosos o cuando se trate de manifiesto de tipo ida y
+regreso.
+- La fecha de vigencia de la licencia de conducción debe ser mayor a la máxima
+fecha de cita del descargue de las remesas cargadas en el manifiesto.
+- El segundo conductor debe cumplir los mismos requisitos del primer conductor.
+- Si el tipo de identificación del Titular del manifiesto es Nit, debe especificarse
+el digito de chequeo según normatividad colombiana.
+- La placa del automotor debe estar en el registro RNA del RUNT con las siguientes
+características: Matricula Activa, Servicio Público y Modalidad de Carga.
+- La fecha de vencimiento del SOAT del vehículo automotor registrado en el RUNT
+debe ser mayor a la fecha más alta de las citas de descargue de las remesas
+cargadas en el manifiesto.
+- La fecha de vencimiento del RTM del vehículo automotor registrado en el RUNT
+debe ser mayor a la fecha más alta de las citas de descargue de las remesas
+cargadas en el manifiesto, excepto para vehículo nuevo el cual es el que tiene
+menos de 2 años de la fecha de la matrícula o según la disposición vigente.
+- La placa del vehículo automotor no puede tener anotación como “automotor
+con omisiones en el registro inicial” en el RUNT y en el RNDC, al momento de
+expedir un nuevo Manifiesto Electrónico de Carga. En el evento en qué la Empresa
+de Transporte desee continuar con el proceso de expedición del Manifiesto
+Electrónico de Carga para un vehículo marcado con dicha anotación deberá
+manifestar en el portal RNDC su autorización asumiendo que es consciente de
+esta condición previo a la expedición. La información de este proceso será
+reportada por el RNDC a la Superintendencia de Transporte para lo de su
+competencia.
+
+-- 26 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- El valor a pagar del Manifiesto debe ser mayor a 0, excepto cuando la
+identificación del titular del manifiesto electrónico de carga y la identificación del
+tenedor del vehículo automotor es igual a la identificación de la empresa de
+transporte (Transporte en Flota Propia).
+- El valor de la retención en la fuente debe corresponder aquel definido
+legalmente (año 2022 1% del valor a pagar, excepto cuando sea menor a 4 UVT, el
+cual sería 0. Artículo 1.2.4.4.8 del Decreto 1625 de 2016 “Decreto Único
+Reglamentario en Materia Tributaria”).
+- El factor de retención de ICA (con base en mil) debe ser el definido por el
+municipio del sitio de cargue. Si un municipio no ha digitado el factor de retención
+de ICA en el RNDC, no se hace la validación descrita.
+- El valor del anticipo no puede ser mayor al valor a pagar menos la sumatoria de
+las dos retenciones (retención en la fuente y retención de ICA).
+La fecha pactada para el pago del saldo del valor a pagar no puede ser mayor a
+la fecha máxima de pago definida en el artículo 2.2.1.7.6.6 del Decreto 1079 de
+2015 (5 días hábiles después de la fecha de entrega de la mercancía: Fecha
+pactada de la cita de descargue).
+- La placa del remolque o semirremolque debe estar en el registro RNR del RUNT.
+- La combinación de cabezote y remolque/semirremolque debe estar dentro de
+la lista de combinación de configuraciones permitidas. Consultable en el RNDC.
+- La sumatoria de los pesos de: Mercancía de todas las remesas, peso vacío del
+cabezote, peso vacío de los remolques y peso vacío de los contenedores, no
+puede ser mayor al tope máximo de la configuración combinada. El RNDC validará
+el peso vacío del vehículo automotor y del remolque/semirremolque con la
+información de la ficha técnica de homologación suministrada en el RUNT. Para
+el caso de vehículos C2 el tope máximo se validará con el peso bruto vehicular.
+- Las remesas que se cargan en un manifiesto no deben haber sido cargadas en
+otro manifiesto, excepto cuando hay trasbordo de remesas.
+- La sumatoria de los pesos de las remesas cargadas debe ser mayor al peso
+mínimo de referencia, determinado como control de calidad de la información
+según la configuración combinada, debidamente publicado en el portal del RNDC.
+En el evento que la Empresa de Transporte requiera registrar un peso inferior al
+mínimo de referencia deberá registrar esta excepción en el RNDC asumiendo la
+responsabilidad sobre este dato.
+- El curso de mercancía peligrosa para conductores deberá tener fecha de
+vencimiento posterior a la fecha de la cita del descargue para cuando se
+transporte mercancía peligrosa. La consulta se realiza en línea con el sistema
+SISCOMMP.
+- La placa del cabezote y la placa del remolque deben estar especificados en el
+permiso de carga extra-pesada o extra dimensionada expedida por INVIAS para
+cuando la naturaleza de la carga sea extra-pesada o extra-dimensionada.
+- El valor a pagar deberá cumplir lo establecido en la Resolución 757 de 2015, la
+Resolución 20213040034405 de 2021, y las que la modifiquen, adicionen o
+sustituyan. En el evento que la Empresa de Transporte registre un valor a pagar
+inferior, de acuerdo con lo definido en las precitadas resoluciones, el Sistema
+RNDC enviará una alerta para los usuarios del portal web interactivo así como a
+los usuarios del webservice, esta alerta es una notificación de que la empresa
+está asumiendo la responsabilidad de realizar este registro y la misma será
+remitida a la Superintendencia de transporte para lo de su competencia.
+
+-- 27 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+g) Salidas de información: Número de radicado de registro de datos de manifiesto
+electrónico de carga.
+h) Control de salida de información: Número de radicado de manifiesto terrestre
+de carga. La empresa de transporte podrá hacer uso de los datos del registro
+manifiesto terrestre de carga radicados en el sistema y bajo su responsabilidad
+podrá generar un documento en formato “pdf”.
+i) Proceso siguiente: Registrar datos de Cumplido Inicial de remesa o Cumplido de
+Remesa.
+5.2.5. Registro de firma electrónica del manifiesto electrónico de carga.
+a) Nombre del Proceso: Firma Electrónica del Manifiesto.
+b) Alcance:
+De conformidad con el artículo 2.2.1.7.5.2. del Decreto 1079 de 2015, el manifiesto
+electrónico de carga será firmado por la empresa de transporte y por el propietario
+o conductor del vehículo autorizado por el propietario, según corresponda. La
+expedición del manifiesto electrónico de carga a través del sistema del Registro
+Nacional de Despachos de Carga -RNDC-, hace las veces de firma de la empresa de
+transporte cuando el sistema del Registro Nacional de Despachos de Carga -RNDC-,
+asigne al Manifiesto Electrónico de Carga el número de radicado de aceptación. Un
+vehículo puede llevar más de un Manifiesto Electrónico de Carga si ha sido
+despachado por más de una empresa de transporte.
+El propietario del vehículo en su condición del titular del Manifiesto Electrónico de
+Carga podrá realizar la firma del mismo a través de la aplicación para dispositivos
+móviles del sistema del Registro Nacional de Despachos de Carga – RNDC- o
+autorizar al conductor para que la realice en su nombre y representación.
+c) Objetivo del Proceso:
+Permitir a los titulares de los manifiestos y a los conductores firmar el manifiesto
+de carga en forma electrónica, en señal de aceptación de las condiciones allí
+escritas por la empresa de transporte y acordadas con el propietario (Titular del
+Manifiesto) del vehículo vinculado a la empresa para esa operación. De conformidad
+con el artículo 2.2.1.7.5.2. del Decreto 1079 de 2015, el manifiesto electrónico de
+carga será firmado por la empresa de transporte y por el propietario o conductor
+del vehículo, según corresponda. La expedición del manifiesto electrónico de carga
+a través del sistema del Registro Nacional de Despachos de Carga -RNDC-, hace las
+veces de firma de la empresa de transporte cuando el sistema del Registro Nacional
+de Despachos de Carga -RNDC-, asigne al Manifiesto Electrónico de Carga el número
+de radicado de aceptación.
+d) Proceso Precedente: Manifiesto Electrónico de Carga. La empresa de transporte
+que desee las firmas electrónicas de los manifiestos debe expresar ese deseo al
+momento de registrar la información del manifiesto.
+e) Entrada de Información:
+- La firma electrónica del manifiesto de carga solo se puede realizar con la
+aplicación para dispositivo móvil del RNDC: Aplicación para dispositivos
+móviles. La representación gráfica de las firmas electrónicas es la capturada a
+través de una fotografía de la firma manuscrita.
+- El manifiesto de carga debe estar debidamente registrado en el RNDC con su
+número de radicado.
+
+-- 28 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Se necesitan los siguientes datos: Código de usuario del conductor o del Titular
+del Manifiesto. Tipo de autorización: C o T dependiendo si es de un Conductor
+o de un Titular. Nro. de Radicado del manifiesto.
+f) Control de entrada de información:
+- El usuario corresponda a un usuario tipo conductor o titular manifiesto.
+- No se encuentre ya firmado. Evita doble firma.
+g) Salidas de información:
+- Nro. De Radicado de Firma electrónica.
+- Si el titular había delegado al conductor la responsabilidad de su firma, el RNDC
+genera un registro con otro Nro. de autorización a nombre del Titular del
+Manifiesto.
+h) Control de salida de información (validación de salida): La empresa de transporte,
+el titular del manifiesto y el conductor pueden consultar el Nro. de Radicado de
+Firma electrónica, con fecha y hora de la firma.
+i) Proceso siguiente: Registro de cumplido inicial de remesa terrestre de carga por
+parte del conductor.
+11. 5.3. Registros finalización de viaje.
+5.3.1. Registro opcional cumplido inicial de remesa terrestre de carga.
+a) Nombre del proceso: registrar datos de cumplido inicial de remesa.
+b) Alcance:
+La empresa de transporte, de forma opcional podrá reportar los datos requeridos
+en el registro Cumplido Inicial de Remesa Terrestre de Carga, que se constituirán
+como datos válidos para el registro Cumplido de Remesa Terrestre de Carga, una
+vez la empresa de transporte registre el dato de la cantidad entregada.
+c) Objetivo del proceso:
+- Consiste en el registro opcional por parte de la empresa de transporte de los
+datos relacionados con la hora y fecha realmente ejecutadas, para cada uno de
+los siguientes eventos: llegada al lugar del cargue, entrada al lugar del cargue,
+salida del lugar del cargue, llegada al lugar del descargue, entrada al lugar del
+descargue y salida del lugar del descargue. Si la empresa de transporte optó por
+realizar el registro Cumplido Inicial de Remesa, estos registros se podrán tomar
+como datos válidos que aunados al registro de la cantidad entregada constituyen
+el registro Cumplido de Remesa.
+- La empresa de transporte que opte por registrar los datos del cumplido inicial
+de remesa puede realizarlo en el sistema de información RNDC ya sea: haciendo
+uso de la interoperabilidad con el sistema de información (o directamente en la
+plataforma dispuesta por el Ministerio de Transporte.
+- La empresa de transporte podrá realizar el reporte de información de este
+registro opcional, a través de una Empresa de Servicios Logísticos para el Control
+Vehicular que le presta los servicios de seguimiento logístico de los vehículos con
+tecnología de GPS o con el uso de otros periféricos electrónicos o a través de la
+
+-- 29 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+aplicación para uso móvil por el titular del Manifiesto Electrónico de Carga o el
+conductor, previamente autorizados por la empresa de transporte.
+- Tratándose del reporte autorizado a las Empresas de Servicios Logísticos para
+el Control Vehicular que presta los servicios de seguimiento logístico de los
+vehículos con tecnología de GPS o con el uso de otros periféricos electrónicos, el
+reporte de la información será por medio de interoperabilidad en el sistema de
+información Ejem: Vía Web-Service.
+- Cuando el autorizado para reportar información es el conductor, el reporte de
+la información se hará mediante la Aplicación de uso móvil dispuesta por el
+Ministerio de Transporte.
+- La información de los tiempos logísticos reales podrá ser reportada por el
+conductor previa autorización de la empresa de transporte en el proceso del
+registro del manifiesto electrónica de carga. Igualmente, los tiempos logísticos
+reales podrán ser reportados por la Empresa Logística de Seguimiento Satelital
+previamente autorizada por la empresa durante el registro de la remesa terrestre
+de carga.
+d) Proceso precedente: Registrar datos de manifiesto electrónico de carga.
+e) Entrada de información:
+- Información General de la Remesa
+- Remitente: Sitio de Cargue (incluyendo coordenadas latitud, longitud)
+- Destinatario: Sitio de descargue (incluyendo coordenadas latitud, longitud).
+- Tiempos logísticos en cargue
+- Tiempos logísticos en descargue
+- Los demás datos definidos en la guía Diccionario de Datos publicado por el
+Ministerio de Transporte.
+f) Control de entrada de la información (validación de ingreso)
+- La remesa terrestre de carga debe encontrarse en estado activo en el sistema
+RNDC. Los datos mínimos y obligatorios que debe registrar la Empresa de
+Transporte para el cumplido inicial de Remesa son hora y fecha en tiempo real
+de cada uno de los siguientes eventos: llegada al cargue, entrada al cargue, salida
+del cargue, llegada al descargue, entrada al descargue y salida del descargue. Esos
+datos pueden ser enviados en línea con el uso de las tecnologías de empresas de
+GPS, la APP RNDC Transportador para dispositivos móviles o el sistema de la
+Empresa de Transporte.
+- Estos registros se realizan como parte del Cumplido de Remesa y serán tomados
+como datos válidos para concluir junto con la cantidad entregada el Cumplido de
+Remesa.
+- La Empresa de Transporte debe autorizar a través del RNDC, al conductor, para
+el registro de los eventos mencionados, en el momento en que se expide el
+manifiesto electrónico de carga.
+g) Salidas de información: Número de radicado
+h) Control de salida de información (validación de salida): Número de radicado
+i) Proceso siguiente: Registrar datos del cumplido de remesa
+12. 5.3.1.1. Registro opcional de cumplido inicial de remesa por parte
+
+-- 30 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+del Conductor.
+a) Nombre del proceso: Registrar datos de cumplido inicial de remesa por parte
+del conductor.
+b) Objetivo del proceso: Registrar los datos de la operación de transporte que ya
+se han realizado, estos datos son posibles de realizar a través de la aplicación para
+dispositivos móviles del RNDC, el conductor va registrando los datos de cada tiempo
+logístico de modo tal que son reportados en tiempo real.
+c) Proceso precedente: firmar manifiesto.
+d) Entrada de información: Tiempos logísticos de la operación, fecha y hora de
+llegada al cargue, fecha y hora de entrada al cargue, fecha y hora de salida del
+cargue, fecha y hora de llegada al descargue, fecha y hora de entrada al descargue,
+fecha y hora de salida del descargue.
+e) Control de entrada de información.
+- Se valida que las horas se encuentren en secuencia ascendente de tiempo.
+- El conductor debe estar autorizado por parte de la empresa de transporte para
+enviar la información.
+f) Salida de información: Número de radicado del registro de la información.
+g) Control de salida de información (validación de salida): El usuario puede
+consultar el estado de registro a través de la sección de consultas de la página, la
+aplicación para dispositivos móviles o los servicios de interoperabilidad.
+h) Proceso siguiente: cumplir datos de cumplido de remesa terrestre de carga.
+13. 5.3.1.2 Registro opcional cumplido inicial de remesa por parte de la
+Empresa de servicios logísticos para el control vehicular (Empresa
+GPS).
+a) Nombre del proceso: registrar cumplido inicial de remesa.
+b) Objetivo del proceso: Registrar el avance del cumplido inicial de remesa, los
+datos de fecha y hora de llegada al lugar de cargue y fecha y hora de llegada al lugar
+de descargue para cada una de las remesas que transporta un vehículo de carga.
+Esto se realiza en dos pasos o en un único paso cuando los dos datos los desea
+ingresar en una sola operación. La empresa de transporte debe haber registrado en
+la Remesa el Nit de la empresa de GPS que hará el monitoreo.
+c) Proceso precedente: solicitar información de remesas autorizadas.
+d) Entrada de información: para ingresar los datos del cumplido inicial de remesa
+en el lugar de cargue se ingresan los siguientes datos:
+- NIT empresa de GPS.
+- Número de radicado de manifiesto.
+- Numero de radicado de remesa.
+- Latitud y Longitud del lugar de cargue.
+- Fecha y hora de salida del cargue.
+
+-- 31 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Placa vehículo.
+- NIT de la empresa de transporte.
+Los datos de avance en el lugar de descargue son los siguientes:
+- NIT empresa de GPS.
+- Número de radicado de manifiesto.
+- Número de radicado de remesa.
+- Latitud y longitud del lugar de descargue.
+- Fecha y hora de llegada al descargue.
+- Placa de vehículo.
+- NIT empresa de transporte.
+Los datos de avance de cargue y descargue son los siguientes:
+- NIT empresa de GPS.
+- Número de radicado de manifiesto.
+- Número de radicado de remesa.
+- Latitud y longitud del lugar de cargue.
+- Fecha y hora de salida del cargue.
+- Latitud y longitud del lugar de descargue.
+- Fecha y hora de llegada al descargue.
+- Placa vehículo.
+- NIT de la empresa de transporte.
+e) Control de entrada de información:
+- El NIT de la empresa de transporte y el NIT de la empresa de GPS deben estar
+como usuario activo.
+- El número de radicado del manifiesto y la remesa son confirmados por el RNDC.
+- La placa del vehículo debe coincidir con la placa que aparece en el manifiesto
+electrónico de carga.
+f) Salida de información: Número de radicado de registro de información de avance
+de remesa.
+g) Control de salida de información: la empresa de GPS, la empresa de transporte
+y el transportador, pueden consultar a través del servicio interactivo la actualización
+de los datos ingresados por la empresa de GPS. Tiempos logísticos y novedades del
+seguimiento GPS.
+h) Proceso siguiente: registrar datos de cumplido de remesa.
+14. 5.3.1.3.
+Registro novedades de la empresa de GPS
+
+-- 32 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+a) Objetivo: cerrar la responsabilidad del reporte del seguimiento satelital de una
+remesa por parte de una empresa de servicios logísticos para el control vehicular
+(Empresa GPS).
+b) Proceso precedente: solicitar información de remesas autorizadas.
+c) Entrada de información:
+- NIT empresa de GPS.
+- Radicado de la remesa.
+- NIT empresa de transporte.
+- Placa del vehículo.
+- Tipo de novedad.
+d) Control de entrada de información:
+- El sistema valida que se haya reportado la información del número de radicado
+de la remesa.
+e) Salida de información radicado de registro de novedad de remesa.
+f) Control de salida de información: la empresa de GPS, la empresa de transporte
+y el transportador, pueden consultar a través del servicio interactivo la actualización
+de los datos ingresados por la empresa de GPS, tiempos logísticos y novedades del
+seguimiento GPS.
+5.3.2. Registro obligatorio cumplido de remesa terrestre de carga.
+a) Nombre del proceso: Registrar datos de cumplido de remesa terrestre de carga.
+b) Alcance:
+La empresa de transporte habilitada, persona natural o jurídica, deberá diligenciar
+de forma obligatoria en el sistema del Registro Nacional de Despachos de Carga -
+RNDC- todos los datos requeridos en el registro Cumplido de Remesa Terrestre de
+Carga.
+c) Objetivo del proceso:
+Registrar los datos relacionados con los tiempos reales (fecha y hora) ejecutados
+de cargue y descargue de la mercancía (Lo que significa incluir los tiempos de
+espera): llegada al lugar del cargue, entrada al lugar del cargue, salida del lugar del
+cargue, llegada al lugar del descargue, entrada al lugar del descargue y salida del
+lugar de descargue (Los cuales pueden ser tomados del registro Cumplido Inicial de
+Remesa cuando la empresa de transporte haya optado por realizarlo), más los datos
+relacionados con la cantidad real entregada en el lugar de descargue. Los datos del
+Cumplido de Remesa Terrestre de Carga son fundamentales para que la empresa
+de transporte pueda obtener la información necesaria para generar la factura al
+Generador de Carga o Contratante para el cobro del servicio público de transporte
+de carga por carretera.
+d) Proceso precedente: Registrar manifiesto de carga o cumplido inicial de remesa
+(opcional, cuando la empresa lo haya realizado).
+e) Entrada de información:
+- Número Consecutivo de remesa
+
+-- 33 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Tiempos logísticos reales en Cargue y Descargue.
+- La cantidad real entregada al destinatario.
+- Los demás datos definidos en la guía Diccionario de Datos elaborado y publicado
+por el Ministerio.
+f) Control de entrada de la información (validación de ingreso):
+- La cantidad real entregada en el lugar de descargue.
+- Los tiempos reales ejecutados de cargue y descargue de la mercancía (fecha y
+hora): llegada al Cargue, entrada al cargue, salida del cargue, llegada al descargue,
+entrada al descargue y salida del descargue.
+- La remesa debe estar ligada a un manifiesto activo.
+- Cuando se suspende la entrega, se debe definir el motivo.
+- Las fechas de los tiempos logísticos no pueden ser mayores a 30 días de
+diferencia con base en la cita de cargue. Tampoco acepta fechas futuras. Si la
+empresa de transporte necesita registrar tiempos logísticos con más de 30 días
+de diferencia, debe primero autorizar este caso especial y luego si realizar el
+Cumplido de remesa.
+- Se permiten duraciones de viaje de máximo 30 días calendario para operaciones
+de transporte de maquinaria, código: 84 y que sea extradimensionada, para las
+otras operaciones lo máximo son 6 días. Si la empresa de transporte necesita
+registrar duraciones de viaje con más cantidad de días, debe primero autorizar el
+caso especial y con eso el RNDC acepta el Cumplido.
+- No se permiten duraciones de viaje menores a 10 minutos. Diferencia entre fecha
+y hora de llegada al descargue y la fecha y hora de salida del cargue.
+- Las fechas y horas de cada uno de los tiempos logísticos deben estar en estricto
+orden de cronología. Llegada al cargue debe ser menor o igual a la Entrada al
+cargue. Entrada al cargue debe ser menor a la Salida del cargue. Salida del cargue
+debe ser menor a la Llegada al descargue. La llegada al descargue debe ser menor
+o igual a la Entrada al descargue. La Entrada al descargue debe ser menor a la
+Salida del descargue.
+- Las horas de los tiempos logísticos deben ser reportadas en formato
+militar.00:00 a 23:59, hora legal colombiana.
+- La velocidad del viaje no debe ser superior a 80 kilómetros por hora. La
+velocidad la calcula el RNDC con base en los kilómetros de la ruta y la duración
+del viaje.
+- Para efectos del control de calidad de la información el dato de la cantidad
+entregada no puede ser menor al 10% de la cantidad cargada ni mayor a un 100%
+adicional a la cantidad cargada. Si la empresa de transporte necesita registrar la
+cantidad entregada por fuera de los límites, debe primero autorizar el caso
+especial y luego el RNDC si le acepta el cumplido.
+- Si la remesa ya tiene los registros de Cumplido Inicial de remesa, son esos datos
+los que se tienen en cuenta y no los que envíen en el Cumplido de Remesa.
+g) Salidas de información: Radicado registro cumplido remesa.
+h) Control de salida de información (validación de salida): Radicado registro
+cumplido remesa.
+
+-- 34 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+i) Proceso siguiente: Registrar datos de Cumplido de manifiesto.
+5.3.3. Registro cumplido de manifiesto electrónico de carga.
+a) Nombre del proceso: registrar cumplido de manifiesto electrónico de carga.
+b) Alcance:
+La empresa de transporte habilitada, persona natural o jurídica, deberá diligenciar
+de forma obligatoria en el sistema del Registro Nacional de Despachos de Carga -
+RNDC-, todos los datos requeridos en el registro Cumplido de Manifiesto Electrónico
+de Carga, a más tardar dentro de los 5 días hábiles contados a partir de la fecha de
+entrega de la mercancía registrada en el Cumplido de Remesa Terrestre de Carga,
+es decir, la fecha y hora de salida del lugar de descargue. En aquel evento en qué
+la empresa de transporte no realice el registro del Cumplido de Remesa Terrestre
+de Carga, el término de 5 días hábiles a los que se refiere el Decreto 1079 de 2015,
+se contará a partir de la cita pactada para el descargue de la mercancía. En este
+evento y cuando la empresa de transporte haya registrado previamente en la
+Remesa Terrestre de Carga el tiempo total pactado para descargue de la mercancía,
+el término de 5 días hábiles a los que se refiere el precitado Decreto, se contará, a
+partir de la cita pactada para el descargue de la mercancía adicionándole el tiempo
+total pactado para el descargue registrado en la remesa.
+c) Objetivo del proceso:
+Es el registro obligatorio realizado por la empresa de transporte de los datos de los
+valores, correspondientes a eventos presentados durante el viaje indicando sus
+causales, que se descontarán o adicionarán del Valor a Pagar pactado reportado en
+el manifiesto electrónico de carga. Este registro hace uso de los datos reportados
+por la empresa de transporte en el Cumplido de Remesa Terrestre de Carga y le
+permite a la empresa de transporte obtener el Valor a Pagar definitivo y con ello el
+saldo que debe cancelar al titular del manifiesto electrónico de carga.
+d) Proceso precedente: Cumplido de remesa terrestre de carga.
+e) Entrada de información:
+- Consecutivo de Manifiesto
+- Valores adicionales o valores a descontar del valor a pagar pactado
+correspondientes a eventos presentados en el viaje y sus causales.
+- Los demás datos o campos definidos en la guía Diccionario de datos publicado
+por el Ministerio de Transporte.
+f) Control de entrada de la información (validación de ingreso): La empresa de
+transporte debe realizar el cumplido de remesa previo a cada una las remesas que
+hacen parte del manifiesto.
+g) Salidas de información:
+- Número de radicado de cumplido de manifiesto.
+
+-- 35 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Documento en formato PDF del cumplido de manifiesto que puede consultar la
+empresa de transporte y podrá hacer uso de la información de viaje radicada en
+el sistema, bajo su responsabilidad podrá generar un documento en formato pdf.
+- Valores adicionales o valores a descontar del valor a pagar pactado
+correspondientes a eventos presentados en el viaje y sus causales.
+h) Control de salida de información (validación de salida): Número de radicado de
+registro de cumplido de manifiesto.
+i) Proceso siguiente: Registrar fletes de las remesas en la Factura Electrónica
+15. 5.4. Registro obligatorio dato del flete.
+5.4.1. Empresa de transporte.
+a) Nombre del proceso: Reporte dato del flete a través del archivo de la factura
+electrónica.
+b) Alcance:
+La empresa de transporte habilitada, persona natural o jurídica, obligada a emitir
+factura electrónica, de acuerdo con las disposiciones legales vigentes, deberá
+registrar de forma obligatoria en el sistema del Registro Nacional de Despachos de
+Carga -RNDC- el dato del flete a través del documento XML de la factura electrónica
+de transporte o cualquier otra tecnología que disponga la autoridad competente
+que emita al generador de carga por la prestación del servicio público de transporte
+de carga por carretera.
+El archivo de la factura electrónica deberá cumplir con las condiciones definidas
+por la U.A.E. Dirección de Impuestos y Aduanas Nacionales -DIAN- para la factura
+electrónica del sector transporte de carga.
+Para el registro de una nueva Remesa Terrestre de Carga, el sistema verificará que
+la cantidad de Remesas cumplidas con más de 5 días hábiles, o con más de los
+días pactados entre el generador y la empresa de transporte para el pago del flete,
+contados a partir de la entrega de la mercancía y sin registro del dato del flete en
+la factura electrónica, no supere el 20% del número total de remesas cumplidas
+en los últimos 30 días calendario. De superarse el 20%, el sistema anunciará a la
+empresa de transporte que no se permitirá la generación de nuevas Remesas
+Terrestres de Carga. Este control no es aplicable tratándose de operaciones con
+remesa de Mercancía consolidada, ya que en esta operación el generador es la
+misma empresa de transporte.
+En aquellos eventos en qué la empresa de transporte y el generador de carga hayan
+pactado un término diferente para el pago del Flete, el generador de carga deberá
+reportar al sistema del Registro Nacional de Despachos de Carga -RNDC- el plazo
+pactado antes de la expedición de la Remesa Terrestre de Carga.
+En el evento en qué el generador de carga no registre el plazo pactado, para el pago
+del Flete, el sistema aplicará el término de cinco (5) días hábiles siguientes al recibo
+de la mercancía transportada.
+Para el registro de un nuevo Manifiesto Electrónico de Carga, el sistema verificará
+que la cantidad de registros de dato del flete a través del documento XML de la
+
+-- 36 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+factura electrónica o cualquier otra tecnología que disponga la autoridad
+competente pendientes por registrar, de conformidad con lo dispuesto en el
+presente artículo no supere el 20% del número total de remesas terrestres de carga
+expedidas en los últimos 30 días calendario. De superarse el 20%, el sistema
+anunciará a la empresa de transporte que no se permitirá la generación de nuevos
+Manifiestos Electrónicos de Carga. Como prevención y para evitar llegar a este
+límite, el sistema provee a la empresa de transporte de una funcionalidad que le
+permite consultar la lista de los manifiestos que están pendientes de cumplir y cuya
+fecha ya expiró.
+c) Objetivo del proceso:
+La empresa de transporte de forma obligatoria deberá reportar el dato del flete a
+través del archivo XML de la factura electrónica en el sistema RNDC.
+d) Proceso precedente: cumplido de remesas terrestres de carga
+e) Entrada de información:
+- Archivo XML de la factura electrónica cumpliendo las normas vigentes de la
+DIAN para factura electrónica del sector transporte.
+f) Control de entrada de información (validación de ingreso):
+- En línea a través de la plataforma dispuesta por el Ministerio de Transporte
+(portal interactivo).
+g) Control de salida de información (validación de salida): Número de radicado.
+h) Proceso siguiente: Aprobación Fletes de la Factura Electrónica por parte del
+Generador de Carga.
+5.4.2. Generador de carga.
+a) Nombre del proceso: Registrar dato Valor de Flete de las Remesas.
+b) Alcance:
+El generador de carga deberá registrar de forma obligatoria en el sistema del
+Registro Nacional de Despachos de Carga – RNDC-, el dato del Flete.
+El generador de carga deberá reportar el dato del Flete en el sistema del Registro
+Nacional de Despachos de Carga -RNDC-, dentro de los cinco (5) días hábiles
+siguientes al recibo de la mercancía transportada o en caso de existir pacto en
+contrario, el generador de carga deberá reportar la información dentro del plazo
+estipulado para realizar el pago a la empresa de transporte. En el evento en qué el
+generador de carga opte por cumplir la obligación de reportar el dato del Flete, a
+través del archivo XML que es remitido por la empresa de transporte, este deberá
+realizar la aceptación expresa en el sistema del Registro Nacional de Despachos de
+Carga – RNDC dentro del mismo término.
+En aquellos eventos en qué la empresa de transporte y el generador de carga hayan
+pactado un término diferente para el pago del Flete, el generador de carga deberá
+reportar al sistema del Registro Nacional de Despachos de Carga -RNDC el plazo
+pactado antes de la expedición de la Remesa Terrestre de Carga. En el evento en
+qué el generador de carga no registre el plazo pactado, para el pago del Flete el
+sistema aplicará el término de cinco (5) días hábiles siguientes al recibo de la
+mercancía transportada.
+
+-- 37 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+c) Objetivo del proceso:
+Es el registro obligatorio que debe realizar el generador de carga en el sistema
+Registro Nacional de Despachos de Carga – RNDC-, relacionado con dato del flete,
+es decir, el precio establecido entre el remitente o destinatario de la carga con la
+empresa de transporte por concepto del contrato de transporte terrestre automotor
+de carga para la realización del servicio de transporte por un período de tiempo
+determinado.
+d) Proceso precedente: Control opcional de empresas de transporte o Factura
+Electrónica.
+e) Entrada de información:
+El sistema RNDC tiene definidas tres formas para que los generadores de carga
+registren el dato del valor del flete. El reporte de estos datos por parte del
+generador de carga se puede realizar de las siguientes formas:
+- Registro dato del flete a través del archivo XML de la Factura Electrónica.
+Mediante aceptación en la plataforma dispuesta por el Ministerio de Transporte
+del dato del flete registrado por la empresa de transporte mediante el archivo
+XML de la factura electrónica o cualquier otra tecnología que disponga la
+autoridad competente, generado por la empresa de transporte y remitida por este
+último al generador de carga.
+- Cuando el dato del Flete para la prestación del servicio público de transporte
+de carga se pacte por cada remesa terrestre de carga este valor puede ser
+reportado en línea a través de interoperabilidad con el sistema del Registro
+Nacional de Despachos de Carga – RNDC- y haciendo uso de la plataforma
+dispuesta por el Ministerio de Transporte (Portal Web Interactivo – archivo plano).
+- Cuando se maneje lista de valores o tarifas pactadas (Flete) para la prestación
+de servicios público de transporte de forma periódica definidos por las partes, el
+registro de estos valores en el sistema del Registro Nacional de Despachos de
+Carga -RNDC- se tendrá como válido para el cumplimiento de la obligación del
+registro del Flete para esas operaciones específicas y se deberá indicar por parte
+del generador de carga la vigencia de estas tarifas.
+16. 5.4.2.1. Registro dato del flete a través del archivo XML de la Factura
+Electrónica.
+a) Nombre del proceso:
+Registrar datos del flete a través del archivo XML de la factura electrónica
+reportado por la empresa de transporte.
+b) Objetivo del proceso:
+Cuando el generador de carga apruebe como dato del flete en el sistema RNDC el
+archivo de la factura electrónica o cualquier otra tecnología que disponga la
+autoridad competente, generado por la U.A.E. Dirección de Impuestos y Aduanas
+Nacionales – DIAN- que ha sido cargado por la empresa de transporte.
+c) Proceso precedente: controlar empresas
+d) Entrada de información:
+
+-- 38 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Datos de los fletes de cada una de las remesas extraídas del archivo XML de la
+Facturación Electrónica
+e) Control de entrada de información (validación de ingreso): En línea a través de
+la plataforma dispuesta por el Ministerio de Transporte (portal interactivo).
+f) Control de salida de información (validación de salida): Número de radicado.
+g) Proceso siguiente: Ninguno
+17. 5.4.2.2. Registrar tarifa de fletes para un periodo de tiempo a través
+de lista de tarifas pactadas
+a) Nombre del proceso: Registrar tarifa de fletes para un periodo de tiempo a
+través de lista de tarifas pactadas.
+b) Objetivo del proceso:
+Cuando se maneje lista de valores o tarifas pactadas (Flete) para la prestación de
+servicios público de transporte de forma periódica definidos por las partes, el
+registro de estos valores en el sistema del Registro Nacional de Despachos de Carga
+-RNDC- se tendrá como válido para el cumplimiento de la obligación del registro del
+Flete para esas operaciones específicas y se deberá indicar por parte del generador
+de carga la vigencia de estas tarifas.
+c) Proceso precedente: Controlar Empresas.
+d) Entrada de información:
+- Empresa de Transporte
+- Rango de fechas
+- Tipo de Valor de Flete
+- Valor del Flete
+- Demás campos o datos definidos en la guía Diccionario de Datos publicada por
+el Ministerio de Transporte.
+e) Control de entrada de información (validación de ingreso)
+El sistema recibe la información de la siguiente manera:
+- En línea a través de interoperabilidad
+- En línea haciendo uso de la plataforma dispuesta por el Ministerio de
+Transporte.
+Los siguientes campos son validados:
+- NIT de la empresa
+- Se validan cada uno de los datos definidos en la guía Diccionario de Datos
+publicado por el Ministerio de Transporte.
+f) Control de salida de información (validación de salida): Número de radicado.
+g) Proceso siguiente: ninguno.
+
+-- 39 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+18. 5.4.2.3. Registro datos del flete por cada remesa.
+a) Nombre del proceso: Registrar datos del flete por cada remesa
+b) Objetivo del proceso:
+Cuando el dato del Flete para la prestación del servicio público de transporte de
+carga se pacte por cada remesa terrestre de carga este valor puede ser reportado
+de forma independiente por cada remesa.
+c) Proceso precedente: controlar empresas
+d) Entrada de información:
+- Empresa de Transporte
+- Remesa (Consecutivo de manifiesto o Radicado de manifiesto o
+Consecutivo de remesa o radicado de remesa).
+- Tipo de tarifa flete
+- Valor del flete
+- Demás datos definidos en la guía Diccionario de Datos publicado por el
+Ministerio de Transporte.
+e) Control de entrada de información (validación de ingreso): El sistema recibe la
+información de la siguiente manera:
+- En línea a través de interoperabilidad
+- En línea haciendo uso de la plataforma dispuesta por el Ministerio de
+Transporte.
+Los siguientes campos son validados:
+- Consecutivo de remesa
+- Empresa de transporte
+- Demás datos definidos en la guía Diccionario de Datos publicado por el
+Ministerio de Transporte.
+f) Control de salida de información (validación de salida): Número de radicado.
+g) Proceso siguiente: Ninguno
+19. 5.4.2.4. Cargue masivo mediante archivo plano.
+a) Nombre del proceso: Cargue masivo mediante archivo plano
+b) Objetivo del proceso: cuando el generador de carga decida registrar información
+de forma masiva mediante la construcción de un archivo plano que contiene el dato
+del flete de las operaciones de transporte allí relacionadas.
+c) Proceso precedente: controlar empresas
+d) Entrada de información:
+
+-- 40 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Archivo plano con los datos definidos en la guía Diccionario de Datos
+publicado por el Ministerio del Transporte.
+e) Control de entrada de información (validación de ingreso): En línea a través de
+la plataforma dispuesta por el Ministerio de Transporte (portal interactivo).
+f) Control de salida de información (validación de salida): Número de radicado.
+g) Proceso siguiente: Ninguno
+5.5. Viaje Municipal
+5.5.1 Registro obligatorio datos de remesa municipal.
+a) Nombre proceso: Registrar datos de una remesa municipal.
+b) Objetivo del proceso:
+Registrar parte de los datos del contrato celebrado entre el solicitante del servicio
+y la empresa de transporte de carga donde constan las especificaciones establecidas
+en el artículo 1010 del Código de Comercio y las condiciones generales del contrato.
+La empresa de transporte realizará el/los registro(s) de Remesa Municipal en el
+sistema de información Registro Nacional de Despachos de Carga – RNDC-, que se
+vincularán un registro de Viaje Municipal. El sistema de información Registro
+Nacional de Despachos de Carga – RNDC- procederá con la asignación de número
+de radicado que corresponde a cada registro Remesa Municipal y se habilitará la
+opción de expedición de las mismas, si así la empresa lo determina. Una vez una
+Remesa ha sido asociada a un Registro de Viaje Municipal, no puede ser asociada a
+otro viaje, excepto en los casos de trasbordo de mercancía.
+c) Proceso precedente: Ninguno.
+d) Entrada de información:
+- Consecutivo interno de la empresa de la Remesa Municipal.
+- Mercancía a transportar
+- Demás datos definidos en la guía Diccionario de Datos publicado por el
+Ministerio de Transporte.
+e) Control de entrada de la información (Validación de Ingreso):
+- La empresa de transporte debe tener la habilitación activa.
+- Consecutivo de la Remesa Municipal. Es obligatorio y debe corresponder
+a un consecutivo único asignado por cada empresa de transporte. Una cadena
+de hasta 15 caracteres alfanuméricos. (se verifica que no se repita).
+- No se permiten registros duplicados, es decir, que el RNDC vigila que no
+se repita el consecutivo de la remesa municipal.
+- Código de la Mercancía. Codificación Armonizada, o Codificación de la
+Naciones Unidas cuando se trate de mercancías peligrosas y desechos
+peligrosos.
+
+-- 41 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Si la operación de la remesa es de contenedor, se debe escribir el peso
+vacío del contenedor. Ese peso vacío se valida contra la tabla paramétrica que
+tiene el RNDC para cada tipo de empaque de categoría contenedor, la cual puede
+ser consultada en el portal web interactivo o por web-services.
+- Si la operación de la remesa es de contenedor vacío, la cantidad de la
+mercancía debe ser 0 y en las otras operaciones debe ser mayor a 0. Si la
+operación se refiere a varios viajes en el día, la remesa deberá indicar cuantos
+contenedores vacíos se van a transportar.
+- La unidad de empaque debe pertenecer a la lista de unidades de
+empaque publicada por el RUNT y el RNDC.
+- La naturaleza de la carga corresponderá a una de las listadas en la tabla
+paramétrica que para el efecto se publique en portal web interactivo del RNDC.
+- Algunas mercancías tienen definida su única unidad de medida
+permitida: Galones o Kilogramos. Consultable en el portal del RNDC en el
+maestro de Codificación Armonizada y de Mercancía Peligrosa.
+- La descripción corta del producto es un texto libre para detallar mejor
+la mercancía y debe ser de mínimo 4 caracteres y máximo 60.
+- Cuando el generador de carga registre en el módulo de control de
+empresas cada una de las empresas de transporte que están autorizadas como
+proveedor del servicio público de transporte de carga por carretera y que pueden
+registrar sus datos como generador de carga en las remesas municipales, el
+RNDC realizará esta validación. En el evento en qué el generador de carga no
+maneje el listado de empresas de transporte autorizadas el RNDC no realiza
+validación.
+f) Salidas de Información:
+- Número de radicado de remesa municipal.
+- Remesa municipal: La empresa de transporte podrá hacer uso de los
+datos del registro remesa municipal radicados en el sistema y bajo su
+responsabilidad podrá generar un documento en formato “pdf”.
+g) Control de salida de Información: El usuario podrá consultar con el número de
+radicado de remesa municipal entregado por el sistema de información RNDC que la
+información guardada en la base de datos coincide con los datos por él registrados.
+Esta consulta se puede hacer por el portal interactivo o por web-services.
+h) Proceso siguiente: Registrar viaje municipal.
+5.5.2. Registro obligatorio viaje municipal
+a) Nombre del proceso: Registrar viaje municipal.
+b) Objetivo del proceso: Corresponde al registro obligatorio que debe realizar la
+empresa de transporte para todo viaje de radio de acción municipal.
+- Tipos de Viaje Municipal (urbano o rural):
+⎯ General: Es el Viaje Municipal que ampara la operación de transporte
+en un viaje diferente a la operación: varios viajes en el día.
+
+-- 42 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+⎯ Varios viajes en el día: Es el Viaje Municipal que ampara la operación de
+transporte que se desarrolla en un mismo día y en un único vehículo,
+para trasladar una cantidad de carga que requiera varios viajes en un
+mismo lugar de cargue y lugar de descargue. En este viaje solo se podrá
+asociar una sola remesa.
+c) Proceso precedente: Registrar datos de remesa municipal
+d) Entrada de información:
+- Consecutivo Viaje municipal
+- Placa del vehículo automotor
+- Remesas municipales
+- Demás datos definidos en la guía Diccionario de Datos publicado por el
+Ministerio de Transporte.
+e) Control de entrada de la información:
+- No permitir registros duplicados
+- El vehículo automotor debe tener vigentes el SOAT y la RTM
+- El conductor debe tener vigente la licencia de conducción
+- Valor a pagar del viaje
+- Se validan todos los datos obligatorios definidos en el Diccionario de
+Datos publicado por el Ministerio de Transporte.
+f) Salidas de información:
+- Número de radicado de registro de viaje municipal.
+- Registro de viaje municipal: La empresa de transporte podrá hacer uso
+de los datos del registro de viaje municipal radicados en el sistema y bajo su
+responsabilidad podrá generar un documento en formato “pdf”.
+g) Control de salida de información: El usuario podrá consultar con el número de
+radicado de remesa municipal entregado por el sistema de información RNDC que la
+información guardada en la base de datos coincide con los datos por él registrados.
+Esta consulta se puede hacer por el portal interactivo o por web-services.
+h) Proceso siguiente: Registrar cumplido de viaje municipal.
+5.5.3. Registro de cumplido de viaje municipal.
+a) Nombre de proceso: Registrar cumplido de viaje municipal.
+b) Objetivo del proceso:
+Es el registro realizado por la empresa de transporte de los datos de los valores,
+correspondientes a eventos presentados durante el viaje indicando sus causales, que
+se descontarán o adicionarán del Valor a Pagar pactado reportado en el registro de
+viaje municipal. Le permite a la empresa de transporte obtener el Valor a Pagar
+
+-- 43 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+definitivo y con ello el saldo que debe cancelar al titular del registro de viaje
+municipal.
+c) Proceso precedente: Registrar datos del viaje municipal.
+d) Entrada de información:
+- Consecutivo registro municipal.
+- Tipo de cumplido/cierre.
+- Demás datos definidos en el Diccionario de Datos publicado por el
+Ministerio de Transporte.
+e) Control de entrada de información. Se realizan las siguientes validaciones de
+información:
+- Debe existir un consecutivo interno de la empresa de registro municipal
+previamente generado por la empresa de transporte.
+- Demás validaciones definidas en la guía Diccionario de Datos publicado
+por el Ministerio de Transporte.
+f) Salida de información: Número de radicado de cumplido de viaje municipal.
+g) Control de salida de información: Consulta del número de radicado de cumplido
+de viaje municipal a través del portal interactivo o de web-services.
+h) Proceso siguiente: Ninguno.
+20. 5.6. Registro de contratación directa
+5.6.1. Autorizar al conductor a realizar viaje de contratación directa
+a) Nombre del proceso: autorizar al conductor del vehículo a realizar viaje de
+contratación directa.
+b) Objetivo del proceso: es el proceso realizado en las ocasiones en las cuales el
+conductor procederá a realizar un viaje de contratación directa. Para poder realizar
+esta contratación, el propietario del vehículo deberá autorizar en el sistema RNDC
+a una persona diferente a él, como conductor designado para la realización de los
+viajes bajo esta modalidad. De modo tal, que existe un pleno conocimiento por
+parte del propietario de la realización de la actividad de contratación directa por
+parte de un conductor autorizado. Este proceso solo se puede realizar por la APP
+para dispositivos móviles RNDC TRANSPORTADOR.
+c) Proceso precedente: ninguno.
+d) Entrada de información:
+- Información del vehículo que requiere autorización.
+- Información del conductor que será autorizado.
+
+-- 44 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+e) Control de entrada de información: Se valida que el conductor designado no
+corresponda al propietario del vehículo, de modo tal que si el propietario desea
+operar el vehículo no es necesario realizar este proceso.
+f) Salida de información: Número de radicado de autorización de conductor.
+g) Control de salida de información: Consulta del número de radicado de
+autorización de conductor a través de la aplicación de uso móvil del sistema RNDC.
+h) Proceso siguiente: Registro de contratación directa.
+5.6.2. Registro de contratación directa
+a) Nombre del proceso: Registrar viaje de contratación directa.
+b) Objetivo del proceso: Es el proceso realizado en las ocasiones en las cuales y
+de acuerdo con las características del viaje, este puede ser contratado sin
+intervención de la empresa de transporte. La contratación directa se entiende en
+los términos referidos en el artículo 1 del Decreto 2044 de 1988 “por el cual se
+dictan disposiciones sobre el acarreo de productos especiales, en vehículos de
+servicio público de transporte de carga”.
+c) Proceso precedente: autorizar conducir vehículo.
+d) Entrada de información:
+- Información del viaje: origen, destino, fecha de realización del viaje.
+- Información de los productos (definido en el Decreto 2044 de 1988):
+código del producto, unidad de empaque, peso de la unidad de empaque,
+cantidad de unidades de empaque.
+e) Control de entrada de información:
+- El conductor debe estar autorizado por el propietario del vehículo para
+el registro de información.
+- El conductor debe estar habilitado para la conducción de vehículos de
+servicio público de carga, licencia de conducción vigente.
+- El vehículo debe tener vigente el SOAT y la RTM.
+- La carga debe pertenecer a la familia de productos definidos en el
+Decreto 2044 de 1988 y en el sistema armonizado de la organización mundial
+de aduanas, hasta el tercer nivel: Capitulo, Partida, Subpartida.
+- Las demás definidas y escritas en la guía de Contratación Directa
+previamente publicada por el Ministerio de Transporte.
+f) Salida de información:
+- número de radicado de registro de contratación directa.
+- Información relacionada con la operación de transporte.
+g) Control de salida de información: Consulta del número de radicado registro
+de contratación directa a través de la aplicación de uso móvil del sistema RNDC.
+h) Proceso siguiente: finalizar o anular el viaje de contratación directa.
+
+-- 45 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+5.6.3. Finalizar o anular el viaje de Contratación Directa.
+a) Nombre del proceso: Finalizar o anular el viaje.
+b) Objetivo del proceso: Luego de realizar el viaje, el conductor debe reportar al
+sistema RNDC la finalización del viaje o en su defecto la anulación del viaje que
+se planeaba realizar. La finalización del viaje tiene como objetivo registrar la
+información de ejecución del viaje y la cantidad entregada al destinatario. La
+anulación se refiere a los viajes que no se pudieron realizar por cambios en la
+información reportada en el registro de contratación directa. Este proceso solo
+se puede realizar por la APP para dispositivos móviles RNDC TRANSPORTADOR.
+c) Proceso precedente: Registro de contratación directa.
+d) Entrada de información:
+- Causales de terminación anticipada de viaje.
+- Cantidad entregada por cada producto.
+e) Control de entrada de información:
+- Las causales de terminación del viaje deben ser encontrarse en las
+opciones presentadas en la aplicación.
+f) Salida de información:
+- número de radicado de finalización o anulación de viaje.
+- Información del viaje finalizado o anulado.
+g) Control de salida de información: Consulta del número de radicado registro de
+contratación directa a través de la aplicación de uso móvil del sistema RNDC.
+h) Proceso siguiente: Ninguno.
+TÍTULO 3
+OTRAS FUNCIONALIDADES DEL SISTEMA RNDC
+6. OTRAS FUNCIONALIDADES.
+21. 6.1. Anulación de registros.
+Una anulación se da en el momento en el cual se presentan errores en la digitación,
+o cambios en las características principales del servicio que se registró. Sin embargo,
+el RNDC conserva la historia de todos los registros y solo permite realizar anulaciones
+de remesas terrestres de carga y manifiestos electrónicos de carga si el viaje no ha
+comenzado. Una vez anulado un registro no se puede volver a crear con el mismo
+consecutivo del anulado. Solo pueden anularse informaciones de carga que no han
+sido convertidas a remesas terrestres de carga. Para anular alguno de los registros de
+información, es necesario explicar la causa de la anulación.
+6.1.1. Anular o corregir registro remesa terrestre de carga.
+a) Nombre del proceso: Anular o corregir remesa.
+
+-- 46 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+b) Objetivo del proceso: La anulación de remesas terrestres de carga debido a
+errores en la digitación o a la cancelación del servicio puede realizarse a través
+del proceso anular remesa terrestre de carga.
+c) Proceso precedente: Anular Manifiesto o Ninguno si la remesa no hace parte
+de un manifiesto.
+d) Entrada de información:
+- Selección del proceso de anulación.
+- Motivo de anulación.
+- Identificador de la remesa terrestre de carga.
+- Observaciones.
+e) Control de entrada de información (validaciones de ingreso).
+- Se valida que no se encuentra vinculado a un manifiesto.
+- Se valida que exista un motivo de anulación.
+- Solo pueden anularse remesas terrestres de carga que no han sido
+asociadas a un manifiesto de carga. La anulación de una remesa terrestre de
+carga solo puede realizarse si el viaje aún no ha iniciado.
+f) Salidas de información: Número de radicado de anulación de remesa.
+g) Control de salida de información (validación de salida): Número de
+radicado de anulación de remesa.
+h) Proceso siguiente: Ninguno.
+6.1.2. Anular registro de cumplido de remesa terrestre de carga.
+a) Nombre del proceso: Anular Cumplido de Remesa.
+b) Objetivo del proceso: Anular el cumplido de remesa por errores
+encontrados en el cumplido de remesa.
+c) Proceso precedente: Anular cumplido de manifiesto o Registrar cumplido
+remesa.
+d) Entrada de información:
+- Numero Radicado remesa.
+- Motivo anulación.
+- Observaciones.
+e) Control de entrada de la información (validación de ingreso): La remesa
+debe estar cumplida.
+f) Salidas de información:
+- Radicado de anulación cumplido de remesa.
+- Cumplido de remesa anulado.
+g) Control de salida de información (validación de salida).
+- Numero Radicado remesa
+
+-- 47 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- Radicado de anulación cumplido de remesa.
+h) Proceso siguiente: Anular remesa o registrar cumplido remesa.
+6.1.3. Anular registro opcional cumplido inicial de remesa terrestre de carga.
+a) Nombre del proceso: Anular cumplido inicial de remesa.
+b) Objetivo del proceso: El proceso de anulación del cumplido inicial de
+remesa se da en el momento en que el usuario ha cometido un error de
+digitación u otra situación que no está categorizada. Esta anulación se da para
+nuevamente generar la información correcta o ajustada de la operación de
+transporte y el proceso de entrega de la carga.
+c) Proceso precedente: Anular cumplido de remesa o ninguno si la remesa
+no había sido cumplida.
+d) Entrada de información:
+- Remesa de cargue.
+- Cargue o descargue.
+- Motivo de anulación.
+- Observaciones.
+e) Control de entrada de la información (validación de ingreso). Se realizan
+las siguientes validaciones:
+- Verificar que la remesa no esté cumplida.
+- Verificar que no haya más de una anulación.
+f) Salidas de información.
+- Número de radicado de anulación de cumplido inicial de remesa.
+- Remesa sin datos de cumplido inicial de remesa.
+g) Control de salida de información (validación de salida): Número de
+radicado de anulación de cumplido inicial de remesa.
+h) Proceso siguiente: Anular remesa.
+6.1.4. Anular registro opcional de información preliminar de carga.
+a) Nombre del proceso: Anular información de carga.
+b) Objetivo del proceso: Cuando se presentan errores de digitación o
+cambios en las características principales del servicio que se registró, el RNDC
+permite realizar anulaciones a los registros realizados.
+c) Proceso precedente: Anular información del viaje o Ninguno si la
+Información de Viaje no fue registrada.
+d) Entrada de información:
+- Información de carga.
+- Motivo de anulación.
+- Observaciones
+
+-- 48 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+e) Control de entrada de la información (validación de ingreso). Se realizan
+las siguientes validaciones:
+- Verificar que no hay una remesa expedida que esté relacionada con
+información de carga.
+- Es obligatorio registrar el motivo de la anulación.
+f) Salidas de información: Número de radicado del proceso de anulación de
+información de carga.
+g) Control de salida de información (validación de salida).
+- Se realizan las siguientes validaciones: Número de radicado del proceso.
+h) Proceso siguiente: Ninguno.
+6.1.5. Anular registro opcional de información de viaje.
+a) Nombre del proceso: Anular información de viaje.
+b) Objetivo del proceso: La anulación de informaciones de viaje debido a
+errores en la digitación o a la cancelación del servicio puede realizarse a través
+del proceso anular información de viaje.
+c) Proceso precedente: Anular Remesa o Ninguno si la remesa no fue
+expedida.
+d) Entrada de información:
+- Identificador de información de viaje.
+- Motivo de anulación.
+- Observaciones.
+e) Control de entrada de información (validación de ingreso). Se realizan las
+siguientes validaciones:
+- Verificar que no hay una remesa expedida que esté relacionada con
+información de carga.
+- Es obligatorio registrar el motivo de la anulación.
+- Solo pueden anularse informaciones de viaje que no han sido convertidas
+a manifiesto de carga y cuyas informaciones de carga no han sido
+convertidas remesas terrestres de carga.
+f) Salidas de información: Número de radicado de anulación de información
+de viaje.
+g) Control de salida de información (validación de salida).
+- Se realizan las siguientes validaciones: Número de radicado de anulación.
+h) Proceso siguiente: Ninguno.
+6.1.6. Anular registro manifiesto electrónico de carga.
+a) Nombre del proceso: Anular manifiesto de carga.
+
+-- 49 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+b) Objetivo del proceso: La anulación de manifiestos de carga debido a
+errores en la digitación o a la cancelación del servicio puede realizarse a través
+del proceso anular manifiesto de carga.
+c) Proceso precedente: Anular Cumplido de Manifiesto o Ninguno si el
+manifiesto no fue cumplido.
+d) Entrada de información:
+- Consecutivo de número de manifiesto de carga.
+- Motivo de anulación.
+- Manifiesto que reemplazará.
+- Observaciones.
+e) Control de entrada de información:
+- El manifiesto no debe estar como cumplido.
+- Ninguna remesa asociada debe estar reportada como cumplida.
+- Debe reportar un motivo de anulación.
+- Las remesas ligadas al manifiesto no deben tener registros de avance de
+cumplido de remesa.
+- La observación de porqué realiza la anulación es obligatoria.
+- El sistema no permitirá anular un nuevo manifiesto si la cantidad de
+manifiestos anulados en el mes supera el porcentaje definido en la siguiente
+tabla con respecto a la cantidad de manifiestos expedidos por la empresa
+de transporte en el mismo mes al cual pertenece el manifiesto que desea
+anular:
+Tabla 2 Rangos permitidos de anulaciones de manifiestos
+Rango de cantidad de manifiesto
+electrónico de carga
+Porcentaje
+Más de 2000 manifiestos electrónicos de
+carga en el mes calendario al cual
+pertenece el manifiesto que será objeto
+de anulación.
+10%
+Entre 500 y 2000 manifiestos electrónicos
+de carga en el mes calendario al cual
+pertenece el manifiesto que será objeto
+de anulación.
+20%
+Entre 100 y 499 manifiestos electrónicos
+de carga en el mes calendario al cual
+pertenece el manifiesto que será objeto
+de anulación.
+30%
+Entre 50 y 99 manifiestos electrónicos de
+carga en el mes calendario al cual
+pertenece el manifiesto que será objeto
+de anulación.
+40%
+Menos de 50 manifiestos electrónicos de
+carga en el mes calendario al cual
+pertenece el manifiesto que será objeto
+de anulación.
+50%
+
+-- 50 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+- La cantidad de manifiestos electrónico de carga objeto de anulación se
+calculará con base en el número de registros realizados en el mismo
+año/mes calendario al cual pertenece el manifiesto que será objeto de
+anulación. Si la empresa de transporte debe anular una mayor cantidad de
+manifiestos de modo que se supera el límite presentado, debe a través del
+sistema RNDC, realizar la solicitud explicando los motivos de este aumento
+de anulaciones.
+Si la empresa de transporte desea continuar con el proceso de anulación por
+encima de los valores establecidos en la tabla, el RNDC permitirá esta anulación,
+previa manifestación expresa de la empresa de transporte, a través del portal
+del sistema, del Registro Nacional de Despachos de Carga -RNDC- de su decisión
+de continuar con este proceso de anulación del manifiesto electrónico de carga
+y que es consciente que esta situación puede ser objeto de investigación por
+parte de la Superintendencia de Transporte. La información de este proceso
+será reportada por el RNDC a la Superintendencia de Transporte para lo de su
+competencia."
+Si un manifiesto se anula por los motivos: R, T, G, C o V, (Cambio en la Remesa,
+Cambio de Tarifa, Cambio de Destino por el Generador, Cambio de Conductor,
+Cambio de Vehículo) se puede digitar el consecutivo de manifiesto nuevo que lo
+reemplazará. Los reemplazos de manifiesto no hacen parte del control de la
+tabla anterior.
+f) Salidas de información: Número de radicado de anulación de manifiesto.
+g) Control de salida de información: Se puede consultar el número de
+radicación de anulación de manifiesto electrónico de carga a través de web-
+services y el portal interactivo.
+h) Proceso siguiente: Anular Remesa o Ninguno.
+6.1.7. Anular registro cumplido del manifiesto electrónico de carga.
+a) Nombre del proceso: Anular cumplido de manifiesto.
+b) Objetivo del proceso: La anulación de cumplido de manifiesto de carga
+se hace debido a errores en la digitación o a la cancelación del servicio y puede
+realizarse a través del proceso anular manifiesto de carga.
+c) Proceso precedente: Cumplido de Manifiesto.
+d) Entrada de información:
+- Consecutivo de número de manifiesto.
+- Motivo de Anulación.
+e) Control de entrada de información:
+- El manifiesto debe estar cumplido.
+
+-- 51 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+f) Salidas de información:
+- Número de radicado de anulación de cumplido de manifiesto.
+g) Control de salida de información: Se puede consultar el número de
+radicación de anulación de cumplido de manifiesto a través de web-services y
+el portal interactivo.
+h) Proceso siguiente: Anular manifiesto o Ninguno.
+6.1.8. Anular registro de Valor de Flete.
+El Generador puede anular los registros que haya radicado en el RNDC correspondiente
+a Valores de Fletes ya sea de los de Pactos en Rangos de fechas o los registros de
+valores de Fletes de cada Remesa.
+22. 6.2. Reporte no registro de viajes en el mes.
+El sistema del Registro Nacional de Despachos de Carga -RNDC- efectuará validaciones
+y mensualmente generará la información relacionada con las empresas de transporte
+habilitadas que dentro del mes inmediatamente anterior no generaron Manifiestos
+Electrónicos de Carga ni registros de viajes municipales, al sistema de información
+Registro Nacional de Despachos de Carga-RNDC-, indicando el motivo de la no
+generación. Esta información será de consulta abierta por parte de la Superintendencia
+de Transporte para los temas de su competencia.
+7. COMPARACIÓN DE INFORMACIÓN ENTRE SISTEMAS.
+Para efectos de control, verificación y calidad de la información el sistema RNDC, realiza
+la comparación de los datos reportados por los usuarios con la información que reposa
+en el Sistema del Registro Único Nacional de Transito -RUNT-, en el Sistema de
+Información de Conductores que Transportan Mercancías Peligrosas -SISCONMP –, la
+reportada por el Instituto Nacional de Vías – INVIAS- en materia de transporte de carga
+indivisible, extra pesada y extra dimensionada y la información del Sistema de
+Información de Costos Eficientes para el Transporte Automotor de Carga por Carretera
+-SICE-TAC-, entre otros sistemas de información que permitan el manejo integral de
+los datos reportados por los sujetos obligados.
+Esta comparación inicia con el ingreso de datos por parte del usuario del sistema, luego,
+el RNDC realiza las consultas respectivas en los sistemas de comparación y continúa
+con el proceso que esté desarrollando el usuario cuando la información cumple con los
+requisitos de exactitud y actualización. En aquellos eventos en que la información no
+cumpla con estos requisitos, el sistema generará los respectivos avisos que brindarán
+la orientación que requiere el usuario para el registro correcto de los datos.
+Por otra parte, el sistema RNDC realiza la actualización cíclica de los datos consultados
+con base en una ventana de tiempo definida para la respectiva consulta y actualización,
+de esta forma, el usuario realiza una consulta y si el dato cuenta con una fecha de
+actualización que se encuentra dentro de la ventana de tiempo, no es necesario realizar
+la consulta con los sistemas de comparación de información.
+
+-- 52 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+8. CONSULTAS.
+23. 8.1. Empresa de Transporte.
+a) Consulta de Documentos
+Las empresas de Transporte pueden consultar todos los registros que hayan radicado
+en el sistema RNDC, inclusive los registros de las Anulaciones. Las consultas se pueden
+hacer por el portal web interactivo y también por los servicios WEB.
+b) Consulta de Maestros
+Las empresas de Transporte pueden consultar todos los registros de los procesos de
+Terceros y Vehículos que ellos hayan radicado.
+c) Consulta de Tablas Paramétricas
+Pueden consultar las tablas paramétricas como, por ejemplo: Configuraciones,
+Empresas de Seguros, Carrocerías, Codificación de Productos y las demás tablas que
+se encuentren relacionadas en la guía: Tablas Paramétricas del RNDC.
+d) Consulta de Otra información del RNDC
+Las empresas de Transporte pueden consultar en el portal interactivo del RNDC
+información que envían otros actores de los procesos como, por ejemplo: RNA (RUNT)
+Registro Nacional Automotor de Carga, Cursos de Mercancía Peligrosa (SISCONMP),
+Permisos de Carga Extra (INVIAS), Paso de vehículos por los puestos de control en
+carretera (INVIAS), Citas de Terminales Portuarias.
+e) Reimpresión de documentos
+Las empresas de Transporte pueden generar los archivos pdf de: Remesas, Manifiestos,
+Cumplidos de Remesas, Cumplidos de Manifiestos, Remesas municipales, Registros de
+Viaje municipales, correspondientes a registros radicados por ellos.
+24. 8.2. Generador.
+- Consulta de Documentos
+Los Generadores pueden consultar todos los registros que hayan radicado en el sistema
+RNDC, inclusive los registros de las Anulaciones. Las consultas se pueden hacer por el
+portal web interactivo y también por los servicios WEB.
+25. 8.3. Entidades Públicas.
+Las entidades públicas como, por ejemplo: UGPP, FISCALIA, MUNICIPIOS,
+SUPERINTENDENCIA DE TRANSPORTE, INVIAS, UIAF, POLICIA, JUZGADOS, ENTRE
+OTROS, podrán realizar acercamientos y acuerdos con el Grupo de Logística para
+diseñar las consultas de la información del RNDC.
+26. 8.4. Propietario o conductor.
+Los propietarios de vehículos y sus conductores pueden consultar los manifiestos y sus
+remesas intermunicipales, así como las remesas municipales y los registros
+municipales, que les hayan expedido las empresas de transporte a nombre de ellos, es
+decir, que en el manifiesto el titular del manifiesto tenga la identificación del propietario
+y lo mismo para el conductor del manifiesto tenga la identificación respectiva. Esa
+consulta permite también generar el archivo .pdf del manifiesto o del viaje municipal
+en caso de necesitar mostrarlo a la autoridad en carretera.
+
+-- 53 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+Estas consultas se pueden hacer usando la funcionalidad para dispositivo móvil llamada
+APP RNDC Transportador. Las instrucciones de uso se pueden consultar en la guía APP
+RNDC Transportador publicada por el Ministerio de Transporte.
+Así mismo, los conductores pueden consultar por la misma aplicación las
+contrataciones directas realizadas.
+27. 8.5. Consulta pública.
+El público en general puede realizar consultas el portal web interactivo, sin necesidad
+de usuario y clave de la información del RNDC, con la debida guarda de las reglas para
+la administración de datos personales legalmente establecida, entre otras las siguientes
+consultas:
+- Estado de una placa
+- Historial de manifiestos expedidos a una placa
+- Historial de manifiestos expedidos a un conductor
+- Estadísticas mensuales de los viajes registrados en el RNDC
+- Estadísticas de viajes por tipo de vehículo y tipo de combustible
+- Lista de empresas de transporte habilitadas
+- Lista de empresas de GPS disponibles para enviar información al RNDC
+- Detalle de las remesas y sus tiempos logísticos, en forma anónima.
+28. 8.6. Puertos.
+Las empresas autorizadas como Terminales Portuarias pueden consultar todos los
+registros que hayan radicado en el sistema RNDC-INSIDE, registros RIEN: Asignación de
+Cita, Uso de Cita, Cancelación de Cita, Anulación de Cita, Oferta no utilizada. Las
+consultas se pueden hacer por el portal web interactivo.
+Para la parte operativa de sus sistemas de enturnamiento, la terminal portuaria puede
+realizar algunas consultas como por ejemplo: Datos de una Placa de un automotor,
+Datos de la cedula de un Conductor, Datos de un Manifiesto y sus Remesas.
+9. PLAN DE CONTINGENCIA.
+Continuidad y/o contingencias del sistema del Registro Nacional de Despachos de
+Carga – RNDC. El Ministerio de Transporte monitoreara permanentemente el
+funcionamiento del sistema de información Registro Nacional de Despachos de Carga-
+RNDC y realizará las recomendaciones pertinentes al afinamiento de la aplicación y a
+nivel de bases de datos, y en el evento de ser necesario realizar tareas de
+
+-- 54 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+mantenimiento se informará oportunamente a los usuarios para que den inicio al plan
+de contingencia, para lo cual se deberá seguir el procedimiento definido en éste
+numeral.
+En los demás eventos en qué las personas obligadas a registrar información en el
+sistema Registro Nacional de Despachos de Carga – RNDC no puedan acceder al sistema
+por fallas tecnológicas o incidentes atribuibles únicamente a la infraestructura
+tecnológica del Ministerio, deberán generar el pdf del manifiesto según el formato
+estándar definido en la guía de usuario de portal interactivo del RNDC, sin el radicado
+de manifiesto y sin la representación gráfica del código QR. En todo caso, los registros
+deberán ser reportados al sistema del Registro Nacional de Despachos de Carga –
+RNDC- en un término máximo de 48 horas contados a partir de la hora en que se
+restableció el servicio del RNDC en el Ministerio de Transporte.
+En los casos en que los actores del RNDC no puedan acceder al sistema por fallas
+tecnológicas atribuibles a las respectivas empresas no aplica este plan de contingencia.
+El plan de contingencia consiste en que la empresa de transporte puede realizar el viaje
+generando el documento en papel del manifiesto de carga, sin el Número de Radicado
+y sin el código QR. Debe ir acompañado de las remesas en papel sin número de radicado.
+Los formatos que deben cumplir estos dos documentos estarán en la guía de Usuario
+Portal Interactivo.
+10. CONTROL PARA EL INGRESO DE INFORMACIÓN.
+Para el ingreso de información en el sistema RNDC, se tiene en cuenta diferentes
+condiciones en las cuales los datos de ingreso en los formularios del RNDC son
+incompatibles, no combinables o que carecen de sustento por ser inviable dentro de la
+operación de transporte.
+Estos criterios de incompatibilidad, no combinación o inviable se definen como control
+de ingreso de información, en el cual, el sistema RNDC exige condiciones mínimas para
+el respectivo ingreso de información dentro del sistema sin perjuicio de la operación de
+transporte, pero velando por que la calidad de la información ingresada esté dentro de
+los conceptos de verosimilitud y fiabilidad.
+La incompatibilidad se refiere a las combinaciones de parámetros definidos dentro de
+los formularios del RNDC y que por los valores ingresados de la información no se pueda
+ejecutar una operación en el mundo real.
+La no combinación se refiere a las posibilidades de combinación que tiene el RNDC en
+sus diferentes formularios y que por su disposición legal o de carácter técnico se limiten
+estas combinaciones dentro del sistema RNDC.
+La inviabilidad es el criterio por el cual los valores que pueda tomar un parámetro
+dentro del RNDC hacen que la operación de transporte sea inviable por razones físicas,
+legales o técnicas.
+El detalle de cada uno de los mensajes de error y alertas que entre el sistema al usuario
+se encuentran en la guía Diccionario de Errores.
+Estos controles para el ingreso de información se publican en el portal logístico de
+Colombia a través del canal digital https://plc.mintransporte.gov.co/RNDC/Solución-
+de-Problemas en la sección “control para el ingreso de información”.
+11. SISTEMA DE AYUDA.
+El sistema RNDC cuenta con un conjunto de herramientas para el entendimiento del
+
+-- 55 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+funcionamiento y las posibles situaciones que el usuario puede enfrentar en el
+transcurso del uso del RNDC en contextos donde la operación de transporte puede
+tener variaciones respecto a los procesos estandarizados en la plataforma. Este
+sistema de ayuda brinda guía acerca de los tópicos de, preguntas frecuentes que son
+realizadas por los mismos usuarios, solución de problemas encontrados con la
+ejecución del sistema RNDC, diccionario de errores y la interpretación del mensaje de
+error presentado durante la operación del sistema y finalmente el diccionario de datos
+que brinda una guía acerca de los tipos de datos requeridos para el ingreso de
+información en el sistema RNDC buscando reducir la cantidad de errores que pueda
+tener el usuario.
+29. 11.1. Preguntas frecuentes.
+El Ministerio de Transporte cuenta con una sección de “Preguntas frecuentes” que se
+encuentra actualizada a través del canal digital
+https://plc.mintransporte.gov.co/RNDC/Preguntas-Frecuentes-RNDC o el canal que el
+Ministerio de Transporte disponga, esta sección recolecta las preguntas frecuentes
+realizadas por los usuarios de la plataforma y se presenta para los usuarios de
+empresas transportadoras del servicio público de transporte de carga por carretera y
+empresas generadoras de carga.
+30. 11.2. Solución de problemas.
+El Ministerio de Transporte cuenta con una sección de “Diccionario de errores” que se
+encuentra actualizada a través del canal digital
+https://plc.mintransporte.gov.co/RNDC/Solución-de-Problemas, o el canal que el
+Ministerio de Transporte disponga, esta sección recolecta los problemas usuales
+reportados por los usuarios de la plataforma.
+31. 11.3. Diccionario de errores.
+El Ministerio de Transporte cuenta con una guía de “Diccionario de errores” que se
+encuentra actualizada a través del canal digital
+https://plc.mintransporte.gov.co/RNDC/Diccionario-de-errores, o el canal que el
+Ministerio de Transporte disponga, esta sección dispone el diccionario de errores que
+son los mensajes que le aparecen a los usuarios cuando existe algún error en el
+parámetro o campo diligenciado en las funcionalidades del RNDC de acuerdo con los
+roles de usuario del sistema RNDC.
+32. 11.4. Diccionario de datos.
+El Ministerio de Transporte cuenta con una sección de “Diccionario de datos” que se
+encuentra actualizada a través del canal digital
+https://plc.mintransporte.gov.co/RNDC/Diccionario-de-datos, o el canal que el
+Ministerio de Transporte disponga. Existen el repositorio de datos públicos, el cual
+permite que la ciudadanía consulte el diccionario de datos de las bases públicas con
+las que cuenta el RNDC y diccionario de uso restringido en cumplimiento de la Ley
+Habeas Data, la cual, es accesible para aquellos usuarios registrados con algún rol
+dentro del sistema RNDC, este diccionario cuenta con los datos de uso del RNDC y su
+acceso es través del sistema RNDC y la sección “consultas”.
+33. 11.5. Consultas.
+El Ministerio de Transporte cuenta con el correo electrónico
+rndc@mintransporte.gov.co o el canal que disponga o defina pertinentemente, en el
+cual, los usuarios podrán realizar consultas relacionadas con el funcionamiento del
+sistema o cualquier petición, queja, reclamo o sugerencia que considere ser resuelta
+por la Entidad de manera directa.
+
+-- 56 of 57 --
+
+RESOLUCION NO. 20223040045515
+DE AGOSTO 5 DE 2022
+“Por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC y se dictan otras disposiciones"
+34. 11.6. Datos de contacto.
+El Ministerio de Transporte cuenta con canales de atención a la ciudadanía y canales
+dedicados a la atención de inconvenientes técnicos y otras requisiciones relacionadas
+con el uso del sistema RNDC.
+Los canales de mesa de ayuda son los siguientes:
+Correo destinado a la atención de incidentes del sistema RNDC
+rndc@mintransporte.gov.co.
+Correo destinado a la atención de incidentes del módulo INSIDE del sistema RNDC
+inside@mintransporte.gov.co.
+El Ministerio de transporte dispone de los siguientes canales de atención ciudadana:
+Sede Central: Dirección: Calle 24 # 60 - 50 Piso 9 - Centro Comercial Gran Estación II
+(Bogotá, D.C - Colombia).
+Sólo atención por agendamiento https://bit.ly/3AjYqyH.
+Atención por video llamada aquí:
+https://mintransporte.gov.co/publicaciones/8625/desde-cualquier-lugar-
+atenderemos-tus-inquietudes/
+Línea de atención: (601) 3240800 op. 1
+Línea gratuita nacional: 01 8000 112042
+Línea gratuita de transparencia: 01 8000 110950
+Formulario para radicación de PQRSD (peticiones, quejas, reclamos, sugerencias y
+denuncias) y documentos https://mintransporte.powerappsportals.com/.
+Email para radicación de PQRSD y documentos:
+servicioalciudadano@mintransporte.gov.co
+El Ministerio de transporte mantendrá actualizados estos datos en los respectivos
+medios pertinentes.
+El Ministerio de Transporte comunicará a través de las páginas
+https://rndc.mintransporte.gov.co o https://plc.mintransporte.gov.co los avisos
+relacionados con mantenimientos, caídas o incidentes que afecten el funcionamiento
+normal del sistema RNDC en alguno de sus componentes.
+El Ministerio de Transporte dispondrá de los canales y medios de comunicación
+respectivos que considere para la comunicación de suspensiones temporales del
+sistema RNDC en lo que se refiere a mantenimientos, caídas del sistema o incidentes
+que afecten el funcionamiento del sistema RNDC en alguno de sus componentes.
+
+-- 57 of 57 --
+

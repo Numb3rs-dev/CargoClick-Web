@@ -1,0 +1,1084 @@
+Procedimiento de administración de usuarios para el
+Sistema del Registro Nacional de Despachos de Carga -
+RNDC, permite gestionar la vinculación de personas
+naturales o jurídicas obligadas a reportar información en
+el RNDC
+GUÍA SOLICITUD DE
+USUARIOS SISTEMA RNDC
+
+-- 1 of 52 --
+
+2
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+El procedimiento de administración de usuarios para el Sistema del
+Registro Nacional de Despachos de Carga - RNDC, permite gestionar la
+vinculación de personas naturales o jurídicas obligadas a reportar
+información en el RNDC
+CONTROL DE CAMBIOS
+Versión: 2
+Elaborado por:
+Edna Lorena Gutiérrez
+Revisado por:
+Alexandra Hernández
+Magola Eugenia Molina
+Angela Carolina Palacios
+Jairo Vesga
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Fecha de Aprobación:
+06/06/2024
+
+-- 2 of 52 --
+
+3
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Descripción de las modificaciones:
+Fecha Modificación
+27/05/2024 Se modifica versión de la Guía, para incluir el proceso
+para solicitud de usuario para Generador de Carga con
+domicilio en el extranjero.
+
+-- 3 of 52 --
+
+4
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Contenido
+1. INTRODUCCIÓN ................................................................................................................................ 5
+2. CREACIÓN DE USUARIO PRINCIPAL ............................................................................... 8
+2.1. Solicitud .............................................................................................................................................. 8
+2.1.1. Solicitud de usuario para Generador Extranjero ................................................ 15
+2.2. Activación usuario ..................................................................................................................... 19
+3. CREACIÓN DE USUARIO DEPENDIENTE .................................................................... 22
+4. CAMBIO Y REESTABLECIMIENTO DE CLAVE DE USUARIO .......................... 29
+4.1. Usuario principal ........................................................................................................................ 29
+4.2. Usuario dependiente .............................................................................................................34
+4.2.1. Cambio de clave desde usuario principal ....................................................34
+4.2.2. Cambio de clave desde usuario dependiente ......................................... 38
+5. TERMINAL PORTUARIA ...........................................................................................................42
+5.1. Creación terminal portuaria ...............................................................................................42
+5.2. Creación reporte de información del Sistema de Información de
+Enturnamiento Portuario ............................................................................................................ 47
+6. REFERENCIAS ................................................................................................................................. 52
+
+-- 4 of 52 --
+
+5
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+1. INTRODUCCIÓN
+El procedimiento de administración de usuarios para el sistema Registro
+Nacional de Despachos de Carga - RNDC, permite gestionar la vinculación
+de personas naturales o jurídicas que realizan reporte de información al
+RNDC, es decir:
+Los roles o tipos de usuarios en el RNDC están conformados por 3 grupos
+de usuarios:
+1. Los Obligados:
+• Empresas de transporte
+• Generador de carga
+• Propietarios de vehículos (titulares de manifiesto electrónico de
+carga)
+• Los puertos autorizados (marítimos y fluviales)
+2. Los opcionales que interactúan enviando información al RNDC:
+• Los municipios
+• Los conductores
+• Las empresas de Seguimiento Satelital -GPS
+• Instituto Nacional de Vías -INVÍAS
+3. Los opcionales que solo consultan la información del RNDC:
+• Superintendencia de Transporte
+• Policía Nacional y sus divisiones (DITRA, DIRAN)
+• Unidad de Gestión Pensional y Parafiscales -UGPP
+• Fiscalía General de la Nación
+• Otras entidades Gubernamentales
+En el caso de los usuarios conductor, tenedor/propietario del vehículo,
+
+-- 5 of 52 --
+
+6
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+deben remitirse a la Guía RNDC Transportador para conocer el proceso de
+activación del usuario y uso de la aplicación APP RNDC Transportador.
+Finalmente, las entidades del orden nacional o departamental que
+requieran realizar consultas en el sistema RNDC deben solicitar usuario a
+través de una solicitud formal al Grupo de Logística del Ministerio de
+Transporte.
+El Registro Nacional de Despachos de Carga es un “sistema de
+información que […] recibe, valida y transmite las operaciones para el
+Servicio Público de Transporte Terrestre Automotor de Carga, […]
+permitiendo además el monitoreo y cumplimiento de la política de
+libertad vigilada”1, siendo estas operaciones vinculadas a los diferentes
+actores como generadores, empresas de transporte y puertos que
+competen sobre la operación de transporte terrestre automotor de carga.
+Figura 1. Esquema de usuarios del sistema RNDC.
+1 Resolución 377 de 2013, Colombia, Ministerio de Transporte. Consultado el 01 de marzo de 2021 en la página
+https://plc.mintransporte.gov.co/Portals/0/Documentos/Resolucion0000377-2013.pdf?ver=2018-09-20-185238-000
+Empresa
+Usuario
+principal
+Usuario
+dependiente 1
+Usuario
+dependiente 2
+Usuario de
+facturación
+electrónica.
+Usuario
+dependiente 3
+Usuario de
+consultas
+generales
+
+-- 6 of 52 --
+
+7
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Un usuario principal entonces es un usuario cuyas actividades son en
+representación a la empresa a la cual está vinculado y la empresa es un
+actor dentro de las diferentes operaciones del transporte terrestre
+automotor de carga. Un usuario principal tiene funciones específicas de
+su rol las cuales son: generar información de acuerdo con el rol que cada
+uno desempeña, administrar usuarios que realicen la generación de
+información en nombre de la empresa y que sean delegados por éste y,
+consultar la información que se encuentra almacenada en el sistema y que
+muestre la actividad de la empresa.
+
+-- 7 of 52 --
+
+8
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+2. CREACIÓN DE USUARIO PRINCIPAL
+Un usuario principal es aquel usuario que, dependiendo del rol asignado,
+tiene la capacidad de crear usuarios dependientes de este usuario
+principal y configurar parámetros e instancias de su rol, administra los
+usuarios dependientes que realizan registros en el Registro Nacional de
+Despachos de Carga RNDC y tiene funcionalidades sin límite para crear,
+registrar, anular, consultar información en el sistema RNDC.
+Quien debe solicitar el usuario principal es el representante legal de la
+empresa y es aquella persona que cuenta con la autorización o capacidad
+para poder ejercer derechos o adquirir obligaciones en nombre de una
+empresa (persona jurídica) y de esta manera la legislación vigente define
+cuáles son los documentos que permiten acreditar dicha calidad, tal como
+el certificado de existencia y representación legal, expedido por la cámara
+de comercio en la cual la empresa se encuentra registrada.
+2.1. Solicitud
+El procedimiento de vinculación-creación de usuario principal, se explica
+en los siguientes pasos que se describen a continuación.
+
+-- 8 of 52 --
+
+9
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 2. Diagrama de flujo proceso de gestión usuarios.
+
+-- 9 of 52 --
+
+10
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Para iniciar el procedimiento de solicitud de usuario, usted debe acceder
+a la página https://plc.mintransporte.gov.co/RNDC y hacer clic en el enlace
+“Usuario/Contraseña” tal como se indica en la siguiente figura:
+Luego de clic en “Solicitar usuario”
+
+-- 10 of 52 --
+
+11
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Ilustración 3. Caja de texto "Ingreso a RNDC"
+Luego de ingresar al enlace, encontrará un formulario que deberá ser
+diligenciado en su totalidad con base en la información oficial de la
+empresa solicitante, siendo la siguiente:
+- Tipo de empresa: Seleccione entre las cinco opciones disponibles.
+Generador de carga, empresa transportadora habilitada, puerto ma-
+rítimo o fluvial autorizado, empresa GPS y municipio. Si su organiza-
+ción no se encuentra dentro de alguna de las categorías presenta-
+das, por favor, escriba a la mesa de ayuda para la solicitud de usuario.
+- Número de Identificación Tributaria: es el número de identificación
+de la empresa ante la DIAN, tal como aparece en el Certificado de
+Existencia y Representación Legal emitido por la Cámara de Comer-
+cio en la cual se encuentra registrada la empresa. Se debe incluir el
+dígito de verificación sin guiones ni espacios.
+- Razón social: Nombre de la empresa tal como aparece en el Certifi-
+cado de Existencia y Representación Legal.
+
+-- 11 of 52 --
+
+12
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+- Dirección: Dirección de notificación judicial tal como aparece en el
+Certificado de Existencia y Representación Legal.
+- Municipio: Registre el nombre del municipio de correspondencia de
+la dirección ingresada anteriormente. El sistema le apoyará en auto-
+completar el nombre del municipio y el departamento al cual perte-
+nece el mismo.
+- Email de notificación judicial: Es la dirección de correo electrónico
+definido por la empresa y que aparece en el Certificado de Existencia
+y representación legal.
+- Nombres y apellidos del representante legal: Escriba el nombre
+completo del representante legal de la empresa tal como aparece
+en el certificado de existencia y representación legal. Se debe dar
+prioridad al representante legal principal, de lo contrario será causal
+de devolución.
+- Identificación: Ingrese el número de identificación del represen-
+tante legal tal como aparece en el Certificado de Existencia y Repre-
+sentación Legal. Este es un campo numérico, no ingrese puntos,
+guiones o caracteres especiales dado que el formulario no le permi-
+tirá hacer un envío exitoso.
+- Nombres y apellidos del contacto delegado ante el RNDC: Es el nom-
+bre la persona que tendrá contacto con el RNDC. En caso de requerir
+una comunicación directa con la empresa vinculada, el Ministerio de
+Transporte localizará al contacto que aparece en el formulario, en
+caso de ser el mismo representante legal, ingrese el mismo nombre
+nuevamente.
+- Teléfonos: Ingrese los teléfonos de contacto de la persona delegada,
+bien sea teléfono fijo o teléfono celular.
+
+-- 12 of 52 --
+
+13
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+- Certificado de Existencia y Representación Legal: Adjunte el Certifi-
+cado de Existencia y Representación Legal emitido por la Cámara de
+Comercio en la cual se encuentra registrada la empresa, este docu-
+mento debe estar en formato PDF, debe ser legible y debe tener una
+fecha de expedición no mayor a 30 días calendario. Esto aplica para
+usuarios del tipo empresa de transporte, empresa GPS, puerto ma-
+rítimo o fluvial, generador de carga.
+- Acuerdo de confidencialidad: Únicamente para usuarios de munici-
+pios, adjunte el Certificado de Confidencialidad expedido por el mu-
+nicipio donde acepta la política de tratamiento de datos personales
+expedida por el Ministerio de Transporte y la cual se encuentra en el
+enlace inferior del formulario o a través del siguiente enlace:
+https://www.mintransporte.gov.co/loader.php?lServi-
+cio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=20598.
+- Resolución territorial: Documento generado por la Territorial de Mi-
+nisterio de Transporte donde habilita la operación de empresas del
+servicio público de transporte de carga por carretera. Esta opción
+aplica únicamente para empresas de transporte.
+
+-- 13 of 52 --
+
+14
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 4. Formulario de solicitud de usuario principal RNDC.
+Posterior a diligenciar el formulario, se encuentra la declaración de
+protección de datos personales del Ministerio, allí encontrará un acceso a
+un documento en PDF, el cual contiene los lineamientos de la política del
+Ministerio.
+Finalmente, deberá resolver la operación matemática de seguridad que le
+solicita, de modo tal que debe realizarse esta operación y hacer clic en el
+botón “registrar solicitud de usuario”. Si considera que no es posible
+completar el formulario, puede utilizar la opción “salir” que se encuentra
+justo al lado del primer botón mencionado.
+El Ministerio de Transporte procederá a realizar la verificación de la
+información consignada y de acuerdo con el dictamen que se genere,
+
+-- 14 of 52 --
+
+15
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+procederá a aprobar o rechazar la solicitud del usuario de acuerdo con los
+criterios de consistencia, fiabilidad y completitud de la información. Para
+el caso de las empresas de transporte, el Grupo de Logística realizará la
+validación de la resolución de habilitación directamente con la Dirección
+Territorial correspondiente.
+Si la solicitud es aprobada, el solicitante recibirá en su correo electrónico
+un mensaje con instrucciones para la activación del usuario en el sistema
+RNDC. Dentro de las instrucciones se encuentra un enlace que lo lleva a
+una sección de activación. El mensaje permite, además, verificar qué si el
+usuario del correo NO ha realizado dicha solicitud, puede reversar el
+procedimiento a través de la mesa de ayuda del RNDC.
+Figura 5. Modelo de respuesta solicitud usuario RNDC.
+2.1.1. Solicitud de usuario para Generador Extranjero
+1. Ingrese a la página web https://plc.mintransporte.gov.co/
+
+-- 15 of 52 --
+
+16
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+2. De clic en el módulo RNDC que está ubicada en la parte superior, se
+desplegara las siguientes funciones, escoja la opción
+USURIO/CONTRASEÑA:
+2. Al dar clic en Usuario/Contraseña escoger la opción SOLICITUD DE
+USUARIO
+
+-- 16 of 52 --
+
+17
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+3. Del formulario desplegado seleccione en el tipo de empresa la opción
+“Generador de Carga ” y oprima la tecla tabular :
+4. Diligencie la información del formulario de la siguiente manera:
+
+-- 17 of 52 --
+
+18
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+a. Tipo de Empresa- GENERADOR DE CARGA y oprima la tecla tabular
+b. Número de Identificación de la persona natural o jurídica según
+corresponda.
+c. En la siguiente casilla escoja - IDENTIFICACION EXTRANJERA
+d. Escriba el nombre de la empresa o de la persona natural.
+e. Escriba la Dirección de la sede principal del Generador de Carga.
+f. Escoja o escriba el País de origen del Generador de Carga.
+g. Escriba la Ciudad.
+h. Escriba la dirección de correo electrónico - Email.
+i. Escriba el Nombre del Representante Legal.
+j. Escriba el Numero de la identificación del Representante Legal.
+k. Escriba el Nombre de la persona delegada por el Representante Legal
+para ser el contacto con el Ministerio de Transporte.
+l. Escriba el Número Telefónico de le empresa en el extranjero.
+m. Realice la suma aleatoria y escriba el resultado.
+n. Anexe el Certificado Existencia y Representación Legal, RUT o el
+documento equivalente en su país de origen, que demuestre la existencia
+legal del Generador de Carga.
+ñ. De clic en REGISTRAR SOLICITUD DE USUARIO.
+5. El sistema le entregará un número de radicado y al correo registrado se
+le enviará la respuesta con un LINK de acceso en el cual le deberá dar clic
+y podrá visualizar el USUARIO que tendrá la siguiente estructura
+MASTER@XXXXXXXXX y le deberá asignar la contraseña a este usuario.
+6. Una vez tenga el usuario, ingrese al sistema en la página web del
+REGISTRO NACIONAL DE DESPACHOS DE CARGA – RNDC
+https://rndc.mintransporte.gov.co/MenuPrincipal/tabid/204/language/es-
+
+-- 18 of 52 --
+
+19
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+MX/Default.aspx?returnurl=%2FDefault.aspx
+6. Digite su usuario y contraseña e ingrese al sistema RNDC.
+2.2. Activación usuario
+En la sección de activación, el sistema le proporcionará la información del
+usuario principal generado y adicionalmente un campo para la creación
+de la contraseña de acceso al sistema, la cual debe cumplir con los
+requisitos de seguridad que son los siguientes: contener una mayúscula y
+una minúscula, mínimo 8 caracteres de longitud, contener un número y
+contener un carácter especial.
+
+-- 19 of 52 --
+
+20
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 6. Cuadro de diálogo de activación usuario RNDC.
+Para diligenciar el formulario se debe diligenciar el email en el cual se
+recibió la información, la contraseña y se confirma la contraseña.
+Adicionalmente debe realizar la operación matemática de seguridad y así,
+de esta forma se completará el proceso.
+Luego, el usuario podrá acceder a través de la página
+https://plc.mintransporte.gov.co a realizar las funciones de expedición de
+información siguiendo los lineamientos de las relaciones económicas y de
+operación del servicio público de transporte terrestre automotor de carga.
+
+-- 20 of 52 --
+
+21
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 7. Página principal de acceso al RNDC.
+En caso de tener algún inconveniente, diríjase a la sección de ayuda del
+RNDC, la cual se encuentra en la sección inferior de la página
+https://plc.mintransporte.gov.co/RNDC y seleccione el canal de
+comunicación a través del cual desea enviar su solicitud, los canales de
+comunicación son los siguientes:
+Figura 8. Mesa de ayuda Sistema RNDC.
+
+-- 21 of 52 --
+
+22
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Para la documentación relacionada con los manuales de uso y funciones
+específicas del RNDC, diríjase a la página
+https://rndc.mintransporte.gov.co/es-mx/normatividad.aspx o a la sección
+“Manuales y documentación RNDC” en la página
+https://plc.mintransporte.gov.co/RNDC/Manuales la cual, contiene los
+documentos relacionados con la operación y administración del sistema
+Registro nacional de Despachos de Carga RNDC.
+3. CREACIÓN DE USUARIO DEPENDIENTE
+Si el usuario principal requiere la designación de usuarios que realicen la
+actividad de envío de información al sistema RNDC, se debe crear uno o
+varios usuarios dependientes que van a estar ligados a cada usuario
+principal respectivamente. Un usuario dependiente es un usuario que se
+encuentra relacionado con un usuario principal, el cual es solicitante de
+vinculación a nombre de una empresa.
+Para la habilitación de usuarios dependientes para el registro de
+información en el sistema RNDC, lo primero es crearlos, para lo cual se
+deben seguir estos pasos:
+• Ingresar al sistema RNDC a través de la página https://plc.mintrans-
+porte.gov.co
+• Ingresar como usuario principal a la pestaña RNDC.
+• Ingresar al menú RNDC y a la opción usuarios.
+• Luego hacer clic en el botón “Nuevo Usuario”.
+• Diligenciar el formulario y generar el usuario.
+A continuación, se explica el proceso detallado para la creación de usuarios
+dependientes en el sistema RNDC.
+La primera acción que debe hacer el usuario es ingresar a la página
+https://plc.mintransporte.gov.co e ingresar al módulo RNDC.
+
+-- 22 of 52 --
+
+23
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 9. Ingreso al menú RNDC del Portal Logístico de Colombia.
+Posteriormente, se debe escribir el usuario y contraseña para ingresar al
+módulo RNDC.
+
+-- 23 of 52 --
+
+24
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 10. Cuadro de ingreso de usuario y contraseña Sistema RNDC.
+Luego se debe dirigir al menú RNDC y seleccionar la opción “Usuarios”.
+
+-- 24 of 52 --
+
+25
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Ilustración 11. Menú RNDC y opción "Usuarios".
+Cuando se ingresa a la opción seleccionada, aparece la siguiente pantalla
+que permite al usuario principal visualizar todos los usuarios dependientes
+que se encuentran relacionados con el usuario principal.
+Figura 12. Menú principal de administración de usuarios dependientes.
+Para la creación del nuevo usuario se debe ingresar al botón “NUEVO
+USUARIO”, luego de hacer clic en el botón, aparece el siguiente cuadro de
+
+-- 25 of 52 --
+
+26
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+texto donde se le solicita al usuario la siguiente información:
+Empresa: texto por defecto que presenta la empresa a la cual está
+asociado el usuario a crear.
+- Nombre de usuario principal: texto por defecto.
+- Usuario nuevo dependiente: casilla que debe diligenciar asignando
+el nombre de usuario a crear. Se debe escribir a la izquierda del sím-
+bolo de arroba. Ej. juan@8888
+- Nombres y apellidos: ingrese los nombres y apellidos del usuario de-
+pendiente a crear.
+- Empresa: seleccione de la lista desplegable la empresa a la cual esté
+asociado.
+- Dirección geográfica del usuario: escriba la dirección en la cual el
+usuario reside.
+- Email: escriba el email del usuario secundario al cual se va a asociar
+la cuenta.
+- Contraseña: escriba la contraseña que se le va a suministrar al usua-
+rio dependiente, teniendo en cuenta las reglas de seguridad de la
+información que maneje su empresa.
+- Confirmar contraseña: campo de verificación de digitación de la
+contraseña suministrada en el campo anterior.
+Luego de diligenciar el formulario se procede a seleccionar la opción
+“GUARDAR NUEVO USUARIO” y el usuario quedará listo para ingresar al
+Sistema RNDC.
+
+-- 26 of 52 --
+
+27
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 13. Formulario de creación de usuarios dependientes.
+Adicionalmente, el usuario dependiente debe ser definido por el tipo de
+uso que va a realizar dentro de la plataforma, de modo tal que se deberá
+definir de acuerdo con las opciones de usuario dependiente operativo,
+usuario facturación electrónica, usuario para consultas o usuario principal
+y el rango autorizado de consecutivo de manifiestos que puede expedir el
+usuario.
+
+-- 27 of 52 --
+
+28
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 14. Selección de funcionalidades de usuario dependiente.
+Consideraciones
+Se debe tener en cuenta que el único autorizado para crear o inactivar
+usuarios dependientes es el usuario principal o máster, de lo contrario,
+aparecerá la siguiente imagen de advertencia:
+Figura 15. Mensaje de advertencia de no creación de usuarios.
+Si no aparece la empresa en la lista desplegable, comuníquese con la mesa
+de ayuda en los canales especificados para tal fin.
+
+-- 28 of 52 --
+
+29
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+4. CAMBIO Y REESTABLECIMIENTO DE CLAVE DE USUARIO
+- Para recuperar contraseña o cambiar la contraseña del usuario prin-
+cipal, se debe conocer el usuario al cual se le hará la solicitud.
+- En caso de que la empresa haya olvidado el usuario principal o más-
+ter se deberá solicitar la restauración o “reset” de usuario principal.
+- Para usuarios dependientes el usuario principal debe realizar la ad-
+ministración del cambio de contraseña únicamente.
+4.1. Usuario principal
+Recuperar contraseña
+El usuario principal tiene la opción de recuperar su contraseña si la ha
+olvidado a través de las siguientes acciones:
+- Ingrese a https://plc.mintransporte.gov.co
+- Seleccione el menú RNDC.
+- En la caja de “ingreso RNDC”, diligencie su nombre de usuario y
+haga clic en “Restaurar contraseña”.
+- Recibirá un correo electrónico con las instrucciones para restaurar
+la contraseña.
+- Ingrese al enlace recibido.
+- Digite su nueva contraseña y realice la confirmación.
+
+-- 29 of 52 --
+
+30
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+A continuación, se presentan las imágenes del paso a paso descrito:
+Ingrese a https://plc.mintransporte.gov.co y seleccione el menú RNDC.
+Figura 16. Ingreso al Portal Logístico de Colombia.
+En la caja “Ingreso RNDC” diligencie su nombre de usuario (1) y haga clic
+en “restaurar contraseña” (2).
+2
+
+-- 30 of 52 --
+
+31
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 17. Selección para restaurar contraseña.
+Luego de recibir el correo, ingrese al enlace que aparece en el cuerpo del
+mensaje.
+Digite su nueva contraseña y realice la confirmación.
+Cambiar contraseña
+Para el cambio de contraseña del usuario principal, se deben realizar los
+siguientes pasos en el sistema RNDC:
+- Ingrese a https://plc.mintransporte.gov.co
+- Seleccione el menú RNDC.
+- En la caja de “ingreso RNDC”, diligencie su nombre de usuario y con-
+traseña e ingrese al sistema.
+1
+2
+
+-- 31 of 52 --
+
+32
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+- Seleccione el menú “RNDC” y luego la opción “cambiar clave”.
+- Digite su nueva contraseña y realice la confirmación.
+A continuación, se relacionan las imágenes del paso a paso descrito:
+Figura 18. Ingreso al Portal Logístico de Colombia.
+Ingrese al Portal Logístico de Colombia, seleccione el menú RNDC, digite
+su nombre de usuario y contraseña.
+Figura 19. Ingreso al menú RNDC.
+
+-- 32 of 52 --
+
+33
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Luego de ingresar al sistema RNDC, seleccione el menú “RNDC” y luego la
+opción “Cambiar clave”.
+Figura 20. Ingreso al menú Cambiar clave.
+Luego de ingresar al menú “cambiar clave” aparece el menú de cambio de
+palabra clave.
+Figura 21. Menú cambio de clave.
+
+-- 33 of 52 --
+
+34
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Luego de digitar la clave, se hace clic en el botón “cambiar clave”, recibirá
+el mensaje “cambio de clave exitoso”.
+Reset de usuario
+Cuando el usuario principal no recuerda su usuario ni su contraseña, podrá
+solicitar ello desde el correo de notificación judicial que se encuentra en el
+registro de existencia y representación legal de la empresa, al Ministerio de
+Transporte, a través de una solicitud enviada al correo
+jsamudio@mintransporte.gov.co adjuntando el certificado y la solicitud
+de reset de usuario, para que el funcionario asignado realice la revisión de
+la solicitud, verifique la información con el documento adjunto y realice el
+proceso de reset e información del usuarios máster o principal y envíe la
+respuesta.
+4.2. Usuario dependiente
+4.2.1. Cambio de clave desde usuario principal
+Para cambiar o recuperar la clave de un usuario dependiente, se debe
+realizar la siguiente operación para la administración de estos usuarios:
+- Ingresar a https://plc.mintransporte.gov.co
+- Ingresar al menú RNDC.
+- Ingresar el usuario y contraseña del usuario principal.
+- Seleccionar el menú “RNDC”, ingresar a la opción “usuarios”.
+- Señalar el usuario dependiente y seleccionar la opción “modificar
+usuario”.
+- Luego, en el cuadro de texto, digitar la nueva clave del usuario de-
+pendiente y realizar la confirmación.
+
+-- 34 of 52 --
+
+35
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+El proceso de detallado se presenta a continuación:
+Figura 22. Ingreso al Portal Logístico de Colombia.
+Figura 23. Ingreso al sistema RNDC.
+
+-- 35 of 52 --
+
+36
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 24. Acceso a la opción usuarios del menú RNDC.
+Figura 25. Cuadro administrador de usuarios dependientes.
+Luego de seleccionar el usuario, éste queda resaltado y se hace clic en el
+botón “modificar usuario”, para así realizar las siguientes modificaciones
+de datos propios del usuario.
+
+-- 36 of 52 --
+
+37
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Así, se podrán modificar los siguientes datos de un usuario dependiente:
+- Nombres y apellidos
+- Empresa a la cual está asociado el usuario dependiente
+- Dirección
+- Municipio
+- Email
+- Teléfonos
+- Contraseña
+- Confirmar contraseña
+Lo anterior, se presenta a continuación:
+Figura 26. Cuadro de modificación de datos de usuario dependiente.
+
+-- 37 of 52 --
+
+38
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Luego de modificar los datos respectivos, se hace clic en el botón “cambiar
+contraseña” si se realizó cambio a la contraseña y “guardar cambios” si el
+cambio se realizó a los demás datos de localización del usuario
+dependiente.
+Si el cambio se realizó de forma satisfactoria, aparece en la parte inferior
+del formulario correspondiente el mensaje: “el usuario ha sido
+modificado”.
+También se presenta la opción de modificar el usuario desde la página
+https://rndc.mintransporte.gov.co en la cual, el usuario principal tiene la
+capacidad de realizar las mismas funcionalidades que se encuentran en la
+página del Portal Logístico de Colombia.
+4.2.2. Cambio de clave desde usuario dependiente
+Para el cambio de contraseña del propio usuario dependiente, se deben
+realizar los siguientes pasos en el sistema RNDC.
+- Ingrese a https://plc.mintransporte.gov.co
+- Seleccione el menú RNDC
+- En la caja de “ingreso RNDC”, diligencie su nombre de usuario y con-
+traseña e ingrese al sistema.
+- Seleccione el menú “RNDC” y luego la opción “cambiar clave”.
+- Digite su nueva contraseña y realice la confirmación.
+Las imágenes del paso a paso se presentan a continuación:
+
+-- 38 of 52 --
+
+39
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 27. Ingreso al Portal Logístico de Colombia.
+Ingrese al Portal Logístico de Colombia, seleccione el menú RNDC, digite
+su nombre de usuario y contraseña.
+Figura 28. Ingreso al menú RNDC.
+Luego de ingresar al sistema RNDC, seleccione el menú “Inside” y luego la
+opción “Cambiar clave”.
+
+-- 39 of 52 --
+
+40
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 29. Ingreso al menú Cambiar clave.
+Luego de ingresar a “Cambiar clave”, podrá realizar el cambio de palabra
+clave.
+Figura 30. Menú cambio de clave.
+Luego de digitar la clave, debe hacer clic en el botón “CAMBIAR CLAVE”,
+recibirá el mensaje “cambio de clave exitoso”.
+
+-- 40 of 52 --
+
+41
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Cambio de clave desde el Sistema RNDC
+El procedimiento de cambio de clave de usuario principal desde el Sistema
+RNDC debe realizarse siguiendo los pasos que se mencionan a
+continuación:
+- Ingrese a https://RNDC.mintransporte.gov.co
+- Seleccione el menú Herramientas
+- Seleccione el menú Administrar usuarios
+- Ingrese en el cuadro “Palabra clave” la nueva contraseña
+- Confirme la contraseña en el recuadro “confirmación”
+- Seleccione el botón “Cambiar clave”
+De esta forma estará confirmada la nueva contraseña.
+Figura 31. Ingreso administración usuarios RNDC.
+
+-- 41 of 52 --
+
+42
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 32. Menú de usuario secundario para cambio de clave.
+5. TERMINAL PORTUARIA
+5.1. Creación terminal portuaria
+Para los usuarios del tipo “Puerto Marítimo Fluvial o Autorizado”, se debe
+realizar la inscripción de la “Terminal”, la cual es la zona donde se realiza la
+operación de cargue y descargue de vehículos, para poder realizar el envío
+de la información teniendo en cuenta las condiciones de la Resolución
+20213040005875 del 15 de febrero de 2021. El usuario principal tiene la
+capacidad de crear la terminal teniendo en cuenta la información de
+ubicación de la terminal.
+
+-- 42 of 52 --
+
+43
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Para la creación de la terminal, se deben realizar los siguientes pasos:
+a. Ingresar al sistema RNDC a través de la página web
+https://plc.mintransporte.gov.co
+b. Ingresar como usuario principal a la pestaña RNDC.
+c. Ingresar al menú INSIDE y hacer clic en la opción “Terminal Por-
+tuaria”.
+d. Crear la nueva Terminal.
+A continuación, se explica el proceso detallado para la definición de
+terminales portuarias dependientes en el sistema RNDC.
+La primera acción que debe hacer el usuario es ingresar a la página Web
+https://plc.mintransporte.gov.co y luego al módulo RNDC.
+Figura 33. Ingreso al menú RNDC del Portal Logístico de Colombia.
+En segunda instancia, se debe ingresar el usuario y contraseña para
+
+-- 43 of 52 --
+
+44
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+acceder al módulo RNDC.
+Figura 34. Cuadro de ingreso de usuario y contraseña Sistema RNDC.
+Posterior al ingreso en el sistema, se debe dirigir al menú INSIDE y
+seleccionar la opción “Terminal Portuaria”.
+
+-- 44 of 52 --
+
+45
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 35. Menú INSIDE y opción "Terminal Portuaria".
+Luego de ingresar al módulo seleccionado, aparecerá un menú de
+administración de terminales portuarias. Este módulo tiene la finalidad de
+visualizar las diferentes terminales que poseen un puerto fluvial o
+marítimo autorizado y de esta forma segmentar la información de acuerdo
+con la disposición física que cuenta el autorizado. Para la creación, se debe
+seleccionar el botón “Nueva Terminal Portuaria”.
+
+-- 45 of 52 --
+
+46
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 36. Menú de administración de terminales portuarios.
+Para la creación se debe seleccionar el botón “Nueva Terminal Portuaria” y
+diligenciar el formulario en el cual se solicita la siguiente información:
+- Empresa: texto por defecto que presenta la empresa a la cual está
+asociada la terminal a crear.
+- Usuario principal: texto por defecto.
+- Zona Portuaria: lista desplegable en la cual se debe seleccionar la
+zona portuaria a la cual pertenece la terminal portuaria.
+- Nombre Terminal: para la creación de la terminal, el nombre debe
+tener una combinación de nombre de la empresa + nombre de sede.
+- Dirección: Dirección de la terminal, si desea puede agregar coorde-
+nadas de georreferenciación en formato decimal.
+- Ciudad: Ciudad o municipio en el cual se encuentra la terminal.
+Al finalizar el formulario, se hace clic en “Guardar nueva terminal”. De esta
+forma crea la terminal y se cuenta con el usuario listo para el envío de
+información al sistema RNDC.
+
+-- 46 of 52 --
+
+47
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 37. Formulario de creación de nueva terminal portuaria.
+Consideraciones
+• El sistema no permite crear terminales a los usuarios secundarios.
+• El sistema no permite crear terminales sin la información solicitada
+en el formulario.
+• Se realizarán verificaciones a la información generada por las termi-
+nales.
+• Si tiene algún inconveniente con la creación de la terminal, comuní-
+quese con la mesa de ayuda en los canales especificados para tal fin.
+5.2. Creación reporte de información del Sistema de Información
+de Enturnamiento Portuario
+Un sistema de enturnamiento es el método por el cual la terminal
+portuaria define el ingreso de los vehículos para los diferentes tipos de
+operación que tenga habilitados. Pueden existir varios sistemas de
+enturnamiento para una terminal.
+Para crear un sistema de enturnamiento se deben realizar los siguientes
+pasos:
+
+-- 47 of 52 --
+
+48
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+- Ingresar al sistema RNDC a través de la página https://plc.mintrans-
+porte.gov.co
+- Ingresar como usuario principal a la pestaña RNDC.
+- Ingresar al menú INSIDE y a la opción enturnamiento.
+- Seleccionar el botón “nuevo enturnamiento”.
+- Diligenciar el formulario.
+A continuación, se explica el proceso detallado para la creación de
+sistemas de enturnamiento en el Sistema RNDC.
+La primera acción que debe hacer el usuario es ingresar a la página
+https://plc.mintransporte.gov.co y luego al módulo RNDC.
+Figura 38. Ingreso al menú RNDC del Portal Logístico de Colombia.
+
+-- 48 of 52 --
+
+49
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+En segunda instancia, se debe ingresar el usuario y contraseña para
+ingresar al módulo RNDC.
+Figura 39. Cuadro de ingreso de usuario y contraseña sistema RNDC.
+Posterior al ingreso en el sistema, dirigirse al menú INSIDE y seleccionar la
+opción “Enturnamiento”.
+
+-- 49 of 52 --
+
+50
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 40. Menú INSIDE y opción "Enturnamientos".
+Luego de ingresar al módulo de enturnamientos, aparecerá un formulario,
+en el cual, podrá ver los sistemas de enturnamiento por cada terminal
+portuaria que se encuentren asociados a la empresa autorizada. El visor
+cuenta con las opciones “ver sistemas enturnamiento”, “nuevo
+enturnamiento” y “modificar enturnamiento”, para la creación, se debe
+hacer clic en “nuevo enturnamiento”, seleccionando previamente la
+terminal portuaria para crear.
+
+-- 50 of 52 --
+
+51
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 41. Visor de sistemas de enturnamiento.
+Luego de seleccionar el “nuevo enturnamiento” aparecerá el formulario de
+“creación de sistema de enturnamiento”. Este formulario cuenta con los
+siguientes campos:
+- Empresa: nombre de la empresa autorizada.
+- Usuario principal: usuario principal vinculado a la empresa.
+- Zona portuaria: zona en la cual se encuentra la terminal portuaria.
+- Terminal portuaria: terminal a la que pertenece a la empresa autori-
+zada.
+- Nombre sistema de enturnamiento: nombre que se debe diligenciar
+para identificar el sistema de enturnamiento.
+- Descripción del enturnamiento: información sobre el funciona-
+miento del sistema de enturnamiento.
+- Tipo de enturnamiento: campo desplegable que permite seleccio-
+nar el tipo de enturnamiento relacionado con el tipo de carga vin-
+culada al sistema de enturnamiento.
+- Realiza pesaje x báscula: pregunta que se realiza para definir si el sis-
+tema de enturnamiento realiza pesaje de los vehículos al ingreso y/o
+salida del sistema de enturnamiento.
+- Asigna cita previa: define si se asigna la cita previa para el ingreso a
+la terminal portuaria.
+- Tipo de mercancía: define la mercancía que se recibe o despacha en
+el enturnamiento, para que éste pueda ser creado.
+- Tipo carbón: si la opción de tipo de mercancía es carbón, se escoge
+la opción térmico, coque o no aplica si no se define el tipo de carbón.
+
+-- 51 of 52 --
+
+52
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace:
+https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 42. Formulario de creación de enturnamiento.
+Luego de diligenciar los datos solicitados en el formulario, se hace clic en
+el botón “guardar nuevo enturnamiento” y se da la creación del sistema.
+Al finalizar esta actividad, ya se cuenta con las configuraciones requeridas
+para realizar el ingreso de información al Sistema RNDC.
+6. REFERENCIAS
+- República de Colombia, Ministerio de Transporte, Resolución 377 de
+2013, por la cual se adopta e implementa el Registro Nacional de
+Despachos de Carga RNDC.
+- República de Colombia, Ministerio de Transporte, https://plc.min-
+transporte.gov.co, consultado el 12 de septiembre de 2022.
+
+-- 52 of 52 --
+

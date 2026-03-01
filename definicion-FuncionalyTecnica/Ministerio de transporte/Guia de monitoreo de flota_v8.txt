@@ -1,0 +1,1697 @@
+GUÍA DE
+MONITOREO
+DE FLOTA
+Reporte de tiempos logísticos
+a través de sistemas de
+monitoreo de flota al RNDC
+Versión. 08
+24 de febrero de 2026
+
+-- 1 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+1
+CONTENIDO
+CONTROL DE CAMBIOS GUIA TIEMPOS LOGISTICOS. ................................................................................................... 2
+ANTECEDENTES. ............................................................................................................................................................ 3
+1. AMBITO DE APLICACIÓN – ALCANCE ..................................................................................................................... 4
+2. DEFINICIONES. ....................................................................................................................................................... 5
+3. SOLICITUD DE USUARIO DE EMPRESA DE MONITOREO DE FLOTA EN RNDC. ...................................................... 7
+4. PARAMETRIZACIÓN DE EMPRESA DE MONITOREO DE FLOTA POR PARTE DE LA EMPRESA DE TRANSPORTE .... 9
+5. PARAMETRIZACIÓN DE GEOCERCAS ................................................................................................................... 11
+6. SEDES MODULO DE TERCEROS - COORDENADAS GEORREFERENCIADAS........................................................... 11
+7. EXPEDICION DE REMESA ..................................................................................................................................... 16
+7.1 REMESA “MERCANCIA CONSOLIDADA”. ..................................................................................................... 18
+7.2 MODIFICACIONES EN LA REMESA. .............................................................................................................. 20
+8. EXPEDICIÓN DE MANIFIESTO ELECTRÓNICO DE CARGA. .................................................................................... 26
+9. CONSULTA PARA EMPRESAS DE MONITOREO DE FLOTA. .................................................................................. 29
+10. REGISTRO MONITOREO DE MANIFIESTO (RMM) ............................................................................................ 34
+10.1 AJUSTE REGISTRO DE MONITOREO DE MANIFIESTO. ................................................................................. 38
+11. REGISTRO DE NOVEDADES MONITOREO DE MANIFIESTO (RNMM). .............................................................. 41
+12. DISTRIBUCION DE TIEMPOS LOGISTICOS REALES EN REMESAS. ..................................................................... 44
+13. CUMPLIDO INICIAL DE REMESA ....................................................................................................................... 45
+14. CUMPLIDO DE REMESA ................................................................................................................................... 45
+15. DICCIONARIO DE ERRORES .............................................................................................................................. 45
+16. PLAN DE CONTINGENCIA RNDC....................................................................................................................... 46
+17. ESTADISTICAS DE INFORMACION DE LA EMPRESA DE MONITORE DE FLOTA. ............................................... 47
+18. CONSULTAS PARA LA EMF. .............................................................................................................................. 47
+
+-- 2 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+2
+CONTROL DE CAMBIOS GUIA TIEMPOS LOGISTICOS.
+FECHA MODIFICACION
+29/09/2025 Estructuración de guía de tiempos logísticos a través de
+sistemas de Monitoreo de Flota
+08/10/2025
+Se Actualiza el ámbito de aplicación, actualización
+definiciones de Horas de espera para el cargue, Horas de
+cargue, Horas totales de cargue, horas de espera para el
+descargue, horas de descargue, horas totales de descargue y
+horas logísticas de acuerdo con decreto 1017 2025
+29/10/2025
+Se define de acuerdo al alcance que las remesas de tipo de
+operación mercancía consolidada, cambios en la cita
+pactada de cargue y descargue, y cambio de sede en
+descargue.
+Modificación de tiempos logísticos en el cumplido de la
+remesa
+04/11/2025 Se incluye IP a donde se comunican las empresas de
+monitoreo: rndcws.mintransporte.gov.co:8080/ws
+12/11/2025
+Ajuste de tiempos logísticos será a nivel de manifiesto en la
+opción de Monitoreo de manifiesto con acceso desde portal
+interactivo RNDC 2, numeral 10.1
+Actualización de validaciones para cambios de fecha
+pactada en cargue y descargue y actualización ejemplos
+XML para cada uno de los casos.
+Actualización de tiempo de envío de RMM por parte de la
+EMF.
+19/11/2025
+Complemento del RMM- Numeral 10.1 ajuste a tiempos
+logísticos, se incluye paso a paso de portal interactivo y
+ejemplo XML.
+03/12/2025
+Actualización de etiquetas para el proceso de modificaciones
+de la remesa. – y ajuste registro de monitoreo de manifiesto.
+Se crea una nueva consulta para EMF para consulta
+manifiestos por Numero de radicado.
+24/02/2026
+Inclusión de IP para la consulta de manifiestos a monitorear.
+Nuevas consultas de manifiestos autorizados para EMF
+(ULTIMAHORA, ID)
+Generación de puntos de control en el ajuste de RMM por
+parte de la ETC.
+
+-- 3 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+3
+ANTECEDENTES.
+El Ministerio de Transporte ha reglamentado desde el año 2013 la operación del
+transporte de carga pública por carretera, el cual por medio de la utilización del Registro
+Nacional de Despachos de Carga (en adelante “RNDC”), opera como sistema de
+información, permitiendo a cada empresa de transporte habilitada, la expedición de
+manifiestos de carga.
+Como parte de los datos que cada empresa de transporte debe reportar y enviar al
+Ministerio de Transporte, se encuentran los tiempos logísticos del viaje, los cuales hacen
+parte del Cumplido de la Remesa y del Cumplido del Manifiesto; entendiendo por
+Cumplido de la Remesa, la constancia de entrega de la mercancía al destino final, y por
+Cumplido del Manifiesto, la certificación o liquidación final de todos los gastos
+involucrados en el viaje.
+En este sentido, conforme con lo dispuesto en el artículo 1 de la resolución 377 de 2013
+y la Resolución 20223040045515 de 2022, “Por la cual se actualiza el sistema del Registro
+Nacional de Despachos de Carga -RNDC y se dictan otras disposiciones...",
+específicamente en el Manual de Descripción e Instrucciones para la Operación
+General del Registro Nacional de Despachos de Carga RNDC, numeral 5.3.3. -Registro
+cumplido de manifiesto electrónico de carga-, que determina: "La empresa de
+transporte habilitada, persona natural o jurídica, deberá diligenciar de forma obligatoria
+en el sistema del Registro Nacional de Despachos de Carga -RNDC-, todos los datos
+requeridos en el registro Cumplido de Manifiesto Electrónico de Carga, a más tardar
+dentro de los 5 días hábiles contados a partir de la fecha de entrega de la mercancía
+registrada en el Cumplido de Remesa Terrestre de Carga (...)."
+La Resolución 20243040058015 de noviembre de 2024 establece que las empresas de
+servicio público de transporte de carga, deberán realizar de manera obligatoria el
+reporte en el RNDC de los datos relacionados con los tiempos reales ( fecha y hora)
+ejecutados de cargue y descargue de la mercancía mediante el uso de sistemas de
+monitoreo de flota, a partir del 30 de noviembre de 2025 de acuerdo con las
+condiciones, criterios técnicos y metodología que para tal efecto expida el ministro de
+transporte.
+
+-- 4 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+4
+La empresa de transporte deberá autorizar ante el RNDC, a la empresa que preste el
+servicio de monitoreo de flota para que a su nombre sea la que reporte al sistema RNDC
+los datos relacionados (Llegada lugar del cargue, salida lugar del cargue, Llegada lugar
+del descargue, y salida Lugar del descargue)
+Respecto a los datos de fecha y hora de entrada al lugar de cargue y entrada al lugar
+de descargue, los mismos podrán ser reportados por la empresa de transporte al RNDC
+a través del portal interactivo y/o Webservice y/o aplicación “RNDC Transportador”.
+1. AMBITO DE APLICACIÓN – ALCANCE
+El reporte de tiempos logísticos a través de Sistemas de monitoreo de Flota se
+entiende que aplican de manera inicial para aquellas operaciones de transporte
+amparadas bajo el tipo de manifiesto de carga general, Multiparada, ida y regreso.
+Así mismo aplica para los manifiestos de carga que contengan remesas terrestres de
+carga: general, Contenedor cargado, contenedor vacío y mercancía consolidada
+siempre y cuando no realicen operaciones de recolección y/o distribución.
+No aplica para Manifiestos de Varios viajes en el día, Viaje Vacío y registros de viaje
+Municipal.
+
+-- 5 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+5
+2. DEFINICIONES.
+Punto de Control: consiste en un espacio definido mediante coordenadas
+georreferenciadas en el cual se efectuarán los procesos de cargue y/o descargue de
+mercancía y puntos intermedios en el tránsito, y los cuales la empresa de monitoreo
+deberá capturar y reportar los tiempos logísticos reales.
+Cada punto de control para los procesos de cargue y descargue deberán tener una
+cita previa para que el conductor llegue puntual al punto de control y la empresa de
+monitoreo tenga una fecha y hora de referencia para el monitoreo. Los puntos de
+control intermedio los define el Ministerio de transporte y no tendrás fecha y hora de cita.
+Cada punto de control debe tener bien definidas las coordenadas georreferenciadas.
+Evento de monitoreo: consiste en las novedades que puedan presentar las empresas de
+monitoreo de flota antes y durante la operación y reporte de los tiempos logísticos reales
+de los manifiestos de carga autorizados por la empresa de transporte.
+Registro monitoreo de manifiesto (RMM): reporte de los datos relacionados con la hora y
+fecha realmente ejecutadas, para cada uno de los siguientes eventos: llegada al lugar
+del cargue, salida del lugar del cargue, llegada al lugar del descargue y salida del lugar
+del descargue.
+Tratándose del reporte autorizado a las Empresas de monitoreo de flota con el uso de
+sistemas de información para el seguimiento y monitoreo a vehículos, el reporte de la
+información será por medio de interoperabilidad en el sistema de información Vía Web-
+Service.
+El registro de monitoreo de manifiesto se deberá enviar al RNDC después que el vehículo
+salga del punto de control.
+Registro de Novedades monitoreo de Manifiesto (RNMM): Registro con la relación de la
+novedad de monitoreo por el cual no se puede realizar el registro de tiempos logísticos
+reales de los puntos de control de los manifiestos autorizados.
+Geocerca: Delimitación virtual o perímetro que se realiza a una zona o espacio
+geográfico para separar de su entorno, las geocercas pueden tener una forma
+geométrica definida (circular, rectangular etc.) como también podrán ser patrones
+irregulares de acuerdo con la necesidad y que aumenten la precisión de esta. Esta
+
+-- 6 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+6
+delimitación se hace conjuntamente entre generador de carga, empresa de transporte
+y empresa de monitoreo de flota.
+Horas de espera para el cargue: Es el tiempo transcurrido desde el momento en que el
+vehículo se encuentra disponible en el lugar señalado por la Empresa de Transporte para
+realizar la actividad de cargue de la mercancía al vehículo, hasta el momento de inicio
+del cargue de la misma. En caso de que el vehículo llegue al lugar del cargue antes de
+la hora programada, el tiempo de espera se contará a partir de la hora de la cita
+programada.
+Horas de cargue: Es el tiempo transcurrido desde el momento que inicia la actividad de
+cargue de la mercancía al vehículo hasta que este sale cargado del lugar.
+Horas totales de cargue: Es la sumatoria de las horas de espera para el cargue y las horas
+de cargue.
+Horas de espera para el descargue: Es el tiempo transcurrido desde el momento en que
+el vehículo se encuentra disponible en el lugar señalado por la Empresa de Transporte
+para realizar la actividad de descargue de la mercancía, hasta que inicia la actividad
+de descargue de la misma. En caso de que el vehículo llegue al lugar del descargue
+antes de la hora programada, el tiempo de espera se contará a partir de la hora de la
+cita programada.
+Horas de descargue: Es el tiempo transcurrido desde el momento que inicia la actividad
+de descargue de la mercancía del vehículo hasta que sale descargado del lugar.
+Horas totales de descargue: Es la sumatoria de las horas de espera para el descargue y
+las Horas de descargue.
+Horas logísticas: Es la sumatoria de las horas totales del cargue y las horas totales de
+descargue.
+SIGLAS
+Para el presente documento se entenderán las siguientes siglas.
+(EMF) Empresa de Monitoreo de Flota
+(ETC) Empresa de Transporte de carga
+(GEC) Generador de Carga
+(RMM) Registro Monitoreo de Manifiesto.
+(RNMM) Registro de novedades de monitoreo de manifiesto
+
+-- 7 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+7
+3. SOLICITUD DE USUARIO DE EMPRESA DE
+MONITOREO DE FLOTA EN RNDC.
+Cada Empresa Monitoreo de Flota (EMF) que desee enviar la información de
+tiempos logísticos al RNDC, debe solicitar usuario mediante el portal interactivo
+RNDC2 (Iniciar Sesión) diligenciando cada uno de los campos y anexando el
+certificado de existencia y representación de Cámara de Comercio, el cual no
+puede tener una vigencia mayor a treinta (30) días calendario de su expedición
+por Cámara de Comercio. Portal Logístico de Colombia.
+Selección tipo de empresa:
+Si toda la información adjuntada en la solicitud del usuario es correcta mediante correo
+electrónico que asigna un usuario y contraseña inicial la cual puede cambiar en
+cualquier momento.
+
+-- 8 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+8
+Una vez asignado usuario en RNDC, la EMF debe administrar usuarios creando usuario
+tipo 2 (usuario de monitoreo) el cual será el usuario con todos los permisos para consulta
+y envío de información. Mediante el portal interactivo en el módulo de herramientas >>
+Administración de usuarios puede realizar la creación de usuario dependiente tipo 2.
+Cuando el Monitoreo mediante sistemas de monitoreo lo realiza la empresa de
+transporte, aplica la creación de usuario tipo 2 (usuario de monitoreo) para el reporte de
+tiempos logísticos reales.
+Se recomienda que la información que relacionen para el usuario dependiente tipo 2
+sea información institucional de la empresa (Correo), en caso de cambios de personal
+puedan restablecer el usuario por parte de la empresa.
+Cada empresa de monitoreo de flota debe tener su usuario principal y usuarios
+dependientes de monitoreo, No debe usar usuarios de Empresas de transporte a la cual
+va a realizar el monitoreo de manifiestos.
+la IP a donde se comunican las empresas de monitoreo:
+http://plc.mintransporte.gov.co:8080/
+se encuentra habilitada para realizar consulta de manifiestos a monitorear (Unidad 9)
+<tipo> 9</tipo> <procesoid>4</procesoid>
+rndcws.mintransporte.gov.co:8080/ws
+Ip les permite extraer el archivo wsdl en donde se encuentra la URL correcta para el envío
+del webservice y los dos parámetros que deben enviar para la tecnología SOAP. En esta
+pueden realizar el RMM (60-68) RNMM(46)
+
+-- 9 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+9
+4. PARAMETRIZACIÓN DE EMPRESA DE
+MONITOREO DE FLOTA POR PARTE DE LA
+EMPRESA DE TRANSPORTE
+En el módulo “herramientas” del RNDC, la opción “Información empresa transportadora”
+la empresa de transporte (ETC) podrá realizar la parametrización de EMF, como una
+característica de la empresa de transporte, definiendo un NIT predeterminado de EMF
+para el registro de tiempos logísticos reales.
+La única forma de actualizar es a través de portal interactivo de RNDC2. Y el usuario
+permitido para realizar camios en el módulo es el usuario maestro (Tipo 6), asignado a la
+empresa de transporte.
+
+-- 10 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+10
+Al realizar este proceso la ETC no debe enviar el NIT de la EMF por cada manifiesto de
+carga. En Caso de no Incluir la EMF como una característica predeterminada, la ETC
+deberá digitar el NIT de la EMF cada vez que realice la expedición de un Manifiesto.
+Si en alguna operación se realizará el monitoreo de flota a través de una EMF distinta a
+la predeterminada, la ETC debe registrar el NIT de la EMF que va a realizar el monitoreo
+en la expedición del Manifiesto.
+EMPRESA DE TRANSPORTE CON SISTEMAS DE MONITOREO PROPIOS
+El NIT de la EMF y el NIT de la ETC podrá ser el mismo, siempre y cuando se realice el
+diligenciamiento del certificado establecido por el ministerio de transporte donde la ETC
+certifica las condiciones técnicas de la herramienta tecnológica propia, utilizada para
+realizar el monitoreo de flota y la calidad de la información de datos, que serán
+registrados en el RNDC como tiempos logísticos reales. Este formato estará firmado por
+el representante legal de la empresa de trasporte.
+Una vez aprobada la solicitud por parte del RNDC La empresa de transporte debe
+parametrizar el NIT estándar en el módulo de información empresa transportadora para
+posteriormente pueda crear usuario(s) de tipo monitoreo. (USUARIO TIPO 2) Usuario de
+monitoreo.
+Empresas de transporte con certificado de cumplimiento de condiciones técnicas NO
+pueden hacer monitoreo de flota a otra empresa de transporte.
+
+-- 11 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+11
+El Ministerio de transporte realiza seguimiento y análisis de la información suministrada y
+en caso de identificar mala calidad de los datos, realizará reporte a la Superintendencia
+de Transporte para que ejerza sus competencias de Vigilancia, inspección y control.
+5. PARAMETRIZACIÓN DE GEOCERCAS
+Para la identificación, definición y realización de geocercas para cada punto de control,
+se entenderá que es un trabajo conjunto entre las empresas de transporte (ETC),
+generadores de carga (GEC) y la empresa de monitoreo de flota (EMF).
+La exactitud en la creación de geocercas permitirá aumentar la precisión para la
+identificación de los tiempos logísticos reales, delimitando puntos cercanos que puedan
+afectar la calidad de los datos en los momentos de entrada y salida de la geocerca.
+Con el avance del reporte de tiempos logísticos a través de herramientas de monitoreo
+de flota, el RNDC recopilará información de las geocércas definidas en los puntos de
+control. Para esta recopilación de geocercas desde el RNDC se definirá un proceso
+técnico para la entrega de esta información por parte de las EMF y las ET, este proceso
+incluirá un trabajo articulado con generadores de carga.
+A partir de esta información el RNDC construirá un maestro de geocercas de puntos de
+control. En una segunda fase de este proyecto se utilizará el maestro de geocercas para
+entregar a las EMF esta información por cada punto de control, mejorando el proceso
+de registro de tiempos logísticos y eficiencia en operaciones de transporte.
+6. SEDES MODULO DE TERCEROS -
+COORDENADAS GEORREFERENCIADAS
+Las coordenadas georreferenciadas (latitud y longitud) de los puntos de cargue y
+descargue son vitales para el éxito del registro por parte de las empresas que prestan el
+servicio de monitoreo de flota. Las herramientas existentes que se encuentran en internet
+pueden proveer las coordenadas de latitud y longitud, a partir de la dirección y del
+municipio, pero siempre y cuando la dirección se encuentre normalizada o bien escrita.
+El RNDC define puntos centrales de cada municipio, identificando la geocercas
+validando las coordenadas de cada una de las sedes para cargue y/o descargue
+relacionadas por las empresas de transporte.
+En el RNDC se registran las coordenadas georreferenciadas en el Módulo “Registrar
+terceros y conductores”
+
+-- 12 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+12
+Los dos datos son validados por el RNDC contra la geocerca definida para cada
+municipio, en caso de no tener una geocerca definida se tomará un rango estándar de
+10 km. En el RNDC, cada municipio de Colombia tiene asociada una coordenada
+georreferenciada de un punto relativamente central al casco urbano, el cual puede ser
+consultado por maestros: DIVIPOLA.
+Si la distancia entre la ubicación del tercero y el punto central del municipio
+es mayor a la geocerca, es porque el municipio del tercero no es la cabecera municipal
+sino una vereda del municipio, lo cual significa que se
+debe averiguar el código de esa vereda y digitarlo en vez de la cabecera.
+Para las ETC que usan WebServices, los nombres de los campos son: LATITUD y LONGITUD
+son para la ubicación de la sede de cargue y/o descargue.
+Ejemplo:
+
+-- 13 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+13
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>11</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<codtipoidtercero>n</codtipoidtercero>
+<numidtercero>1111</numidtercero>
+<nomidtercero>xxxx</nomidtercero>
+<codmunicipiorndc>11001000</codmunicipiorndc>
+<codsedetercero>001</codsedetercero>
+<nomsedetercero>SEDE1</nomsedetercero>
+<latitud>4.645811</latitud>
+<longitud>-74.102716 </longitud>
+</variables>
+</root>
+En las sedes donde implementan zonas de enturnamiento en una posición geográfica
+diferente a donde se realizan las operaciones de cargue o descargue, deben incluir las
+coordenadas georreferenciadas de la zona de enturnamiento.
+<direccionenturnamiento>
+<latitudenturnamiento>
+<longitudenturnamiento>
+Ejemplo: creación de tercero con una zona de enturnamiento.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>11</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<codtipoidtercero>n</codtipoidtercero>
+<numidtercero>1111</numidtercero>
+<nomidtercero>xxxx</nomidtercero>
+<codmunicipiorndc>11001000</codmunicipiorndc>
+<codsedetercero>001</codsedetercero>
+
+-- 14 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+14
+<nomsedetercero>sede1</nomsedetercero>
+<latitud>4.645811</latitud>
+<longitud>-74.102716 </longitud>
+<direccionenturnamiento>111</direccionenturnamiento>
+<latitudenturnamiento>1111</latitudenturnamiento>
+<longitudenturnamiento>1111</longitudenturnamiento>
+</variables>
+</root>
+Los terminales portuarios son comunes el uso de zonas de enturnamiento, generalmente
+para operaciones con carga de granel líquido y sólido, a cambio de asignación de citas
+de manera individual a cada vehículo.
+¿Cómo identificar una coordenada Georreferenciada para una sede ¿
+Una forma de averiguar las coordenadas georreferenciadas para un tercero
+es utilizar la herramienta Google Maps (https://www.google.com/maps ).
+En la parte izquierda se escribe la dirección, incluyendo el municipio y el
+departamento, como, por ejemplo: calle 24 60-50 Bogotá.
+Luego se hace clic en la lupa que está ligeramente a la derecha y el
+software le muestra la ubicación de esa dirección con un globo de
+color rojo.
+
+-- 15 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+15
+Con el “Mouse” se ubica en ese globo rojo y se hace clic derecho y se
+visualiza un Menú.
+Se debe seleccionar: ¿Qué hay aquí? Aparece en la parte inferior un cuadro con las
+coordenadas georreferenciadas.
+En este caso: 4.645811, -74.102716 el primer dato corresponde a la latitud y el segundo a
+la longitud. Para Colombia la longitud siempre debe ser un dato negativo.
+Después de grabar las coordenadas al Tercero, queda habilitado como
+posible ubicación de cargue o descargue de una remesa. El RNDC enviará
+automáticamente esas coordenadas a la empresa de monitoreo de flota.
+
+-- 16 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+16
+7. EXPEDICION DE REMESA
+*Proceso que realiza la empresa de Transporte.
+La presente Guía de tiempos logísticos aplica para los manifiestos de carga que
+contengan remesas terrestres de carga: general, Contenedor cargado,
+contenedor vacío y mercancía consolidada siempre y cuando no realicen
+operaciones de recolección y/o distribución.
+En la expedición de la remesa se digita el código de la sede del punto de control y el
+sistema RNDC consulta los siguientes datos
+1. Nombre
+2. Dirección
+3. Municipio
+4. Coordenadas Georreferenciadas
+5. Dirección zona de enturnamiento (opcional)
+6. Coordenadas Georreferenciadas zona de enturnamiento (opcional)
+Así mismo se debe identificar para cada uno de los puntos de control su respectiva
+fecha y hora de cita con su tiempo pactado de espera.
+1. Fecha y hora cita. (Hora militar con Horas y minutos.)
+La Fecha y hora de la cita es un dato clave y de relevancia en la implementación
+de esta metodología, y debe ser de estricto cumplimiento por cada uno de los
+actores, mejorando las prácticas en las operaciones de transporte e impactando
+
+-- 17 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+17
+de manera positiva la eficiencia y los costos logísticos. Son el parámetro de
+referencia para el cálculo de los tiempos logísticos reales.
+IMPORTANTE: la diferencia entre la cita programada para el
+cargue y la cita programada para el descargue deberá ser
+acorde a la distancia y tiempo de tránsito entre el punto de
+cargue y descargue, la empresa de transporte y el titular de
+manifiesto de carga deberán acordar el reconocimiento
+económico de tiempos adicionales a través del contrato de
+vinculación y reflejarse al momento de expedir y cumplir el
+manifiesto de carga.
+2. Tiempo pactado. (Horas y minutos).
+Tiempos pactados aplica las operaciones de cargue y descargue.
+EJEMPLO (XML) EXPEDICION DE REMESA.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>3</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<consecutivoremesa>1111</consecutivoremesa>
+<codsederemitente>001</codsederemitente>
+<codsededestinatario>002</codsededestinatario>
+<horaspactocarga>2</horaspactocarga>
+<minutospactocarga>25</minutospactocarga>
+<horaspactodescargue>1</horaspactodescargue>
+<minutospactodescargue>53</minutospactodescargue>
+<fechacitapactadacargue>2025/07/11</fechacitapactadacargue>
+<horacitapactadacargue>08:15</horacitapactadacargue>
+<fechacitapactadadescargue>2025/07/12</fechacitapactadadescargue>
+<horacitapactadadescargueremesa>07:35</horacitapactadadescargueremesa>
+</variables>
+</root>
+
+-- 18 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+18
+Mensaje de error cuando los puntos de cargue y/o descargue no tienen las
+coordenadas georreferenciadas.
+Código Observación
+REM502
+Falta una de las coordenadas georreferenciadas para los
+puntos de cargue o descargue, la empresa de monitoreo
+de flota las necesita para realizar el seguimiento satelital
+7.1 REMESA “MERCANCIA CONSOLIDADA”.
+De acuerdo a ámbito de aplicación de la presente metodología, en esta primera
+fase, las remesas que por tipo de operación se seleccione “Mercancía Consolidada”,
+no aplica el reporte de tiempos logísticos a través de sistemas de monitoreo de flota,
+siempre y cuando realicen operaciones de recolección y/o distribución en dos o más
+puntos o sedes.
+En caso de expedir una remesa de tipo de operación “Mercancía Consolidada” con
+Un único punto de cargue y/o un único punto de descargue deben realizar el reporte
+de tiempos logísticos a través de sistemas de monitoreo de flota.
+Para la remesa con tipo de operación “Mercancía Consolidada” se implementa un
+nuevo campo “Tipo de consolidación”, donde se debe especificar el tipo de
+operación bajo las siguientes opciones:
+• Recolección en varios puntos (R) (Dos o más puntos)
+o Tiempos logísticos a través de sistemas de monitoreo de flota
+para el punto de Descargue.
+o Para la operación de cargue de acuerdo a la operación de
+recolección la ETC debe registrar el tiempo logístico en el
+cumplido de la remesa y debe ser un valor mayor a cero (0).
+Sistema mostrara como tiempo 1 hora
+• Distribución en varios puntos (D) (Dos o más puntos)
+o Tiempos logísticos a través de sistemas de monitoreo de flota
+para el punto de Cargue.
+o Para la operación de descargue de acuerdo a la operación de
+Distribución la ETC debe registrar el tiempo logístico en el
+cumplido de la remesa y debe ser un valor mayor a cero (0).
+Sistema mostrara como tiempo 1 hora
+
+-- 19 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+19
+• Ambas: recolección y distribución. (A) (Dos o más puntos)
+o No aplica los tiempos a través de sistemas de monitoreo de
+flota.
+o Para la operación mixta, la ETC debe registrar el tiempo logístico
+de cargue y descargue en el cumplido de la remesa y debe ser
+un valor mayor a cero (0). Sistema mostrara como tiempo 1 hora
+• Normal: (N) Un punto de cargue y un Punto de descargue
+o Tiempos logísticos a través de sistemas de monitoreo de flota
+para el punto de Cargue y para el punto de descargue.
+ejemplo de remesa consolidada
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>3</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<consecutivoremesa>111</consecutivoremesa>
+<codoperaciontransporte>P</ codoperaciontransporte>
+<tipoconsolidada>A</tipoconsolidada>
+<horaspactocarga>2</horaspactocarga>
+<minutospactocarga>30</minutospactocarga>
+
+-- 20 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+20
+<horaspactodescargue>2</horaspactodescargue>
+<minutospactodescargue>45</minutospactodescargue>
+<fechacitapactadacargue>2025/07/11</fechacitapactadacargue>
+<horacitapactadacargue>08:15</horacitapactadacargue>
+</variables>
+</root>
+7.2 MODIFICACIONES EN LA REMESA.
+Se contemplan las modificaciones que afectan el monitoreo y reporte de tiempos
+logísticos reales al RNDC, sin embargo, en la Guía de Modificaciones de remesa se
+detalla cada uno de los procesos y validaciones para las modificaciones a la remesa
+terrestre de carga.
+Cambios que afectan las operaciones de cargue y/o descargue
+• Cambio Cita de cargue código (1)
+• Cambio Cita de descargue código (2)
+• Cambio Sede de descargue código (3)
+• Cambio de Generador de carga código (4)
+Una vez realizados los cambios que afectan las operaciones de cargue y/o descargue,
+el RNDC informa los cambios realizados a la empresa de monitoreo y al titular del
+manifiesto.
+• Titular de Manifiesto: Mediante correo electrónico registrado en la APP
+transportador
+Nota: En caso de que el titular de manifiesto no tenga usuario en el RNDC, el
+correo será enviado a la información registrada en el módulo de terceros por la
+empresa de transporte.
+• La EMF mediante la etiqueta especial “<ajuste>”, que será enviada en la
+próxima consulta de manifiestos a monitorear
+CITA DE CARGUE
+El RNDC permite a la empresa de transporte cambiar la fecha y hora de la cita, para las
+operaciones de cargue, en este proyecto se deben tener en cuenta las siguientes
+condiciones para poder realizar modificaciones:
+1. La remesa debe pertenecer a un manifiesto de carga.
+2. La remesa NO puede tener cumplido inicial de remesa para el punto de control.
+
+-- 21 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+21
+3. La nueva fecha y hora de la cita para el punto de control debe ser futura y
+mayor a 1 hora de diferencia, con respecto a la fecha y hora del sistema
+4. El aviso al titular de manifiesto de carga debe ser Mínimo con 1 hora de
+anticipación con respecto a la fecha y hora de la cita pactada.
+5. Sistema permite el cambio de la fecha y hora de la cita, a pesar de tener un
+RNMM. Solo Notifica a la EMF en caso de ser Novedad tipo (1).
+Para operaciones de transporte con nodo portuario, en caso de recibir la
+información en línea de la asignación de citas en el módulo INSIDE, el RNDC hace
+el cambio de fecha y hora de la cita en las remesas del manifiesto en forma
+automática.
+Se implementa la “Consulta de manifiestos con cargue en puerto sin cita.” Con el
+fin de que la empresa de transporte pueda auditar la información de citas en línea.
+En caso de NO recibir la información en línea por parte del puerto, la empresa de
+transporte es quien debe realizar el cambio de la cita de cargue en la remesa.
+Para el cálculo de tiempos logísticos Y el cálculo del valor a pagar, su comparación con
+valor de referencia de SICE-TAC el RNDC ordena cada punto de cargue
+cronológicamente de acuerdo con la fecha y hora de la cita, y se tienen las siguientes
+consideraciones
+• El primer punto de control los tiempos logísticos se consideran a partir de la
+nueva fecha y hora de la cita. No importa si la nueva cita es anterior o
+posterior a la cita pactada inicialmente.
+• A partir del segundo (2) punto de control, el RNDC tendrá en cuenta la
+primera fecha y hora pactada en la remesa.
+▪ La Nueva fecha y hora de la cita debe ser posterior al punto de control
+(1).
+▪ se debe relacionar el motivo del cambio de la cita pactada,
+teniendo en cuenta las siguientes opciones:
+1. Incumplimiento por parte generador de carga.
+“El reconocimiento económico de los tiempos logísticos se
+tendrá en cuenta desde la fecha y hora de la cita
+pactada o programada.”
+2. Incumplimiento por parte titular de manifiesto.
+
+-- 22 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+22
+“El reconocimiento económico de los tiempos logísticos se
+tendrá en cuenta desde la NUEVA fecha y hora de la cita”
+Para las empresas de transporte que realizan el proceso de cambios de la
+remesa a través de WEB_SERVICE la etiqueta será:
+<motivocambio>1</motivocambio> “Incumplimiento por parte generador
+de carga.”
+<motivocambio>2</motivocambio> “Incumplimiento por parte titular de
+manifiesto.”
+El RNDC permite más de un cambio para la cita de cargue siempre y cuando se
+cumplan las condiciones anteriormente mencionadas.
+Ejemplo Cambio de cita cargue.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>38</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<consecutivoremesa>11</consecutivoremesa>
+<codigocambio>1</codigocambio>
+<motivocambio>1</motivocambio>
+<fechacitapactadacargue>01/01/2025</fechacitapactadacargue>
+<horacitapactadacargue>10:00</horacitapactadacargue>
+</variables>
+</root>
+LUGAR DE CARGUE
+• No se puede cambiar la sede para cargue, debe anular la remesa.
+
+-- 23 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+23
+FECHA CITA DE DESCARGUE
+El RNDC permite a la empresa de transporte cambiar la fecha y hora de la cita, para las
+operaciones de descargue, en este proyecto se deben tener en cuenta las siguientes
+condiciones para poder realizar modificaciones:
+1. La remesa debe pertenecer a un manifiesto de carga.
+2. La remesa NO puede tener cumplido inicial de remesa para el punto de control.
+3. La Remesa SI puede tener Cumplido inicial de remesa para punto de cargue.
+4. La nueva fecha y hora de la cita para el punto de control debe ser futura y
+mayor a 1 hora de diferencia, con respecto a la fecha y hora del sistema
+5. La nueva fecha y hora de la cita para del punto de control debe ser futura y
+máximo a 24 horas de diferencia, con respecto a la fecha y hora del sistema.
+6. Sistema permite el cambio de la fecha y hora de la cita, a pesar de tener un
+RNMM. Solo Notifica a la EMF en caso de ser Novedad tipo (1).
+Para operaciones de transporte con nodo portuario, en caso de recibir la
+información en línea de la asignación de citas en el módulo INSIDE, el RNDC hace
+el cambio de fecha y hora de la cita en las remesas del manifiesto en forma
+automática.
+Se implementa la “Consulta de manifiestos con descargue en puerto sin cita.” Con
+el fin de que la empresa de transporte pueda auditar la información de citas en
+línea.
+En caso de NO recibir la información en línea por parte del puerto, la empresa de
+transporte es quien debe realizar el cambio de la cita de descargue en la remesa.
+Para el cálculo de tiempos logísticos, y el cálculo del valor a pagar y su comparación
+con valor de referencia de SICE-TAC, se debe relacionar el motivo del cambio de la cita
+pactada, teniendo en cuenta las siguientes opciones:
+1. Incumplimiento por parte generador de carga.
+“El reconocimiento económico de los tiempos logísticos se tendrá en
+cuenta desde la fecha y hora de la cita pactada o programada.”
+2. Incumplimiento por parte titular de manifiesto.
+“El reconocimiento económico de los tiempos logísticos se tendrá en
+cuenta desde la NUEVA fecha y hora de la cita”
+
+-- 24 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+24
+Para las empresas de transporte que realizan el proceso de cambios de la
+remesa a través de WEB_SERVICE la etiqueta será:
+<motivocambio>1</motivocambio> “Incumplimiento por parte generador
+de carga.”
+<motivocambio>2</motivocambio> “Incumplimiento por parte titular de
+manifiesto.”
+El RNDC permite más de un cambio para la cita de descargue siempre y cuando
+se cumplan las condiciones anteriormente mencionadas.
+Ejemplo Cambio de cita descargue.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>38</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<consecutivoremesa>11</consecutivoremesa>
+<codigocambio>2</codigocambio>
+<motivocambio>2</motivocambio>
+<fechacitapactadadescargue>01/01/2025</fechacitapactadadescargue>
+<horacitapactadadescargue>10:00</horacitapactadadescargue>
+</variables>
+</root>
+LUGAR DE DESCARGUE.
+
+-- 25 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+25
+Lugar de descargue se podrá modificar solo si el Código de municipio NO cambia. en
+caso de cambiar el Municipio debe anular la remesa.
+Ejemplo Cambio de sede descargue.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>38</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<consecutivoremesa>11</consecutivoremesa>
+<codigocambio>3</codigocambio>
+<codtipoiddestinatario>1</codtipoiddestinatario>
+<numiddestinatario>2</numiddestinatario>
+<codsededestinatario>1</codsededestinatario>
+</variables>
+</root>
+Ejemplo Cambio Generador de carga.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>38</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+
+-- 26 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+26
+<consecutivoremesa>11</consecutivoremesa>
+<codigocambio>5</codigocambio>
+<codsedepropietario>1</codsedepropietario>
+<numidpropietario>1235</numidpropietario>
+<tipoidpropietario>N</tipoidpropietario>
+</variables>
+</root>
+ANULACION DE REMESA.
+Si la Remesa ya tiene reporte de tiempos logísticos reales NO podrá ser anulada.
+Previamente Se deben anular los registros de tiempos logísticos reales. Esta Anulación
+no se le informa a la EMF.
+8. EXPEDICIÓN DE MANIFIESTO ELECTRÓNICO
+DE CARGA.
+*Proceso que realiza la empresa de Transporte.
+El reporte de tiempos logísticos a través de Sistemas de monitoreo de Flota se
+entiende que aplican de manera inicial para aquellas operaciones de
+transporte amparadas bajo el tipo de manifiesto de carga general,
+Multiparada, ida y regreso.
+En la expedición del manifiesto electrónico de carga se debe digitar el NIT de la EMF
+siempre y cuando no tenga definido un NIT estándar el cual se relaciona en la
+funcionalidad “Información empresa transportadora”.
+Para las ETC que usan WebService, los nombres del campo es: <nitmonitoreoflota>
+EJEMPLO EXPEDICIÓN DE MANIFIESTO DE CARGA:
+el presente ejemplo solo se relacionan las etiquetas relevantes para la aplicación de la
+presente guía.
+
+-- 27 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+27
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuario1</username>
+<password>password1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</numnitempresatransporte>
+<nummanifiestocarga>1111</nummanifiestocarga>
+<fechaexpedicionmanifiesto>01/01/2025</fechaexpedicionmanifiesto>
+<numplaca>abc111</numplaca>
+<numplacaremolque>s1213</numplacaremolque>
+<numidconductor>111</numidconductor>
+<numidconductor2>1111</numidconductor2>
+<nitmonitoreoflota>1111</nitmonitoreoflota>
+<remesasman procesoid="43">
+<remesa>
+<consecutivoremesa>1</consecutivoremesa>
+</remesa>
+<remesa>
+<consecutivoremesa>2</consecutivoremesa>
+</remesa>
+<remesa>
+<consecutivoremesa>3</consecutivoremesa>
+</remesa>
+</remesasman>
+</variables>
+</root>
+Al momento de expedir el Manifiesto de cara se contemplan los siguientes errores con
+respecto a la aplicación de la presente guía:
+CODIGO DESCRIPCION
+MAN007
+La empresa de transporte no registra NIT de la
+empresa de monitoreo para el reporte de Tiempos
+logísticos
+MAN065 La empresa de transporte no ha cargado en el RNDC el
+certificado de cumplimiento condiciones técnicas.
+MAN066 La empresa de monitoreo de flota no existe en el RNDC.
+
+-- 28 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+28
+Nota: MAN065 aplica cuando la empresa de transporte relaciona su mismo NIT para el envío de tiempos logísticos
+reales a través de Sistemas de Monitoreo de Flota. (Módulo de Información empresa)
+ANULACION DEL MANIFIESTO ELECTRÓNICO DE CARGA.
+Una vez expedido el manifiesto se tendrán en cuenta las siguientes condiciones para
+permitir la anulación del manifiesto de carga.
+1. Si el manifiesto ya tiene RMM, El sistema anula automáticamente los RMM con una
+causal “Anulación de Manifiesto”.
+2. Si el manifiesto tiene RNMM, El sistema anula automáticamente los RNMM con una
+causal “Anulación de Manifiesto”.
+3. Si el manifiesto no tiene RMM, pero la EMF ya está informada, el RNDC en próxima
+solicitud de información envía una marca para notificar la anulación del
+manifiesto.
+a. En Caso de que le RNDC Reciba un RMM con un manifiesto anulado y que
+la EMF NO este informada el sistema no entrega radicado, se entrega un
+mensaje de error. “MANIFIESTO ANULADO”
+En Caso de que le RNDC Reciba un RMM con un manifiesto anulado y que
+la EMF SI este informada el sistema no entrega radicado, se entrega un
+mensaje de error. “EN CONSULTA PREVIA SE NOTIFICO ANULACION DEL
+MANIFIESTO”
+TRANSBORDOS NO PLANEADOS
+Se Consideran transbordos no planeados en los eventos que por condiciones que
+afectan directamente a el vehículo no culmina la operación de transporte asignada
+bajo un manifiesto de carga, y debe generar un manifiesto de carga para el nuevo
+vehículo de carga que terminará la operación de transporte.
+De cara a el reporte de tiempos logísticos, el manifiesto de carga inicial solo reportará
+los puntos de control los cuales se hayan cumplido antes de la novedad que da como
+resultado el transbordo no planeado.
+Una vez se expide el segundo manifiesto, el RNDC en la próxima consulta de la EMF,
+informa la novedad, con el propósito de suspender el monitoreo al vehículo inicial, y el
+monitoreo continuo con el segundo manifiesto el cual termina esa operación de
+
+-- 29 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+29
+transporte y se reportaran los puntos de control pactados con fecha y hora posterior a
+el evento que produce el transbordo no planeado.
+9. CONSULTA PARA EMPRESAS DE MONITOREO
+DE FLOTA.
+Proceso que realiza la empresa de Monitoreo de Flota.
+La EMF debe solicitar al RNDC la lista de manifiestos en los que han sido autorizados por
+las ETC para hacer la labor de monitoreo, se hace únicamente por medio del
+WebService.
+El ciclo de repetición entre solicitud y solicitud no podrá ser inferior a 5 minutos (No puede
+ser cada 2 minutos), con el fin de evitar sobrecargas innecesarias en el RNDC.
+La EMF podrá realizar tres tipos de consultas:
+1. Nuevos Manifiestos de carga autorizados con relación a la última consulta
+realizada “<manifiestos>nuevos</manifiestos>”
+EJEMPLO XML: para solicitar los Manifiestos autorizados desde la última vez que
+solicitó la empresa de monitoreo de flota, y que no sean mayores a 24 horas de
+expedidos.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>9</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<documento>
+<numidgps>9999999999</numidgps>
+<manifiestos>NUEVOS</manifiestos>
+</documento>
+</root>
+
+-- 30 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+30
+2. Todos los manifiestos de carga autorizados en las últimas 24 horas
+“<manifiestos>todos</manifiestos>”. Esta funcionalidad es útil cuando la empresa
+de monitoreo de flota tiene dudas en la transmisión de los datos. Esta solicitud solo
+se puede hacer una vez cada 24 horas.
+Ejemplo xml para una solicitud de todos los manifiestos en los cuales ha sido
+autorizado en las últimas 24 horas.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>9</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<documento>
+<numidgps>9999999999</numidgps>
+<manifiestos>TODOS</manifiestos>
+</documento>
+</root>
+3. Todos los manifiestos de carga autorizados y que ya fueron consultados
+previamente por la EMF en la última hora
+“<manifiestos>ULTIMAHORA</manifiestos>”. Esta funcionalidad es útil cuando la
+empresa de monitoreo de flota tiene dudas en la transmisión de los datos.
+Ejemplo xml para una solicitud de todos los manifiestos en los cuales ha sido
+autorizado en la última hora.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>9</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<documento>
+<numidgps>9999999999</numidgps>
+<manifiestos>ULTIMAHORA</manifiestos>
+</documento>
+</root>
+
+-- 31 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+31
+4. Todos los numero de Radicado de manifiestos de carga autorizados en las últimas
+24 horas “<manifiestos>ID</manifiestos>”. Esta funcionalidad es útil cuando la
+empresa de monitoreo de flota tiene dudas en la transmisión de los datos.
+Ejemplo xml para una solicitud de todos los manifiestos en los cuales ha sido
+autorizado en la última hora.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>9</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<documento>
+<numidgps>9999999999</numidgps>
+<manifiestos>ID</manifiestos>
+</documento>
+</root>
+5. Consulta por manifiesto relacionando el número de radicado como llave única.
+Esto con el fin de obtener información de los puntos de control de un único
+manifiesto.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>9</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<documento>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+</documento>
+</root>
+Información que envía el RNDC a empresa de Monitoreo.
+
+-- 32 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+32
+i. Numero Radicado de Manifiesto (Llave Única)
+ii. Consecutivo de Manifiesto
+iii. Placa Vehículo (automotor)
+iv. Código secuencial del punto de control
+v. Dirección del punto de control
+vi. Municipio del punto de control
+vii. Coordenadas georreferenciadas del punto de control
+viii. Fecha y Hora cita de la llegada al punto de control
+ix. Tiempo pactado en punto de control. (dato numérico sin decimales
+equivalente a minutos)
+El RNDC envía mínimo 1 punto de control por cada manifiesto de acuerdo al ámbito de
+aplicación de la metodologia. El punto de cargue puede llevar código secuencial 1 y el
+punto de descargue código secuencial 2 así sucesivamente si hay más puntos de
+control.
+La fecha y hora de la cita puede llegar vacía para ciertos puntos de control los cuales
+no se realizan operaciones de cargue y/o descargue, estos puntos de control son
+definidos por el Ministerio de transporte.
+Ejemplo del xml de respuesta del RNDC.
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<root>
+<documento>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numnitempresatransporte>9999999999</numnitempresatransporte>
+<nummanifiestocarga>111</nummanifiestocarga>
+<fechaexpedicionmanifiesto>03/09/2014</fechaexpedicionmanifiesto>
+<numplaca>bod874</numplaca>
+<puntoscontrol>
+<puntocontrol>
+<codpuntocontrol>1</codpuntocontrol >
+<codmunicipio>11001000</codmunicipio>
+<direccion>calle 1 3-51 parque industrial xxx</direccion>
+<fechacita>2018/11/05</ fechacita>
+<horacita>16:07</ horacita>
+<latitud>5.417198</ latitud>
+<longitud>-72.290611</ longitud>
+<tiempopactado>65</tiempopactado >
+</puntocontrol>
+<puntocontrol>
+<codpuntocontrol>2</codpuntocontrol>
+<codmunicipio>5001000</codmunicipio>
+<direccion>calle 30 -40</direccion>
+<fechacita>2018/11/06</ fechacita>
+<horacita>08:00</ horacita>
+
+-- 33 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+33
+<latitud>4.417198</ latitud>
+<longitud>-73.290611</ longitud>
+<tiempopactado>125</tiempopactado >
+</puntocontrol>
+</puntoscontrol>
+</documento>
+<documento>
+…..
+</documento>
+<documento>
+…..
+</documento>
+<documento>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<ajuste>1</ajuste>
+<numnitempresatransporte>9999999999</numnitempresatransporte>
+<nummanifiestocarga>111</nummanifiestocarga>
+<fechaexpedicionmanifiesto>03/09/2014</fechaexpedicionmanifiesto>
+<numplaca>bod874</numplaca>
+<puntoscontrol>
+<puntocontrol>
+<codpuntocontrol>2</codpuntocontrol>
+<ajuste>1</ajuste>
+<codmunicipio>11001000</codmunicipio>
+<direccion>calle 1 3-51 parque industrial xxx</direccion>
+<fechacita>2018/11/05</ fechacita>
+<horacita>16:07</ horacita>
+<latitud>5.417198</ latitud>
+<longitud>-72.290611</ longitud>
+<tiempopactado>65</tiempopactado >
+</puntocontrol>
+</puntoscontrol>
+</documento>
+</root>
+Cuando un punto de control presenta la etiqueta <ajuste>, esto indica que la ETC ha realizado
+modificaciones en los atributos previamente definidos para dicho punto de control. Como
+resultado de estos cambios, la información se envía nuevamente con las nuevas condiciones en
+la consulta, con el fin de actualizar el monitoreo y asegurar que se reporten los tiempos logísticos
+reales.
+1. Cambio en la Fecha y hora del Punto de control
+2. Cambio en la sede del Punto de control
+3. Cambio en la sede y fecha y hora del Punto de control
+4. Anulación de Manifiesto de carga (Suspensión de Monitoreo)
+5. Transbordo NO planeado. (Evento en carretera que suspende el viaje con la
+misma placa.)
+Esta opción permite mantener la trazabilidad y la integridad del seguimiento, adaptándose de
+manera dinámica a los ajustes operativos realizados por la ETC.
+
+-- 34 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+34
+Nota: Si la empresa de monitoreo de flota solicita información de los puntos de control de los
+Manifiestos de carga con frecuencia inferior a los 15 minutos (es decir con periodos menores a
+15 minutos), el RNDC responderá con el mensaje de error:
+Código Observación
+GPS200 La empresa de monitoreo de flota debe esperar 15 minutos
+para volver a consultar manifiestos autorizadas.
+10. REGISTRO MONITOREO DE MANIFIESTO
+(RMM)
+El registro de los tiempos logísticos reales por parte de la empresa que realiza el
+monitoreo de flota se llama Registro monitoreo de manifiesto.
+El registro monitoreo de manifiesto enviado por la EMF de flota incluye la fecha-hora de
+llegada y la fecha-hora de salida, coordenadas georreferenciadas, la placa y el
+radicado del manifiesto de carga. Se realiza una transacción por cada punto de control.
+La Fecha y hora de la cita es un dato clave y de relevancia en la implementación de
+esta metodología, y debe ser de estricto cumplimiento por cada uno de los actores,
+mejorando las prácticas en las operaciones de transporte e impactando de manera
+positiva la eficiencia y los costos logísticos.
+La EMF debe implementar una ventana de tolerancia desde el momento en que es
+informada la EMF a través de la consulta de manifiestos a monitorear hasta 24 horas
+después con relación a la fecha y hora de la cita del punto del control
+Los reportes de la fecha y hora de llegada y fecha y hora de salida deben ser los tiempos
+reales del monitoreo al vehículo en cada punto de control, así el vehículo tenga una
+llegada anterior con respecto a la fecha y hora de la cita.
+Con Respecto a SICE-TAC
+Si la fecha hora de llegada al punto de control es anterior a la fecha hora de cita
+pactada, el sistema (RNDC) para el cálculo del tiempo de espera tomará como hora
+de llegada la fecha – hora de la cita pactada.
+Si la fecha y hora de llegada al cargue o descargue es anterior a la fecha hora de la
+cita pactada del punto de control, y el vehículo es atendido antes de la fecha hora
+de cita pactada, los tiempos de espera son 0 y el tiempo de atención inicia con la
+atención (entrada) al punto de control
+
+-- 35 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+35
+El Sistema RNDC, recibe un registro a nivel de manifiesto y punto de control. y devuelve
+el número de Radicado a la EMF, en señal de aceptación de la calidad de la
+información. Por lo tanto, cada manifiesto de carga tendrá dos o más números de
+radicado de RMM.
+La EMF debe enviar la información del RMM máximo en las siguientes 72 horas a partir de
+la fecha y hora de llegada de cada punto de control.
+En caso de que el vehículo dure más de las 72 horas en el punto de control, la EMF debe
+realizar el RMM con los datos de la fecha y hora de llega y con la etiqueta
+<sinsalida>S</sinsalida>
+En caso de superarse el tiempo estipulado y la empresa de monitoreo de todos modos
+envía el registro de monitoreo de manifiesto, el RNDC no recibe el registro y entrega un
+mensaje de error tipo “72 horas vencidas”. La EMF debe realizar el registro de novedades
+monitoreo de manifiesto (RNMM).
+En caso de presentarse alguna novedad de monitoreo por la cual no se pueda realizar
+el registro de tiempos logísticos de los puntos de control de los manifiestos autorizados, la
+EMF debe emitir el RNMM identificando la novedad por la cual no se pudo cumplir con
+el reporte de tiempos logísticos.
+Ejemplo para registro de monitoreo de manifiesto
+Punto Control 1
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>60</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codpuntocontrol>1</codpuntocontrol>
+<latitud>123.456</latitud>
+<longitud>123.456</longitud>
+<fechallegada>01/01/2017</fechallegada>
+<horallegada>08:32</horallegada>
+<fechasalida>01/01/2017</fechasalida>
+<horasalida>10:32</horasalida>
+</variables>
+
+-- 36 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+36
+</root>
+Punto Control 2
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>60</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codpuntocontrol>2</codpuntocontrol>
+<latitud>123.456</latitud>
+<longitud>123.456</longitud>
+<fechallegada>02/01/2017</fechallegada>
+<horallegada>08:32</horallegada>
+<fechasalida>02/01/2017</fechasalida>
+<horasalida>10:32</horasalida>
+</variables>
+</root>
+Punto Control 3
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>60</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codpuntocontrol>3</codpuntocontrol>
+<latitud>123.456</latitud>
+<longitud>123.456</longitud>
+
+-- 37 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+37
+<fechallegada>02/01/2017</fechallegada>
+<horallegada>08:32</horallegada>
+<sinsalida>S</sinsalida>
+</variables>
+</root>
+Ejemplo respuesta aceptación RNDC al registro de monitoreo de manifiesto
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<ingresoid>123456</ingresoid>
+</root>
+Ejemplo respuesta no aceptación RNDC al registro de monitoreo de manifiesto
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<errormsg>error rmm020: falta el nro. radicado de manifiesto. usuario:169</errormsg>
+</root>
+ANULACION REGISTRO DE MONITOREO DE MANIFIESTO
+En caso de que la EMF detecte la existencia de un error en el RMM, podrá enviar un
+registro de anulación de RMM.
+Ejemplo para anulación de registro de monitoreo de manifiesto
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>68</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidrmm>1234</ingresoidrmm>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codpuntocontrol>2</codpuntocontrol>
+<observaciones>haciendo pruebas</observaciones>
+</variables>
+</root>
+Ejemplo respuesta RNDC a la anulación - registro de monitoreo de manifiesto
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<ingresoid>123456</ingresoid>
+</root>
+
+-- 38 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+38
+10.1 AJUSTE REGISTRO DE MONITOREO DE MANIFIESTO.
+En caso de que la empresa de transporte identifique inconsistencias en los tiempos
+logísticos reales reportados por parte de la empresa de monitoreo de flota, se haya
+presentado novedades en el monitoreo de manifiesto o incumplimiento en el reporte de
+la EMF, la empresa de transporte podrá modificar los datos de llegada y salida al punto
+de control.
+Portal interactivo:
+Para realizar el ajuste a los tiempos logísticos la empresa de transporte debe tener un
+usuario tipo 2 (Usuario de monitoreo), de lo contrario el sistema mostrara error “El usuario:
+XXXXX@1111 no está autorizado para usar esta opción.”
+Si no tiene creado este usuario la empresa de transporte debe
+ingresar (https://rndc2.mintransporte.gov.co/) con el usuario maestro (6), al
+modulo de Herramientas >> Administrar Usuarios >> Nuevo usuario >> el tipo
+de usuario que debe seleccionar “Usuario Monitoreo de Flota”
+La asignación de códigos a los puntos de control se realizan mediante la consulta
+de la EMF a los manifiestos autorizados (Unidad 9 de la Guía), en caso de que el
+manifiesto a realizar la funcionalidad de ajuste de RMM no haya sido consultado
+por la EMF, la empresa de transporte debe realizar primero la codificación de los
+puntos de control mediante el Botón “GENERAR PUNTOS DE CONTROL DEL
+MANIFIESTO” , ubicado en la parte inferior costado izquierdo del formulario.
+
+-- 39 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+39
+Una vez validado el usuario Tipo 2, debe digitar el campo Consecutivo de Manifiesto o
+Radicado de Manifiesto, el sistema muestra la información general del Manifiesto.
+En el Modulo de ajuste de tiempos logísticos, en el Campo Punto de control, debe
+seleccionar el punto al cual se va a modificar los tiempos logísticos, el sistema mostrara
+una codificación numérica asignada con el RNDC, acompañada de las letras: C (para
+puntos de cargue), D (Puntos de descargue).
+Una vez identificado el punto de control el cual se va realizar el ajuste, el sistema muestra
+automáticamente la información de la sede:
+en el campo Motivo de ajuste, debe seleccionar el motivo por el cual se está realizando
+la modificación de tiempos logísticos.
+Motivos de Modificación tiempos logísticos.
+1. Operaciones afectadas por casos fortuitos o fuerza mayor. (evento
+externo, imprevisible e irresistible que imposibilita el cumplimiento de una
+obligación)
+2. Vehículo no sale de la geocerca después de realizar el cargue y/ o
+descargue.
+3. Superposición de sedes en manifiestos distintos.
+4. Incumplimiento empresa de monitoreo de flota.
+5. Empresa de monitoreo de flota reporto un RNMM.
+
+-- 40 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+40
+6. Otra razón por la cual no está de acuerdo.
+Esta codificación numérica aplica para identificar los motivos
+a través de WEBSERVICE como se muestra en el ejemplo XML.
+Adicional debe diligenciar el texto en el campo de Observaciones con el detalle de la
+novedad seleccionada. Y con el reporte de los tiempos logísticos.
+Finalmente, en la sección de tiempos Logísticos visualizara la información de la fecha y
+hora de la cita pactada, y debe diligenciar los tiempos logísticos reales producto de la
+modificación.
+Ejemplo xml ajuste de RMM.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuarioempresatransporte(tipo2)</username>
+<password>passworetc</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>60</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>1111</ numnitempresatransporte >
+<numidgps>111</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>BOD875</numplaca>
+<codpuntocontrol>1</codpuntocontrol>
+<latitud>123.456</latitud> opcional
+<longitud>123.456</longitud> opcional
+
+-- 41 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+41
+<codmotivoajuste>1</codmotivoajuste>
+<observaciones>cierre puerto por lluvias</observaciones>
+<fechallegada>01/01/2017</fechallegada>
+<horallegada>08:32</horallegada>
+<fechasalida>01/01/2017</fechasalida>
+<horasalida>10:32</horasalida>
+</variables>
+</root>
+NOTA: El procedimiento para la modificación de los tiempos logísticos estará sujeto a
+supervisión y seguimiento permanente por parte del Ministerio de Transporte y de la
+Superintendencia de Transporte, quienes, en ejercicio de sus competencias, podrán
+efectuar los ajustes o actualizaciones que resulten pertinentes, con fundamento en los
+análisis efectuados sobre la información reportada al Registro Nacional de Despacho
+de Carga – RNDC.
+11. REGISTRO DE NOVEDADES MONITOREO DE
+MANIFIESTO (RNMM).
+Proceso que realiza Empresa de Monitoreo.
+La EMF puede registrar los eventos que se presenten antes y durante de la operación de
+transporte y que afecten el seguimiento y reporte del registro de monitoreo de
+manifiesto.
+Estos eventos serán reportados al RNDC mediante el registro de novedades monitoreo
+de manifiesto (RNMM). Solo se recibirán novedades hasta Máximo 36 horas después
+con relación a la fecha y hora de la cita del punto de control.
+Eventos que pueden ser reportados por la EMF:
+1. El vehículo no apareció en La Ventana de tolerancia de la cita,
+comparado con la fecha hora de la cita de cargue o descargue.
+(esta novedad se debe reportar pasadas 24 horas y máximo hasta 1 hora
+después de vencidas las 24 horas, el RNDC necesita la información en
+línea).
+2. La placa del vehículo no está registrada en la EMF.
+3. El vehículo se encuentra suspendido o desactivado en la EMF.
+4. La unidad remota instalada en el vehículo se encuentra funcionando mal.
+
+-- 42 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+42
+5. No hay relación con la empresa de transporte (NIT mal relacionado)
+6. No hay vías de acceso para llegar al punto de control
+Para las novedades 2, 3, 4 y 5, no es necesario enviar la etiqueta <codpuntocontrol>,
+porque aplica para todos los puntos de control de manifiesto, en caso de enviar un
+segundo RNMM con novedades (2,3,4y5) para el mismo manifiesto de carga, el sistema
+mostrara un mensaje de error.
+Ejemplo para RNEM.
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>46</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codpuntocontrol>1</codpuntocontrol>
+<codnovedad>1</codnovedad>
+</variables>
+</root>
+Ejemplo 2:
+<?xml version='1.0' encoding='iso-8859-1' ?>
+<root>
+<acceso>
+<username>usuariogps</username>
+<password>passwordgps</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>46</procesoid>
+</solicitud>
+<variables>
+<numidgps>9999999999</numidgps>
+<ingresoidmanifiesto>123456789</ingresoidmanifiesto>
+<numplaca>bod875</numplaca>
+<codnovedad>2</codnovedad>
+
+-- 43 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+43
+</variables>
+</root>
+La respuesta del RNDC cuando acepta la novedad es:
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<root>
+<ingresoid>1</ingresoid>
+</root>
+La respuesta del RNDC cuando recibe dos veces el mismo registro de novedad
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<root>
+<errormsg>duplicado:1 </errormsg>
+</root>
+La cantidad de registros de RNMM, no podrá superar los siguientes porcentajes con
+respecto al número total de Manifiestos Electrónicos de Carga autorizados a realizar el
+monitoreo en los últimos 30 días calendario.
+Rango de cantidad de manifiesto electrónico de
+carga Porcentaje
+Más de 1000 manifiestos electrónicos de carga en el
+mes calendario 10%
+Entre 500 y 1000 manifiestos electrónicos de carga en
+el mes calendario 15%
+Entre 100 y 499 manifiestos electrónicos de carga en el
+mes calendario 20%
+Entre 50 y 99 manifiestos electrónicos de carga en el
+mes calendario 40%
+Menos de 50 manifiestos electrónicos de carga en el
+mes calendario 50%
+La EMF debe enviar la información de RNMM máxima en las siguientes 36 horas
+calendario a partir de la fecha y hora de la cita de cada punto de control.
+En la situación en la que la EMF No reporte RNMM en el tiempo estipulado y no realice el
+registro de monitoreo de manifiesto (RMM), se contempla un incumplimiento por parte
+de la EMF. El total de incumplimientos no podrá superar los siguientes porcentajes con
+
+-- 44 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+44
+respecto al número total de Manifiestos Electrónicos de Carga autorizados a realizar el
+monitoreo en los últimos 30 días calendario.
+Rango de cantidad de manifiesto electrónico de
+carga Porcentaje
+Más de 1000 manifiestos electrónicos de carga en el
+mes calendario 10%
+Entre 500 y 1000 manifiestos electrónicos de carga en
+el mes calendario 15%
+Entre 100 y 499 manifiestos electrónicos de carga en
+el mes calendario 20%
+Entre 50 y 99 manifiestos electrónicos de carga en el
+mes calendario 40%
+Menos de 50 manifiestos electrónicos de carga en el
+mes calendario 50%
+En caso de superar el Porcentaje establecido, la ETC no podrá relacionar el NIT de la EMF
+para la expedición de Nuevos manifiestos, y se debe contemplar un plan de acción que
+se debe registrar en el RNDC por parte de la ETC, el cual habilita por un tiempo de 24
+horas para subsanar el incumplimiento en la identificación de tiempos logísticos, y pueda
+registrar nuevamente el NIT de esa EMF en nuevos Manifiestos de carga.
+El Ministerio de transporte realizará seguimiento y análisis de la información
+suministrada y en caso de identificar mala calidad de los datos, realizará reporte a
+la Superintendencia de Transporte para que ejerza sus competencias de Vigilancia.
+inspección y control.
+En caso de existir el RNMM o incumplimiento por parte de la EMF, la empresa de
+transporte debe registrar los tiempos logísticos en el cumplido de remesa terrestre de
+carga.
+12. DISTRIBUCION DE TIEMPOS LOGISTICOS
+REALES EN REMESAS.
+*Proceso que realiza el sistema RNDC.
+Teniendo en cuenta que un manifiesto electrónico de carga puede contener una o
+varias remesas, el RNDC identifica el tiempo logístico por cada punto de control, y
+relaciona el tiempo de cada remesa en base a los puntos de control.
+
+-- 45 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+45
+En los casos que un punto de control hace parte de dos o más remesas se estipula una
+regla para el cálculo de los tiempos logísticos de cada remesa partiendo del registro de
+monitoreo de manifiesto.
+Regla: Los tiempos logísticos reales de cada remesa de un mismo manifiesto
+de carga serán distribuidos proporcionalmente, de acuerdo con el peso total
+de la mercancía en el punto de control.
+El tiempo real de la operación en cada punto de control se calcula con base
+en la regla anterior, la hora de llegada y hora de salida es la misma para todas
+las remesas, pero el tiempo logístico de cada remesa será el resultado de la
+distribución proporcional.
+13. CUMPLIDO INICIAL DE REMESA
+Proceso que realiza el sistema RNDC.
+A partir del registro de monitoreo de manifiesto, el RNDC genera automáticamente
+el registro de cumplido inicial de remesa para cada una de las remesas que
+pertenecen del manifiesto de carga. Y asignará un numero de radicado a cada
+cumplido inicial de remesa, este será consultable solamente por la ETC.
+14. CUMPLIDO DE REMESA
+Proceso que realiza Empresa de Transporte.
+A partir del cumplido inicial de remesa, se debe incluir los tiempos de entrada al
+cargue y entrada al descargue con la cantidad de la mercancía entregada.
+ANULACION DE CUMPLIDO DE REMESA.
+En caso de hacer un segundo Cumplido de remesa, el sistema seguirá teniendo en cuenta la información
+del cumplido inicial de remesa.
+15. DICCIONARIO DE ERRORES
+El diccionario de datos en un proceso dinámico en el RNDC, el cual puede ser
+
+-- 46 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+46
+consultable a través del portal interactivo Menu Principal
+En la opción de consultar >> consultar Maestros >> Diccionario de Errores.
+De acuerdo a el Proceso (Columna 2), el sistema muestra la relación de errores activos.
+16. PLAN DE CONTINGENCIA RNDC.
+El Ministerio de Transporte monitoreará permanentemente el funcionamiento del sistema
+de información Registro Nacional de Despachos de Carga - RNDC y realiza las
+recomendaciones pertinentes al afinamiento de la aplicación y a nivel de bases de
+datos, y en el evento de ser necesario realizar tareas de mantenimiento se informará
+oportunamente a los usuarios para que den inicio al plan de contingencia, para lo cual
+se deberá seguir el procedimiento definido en éste numeral.
+Aplica de igual manera por eventos fortuitos que se presentan en el Registro Nacional
+de Despachos de Carga – RNDC y que afecta la operatividad de todos los usuarios.
+En los casos en que los actores del RNDC no puedan acceder al sistema por fallas
+tecnológicas atribuibles a sistemas de información de las respectivas empresas no aplica
+este plan de contingencia.
+
+-- 47 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+47
+El plan de contingencia consiste en que la ETC puede realizar el viaje generando el
+documento en papel del manifiesto de carga, sin el Número de Radicado y sin el código
+QR. Los formatos que deben utilizar están en el Portal Interactivo.
+Si el plan de contingencia es activado, durante el la ejecución de una operación de
+transporte y la EMF está realizado el seguimiento al vehículo, por la situación de
+contingencia del RNDC no es posible realizar él envió de información de tiempos
+logísticos de punto de control deberá realizar el envío de información una vez sea
+reestablecido el servicio de RNDC.
+los registros deberán ser reportados al sistema del Registro Nacional de Despachos de
+Carga – RNDC- en un término máximo de 24 horas contados a partir de la hora en que
+se restableció el servicio del RNDC en el Ministerio de Transporte.
+Cuando por causa de la contingencia la EMF no pueda conocer las operaciones futuras
+en que ha sido relacionado por una ETC para realizar el reporte de tiempos logísticos al
+RNDC, una vez se reestablezca el sistema RNDC y el sistema permita realizar la consulta
+para empresas de monitoreo de flota. no se enviará información de los puntos de control
+que su fecha y hora de cita sea pasada. para estos puntos de control la empresa de
+transporte relaciona los tiempos logísticos en el cumplido de remesa.
+17. ESTADISTICAS DE INFORMACION DE LA
+EMPRESA DE MONITORE DE FLOTA.
+El sistema RNDC consolida la información relacionada con los registros realizados por la
+EMF y la validación que realiza la ETC, y pondrá a disposición de la EMF un módulo de
+consultas en el Portal Interactivo del RNDC, donde tendrá acceso a la siguiente
+información.
+1. Registros que se han enviado del RNDC a la EMF para hacer seguimiento y
+reportar los tiempos logísticos reales
+2. Registros de RMM ha realizado la EMF.
+3. Registros con Novedades a enviado la EMF
+4. Numero de anulaciones de registros RMM de la EMF.
+5. Cantidad de rechazos de la ETC a los registros RMM.
+18. CONSULTAS PARA LA EMF.
+
+-- 48 of 49 --
+
+Ministerio de Transporte
+Guía de tiempos Logísticos (RNDC)
+48
+18.1 CONSULTA DONDE PUEDE EVIDENCIAR LAS ETC QUE HAN RELACIONADO EL
+NIT COMO ESTADAR PARA EL REPORTE DE TIEMPOS LOGISTICOS.
+A través del portal interactivo (RNDC2), en la Opción Herramientas >> Información
+Empresa, en la sección de afiliados, puede visualizar las empresas de transporte las
+cuales han relacionado el NIT como un NIT estándar para el monitoreo de manifiestos.
+18.2 CONSULTAS DE DOCUMENTOS.
+
+-- 49 of 49 --
+

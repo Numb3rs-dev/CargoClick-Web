@@ -1,0 +1,431 @@
+1
+GUÍA PARA EL USUARIO
+PROCESO DE TRASBORDO
+SISTEMA RNDC
+Grupo de Logística
+
+-- 1 of 21 --
+
+2
+CONTROL DE CAMBIOS
+Versión: 1
+Elaborado por:
+Jairo Vesga
+Revisado por:
+Edna Lorena Gutiérrez
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Fecha de Aprobación:
+29/05/2023
+Descripción de las modificaciones:
+Elaboración inicial del documento.
+
+-- 2 of 21 --
+
+3
+TABLA DE CONTENIDO
+1 Objetivo ...................................................................................................................... 4
+2 Proceso para hacer trasbordo de mercancías en el sistema RNDC..... 5
+2.1 Trasbordo planeado de remesas............................................................ 5
+2.1.1 Expedición de la remesa .............................................................................................. 5
+2.1.2 Expedición de primer manifiesto ............................................................................. 7
+2.1.3 Empresas de GPS solicitando remesas autorizadas ............................................ 7
+2.1.4 Cumplido Inicial de Remesa, manual o por empresa de GPS ......................... 8
+2.1.5 Cumplido de Remesa .................................................................................................... 8
+2.1.6 Cumplido primer manifiesto........................................................................................ 9
+2.1.7 Expedición segundo manifiesto.................................................................................. 9
+2.1.8 Cumplido segundo manifiesto ............................................................................................... 10
+2.2 Reemplazo de manifiestos ..................................................................... 10
+2.2.1 Anulación del Manifiesto............................................................................................. 11
+2.2.2 Expedición Manifiesto Nuevo .................................................................................... 13
+2.3 Trasbordo no planeado de remesas ................................................... 15
+2.3.1 Cumplido del Manifiesto original ............................................................................. 16
+2.3.2 Expedición Manifiesto Nuevo .................................................................................... 20
+
+-- 3 of 21 --
+
+4
+GUÍA PARA EL USUARIO
+PROCESO DE TRASBORDO SISTEMA RNDC
+1 Objetivo
+Permitir la modificación de manifiestos antes de iniciar el viaje por sucesos
+como: cambio de conductor, cambio de vehículo, cambio en remesas,
+cambio de destino, cambio de valores pactados del manifiesto.
+La información obtenida con este registro constituye un insumo importante
+para la adopción de políticas públicas y la toma de decisiones en todos los
+niveles.
+
+-- 4 of 21 --
+
+5
+2 Proceso para hacer trasbordo de mercancías en el
+sistema RNDC
+2.1 Trasbordo planeado de remesas
+2.2 Reemplazo de manifiestos
+2.3 Trasbordo no planeado de remesas
+2.1 Trasbordo planeado de remesas
+Objetivo
+Permitir que una remesa pueda ser transportada por dos manifiestos con
+placas distintas en forma planeada, es decir, no motivado por algún
+evento en carretera. Al momento de expedir una remesa, la empresa de
+transporte sabe que se hará TRASBORDO y el municipio o lugar donde se
+hará el trasbordo de la remesa. Por lo tanto, la empresa de transporte
+puede digitar al expedir la remesa el código del municipio (cabecera o
+vereda) donde se hará el trasbordo.
+Detalle del procedimiento
+2.1.1 Expedición de la remesa
+▪ Nuevo campo en la remesa llamado: CODMUNICIPIOTRAS-
+BORDO (para los de WebService) Codificación DANE. En el portal
+interactivo del RNDC se encontrará un nuevo campo al final del
+formulario.
+▪ El RNDC valida que el municipio de trasbordo exista y que no sea
+igual al cargue o al descargue.
+
+-- 5 of 21 --
+
+6
+▪ Mensajes de error nuevos:
+REM490: “El municipio de trasbordo no puede ser igual al des-
+cargue” REM491: “El municipio de trasbordo no puede ser igual
+al cargue”
+REM492: “El municipio de trasbordo no existe en la codificación
+DIVIPOLA”
+
+-- 6 of 21 --
+
+7
+2.1.2 Expedición de primer manifiesto
+▪ Al expedir el primer manifiesto, el municipio destino debe ser
+igual al municipio de trasbordo de la remesa.
+▪ El municipio origen del primer manifiesto debe ser igual al
+municipio del cargue de la remesa.
+▪ La remesa no puede tener asignado otro manifiesto, es decir,
+debe estar libre.
+▪ No se permite más de 1 remesa en el manifiesto. Esto es temporal,
+mientras las empresas usan el nuevo procedimiento.
+▪ Mensajes de error nuevos:
+MAN356: “Una remesa de trasbordo ya está asignada a dos ma-
+nifiestos. No se permite ser asignada a un tercer manifiesto“.
+MAN357: “El municipio destino del manifiesto no coincide con el
+municipio de trasbordo de la remesa”.
+MAN361: “Solo se permite una remesa trasbordo en el mani-
+fiesto”.
+MAN362: “El municipio origen del manifiesto no coincide con el
+municipio cargue de la remesa de trasbordo”.
+2.1.3 Empresas de GPS solicitando remesas autorizadas
+▪ Si la remesa es autorizada a una empresa de GPS, se le envía a
+ésta la información del cargue, solamente, porque en la informa-
+ción que se envía normalmente incluye el manifiesto de carga y
+la placa y es posible que el RNDC solo tenga el primer manifiesto
+y el segundo manifiesto aún no lo hayan expedido.
+▪ Si el RNDC ya tiene el registro del segundo manifiesto, se le envía
+a la empresa de GPS otra vez la misma remesa de trasbordo,
+pero ahora con otro manifiesto, otra placa y con la información
+de descargue. La de cargue no, porque ya había sido enviada con
+
+-- 7 of 21 --
+
+8
+el primer manifiesto.
+2.1.4 Cumplido Inicial de Remesa, manual o por empresa de GPS
+▪ El cumplido inicial de una remesa trasbordo, no se puede reportar en
+un solo registro con los dos datos de cargue y descargue. Debe ser en
+registros separados. El RNDC exige siempre en el cumplido inicial, el
+radicado del manifiesto y como son dos manifiestos, deben ser dos
+registros.
+▪ Se valida que el registro de salida del cargue incluya en sus datos el
+radicado de manifiesto equivalente al primer manifiesto y en el registro
+de la llegada el descargue con el segundo manifiesto.
+▪ El registro de la salida del cargue exige que el primer manifiesto no haya
+sido cumplido. Puede no estar expedido el segundo manifiesto.
+▪ El registro de la llegada al descargue NO exige que el primer manifiesto
+esté cumplido, puede no estar cumplido y por supuesto, lo mismo pasa
+con el segundo manifiesto.
+▪ Mensajes de error nuevos:
+CIR031: “Para una remesa de trasbordo, no se permite en el
+mismo registro la fecha y hora del cargue y la fecha y hora del
+descargue”.
+CIR032: “Para una remesa de trasbordo, no se permite reportar
+la llegada al descargue con el primer manifiesto”.
+CIR029: “Para una remesa de trasbordo, no se permite reportar
+la salida del cargue con el segundo manifiesto”.
+2.1.5 Cumplido de Remesa
+▪ De la remesa con trasbordo no se recibe el cumplido de remesa
+hasta tanto no se haya asignado al segundo manifiesto. Se man-
+tiene en estado activa.
+▪ El segundo manifiesto no debe estar cumplido pero el primer
+manifiesto si debe estar cumplido.
+▪ Mensajes de error nuevos:
+
+-- 8 of 21 --
+
+9
+CRE062: “No se permite cumplir una remesa con trasbordo que
+no haya sido asignada al segundo manifiesto”.
+2.1.6 Cumplido primer manifiesto
+▪ El cumplido del primer manifiesto exige que la remesa trasbordo no haya sido
+cumplida, pero que sí tenga el cumplido inicial de remesa (Salida del car-
+gue). El RNDC debe saber que el viaje si se inició.
+▪ La remesa trasbordo quedará en estado ACTIVA, pero el manifiesto en es-
+tado CERRADO porque que ya se cumplió.
+▪ Mensajes de error nuevos:
+CMA111: “La remesa de trasbordo no debe estar cumplida, para cum-
+plir el primer manifiesto”.
+2.1.7 Expedición segundo manifiesto
+• El segundo manifiesto se puede expedir ligando a la misma remesa tras-
+bordo. La remesa debe estar en estado ACTIVA pero ligada a un primer
+manifiesto.
+• El municipio origen del segundo manifiesto debe coincidir con el municipio
+de trasbordo de la remesa y el municipio destino debe coincidir con el mu-
+nicipio de descargue de la remesa trasbordo.
+• El sistema RNDC llevará automáticamente a la remesa trasbordo, los datos
+de placa, configuración y número consecutivo manifiesto del segundo ma-
+nifiesto, es decir, la remesa de trasbordo mantiene dentro de su registro
+interno las dos placas.
+• Mensajes de error nuevos:
+MAN358: “El municipio origen del manifiesto no coincide con el muni-
+cipio de trasbordo de la remesa”.
+MAN359: “El municipio destino del manifiesto no coincide con el mu-
+nicipio de descargue de la remesa de trasbordo”.
+
+-- 9 of 21 --
+
+10
+2.1.8 Cumplido segundo manifiesto
+• Al cumplir el segundo manifiesto, el RNDC exige que la remesa
+de trasbordo se encuentre cumplida completamente.
+• El primer manifiesto debe haber sido cumplido previamente.
+• Mensajes de error nuevos:
+CMA112: “El primer manifiesto de la operación de trasbordo
+debe estar cumplido antes de cumplir el segundo manifiesto.”
+2.2 Reemplazo de manifiestos
+Detalle del procedimiento
+La empresa de transporte realiza la expedición normal de las remesas
+y manifiestos, pero se da cuenta de que hay un cambio en un manifiesto.
+Los manifiestos no se pueden modificar después de haber sido recibidos
+por el RNDC (Asignado un número de radicación), por lo tanto, hay que
+realizar la anulación del manifiesto y expedir uno nuevo.
+El RNDC controla el exceso de anulaciones de manifiestos de cada em-
+presa, no más del 6% de los manifiestos expedidos en el mismo mes al
+cual pertenece el manifiesto que se desea anular.
+Por lo tanto, para esta figura que se presenta en la vida normal del sec-
+tor transporte de carretera, es bueno que las empresas le informen al
+RNDC que la anulación se está realizando para reemplazar el mani-
+fiesto, debido a un cambio que se debe registrar.
+Los cambios permitidos son: cambio de conductor, cambio de vehículo
+(cabezote o remolque), cambio en las remesas, cambio de destino por
+
+-- 10 of 21 --
+
+11
+el generador, cambio de tarifa o valores pactados del manifiesto.
+Al recibir la información el RNDC según el procedimiento descrito a con-
+tinuación, no aplicará el control del máximo 6% de manifiestos anula-
+dos. Ese registro de anulación lo marca como un registro de Reemplazo
+de manifiesto.
+Solo hay 2 procedimientos para realizar el reemplazo:
+▪ Anular el manifiesto a reemplazar sin informar el nuevo manifiesto y
+luego crear el nuevo manifiesto informando a cuál reemplaza.
+▪ Anular el manifiesto a reemplazar informando el nuevo manifiesto y
+luego crear el nuevo manifiesto informando a cuál reemplaza.
+El procedimiento de crear primero el nuevo manifiesto y luego anular
+el reemplazado no aplica, porque la idea es reutilizar las mismas re-
+mesas.
+Las validaciones son:
+2.2.1 Anulación del Manifiesto
+▪ Nuevo campo en el registro de Anulación de Manifiesto llamado:
+NUMMANIFIESTOCARGANUEVO (para los de WebService). Para
+los del ambiente portal interactivo del RNDC es un nuevo campo
+del formulario, cuya etiqueta dice: “Manifiesto Nuevo que lo
+reemplazará”.
+
+-- 11 of 21 --
+
+12
+Los valores permitidos para el campo MOTIVOANULACIONMANIFIESTO
+son:
+D: Error Digitación
+S: Cancelación Servicio
+R: Cambio en las Remesas
+T: Cambio de Tarifa o Valores
+G: Cambio de Destino por el Generador C: Cambio de Conductor
+V: Cambio de Vehículo
+
+-- 12 of 21 --
+
+13
+▪ El RNDC valida el campo NUMMANIFIESTOCARGANUEVO. El ma-
+nifiesto no debe estar expedido en el RNDC ya que hasta ahora
+se están liberando las remesas que serán reutilizadas en el ma-
+nifiesto nuevo. Si no existe, el RNDC deja marcado el registro
+como pendiente de que aparezca el manifiesto nuevo. Las reme-
+sas ligadas se liberan para permitir ser embarcadas en el nuevo
+manifiesto.
+▪ Si los procedimientos internos de la empresa no le permiten de-
+finir el consecutivo de manifiesto nuevo, no hay problema, se
+deja el campo NUMMANIFIESTOCARGANUEVO vacío, es decir no
+lo reporta, y luego cuando se expida el manifiesto nuevo, se debe
+estar muy pendiente de digitarlo en el campo adecuado.
+▪ Mensajes de error nuevos:
+ANM081: “El manifiesto nuevo no debe haber sido expedido”.
+2.2.2 Expedición Manifiesto Nuevo
+
+-- 13 of 21 --
+
+14
+▪ El campo donde se puede digitar el manifiesto anulado y que será
+reemplazado es: MANNROMANIFIESTOTRANSBORDO (para los
+de WebService). Para los del ambiente portal interactivo del
+RNDC es un campo que se encuentra debajo del consecutivo. La
+etiqueta dice: “Escriba el consecutivo Manifiesto de Carga ante-
+rior”.
+▪ El manifiesto anterior o reemplazado debe existir y debe estar
+anulado.
+▪ El nuevo manifiesto no puede tener una fecha de expedición con
+más de cinco días de diferencia con la fecha de expedición del
+manifiesto reemplazado.
+▪ El manifiesto reemplazado debe estar anulado por alguna de las
+cinco causales definidas en la anulación, que permiten el reem-
+plazo.
+▪ El RNDC después de aceptar el nuevo manifiesto, marca el regis-
+tro de anulación previo, como operación de reemplazo y no será
+tenido en cuenta para el control de máximo número de anulacio-
+nes permitidas por mes.
+
+-- 14 of 21 --
+
+15
+▪ Si es un cambio de destino por el generador, se recomienda co-
+rregir la remesa, después de anular el manifiesto. Un registro de
+remesa se deja corregir. Y luego si, embarcar la misma remesa
+al nuevo manifiesto.
+▪ Mensajes de error nuevos:
+MAN034: “El manifiesto reemplazado no existe”.
+MAN032: “El manifiesto reemplazado debe estar anulado previa-
+mente”. MAN033: “El manifiesto reemplazado ya fue reportado
+en la expedición de otro manifiesto.”
+MAN031: “Las fechas de expedición de los dos manifiestos en la
+operación de reemplazo no puede tener una diferencia mayor a 5
+días.”
+MAN035: “El motivo de anulación del manifiesto reemplazado no
+es de los permitidos: R, T, G, C, V”
+MAN036: “El municipio origen del manifiesto no coincide con el
+municipio origen del manifiesto reemplazado.”
+2.3 Trasbordo no planeado de remesas
+Objetivo
+Permitir que una remesa pueda ser transportada por dos manifiestos
+con placas distintas en forma NO planeada, es decir, por un evento en
+carretera como: Varada, Accidente, Siniestro.
+Detalle del procedimiento
+La empresa de transporte realiza la expedición normal de las remesas
+y manifiestos, pero debido a un evento en carretera se debe hacer:
+▪ Un trasbordo de las remesas hacia otro vehículo porque no se
+pudo arreglar el vehículo original o el accidente del vehículo im-
+pide que continúe el viaje.
+▪ Un cambio de conductor por enfermedad o alguna otra causal.
+
+-- 15 of 21 --
+
+16
+▪ Para los dos casos hay que definir la ubicación del trasbordo. Los
+manifiestos no se pueden modificar después de haber sido recibi-
+dos por el RNDC (Asignado un número de radicación), por lo tanto
+hay que proceder a realizar el cumplido de manifiesto y expedir
+uno nuevo por el resto de la ruta.
+▪ No se debe anular el manifiesto porque el viaje se inició y la em-
+presa de transporte debe pagar un porcentaje de lo pactado,
+equivalente a la porción de viaje realizado.
+▪ Un cambio de punto de descargue (destino), solicitado por el ge-
+nerador de carga, después de iniciar el viaje, no se debe hacer
+con este procedimiento. Se debe registrar con la opción: “Reem-
+plazo de Manifiesto”. La razón: Es importante corregir la remesa
+y para corregir una remesa, debe estar libre. La libertad se con-
+sigue anulando el manifiesto.
+▪ El manifiesto original se debe cumplir con el tipo de cumplido:
+SUSPENSION. Las validaciones son:
+2.3.1 Cumplido del Manifiesto original
+▪ El campo en donde se digita el tipo de cumplido se llama: TIPOCUM-
+PLIDOMANIFIESTO (para los de WebService). Los valores posibles son:
+C: Cumplido Normal
+S: Suspensión del Viaje
+
+-- 16 of 21 --
+
+17
+
+-- 17 of 21 --
+
+▪ Al seleccionar el tipo Suspensión, se debe seleccionar el motivo de
+la suspensión. El campo se llama: MOTIVOSUSPENSIONMANI-
+FIESTO (para los de WebService). Los valores posibles son:
+A: Accidente; S: Siniestro; V: Varada.
+Si no se digita el motivo de la suspensión, el RNDC muestra men-
+saje de error.
+▪ Después de seleccionar el motivo de la suspensión se debe registrar la
+consecuencia de la suspensión. El campo se llama: CONSECUEN-
+CIASUSPENSION (para los de WebService). Los valores posibles son:
+R: Cambio de Remolque / Semiremolque T: Cambio total del
+vehículo.
+V: Cambio de Cabezote del vehículo C: Cambio de conductor
+
+-- 18 of 21 --
+
+19
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+F: Fin del viaje / Perdida total de la Carga
+D: Cambio de Destino / Ruta / Valores pactados
+▪ Las remesas ligadas al manifiesto deben tener registrado el cumplido
+inicial de remesa con solo la salida del cargue.
+▪ Las remesas no deben estar cumplidas completamente, ni tener
+cumplido inicial de remesa de la llegada al descargue. La razón:
+El vehículo no puede haber llegado al destino original.
+▪ Este primer manifiesto debería tener un valor de descuento y su
+motivo, el cual debería ser “Viaje Incompleto por Suspensión”.
+
+-- 19 of 21 --
+
+20
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+▪ Mensajes de error nuevos:
+CMA190: “Todas las remesas del manifiesto suspendido deben
+estar sin cumplir.”.
+CMA192: “Todas las remesas del manifiesto suspendido deben
+tener registrado el cumplido inicial de la salida del cargue”.
+CMA194: “Ninguna remesa del manifiesto suspendido debe tener
+registrado el cumplido inicial de la llegada del descargue”.
+2.3.2 Expedición Manifiesto Nuevo
+▪ El campo donde se puede digitar el manifiesto previamente cumplido
+con suspensión de viaje es: MANNROMANIFIESTOTRANSBORDO (para
+los de WebService). Para los del ambiente portal interactivo del RNDC
+es un campo que se encuentra debajo del consecutivo. La etiqueta
+dice: “Solo en caso de Transbordo / Trasiego. Escriba el consecutivo
+Manifiesto de Carga anterior”.
+
+-- 20 of 21 --
+
+21
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+▪ Si el primer manifiesto no está cumplido con el tipo de cumplido
+de “Suspensión”, no dejará crear el nuevo manifiesto.
+▪ Las remesas que se registren en este segundo manifiesto deben
+estar sin cumplir y haber sido ligadas al primer manifiesto.
+▪ Mensajes de error nuevos:
+MAN037: “El manifiesto de Trasbordo o reemplazo no puede es-
+tar pendiente de cumplir. Debe estar Anulado o Cumplido con
+Suspensión.
+MAN038: “El Manifiesto de Trasbordo debe estar correcta-
+mente Cumplido con Suspensión”
+MAN039: “El Manifiesto de Trasbordo debe estar cumplido con
+Suspensión de Viaje”.
+
+-- 21 of 21 --
+

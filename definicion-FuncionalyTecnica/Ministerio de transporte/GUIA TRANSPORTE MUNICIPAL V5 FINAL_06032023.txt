@@ -1,0 +1,974 @@
+GUÍA PARA EL USUARIO
+REGISTRO DE VIAJE MUNICIPAL
+
+-- 1 of 36 --
+
+2
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+CONTROL DE CAMBIOS
+Versión Elaborado
+por
+Revisado
+por
+Aprobado
+por
+Fecha de
+Aprobación
+Descripción
+de las
+modificaciones
+1 Edna Lorena
+Gutiérrez
+Alexandra
+Hernández
+Magola
+Eugenia
+Molina
+Juan
+Felipe
+Sanabria
+Saetta
+28/09/2022 Elaboración
+inicial del
+documento
+GUÍA PARA EL USUARIO –
+REGISTRO DE VIAJE MUNICIPAL.
+Éste es un registro obligatorio por parte de la empresa de transporte y
+corresponde a la información de operaciones de transporte de carga que se realiza
+en el radio de acción municipal, incluidas sus áreas urbanas y sus áreas rurales
+pertenecientes a la misma cabecera municipal.
+
+-- 2 of 36 --
+
+3
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Tabla de contenido
+1.Tabla de contenido ..................................................................................................................................... 3
+2.Introducción ................................................................................................................................................... 4
+3.Objetivo ............................................................................................................................................................. 6
+4.Generalidades ............................................................................................................................................... 7
+4.1Actores .................................................................................................................................................... 7
+4.2Portal interactivo RNDC ........................................................................................................... 10
+4.2.1Menú y comandos para usar en el Registro Viaje Municipal............................11
+5.Proceso Registro de Viaje Municipal en RNDC .......................................................................13
+Actividad 1: Registrar Remesa Municipal ...............................................................................13
+Actividad 2: Realizar el Registro de Viaje Municipal ...................................................... 16
+Actividad 3: Realizar el Cumplido del Registro Municipal ..........................................21
+Actividad 4: Anular Remesa Municipal .................................................................................. 25
+Actividad 5: Anular Registro Municipal ................................................................................. 26
+Actividad 6: Anular Cumplido Registro Municipal..........................................................27
+Funcionalidad - Reimprimir Registros (Remesa, Registro, Cumplido de Viaje
+Municipal) ................................................................................................................................................ 28
+Funcionalidad Cambio Masivo de Remesas Municipales (Remesa Viaje
+Municipal) ................................................................................................................................................ 29
+6.WEB SERVICE ............................................................................................................................................ 30
+7.CONSULTAR ................................................................................................................................................ 36
+
+-- 3 of 36 --
+
+4
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+1. Introducción
+El Ministerio de Transporte expidió la resolución 20223040045515 del 05 /08/2022,
+por la cual se actualiza el sistema del Registro Nacional de Despachos de Carga -
+RNDC- adoptado e implementado en el artículo 1 de la resolución 377 de 2013 - y
+se reglamentan las condiciones, los criterios técnicos y la metodología para el
+reporte y la captura de la información en cada uno de los registros que hacen
+parte del mismo.
+La mencionada resolución del 2022 establece en su artículo 11 la creación de otros
+registros, a cargo de la empresa de transporte habilitada, el generador de la
+carga y el propietario, poseedor o tenedor del vehículo, según corresponda, entre
+lo que se encuentra el descrito en su numeral 2. “Registro obligatorio Viaje
+Municipal”, expresando que es: “…
+aquel que se registra por parte de la empresa
+de transporte, corresponde a la información de operaciones de transporte de
+carga en el radio de acción municipal, sus áreas urbanas (Viaje Municipal) y sus
+áreas rurales (viaje rural) pertenecientes a la misma cabecera municipal.”.
+De otra parte, es importante señalar que el artículo 7 de la Resolución
+20213040005875 de fecha 15/02/2021, por la cual se reglamentan las condiciones,
+criterios técnicos y la metodología para el sistema de información enturnamiento
+portuario en el módulo INSIDE del RNDC, modificado por el artículo 1 de la
+Resolución 20213040024725 de fecha 15/06/2021, establece en su artículo 7 que
+tratándose de operaciones de transporte de carga por carretera cuyo origen y
+destino coincidan con la sede del autorizado para los que no se requiere
+expedición del manifiesto electrónico de carga, previo a la asignación de turno o
+agendamiento de citas, se deberá verificar a través del sistema de información
+del Registro Nacional de Despachos de Carga – RNDC la existencia del número
+de radicación del Registro de Viaje Urbano, hoy denominado “Viaje Municipal”,
+en la resolución 20223040045515 de 2022, antes mencionada.
+Ahora bien, de conformidad con el artículo 19 de la mencionada resolución
+20223040045515 de 2022, las empresas de Servicio Público de Transporte
+Terrestre Automotor de Carga tendrán un plazo de doce (12) meses, contados a
+partir de la vigencia de la misma, para dar cumplimiento al Registro de Viaje
+
+-- 4 of 36 --
+
+5
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Municipal, con excepción de lo dispuesto en el parágrafo del mismo artículo, que
+de manera específica dispone que : “ …	
+Parágrafo: Tratándose de la verificación
+del Registro de Viaje Urbano, para la asignación de turno o agendamiento de
+citas, de que trata la Resolución 20213040005875 de 2021 del Ministerio de
+Transporte modificada por la Resolución 20213040024725 del 2021, será realizado
+por los autorizados enunciados en el artículo tercero de la mencionada
+Resolución 20213040005875 de 2021, a partir de los 4 meses contados desde la
+vigencia de la presente Resolución. Cumplido este plazo, cesa la opción según la
+cual las empresas de Servicio Público de Transporte Terrestre Automotor de
+Carga registraban el Viaje Urbano como numero de radicación consecutivo
+500000001.”, fecha de vencimiento que se cumple el 05 de diciembre de 2022.
+Para facilitar este proceso, el Ministerio de Transporte elaboró la presente guía
+técnica dirigida a las empresas de transporte, de tal manera que les permita
+conocer el detalle del proceso del registro en el Sistema RNDC, con sus diferentes
+pasos, tales como el registro de la remesa municipal, el registro del viaje
+municipal y el cumplido del registro de viaje municipal y la anulación de estos
+registros, si hay lugar a ello.
+
+-- 5 of 36 --
+
+6
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+2. Objetivo
+El objetivo de esta guía es proporcionar al usuario la información necesaria para
+realizar el proceso del Registro del Viaje Municipal, comprendiendo las
+funcionalidades del sistema de información Registro Nacional Despacho de
+Carga-RNDC.
+El reporte de datos del Registro de Viaje Municipal por parte de las empresas de
+transporte proporcionará información y conocimiento de las condiciones y
+características de los viajes de radio de acción municipal, es decir, aquellos donde
+el lugar pactado para realizar el cargue de la mercancía en origen está ubicado
+en el mismo perímetro municipal o distrital del lugar pactado para el descargue
+de la mercancía objeto de la prestación del servicio público de transporte.
+La información obtenida con este registro constituye un insumo importante para
+la adopción de políticas públicas y la toma de decisiones en todos los niveles.
+
+-- 6 of 36 --
+
+7
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+3. Generalidades
+El Registro Nacional de Despacho de Carga, en adelante RNDC, es un sistema de
+información que permite recibir, validar y transmitir los datos generados en las
+operaciones del Servicio Público de Transporte de Carga por Carretera. De esta
+manera, el Ministerio de Transporte cuenta con un instrumento idóneo para
+contribuir a la transparencia y la formalidad que requiere el país y los actores del
+sector que prestan el Servicio Público de Transporte de Carga por Carretera.
+El RNDC es el medio para registrar los datos de la prestación del servicio público
+de transporte automotor de carga por carretera y, además, evidencia la evolución
+de la información de esta operación. De igual manera, brinda información a las
+entidades del Estado, encabezadas por el Ministerio de Transporte y la
+Superintendencia de Transporte, a fin de que puedan ejercer sus funciones de
+formulación de políticas públicas e inspección, vigilancia y control, así como
+aquellas de promoción y prevención, respectivamente.
+3.1 Actores
+Para efectos del Sistema RNDC, un actor es aquel que aporta e intercambia datos
+con el sistema de información, representa a los participantes dentro del proceso
+de la operación del servicio público de transporte terrestre automotor de carga.
+Un actor puede ser una entidad, una persona o parte de una organización, que
+participa en una transacción o proceso y realiza tareas en la operación. Cabe
+aclarar que un mismo actor puede cumplir diferentes roles en la operación.
+Actores en el RNDC para el Registro de Viaje Municipal
+Actor Definición
+Generador de carga Es el contratante del servicio de
+transporte. Para efectos de diligenciar
+la información requerida en el RNDC,
+es la persona natural o jurídica
+
+-- 7 of 36 --
+
+8
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+obligada a realizar el pago del valor
+del flete a la Empresa de Transporte.
+Puede ser el propietario de la
+mercancía.
+Es el titular del contrato de transporte
+o remitente, de conformidad con los
+artículos 1008 y 1009 del Código de
+Comercio y se obliga por cuenta
+propia o ajena, a entregar las cosas
+para la conducción, en las
+condiciones, lugar y tiempo
+convenidos. Podrá ser el destinatario
+de la carga cuando acepte el contrato
+de transporte.
+El generador de carga, para el
+sistema cuenta con un usuario
+principal y con usuarios
+dependientes. El usuario principal
+tiene la posibilidad de configurar los
+siguientes parámetros en el Sistema
+RNDC: registrar fletes pactados,
+anular fletes, administrar usuarios,
+realizar consultas, administrar
+parámetros. Los usuarios
+dependientes únicamente pueden
+registrar y consultar información.
+La empresa de transporte registrará
+en cada remesa municipal el número
+y tipo de identificación de la persona
+(natural o jurídica) que tiene la
+calidad de generador de carga frente
+al contrato de transporte.
+Empresa de transporte Es aquella persona natural o jurídica
+legalmente constituida y
+debidamente habilitada por el
+Ministerio de Transporte, cuyo objeto
+social es la movilización de cosas de
+un lugar a otro en vehículos
+automotores apropiados y registrados
+
+-- 8 of 36 --
+
+9
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+para dicho servicio, en condiciones de
+libertad de acceso, calidad y
+seguridad de los usuarios.
+Es quien, bajo un contrato de
+transporte se obliga a recibir,
+conducir y entregar las mercancías
+objeto del contrato.
+La empresa de transporte cuenta con
+usuario principal y usuarios
+dependientes.
+El usuario principal tiene las
+funcionalidades de crear usuarios
+dependientes, consultar todos los
+documentos registrados por estos,
+modificar contraseñas de los usuarios
+dependientes y registrar datos así
+como estos usuarios lo hacen.
+También puede designar más de 1
+usuario dependiente.
+Los usuarios dependientes
+únicamente pueden registrar y
+consultar información.
+Titular del Registro de Transporte
+Municipal
+Para efectos de este registro, es el
+propietario, poseedor o tenedor de un
+vehículo de servicio público de carga,
+vinculado a la empresa de transporte
+para la ejecución del traslado de la
+carga en el radio de acción municipal.
+Es a quien la empresa de transporte
+le debe pagar. El conductor del
+vehículo podrá ser autorizado por el
+Titular del registro de transporte
+municipal para firmarlo.
+Es un único usuario que tiene acceso
+al RNDC, allí tiene la posibilidad de
+configurar parámetros de firma
+
+-- 9 of 36 --
+
+10
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+electrónica y delegación de firma
+electrónica del Registro de Viaje
+Municipal al transportador, además
+de las otras funciones operativas
+definidas en el sistema. A este rol
+únicamente se puede acceder a
+través de la aplicación de uso móvil
+del RNDC.
+Conductor Persona que conduce el vehículo de
+carga y que debe cumplir con los
+requerimientos legales para poder
+manejar el tipo de vehículo y para el
+transporte de mercancía según su
+naturaleza, cuando corresponda.
+3.2 Portal interactivo RNDC
+Se puede acceder a la herramienta RNDC a través de del sitio web
+https://rndc.mintransporte.gov.co y desde cualquier explorador disponible
+(Internet Explorer, Firefox, Google Chrome, Safari, etc.). Para ingresar se deberá
+digitar la información de usuario y contraseña previamente asignados por el
+Sistema, de conformidad con lo establecido en la guía:
+Solicitud de usuario y
+contraseña.
+
+-- 10 of 36 --
+
+11
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Y se desplegará la siguiente imagen:
+Figura 1
+Portal interactivo del RNDC
+3.2.1 Menú y comandos para usar en el Registro de Viaje Municipal
+El menú del RNDC en general está diseñado para que las opciones más
+frecuentes estén ubicadas en la izquierda, de arriba hacia abajo, permitiendo así
+su uso más rápido. A continuación, se muestran las opciones y menú para la
+generación de: remesa municipal, registro de Viaje Municipal, cumplir registro de
+Viaje Municipal, anular registros y consultar, en los siguientes comandos:
+
+-- 11 of 36 --
+
+12
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 2
+Menú y Comandos
+
+-- 12 of 36 --
+
+13
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+4. Proceso Registro de Viaje Municipal
+en el Sistema RNDC
+El proceso del Registro de Viaje Municipal para transporte de carga está diseñado
+mediante una serie de pasos como se muestra en la siguiente figura, la cual es
+una representación clara y eficaz para entender el proceso completo y registrar
+la remesa municipal y otros procesos en el Sistema RNDC.
+El proceso inicia cuando el generador de carga tiene la necesidad de movilizar
+una mercancía de un lugar a otro dentro del perímetro municipal. Para mayor
+comprensión a continuación se describen una serie de pasos secuenciales:
+Figura 3
+Proceso de Registro Viaje Municipal en RNDC
+Nota: La empresa de transporte, previo al registro de la Remesa Municipal, debió
+registrar en la opción “herramientas” la información relacionada con “Registrar
+terceros y Conductores” y “Registrar vehículos y remolques”.
+Actividad 1: Registrar Remesa Municipal
+• Se despliega el MENU haciendo clic en REGISTRAR.
+• Se escoge la opción “Remesa Municipal”.
+• Se digita el número de consecutivo de la remesa. Este código puede con-
+tener números y letras, es autónomo de la empresa usuaria del sistema.
+• Se diligencia cada una de las casillas requeridas por el proceso así:
+
+-- 13 of 36 --
+
+14
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+CARACTERÍSTICAS DE LA
+MERCANCÍA
+✓ Tipo de operación
+✓ Tipo de empaque
+TIPO DE OPERACIÓN
+✓ General
+✓ Mercancías Consolidada
+✓ Contenedor Cargado
+✓ Contenedor Vacío
+PRODUCTO
+✓ Naturaleza de la carga
+✓ Descripción corta
+✓ Capítulo
+✓ Partida
+✓ Cantidad cargada
+✓ Unidad de medida
+GENERADOR DE LA
+CARGA/CONTRATANTE
+✓ Tipo de identificación
+✓ Número de identificación
+✓ Sede
+LUGAR DE CARGUE
+✓ Tipo de identificación
+✓ Número de identificación
+✓ Sede
+LUGAR DE DESCARGUE
+✓ Tipo de identificación
+✓ Número de identificación
+✓ Sede
+Los datos del lugar de cargue y del lugar de descargue corresponden a:
+El lugar de cargue: al sitio pactado entre la empresa de transporte y el generador
+contratante, para cargar el vehículo con la mercancía objeto del contrato.
+El lugar de descargue: al sitio pactado entre la empresa de transporte y el
+generador contratante para descargar del vehículo la mercancía objeto del
+contrato.
+****
+El Municipio del lugar de cargue debe coincidir con el municipio del lugar
+de descargue.
+
+-- 14 of 36 --
+
+15
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 4
+Módulo de Remesa Municipal
+• Después de digitar la información en cada una de las casillas se hace clic en
+“GUARDAR REMESA MUNICIPAL”. Si la información cumple con los requisitos
+de calidad del sistema de información RNDC, se emite un número de radicado
+de la remesa municipal, que despliega las siguientes opciones:
+✓ “Registrar otra Remesa Municipal”, para iniciar el proceso de registro
+de otra remesa que se requiere.
+✓ “Imprimir Remesa Municipal”, si la empresa así lo dispone. Se hace clic
+y se genera el pdf de la remesa municipal.
+
+-- 15 of 36 --
+
+16
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 5
+Formato Remesa Municipal
+Actividad 2: Realizar el Registro de Viaje Municipal
+• Para realizar el registro de un Viaje Municipal se abre el MENÚ y se hace
+clic en “REGISTRAR”.
+
+-- 16 of 36 --
+
+17
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+• Se escoge la opción “Registro de Viaje Municipal” y se diligencia la si-
+guiente información:
+o Se digita el número de consecutivo del registro de viaje municipal.
+Este código puede contener números y letras, es autónomo de la
+empresa usuaria del sistema.
+o Se diligencia cada una de las casillas requeridas por el proceso así:
+CARACTERÍSTICAS
+GENERALES DEL VIAJE
+MUNICIPAL
+• Tipo de registro:
+o General o
+o Varios viajes en el
+día.
+• Fecha de expedición
+del Registro.
+• Viajes en el día: Co-
+rresponde al número
+de viajes a realizar en
+el día, cuando el tipo
+de registro es de va-
+rios viajes en el día.
+• Municipio.
+TITULAR
+(Corresponde a los
+datos del propietario
+del vehículo)
+• Tipo de identificación
+• Número de identifi-
+cación
+• Sede (se diligencia
+cuando el titular es
+una persona jurídica
+y tiene varias sedes).
+• Dirección.
+• Teléfono.
+VEHÍCULO
+• Placa automotor.
+• Placa remolque.
+CONDUCTOR
+• Tipo de identificación
+• Número
+VALOR VIAJE
+MUNICIPAL
+• Valor a pagar por el
+viaje.
+• Valor del Anticipo.
+• Responsable del Car-
+gue.
+• Responsable del des-
+cargue.
+REMESAS
+En este paso del
+proceso se deben
+adjuntar las remesas
+que trasportará el
+vehículo, se digita el
+número de la remesa en
+el cuadro “Remesa
+deseada” y el sistema las
+adjunta al hacer clic en
+“Adicionar”.
+Posteriormente, se hace
+la verificación en la lista
+de las remesas
+municipales en el
+
+-- 17 of 36 --
+
+18
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+cuadro que muestra el
+documento.
+Nota: Si la remesa no
+corresponde a este
+registro o no la debe
+llevar el vehículo, se
+digita nuevamente el
+número consecutivo de
+la remesa y se hace clic
+en eliminar.
+Nota 1: las remesas que se adicionan deben ser únicamente de remesas
+municipales y no se permiten las remesas de viajes intermunicipales.
+Nota 2: el municipio del lugar de cargue y el municipio del lugar de descargue
+en la remesa municipal debe coincidir con el municipio del Registro del Viaje
+Municipal.
+Nota 3: en caso de que el Registro de Viaje Municipal sea requerido para solicitar
+cita en un Puerto autorizado, el municipio de viaje municipal debe coincidir con
+el municipio de la terminal portuaria.
+Nota 4: el radicado que entrega el RNDC para un Registro de Viaje Municipal es
+un número mayor a 500000001.
+
+-- 18 of 36 --
+
+19
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 6
+Módulo del Registro de Viaje Municipal
+• Al finalizar el proceso y diligenciar toda la información de manera correcta
+se hace clic en “GUARDAR REGISTRO VIAJE MUNICIPAL”. Si la información
+cumple con los requisitos del Sistema RNDC se emite un número de radi-
+cado o autorización y se visualizan las opciones “IMPRIMIR REGISTRO MU-
+NICIPAL”, que genera el pdf con el cual la empresa puede mostrar su re-
+gistro, así como también se puede acceder a la opción “CREAR OTRO RE-
+GISTRO DE VIAJE MUNICIPAL”.
+
+-- 19 of 36 --
+
+20
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 7
+Formato Registro de Viaje Municipal
+
+-- 20 of 36 --
+
+21
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Actividad 3: Realizar el cumplido del Registro Municipal
+• Una vez entregada la mercancía en el destino (lugar de descargue) se
+debe diligenciar el registro: cumplido del Viaje Municipal, se dirige al
+MENÚ “CUMPLIR” y escoge la opción “Cumplir Registro Municipal”.
+• Se digita el número consecutivo del registro municipal que se va a proce-
+sar y el sistema mostrará la siguiente información para que el usuario la
+verifique y la cual debe coincidir con la información del registro que desea
+cumplir.
+INFORMACIÓN GENERAL DEL REGISTRO MUNICIPAL A CUMPLIR
+✓ Placa del Automotor
+✓ Fecha de Expedición
+✓ Municipio
+✓ Placa Semiremolque
+✓ Tipo Registro Municipal
+✓ Identificación del Conductor
+Los datos que se deben digitar son:
+✓ Tipo cumplido/Cierre
+o Cumplido Normal
+o Suspensión, motivo de la suspensión, consecuencia.
+VALORES PACTADOS DEL VIAJE
+En el siguiente grupo de valores se digitan cada uno de los eventos adicionales
+que hayan ocurrido y que representen un valor a pagar o descontar adicional, del
+valor original pactado.
+Estos valores son los siguientes:
+✓ Valor adicional x cargue.
+✓ Valor adicional x descargue.
+✓ Otros valores adicionales – Motivo.
+✓ Otros Descuento – Motivo.
+
+-- 21 of 36 --
+
+22
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+VALORES FINALES DEL VIAJE
+Esta casilla “Valores finales del viaje” se liquida de manera automática, haciendo
+uso de los valores previamente digitados en el registro valores pactados del viaje
+y valores adicionales. Se dispone de la siguiente opción para digitar valores
+adicionales entregados al conductor para el transporte de las mercancías:
+✓ Valor sobreanticipos: en esta casilla se puede adicionar de manera manual
+un valor adicional que se deba registrar y reliquida el valor final.
+REMESAS MUNICIPALES ASOCIADAS
+Esta casilla muestra la cantidad de remesas municipales que se van a cumplir. En
+este paso se debe verificar que esta información este correcta.
+OBSERVACIONES
+Es la casilla en donde se podrán escribir las anotaciones que debe llevar este
+cumplido, así como novedades o cambios.
+Para finalizar el proceso se hace clic en “GUARDAR CUMPLIDOS DE REGISTRO
+MUNICIPAL”. El sistema realiza la revisión de la información y si esta cumple con
+los requisitos, se genera un numero de radicado o autorización.
+Luego, se visualizan las dos opciones “IMPRIMIR CUMPLIDO DE REGISTRO
+MUNICIPAL “que genera el pdf con el documento y el número de radicado del
+cumplido de registro municipal; y también se podrá acceder a la opción “CREAR
+OTRO CUMPLIDO DE REGISTRO MUNICIPAL”, para iniciar un nuevo proceso de
+cumplir otro registro de Viaje Municipal.
+
+-- 22 of 36 --
+
+23
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 8
+Modulo Cumplir Registro Municipal
+
+-- 23 of 36 --
+
+24
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Figura 9
+Formato Cumplido Registro de Viaje Municipal
+
+-- 24 of 36 --
+
+25
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Actividad 4: Anular Remesa Municipal
+• La anulación de una remesa municipal se realiza desplegando el MENU –
+y se hace clic en REVERSAR, luego se escoge la función ANULAR REMESA
+MUNICIPAL.
+• Se digita el consecutivo de remesa municipal en el sistema, el cual mos-
+trará toda la información de este registro.
+• Se escoge el motivo de la anulación:
+✓ Error de digitación
+✓ Cancelación del servicio
+****Solo puede anularse la remesa municipal que no ha sido asociada a un
+registro de Viaje Municipal.
+****La casilla observaciones es un campo obligatorio.
+Para anular una remesa municipal es requisito reportar el motivo de la anulación.
+• Se hace clic en GUARDAR ANULACION DE REMESA MUNICIPAL, el sistema
+mostrará un número de radicado con el cual este proceso fue aceptado
+por el Sistema RNDC. También se muestra la opción ANULAR OTRA RE-
+MESA MUNICIPAL.
+Figura 10
+Módulo de Anular Remesa Municipal
+
+-- 25 of 36 --
+
+26
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Actividad 5: Anular Registro Municipal
+• La anulación de un Registro Municipal inicia desplegando el MENU – se
+hace clic en REVERSAR, se escoge la función ANULAR REGISTRO MUNICI-
+PAL.
+• Se digita el número del consecutivo del registro municipal que se desea
+anular. El sistema de manera automática visualiza la información del re-
+gistro y muestra en la casilla remesas a liberar, se escoge el motivo de la
+anulación:
+✓ Error de digitación
+✓ Cancelación del servicio
+✓ Cambio en las remesas
+✓ Cambio de tarifa
+✓ Cambio de destino por el generador
+✓ Cambio de Conductor
+✓ Cambio de vehículo
+• Se hace clic en GUARDAR ANULACION REGISTRO MUNICIPAL. El sistema
+mostrará un número de radicado con el cual este proceso fue aceptado
+por el Sistema RNDC. También se muestra la opción ANULAR OTRO RE-
+GISTRO MUNICIPAL.
+Figura 11
+Módulo de Anular Registro de Viaje Municipal
+
+-- 26 of 36 --
+
+27
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Actividad 6: Anular Cumplido Registro Municipal
+• La anulación de un Cumplido de Registro Municipal inicia desplegando
+MENU – REVERSAR, se escoge la función ANULAR CUMPLIDO REGISTRO
+MUNICIPAL y se digita el número del consecutivo del cumplido de registro
+municipal que se desea anular.
+• El sistema de manera automática muestra la información del cumplido
+del registro de viaje municipal que se desea anular, se escoge el motivo de
+la anulación:
+✓ Error de digitación
+✓ Otro
+Figura 12
+Módulo de Anular Cumplido Registro Municipal
+• Se hace clic en GUARDAR ANULACION CUMPLIDO REGISTRO MUNICIPAL,
+el sistema mostrará un número del radicado con el cual este proceso fue
+aceptado por el Sistema RNDC. También se muestra la opción ANULAR
+OTRO CUMPLIDO REGISTRO MUNICIPAL.
+
+-- 27 of 36 --
+
+28
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Funcionalidad - Reimprimir Registros (Remesa, Registro y Cumplido de Viaje
+Municipal)
+El Sistema RNDC tiene la opción de poder reimprimir o ver de nuevo el
+documento en pdf de cada uno de los registros de viaje municipal. Hace clic en
+la opción “Reimprimir registro Municipal”, despliega la lista y escoge la opción:
+• Remesa Municipal
+• Registro de viaje municipal
+• Cumplido de viaje municipal
+Haga clic en el botón “Reimprimir registro municipal” y se descargará el pdf en
+su pc.
+Figura 13
+Módulo Reimprimir Registro Municipal
+
+-- 28 of 36 --
+
+29
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Funcionalidad Cambio Masivo de Remesas Municipales (Remesa Viaje Muni-
+cipal)
+El Sistema RNDC tiene la funcionalidad disponible para hacer el cambio de
+“Generador de carga” si por algún motivo se genera la remesa municipal, pero
+se registra con el NIT de otro generador y se requiere corregir para no tener que
+anular el registro. Para ello, se hace lo siguiente:
+a. Diríjase al módulo “Registrar”.
+b. Escoja la funcionalidad “Cambio Masivo de Remesas Municipales”
+c. Digite la información del “Generador Anterior”.
+d. Agregue la fecha de las remesas a modificar.
+e. Verifique el número de las remesas encontradas a las cuales se les va a
+hacer el cambio de generador.
+f. Digite la información del “Nuevo Generador”.
+g. Verifique la información que muestra el sistema de las remesas.
+h. Haga clic en “Actualizar Remesas Municipales” y el RNDC emitirá un nú-
+mero de radicado. Podrá consultar el cambio mediante la opción “Con-
+sultas” – “Consultas Documentos”- “Remesa Municipal”.
+Figura 14
+Modulo Cambio Masivo Remesa Municipal
+
+-- 29 of 36 --
+
+30
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+5. WEB SERVICE
+El RNDC recibe la información de las Empresas de Transporte con la utilidad de
+WebService y el formato sencillo de XML tanto para el requerimiento como para
+la respuesta.
+Para registrar una “Remesa Municipal” se debe usar el
+Proceso ID: 83
+UN EJEMPLO DE XML
+
+-- 30 of 36 --
+
+31
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>JAIROVESGA@9999</username>
+<password>XXXXX</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>81</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATRANSPORTE>
+<CONSECUTIVOURBANO>VIAJEURB001</CONSECUTIVOURBANO>
+<CODOPERACIONTRANSPORTE>G</CODOPERACIONTRANSPORTE>
+<FECHAEXPEDICION>15/06/2021</FECHAEXPEDICION>
+<CODMUNICIPIO>11001000</CODMUNICIPIO>
+<CODIDTITULAR>C</CODIDTITULAR>
+<NUMIDTITULAR>19258361</NUMIDTITULAR>
+<CODSEDETITULAR>00</CODSEDETITULAR>
+<NUMPLACA>BOD874</NUMPLACA>
+<CODIDCONDUCTOR>C</CODIDCONDUCTOR>
+<NUMIDCONDUCTOR>19258361</NUMIDCONDUCTOR>
+<VALORPACTADO>250000</VALORPACTADO>
+<FACTORICA>5</FACTORICA>
+<VALORANTICIPO>100000</VALORANTICIPO>
+<CODRESPONSABLEPAGOCARGUE>D</CODRESPONSABLEPAGOCARGUE>
+<CODRESPONSABLEPAGODESCARGUE>D</CODRESPONSABLEPAGODESCARGUE>
+<OBSERVACIONES>NINGUNA</OBSERVACIONES>
+<REMESAS procesoid="82">
+<REMESA>
+<REMESAURBANA>REMURB001</REMESAURBANA>
+</REMESA>
+Para registrar un “Registro Transporte Municipal” se debe digitar en la casilla
+Proceso ID: 81
+UN EJEMPLO DEL XML
+
+-- 31 of 36 --
+
+32
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+Para registrar el “Cumplido de Viaje Municipal” se debe digitar en la casilla
+Proceso ID: el número 79
+UN EJEMPLO DEL XML
+
+-- 32 of 36 --
+
+33
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>JAIROVESGA@xxxx</username>
+<password>1234xxxx</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>91</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATR
+ANSPORTE>
+<CONSECUTIVOURBANO>01</CONSECUTIVOURBANO>
+<MOTIVOANULACION>D</MOTIVOANULACION>
+<OBSERVACIONES>Ninguna</OBSERVACIONES>
+</variables>
+</root>
+Para registrar la “Anulación de Registro Transporte Municipal” se debe digitar en
+la casilla
+Proceso ID: 91
+UN EJEMPLO DEL XML
+
+-- 33 of 36 --
+
+34
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>JAIROVESGA@XXXX</username>
+<password>123XXXXX</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>92</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESA
+TRANSPORTE>
+<CONSECUTIVOREMESA>10</CONSECUTIVOREMESA>
+<MOTIVOANULACION>D</MOTIVOANULACION>
+<OBSERVACIONES>NINGUNA</OBSERVACIONES>
+</variables>
+</root>
+Para registrar la “Anulación de Remesa Municipal” se debe digitar en la casilla
+Proceso ID: 92
+UN EJEMPLO DEL XML
+
+-- 34 of 36 --
+
+35
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>JAIROVESGA@xxxx</username>
+<password>xxxxx</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>93</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESAT
+RANSPORTE>
+<CONSECUTIVOURBANO>500000012</CONSECUTIVOURBANO>
+<MOTIVOANULACION>D</MOTIVOANULACION>
+<OBSERVACIONES>pruebas de anulación</OBSERVACIONES>
+</variables>
+</root>
+Para registrar el “Anulación Cumplido de Viaje Municipal” se debe digitar en la
+casilla
+Proceso ID: el número 93
+UN EJEMPLO DEL XML
+
+-- 35 of 36 --
+
+36
+Atención virtual de lunes a viernes desde las 8:30am – 4:30pm, Agendando su cita a través del enlace: https://bit.ly/2UFTeTf
+Línea de Servicio al Ciudadano: (+57) 601 3240800 op. 1 Línea gratuita nacional: 018000 112042
+Radicación de PQRS-WEB: https://mintransporte.powerappsportals.com
+Correo electrónico: servicioalciudadano@mintransporte.gov.co
+6. CONSULTAR
+• Se ingresa al módulo de CONSULTAS, se escoge la opción DOCUMENTOS.
+• En la ventana Consulta de Documentos del Proceso se escoge la opción
+que se desee. En esta opción permite conocer al usuario todos los registros
+que se ha realizado en el Sistema RNDC y son los siguientes:
+✓ Consultar remesas de Viaje Municipal
+✓ Consultar Registro de Viaje Municipal
+✓ Consultar cumplido de remesas de Viaje Municipal
+✓ Anular remesa de Viaje Municipal
+✓ Anular registro Viaje Municipal
+✓ Anular Cumplido de remesa Viaje Municipal
+• En este módulo se puede seleccionar la fecha inicial de radicación y la fe-
+cha final de radicación de los registros en el Sistema RNDC.
+• Para finalizar se hace clic en “Consultar para Auditoria”, el sistema mos-
+trará el listado de los documentos consultados y esta información se
+puede descargar en Excel con el botón exportar.
+y cargo
+
+-- 36 of 36 --
+

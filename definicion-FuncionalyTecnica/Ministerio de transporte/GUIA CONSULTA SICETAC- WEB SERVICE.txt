@@ -1,0 +1,197 @@
+Pag. 1
+GUÍA
+CONSULTA SICETAC PARA WEB
+SERVICE
+SISTEMA RNDC
+
+-- 1 of 6 --
+
+Pag. 2
+CONTROL DE CAMBIOS
+Versión: 1
+CONTROL DE CAMBIOS
+Versión: 1
+Elaborado por:
+Jairo Vesga
+Revisado por:
+Edna Lorena Gutiérrez
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Fecha de Aprobación y Descripción de las modificaciones:
+Fecha Modificación
+11/08/2025 Estructuración documento
+Grupo de Logística
+
+-- 2 of 6 --
+
+Pag. 3
+Guía WEBSERVICE
+Consulta de SICETAC
+AGOSTO 2025
+El xml para consultar valores de referencia del SiceTac desde Enero 1 del 2025 es el siguiente:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>XXXXXXX</username>
+<password>XXXXXXX</password>
+</acceso>
+<solicitud>
+<tipo>6</tipo>
+<procesoid>26</procesoid>
+</solicitud>
+<documento>
+<PERIODO>'202504'</PERIODO>
+<CONFIGURACIONESID>'3S3'</CONFIGURACIONESID>
+</documento>
+</root>
+Las dos etiquetas o Tags: PERIODO y CONFIGURACIONESID son obligatorias, porque de lo
+contrario la cantidad que devolvería esa consulta sería de 1’500,000 registros.
+El PERIODO corresponde a un AñoMes, pero puede ser que en ese periodo no existan registros,
+debido a que los valores de ese mes aplican los mismos del mes anterior.
+CONFIGURACIONESID se refiere a la configuración combinada, y los posibles valores son:
+3S3 Tractocamión tres ejes con semiremolque de tres ejes
+3S2 Tractocamión tres ejes con semiremolque de dos ejes
+2S3 Tractocamión dos ejes con semiremolque de tres ejes
+2S2 Tractocamión dos ejes con semiremolque de dos ejes
+3 Camión tres ejes
+2 Camión dos ejes - PBV mas de 10500 Kg
+2L1 Camión dos ejes - Livianos PBV 9001-10500 Kg
+2L2 Camión dos ejes - Livianos PBV 8001-9000 Kg
+2L3 Camión dos ejes - Livianos PBV 7500-8000 Kg
+V2 Volqueta dos ejes
+V3 Volqueta tres ejes
+V4 Volqueta cuatro ejes
+La respuesta que entrega el webservice del ejemplo anterior es:
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<root>
+<documento>
+<periodo>202504</periodo>
+<fechaingreso>20250402</fechaingreso>
+<origen>63001000</origen>
+
+-- 3 of 6 --
+
+Pag. 4
+<nomorigen>ARMENIA QUINDIO</nomorigen>
+<destino>68081000</destino>
+<nomdestino>BARRANCABERMEJA SANTANDER</nomdestino>
+<condicioncarga>CARGADO</condicioncarga>
+<configuracion>3S3</configuracion>
+<tipocarga>2</tipocarga>
+<nombretipocarga>Carga Refrigerada</nombretipocarga>
+<unidadtransporte>60</unidadtransporte>
+<nombreunidadtransporte>FURGON REFRIGERADO</nombreunidadtransporte>
+<kilometros>505</kilometros>
+<valormoviliza>3873858</valormoviliza>
+<valorhora>101509</valorhora>
+<horasrecorrido>12.07</horasrecorrido>
+<viaestandar>SI</viaestandar>
+<rutasid>1</rutasid>
+<via>Calarca,Cajamarca,Ibague,Alvarado,Venadillo,Lerida,Guayabal,Mariquita,Honda</via>
+</documento>
+<documento>
+<periodo>202504</periodo>
+<fechaingreso>20250402</fechaingreso>
+<origen>63001000</origen>
+<nomorigen>ARMENIA QUINDIO</nomorigen>
+<destino>68081000</destino>
+<nomdestino>BARRANCABERMEJA SANTANDER</nomdestino>
+<condicioncarga>VACIO</condicioncarga>
+<configuracion>3S3</configuracion>
+<tipocarga>2</tipocarga>
+<nombretipocarga>Carga Refrigerada</nombretipocarga>
+<unidadtransporte>60</unidadtransporte>
+<nombreunidadtransporte>FURGON REFRIGERADO</nombreunidadtransporte>
+<kilometros>505</kilometros>
+<valormoviliza>2710159</valormoviliza>
+<valorhora>0</valorhora>
+<horasrecorrido>9.7</horasrecorrido>
+<viaestandar>SI</viaestandar>
+<rutasid>1</rutasid>
+<via>Calarca,Cajamarca,Ibague,Alvarado,Venadillo,Lerida,Guayabal,Mariquita,Honda</via>
+</documento>
+Esa respuesta de la solicitud para un periodo y para una sola configuración, entrega hasta
+177,000 registros aproximadamente.
+El usuario puede incluir otras etiquetas en el grupo <DOCUMENTO> con el fin de que entregue
+menor cantidad de registros.
+Etiquetas posibles son:
+<CONDICIONCARGAID> Un 1 si se desea Cargado o un 2 si se desea Vacío
+<ORIGEN> Código del Municipio Origen
+<DESTINO> Código del Municipio Destino
+A continuación un ejemplo:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>XXXXXX</username>
+<password>XXXXXX</password>
+</acceso>
+
+-- 4 of 6 --
+
+Pag. 5
+<solicitud>
+<tipo>6</tipo>
+<procesoid>26</procesoid>
+</solicitud>
+<documento>
+<PERIODO>'202504'</PERIODO>
+<CONFIGURACIONESID>'V4'</CONFIGURACIONESID>
+<CONDICIONCARGAID>'1'</CONDICIONCARGAID>
+<ORIGEN>'11001000'</ORIGEN>
+<DESTINO>'5001000'</DESTINO>
+</documento>
+</root>
+Y la respuesta es:
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<root>
+<documento>
+<periodo>202504</periodo>
+<fechaingreso>20250402</fechaingreso>
+<origen>11001000</origen>
+<nomorigen>BOGOTA BOGOTA D. C.</nomorigen>
+<destino>5001000</destino>
+<nomdestino>MEDELLIN ANTIOQUIA</nomdestino>
+<condicioncarga>CARGADO</condicioncarga>
+<configuracion>V4</configuracion>
+<tipocarga>5</tipocarga>
+<nombretipocarga>Granel Sólido</nombretipocarga>
+<unidadtransporte>4</unidadtransporte>
+<nombreunidadtransporte>VOLCO</nombreunidadtransporte>
+<kilometros>551</kilometros>
+<valormoviliza>4208647</valormoviliza>
+<valorhora>52890</valorhora>
+<horasrecorrido>14.98</horasrecorrido>
+<viaestandar>NO</viaestandar>
+<rutasid>11368</rutasid>
+<via>RUTA NACIONAL 50 - 45 -62</via>
+</documento>
+<documento>
+<periodo>202504</periodo>
+<fechaingreso>20250402</fechaingreso>
+<origen>11001000</origen>
+<nomorigen>BOGOTA BOGOTA D. C.</nomorigen>
+<destino>5001000</destino>
+<nomdestino>MEDELLIN ANTIOQUIA</nomdestino>
+<condicioncarga>CARGADO</condicioncarga>
+<configuracion>V4</configuracion>
+<tipocarga>5</tipocarga>
+<nombretipocarga>Granel Sólido</nombretipocarga>
+<unidadtransporte>4</unidadtransporte>
+<nombreunidadtransporte>VOLCO</nombreunidadtransporte>
+<kilometros>438</kilometros>
+<valormoviliza>3658033</valormoviliza>
+<valorhora>52890</valorhora>
+<horasrecorrido>13.42</horasrecorrido>
+<viaestandar>SI</viaestandar>
+<rutasid>106</rutasid>
+<via></via>
+</documento>
+
+-- 5 of 6 --
+
+Pag. 6
+</root>
+==========================
+
+-- 6 of 6 --
+

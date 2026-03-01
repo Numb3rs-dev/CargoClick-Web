@@ -131,6 +131,27 @@
       ],
       "activo": true,
       "fecha_ultima_activacion": "2026-02-20T00:00:00Z"
+    },
+    "operacional-implementador": {
+      "nombre": "Operacional Implementador v1.0",
+      "descripcion": "Implementador full-stack del Módulo Operacional de CargoClick. Conoce el dominio RNDC (Ministerio de Transporte), los 9 documentos de prompts/operacional/, y ejecuta la implementación en orden estricto de fases: Schema → Repos → RNDC SOAP → Services → API → Frontend.",
+      "archivo_personalidad": "operacional-implementador.md",
+      "aliases": ["operacional", "implementador-operacional", "rndc", "modulo-operacional", "operacional-expert"],
+      "categoria": "implementacion-full-stack-operacional",
+      "especialidades": [
+        "RNDC Ministerio de Transporte (SOAP, ISO-8859-1)",
+        "Procesoids 3/4/5/6/11/12/32",
+        "Conductores, Vehículos, Remesas, Manifiestos",
+        "NuevoNegocio (Ruta A + Ruta B)",
+        "SeguimientoCliente + EncuestaPostEntrega (pública)",
+        "SyncRndc append-only con contraseña enmascarada",
+        "Clean Architecture Next.js (API → Service → Repository)",
+        "Prisma 5 + PostgreSQL + TypeScript strict",
+        "Clerk auth + rutas públicas de encuesta",
+        "shadcn/ui + react-hook-form + Zod doble validación"
+      ],
+      "activo": true,
+      "fecha_ultima_activacion": "2026-03-01T00:00:00Z"
     }
   },
   "configuracion": {

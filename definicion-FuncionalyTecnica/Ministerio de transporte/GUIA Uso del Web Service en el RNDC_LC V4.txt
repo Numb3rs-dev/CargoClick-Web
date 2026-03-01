@@ -1,0 +1,826 @@
+Pag. 1
+GUÍA
+USO DE WEB SERVICE
+EN EL RNDC
+Grupo de Logística
+
+-- 1 of 35 --
+
+Pag. 2
+CONTROL DE CAMBIOS
+Versión:4
+Elaborado por:
+Jairo Vesga
+Revisado por:
+Edna Lorena Gutiérrez
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Fecha de aprobación
+22/06/2023
+Descripción de las modificaciones
+22/06/2023: Se modifica versión de la guía de Uso del Web Service en el
+RNDC para incluir lo definido en la resolución 20233040045515 de 2022.
+
+-- 2 of 35 --
+
+Pag. 3
+TABLA DE CONTENIDO
+Introducción ................................................................................ 4
+1. Arquitectura del Web Service del RNDC ........................................ 5
+2. Elementos de la arquitectura del XML del Web Service ................... 10
+3. Ambiente de pruebas ................................................................ 14
+4. Usando paso a paso el Web Service ............................................ 14
+5. Consultas de información de los datos grabados previamente en el
+RNDC, usando Web Service .......................................................... 21
+6. Herramienta wstest para aprendizaje del Web Service del RNDC ..... 25
+7. Diccionario de datos ................................................................. 29
+8. Diccionario de Errores ............................................................... 32
+
+-- 3 of 35 --
+
+Pag. 4
+GUÍA USO DE WEB SERVICE EN EL RNDC
+SISTEMA DE INFORMACIÓN REGISTRO NACIONAL DE DESPACHOS DE CARGA- RNDC
+Introducción
+Este documento tiene por objeto establecer los estándares y parámetros
+para guiar a los usuarios en la transmisión y recepción de los datos, en el
+marco de interacción con el RNDC WEB-SERVICE. Busca facilitar el uso
+adecuado de la aplicación y la ejecución del proceso de transporte que se
+está instrumentando a través del RNDC, de una manera fácil y rápida.
+Es importante resaltar que un Web Service o servicio web es un fragmento
+de software que usa un conjunto de protocolos y estándares que sirven
+para intercambiar datos entre aplicaciones. En el caso del RNDC, el Web
+Service busca que las aplicaciones desarrolladas por y para las diferentes
+empresas de transporte puedan intercambiar datos con la aplicación del
+RNDC.
+El RNDC WEB-SERVICE ofrece interoperabilidad entre aplicaciones de
+software creadas con propiedades diferentes e instaladas en plataformas
+diferentes. Además, al usar estándares y protocolos basados en texto
+(cadenas de caracteres) hace que sea más fácil acceder al contenido
+generado y entender claramente su funcionamiento. Por último, el RNDC
+WEB-SERVICE permite que las aplicaciones de todas las empresas de
+transporte puedan interactuar con la plataforma y combinar fácilmente la
+información para que ésta sea centralizada.
+
+-- 4 of 35 --
+
+Pag. 5
+1. Arquitectura del Web Service del RNDC
+El Web Service del RNDC atiende con protocolo SOAP (Simple Object
+Access Protocol) y formato de datos XML. La url que atiende el Web
+Service del RNDC es: http://rndcws.mintransporte.gov.co:8080
+Allí se puede consultar el archivo WSDL (WebService Definition Language)
+http://rndcws.mintransporte.gov.co:8080/ws
+WSDL (Web-Service Definition Language)
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http
+://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" xml
+ns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="htt
+p://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schema
+s.xmlsoap.org/wsdl/mime/" name="IBPMServicesservice" targetNamesp
+ace="http://tempuri.org/">
+<message name="AtenderMensajeRNDC0Request">
+
+-- 5 of 35 --
+
+Pag. 6
+<part name="Request" type="xs:string"/>
+</message>
+<message name="AtenderMensajeRNDC0Response">
+<part name="return" type="xs:string"/>
+</message>
+<message name="AtenderMensajeBPM1Request">
+<part name="Request" type="xs:string"/>
+</message>
+<message name="AtenderMensajeBPM1Response">
+<part name="return" type="xs:string"/>
+</message>
+<portType name="IBPMServices">
+<operation name="AtenderMensajeRNDC">
+<input message="tns:AtenderMensajeRNDC0Request"/>
+<output message="tns:AtenderMensajeRNDC0Response"/>
+</operation>
+<operation name="AtenderMensajeBPM">
+<input message="tns:AtenderMensajeBPM1Request"/>
+<output message="tns:AtenderMensajeBPM1Response"/>
+</operation>
+</portType>
+<binding name="IBPMServicesbinding" type="tns:IBPMServices">
+
+-- 6 of 35 --
+
+Pag. 7
+<binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" t
+ransport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="AtenderMensajeRNDC">
+<operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction
+="urn:BPMServicesIntf-
+IBPMServices#AtenderMensajeRNDC" style="rpc"/>
+<input>
+<body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded"
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespa
+ce="urn:BPMServicesIntf-IBPMServices"/>
+</input>
+<output>
+<body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded"
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespa
+ce="urn:BPMServicesIntf-IBPMServices"/>
+</output>
+</operation>
+<operation name="AtenderMensajeBPM">
+<operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction
+="urn:BPMServicesIntf-
+IBPMServices#AtenderMensajeBPM" style="rpc"/>
+<input>
+<body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded"
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespa
+ce="urn:BPMServicesIntf-IBPMServices"/>
+</input>
+<output>
+
+-- 7 of 35 --
+
+Pag. 8
+<body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded"
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespa
+ce="urn:BPMServicesIntf-IBPMServices"/>
+</output>
+</operation>
+</binding>
+<service name="IBPMServicesservice">
+<port name="IBPMServicesPort" binding="tns:IBPMServicesbinding">
+<address xmlns="http://schemas.xmlsoap.org/wsdl/soap/" location="ht
+tp://rndcws.mintransporte.gov.co:8080/soap/IBPMServices"/>
+</port>
+</service>
+</definitions>
+En el XML con un solo Web Service se pueden realizar todas las
+operaciones necesarias para enviar o actualizar la información, tanto en
+el registro de Terceros y Vehículos como en cada uno de los pasos del
+proceso.
+Es fundamental entender la arquitectura del RNDC WEB-SERVICE ya
+que de esta forma para un desarrollador es posible comprender la
+Adicional a la url que se encuentra en el WSDL, el RNDC
+posee otra url (contingencia) que puede ser usada en caso de
+que la original no funcione y el WSDL puede consultarse en:
+http://rndcws2.mintransporte.gov.co:8080/ws
+
+-- 8 of 35 --
+
+Pag. 9
+estructura, el funcionamiento y la interacción entre las distintas partes de
+la aplicación.
+Para el envío de información al RNDC se usa el método
+“AtenderMensajeRNDC”. Asimismo, el único parámetro que se debe
+enviar en este método es “Request”, el cual es una cadena en formato
+XML. El método envía una respuesta también en formato XML con el
+número de radicación o con el texto del error (o errores).
+El “Request” del método “AtenderMensajeRNDC” del Web Service del
+RNDC debe tener la siguiente estructura en XML:
+A continuación, un ejemplo ilustrativo:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+Seguridad del acceso.
+</acceso>
+<solicitud>
+Qué se desea hacer y en cual proceso.
+</solicitud>
+<variables>
+Detalle de la información que se envía.
+</variables>
+<documento>
+Datos para filtrar el documento del proceso a consultar.
+Elemento principal <root> con cuatro elementos secundarios:
+<acceso>, <solicitud>, <variables> y <documento>.
+
+-- 9 of 35 --
+
+Pag. 10
+</documento>
+</root>
+La respuesta que genera el Web-Service cuando los registros se han
+realizado satisfactoriamente lleva siempre el siguiente formato:
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<root>
+<ingresoid>12</ingresoid>
+</root>
+Aquí el número 12 es el consecutivo de radicado. El consecutivo cambia
+cada vez que se acepta un registro nuevo sin errores.
+2. Elementos de la arquitectura del XML del Web
+Service
+Los siguientes son los elementos de esta arquitectura, los cuales se
+revisarán uno.
+Elemento <acceso>
+El elemento <acceso> contempla dos elementos: <username> y
+<password>.
+<username>uuuuuu</username>, donde uuuuuu es el código del
+usuario de la empresa de transporte, generador de carga o empresa de
+GPS, entre otros actores de la cadena de transporte.
+En el caso de <password>pppppp</password>, pppppp es la palabra
+clave del usuario.
+
+-- 10 of 35 --
+
+Pag. 11
+Elemento <solicitud>
+El elemento <solicitud> contempla dos elementos:
+En <tipo>x</tipo>, x es el tipo de operación:
+1. Registrar Información en procesos y maestros.
+2. Consultar Registros de Maestros.
+3. Consultar Documentos o registros de cualquier proceso.
+4. Consulta para la Policía
+5. Consulta para Generadores de Carga
+6. Consulta de Maestros especiales
+7. Crear un usuario desde la app RNDC transportador
+8. Consulta de un conductor
+9. Consultas de remesas autorizadas para empresas de GPS
+En <procesoid>xx</procesoid>, xx = Número del proceso, éste puede
+ser:
+1: Registrar Información de Carga
+2: Registrar Información de Viaje
+3: Expedir Remesa Terrestre de Carga
+4: Expedir Manifiesto de Carga
+5: Cumplir Remesa Terrestre de Carga
+6: Cumplir Manifiesto de Carga
+7: Anular Información de Carga
+8: Anular Información del Viaje
+9: Anular Remesa Terrestre de Carga
+11: Crear o Actualizar datos de Tercero (Maestro)
+12: Crear o Actualizar datos de Vehículo (Maestro)
+
+-- 11 of 35 --
+
+Pag. 12
+17: Diccionario de datos (Maestro)
+26: SiceTac
+27: Diccionario de errores (Maestro)
+28: Anular Cumplido de Remesa
+29: Anular Cumplido de Manifiesto
+32: Anular Manifiesto de Carga
+34: Tarifas o Fletes de Generador de carga
+38: Corregir Remesa
+39: Control en Carretera
+40: Puesto de control en carretera (Maestro)
+41: Anular flete de Generador
+45: Registrar un Cumplido Inicial de Remesa, puede ser empresa de
+GPS, o empresa de transporte.
+46: Registrar Novedades de Empresa de GPS
+48: Registro Nacional Automotor (Maestro)
+54: Anular Cumplido Inicial de Remesa
+41: Anular Flete del Generador de Carga
+73: Aceptación Electrónica del Manifiesto por parte del Titular del
+Manifiesto o del Conductor.
+75: Delegar Aceptación Electrónica del titular del manifiesto al
+Conductor.
+79: Cumplido de Viaje Municipal
+81: Registro de Viaje Municipal
+83: Remesa Municipal
+86: Factura Electrónica de transporte
+91: Anular Registros de Viaje Municipal
+92: Anular Remesa Municipal
+93: Anular Cumplido de Viaje Municipal
+Elemento <variables>
+
+-- 12 of 35 --
+
+Pag. 13
+El elemento <variables> tiene n subelementos y depende del proceso al
+cual se desea enviar información. Cada elemento tiene como etiqueta el
+nombre de la variable del Diccionario de Datos, al cual se puede acceder
+en el portal del rndc.mintransporte.gov.co en la consulta de maestros.
+Elemento <documento>
+El elemento <documento> solo se necesita cuando se quiere consultar
+información. Si se desea radicar o enviar información hacia los procesos
+del RNDC ese elemento no se usa.
+Un ejemplo más detallado:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>uuuuuu</username>
+<password>pppppp</password>
+</acceso>
+<solicitud>
+<tipo>x</tipo>
+<procesoid>xx</procesoid>
+</solicitud>
+<variables>
+<numnitempresatransporte>xxxxxx</numnitempresatransporte>
+</variables>
+</root>
+
+-- 13 of 35 --
+
+Pag. 14
+3. Ambiente de pruebas
+Las Empresas de Transporte pueden realizar sus pruebas del Web Service
+en otra IP. El WSDL lo pueden accesar en:
+http://plc.mintransporte.gov.co:8080/ws
+Allí podrán accesar a una base de datos copia del ambiente de producción
+de alguna fecha. Los usuarios que la pueden usar son los mismos que
+tienen en el ambiente de producción, con sus respectivos password o
+claves.
+Y si desean, pueden también accesar esa misma base de datos con el
+ayudante wstest: rndc.mintransporte.gov.co/wstest/defaultp.aspx
+En el ambiente de pruebas, el sistema RNDC puede responder con
+números de radicados diferentes al orden de los consecutivos del
+ambiente de producción normal.
+La base de datos de pruebas del RNDC cambia cada año por una nueva
+foto del ambiente de producción.
+4. Usando paso a paso el Web Service
+A continuación, se presentan algunos ejemplos comunes dentro del
+proceso del Web Service y las consideraciones generales para el registro
+de los Archivos Maestros (Terceros y Vehículos) y de cada uno de los
+pasos del proceso. Esto con el fin de ofrecer una mayor claridad acerca
+de los procesos, las herramientas y el lenguaje utilizado.
+Para realizar un proceso rápido y sin interrupciones, se recomienda
+primero realizar el ingreso de la información de conductores, propietarios
+
+-- 14 of 35 --
+
+Pag. 15
+o tenedores de vehículos, empresas, personas naturales y vehículos,
+antes de realizar el proceso de registro de la información en el RNDC.
+Solo se debe efectuar una vez el registro en el sistema. Luego de que éste
+se guarde en la base de datos, solo se necesita enviar el tipo de
+documento y el número de documento (terceros) o placa (vehículos), para
+que la información restante sea heredada automáticamente por el proceso
+que se está realizando.
+Los Terceros y Vehículos se deben registrar únicamente cuando hay
+cambios en alguna información, de lo contrario se estaría almacenando
+una historia de cambios que no se necesita y ocupa mucho recurso de
+computación. El RNDC envía un mensaje de error cuando recibe un xml
+de creación de tercero o vehículo y la información coincide con la que ya
+está guardada en la base de datos.
+Ejemplo para crear un tercero sin licencia de conducción
+En este caso, puede asumir el rol de Titular de Manifiesto, Propietario de
+Vehículo, Tenedor de Vehículo y Generador de Carga. Para el caso, se
+llamará a este tercero Linda Barreto Arévalo, identificada con cédula de
+ciudadanía No. 51.760.125 de Bogotá, quién reside en la Calle 156 # 9 -
+50 en Bogotá, con número de teléfono 6753733.
+XML para el proceso solicitado:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password>CLAVE</password>
+</acceso>
+<solicitud>
+
+-- 15 of 35 --
+
+Pag. 16
+<tipo>1</tipo>
+<procesoid>11</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>900301001</NUMNITEMPRESATRANS
+PORTE>
+<CODTIPOIDTERCERO>C</CODTIPOIDTERCERO>
+<NUMIDTERCERO>51760125</NUMIDTERCERO>
+<NOMIDTERCERO>LINDA</NOMIDTERCERO>
+<PRIMERAPELLIDOIDTERCERO>BARRETO</PRIMERAPELLIDOIDTERCER
+O>
+<SEGUNDOAPELLIDOIDTERCERO>AREVALO</SEGUNDOAPELLIDOIDTE
+RCERO>
+<NUMTELEFONOCONTACTO>6753733</NUMTELEFONOCONTACTO>
+<NOMENCLATURADIRECCION>CALLE 156 # 9-
+50</NOMENCLATURADIRECCION
+<CODMUNICIPIORNDC>11001000</CODMUNICIPIORNDC>
+</variables>
+</root>
+Ejemplo para crear un vehículo
+en este caso se trata de un Tractocamión de 3 ejes, marca Chevrolet,
+línea código 373, con placa WZH111, modelo 2010, que pertenece a Linda
+Barreto Arévalo, quien actúa como propietaria y tenedor; el vehículo
+funciona con ACPM, pesa 8000 kilogramos, el tipo de carrocería es S.R.S,
+la aseguradora es MAPFRE CREDISEGURO S.A. con NIT 8110191907, el
+número de póliza es AT131811151729 y vence el 14 de octubre del 2011.
+XML para el proceso solicitado:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password>CLAVE</password>
+</acceso>
+<solicitud>
+
+-- 16 of 35 --
+
+Pag. 17
+<tipo>1</tipo>
+<procesoid>12</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>900301001</NUMNITEMPRESATRANS
+PORTE>
+<NUMPLACA>WZH111</NUMPLACA>
+<CODCONFIGURACIONUNIDADCARGA>55</CODCONFIGURACIONUNID
+ADCARGA>
+<CODMARCAVEHICULOCARGA>1</CODMARCAVEHICULOCARGA>
+<CODLINEAVEHICULOCARGA>373</CODLINEAVEHICULOCARGA>
+<ANOFABRICACIONVEHICULOCARGA>2010</ANOFABRICACIONVEHICU
+LOCARGA>
+<CODTIPOCOMBUSTIBLE>1</CODTIPOCOMBUSTIBLE>
+<PESOVEHICULOVACIO>8000</PESOVEHICULOVACIO>
+<CODTIPOCARROCERIA>0</CODTIPOCARROCERIA>
+<CODTIPOIDPROPIETARIO>C</CODTIPOIDPROPIETARIO>
+<NUMIDPROPIETARIO>51760125</NUMIDPROPIETARIO>
+<CODTIPOIDTENEDOR>C</CODTIPOIDTENEDOR>
+<NUMIDTENEDOR>51760125</NUMIDTENEDOR>
+<NUMSEGUROSOAT>AT131811151729</NUMSEGUROSOAT>
+<FECHAVENCIMIENTOSOAT>14/10/2011</FECHAVENCIMIENTOSOAT>
+<NUMNITASEGURADORASOAT>8110191907</NUMNITASEGURADORAS
+OAT>
+</variables>
+</root>
+Ejemplo para crear una Remesa Terrestre de Carga, con
+consecutivo 0001
+La cantidad cargada es de 22,000 kilogramos. El tomador de la póliza de
+la carga número 15987462357 es la empresa de transporte. La póliza
+vence el 8 de Agosto del 2012. La Empresa Aseguradora es Royal y Sun
+Alliance Seguros (Colombia) S.A. La fecha del cargue es el 10 de agosto
+de 2011, con hora de llegada al cargue 8:00 a.m. Hora de inicio del cargue
+8:15 a.m. y hora de salida del cargue 10:00am. Este formulario no tendrá
+recomendaciones.
+
+-- 17 of 35 --
+
+Pag. 18
+XML para el proceso solicitado:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password>CLAVE</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>3</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>900301001</NUMNITEMPRESATRANS
+PORTE>
+<CONSECUTIVOREMESA>0001</CONSECUTIVOREMESA>
+<CODOPERACIONTRANSPORTE>1</CODOPERACIONTRANSPORTE>
+<CODNATURALEZACARGA>G</CODNATURALEZACARGA>
+<CANTIDADCARGADA>22000</CANTIDADCARGADA>
+<UNIDADMEDIDACAPACIDAD>1</UNIDADMEDIDACAPACIDAD>
+<CODTIPOEMPAQUE>10</CODTIPOEMPAQUE>
+<PESOCONTENEDORVACIO>2800</PESOCONTENEDORVACIO>
+<MERCANCIAREMESA>000201</MERCANCIAREMESA>
+<DESCRIPCIONCORTAPRODUCTO>TRIGO
+BLANCO</DESCRIPCIONCORTAPRODUCTO>
+<CODTIPOIDREMITENTE>C</CODTIPOIDREMITENTE>
+<NUMIDREMITENTE>4676747</NUMIDREMITENTE>
+<CODSEDEREMITENTE>1</CODSEDEREMITENTE>
+<CODTIPOIDDESTINATARIO>C</CODTIPOIDDESTINATARIO>
+<NUMIDDESTINATARIO>46456</NUMIDDESTINATARIO>
+<CODSEDEDESTINATARIO>2</CODSEDEDESTINATARIO>
+<DUENOPOLIZA>E</DUENOPOLIZA>
+<NUMPOLIZATRANSPORTE>15987462357</NUMPOLIZATRANSPORTE>
+<FECHAVENCIMIENTOPOLIZACARGA>08/08/2012</FECHAVENCIMIENT
+OPOLIZACARGA>
+<COMPANIASEGURO>8600025057</COMPANIASEGURO>
+<FECHAVENCIMIENTOPOLIZACARGA>01/01/2020</FECHAVENCIMIENT
+OPOLIZACARGA>
+<HORASPACTOCARGA>4</HORASPACTOCARGA>
+<MINUTOSPACTOCARGA>10</MINUTOSPACTOCARGA>
+<HORASPACTODESCARGUE>3</HORASPACTODESCARGUE>
+<MINUTOSPACTODESCARGUE>00</MINUTOSPACTODESCARGUE>
+<CODTIPOIDPROPIETARIO>N</CODTIPOIDPROPIETARIO>
+
+-- 18 of 35 --
+
+Pag. 19
+<NUMIDPROPIETARIO>5765765</NUMIDPROPIETARIO>
+<CODSEDEPROPIETARIO>3</CODSEDEPROPIETARIO>
+<PERMISOCARGAEXTRA>566</PERMISOCARGAEXTRA>
+<NUMIDGPS>5675756</NUMIDGPS>
+</variables>
+</root>
+Ejemplo para crear un Manifiesto de Carga, con consecutivo 0001
+El tipo de manifiesto es general, la fecha de expedición es 29 de julio de
+2011, se transportará con origen Cali y destino Bogotá, el titular del
+Manifiesto de Carga es a nombre de Edgar Moreno Silva, identificado con
+cédula de ciudadanía No 79.616.565 de Bogotá. El descuento de ley es
+del 3 por mil, el valor del anticipo es de $1.000.000, el saldo se pagará
+en la ciudad de Bogotá, el 29 de Julio del 2011. El encargado del pago del
+cargue y del descargue es la empresa de transporte. Se recomienda que
+en caso de accidente el conductor se comunique al número celular
+3102569874. A este manifiesto están asociadas dos remesas con los
+consecutivos: 0001 y 0020.
+XML para el proceso solicitado:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>USUARIO1</username>
+<password> USUARIO1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>900301001</NUMNITEMPRESATRANS
+PORTE>
+
+-- 19 of 35 --
+
+Pag. 20
+<NUMMANIFIESTOCARGA>0001</NUMMANIFIESTOCARGA>
+<CODOPERACIONTRANSPORTE>G</CODOPERACIONTRANSPORTE>
+<FECHAEXPEDICIONMANIFIESTO>29/07/2011</FECHAEXPEDICIONMA
+NIFIESTO>
+<CODMUNICIPIOORIGENMANIFIESTO>76001000</CODMUNICIPIOORI
+GENMANIFIESTO>
+<CODMUNICIPIODESTINOMANIFIESTO>11001000</CODMUNICIPIODE
+STINOMANIFIESTO>
+<CODIDTITULARMANIFIESTO>C</CODIDTITULARMANIFIESTO>
+<NUMIDTITULARMANIFIESTO>79616565</NUMIDTITULARMANIFIESTO>
+<NUMPLACA>XXXXXX</NUMPLACA>
+<NUMPLACAREMOLQUE>YYYYYY</NUMPLACAREMOLQUE>
+<CODIDCONDUCTOR>C</CODIDCONDUCTOR>
+<NUMIDCONDUCTOR>4675675</NUMIDCONDUCTOR>
+<CODIDCONDUCTOR2>C</CODIDCONDUCTOR2>
+<NUMIDCONDUCTOR2>96896</NUMIDCONDUCTOR2>
+<VALORFLETEPACTADOVIAJE>3250000</VALORFLETEPACTADOVIAJE>
+<RETENCIONICAMANIFIESTOCARGA>3</RETENCIONICAMANIFIESTOCARGA>
+<VALORANTICIPOMANIFIESTO>1000000</VALORANTICIPOMANIFIESTO>
+<CODMUNICIPIOPAGOSALDO>11001000</CODMUNICIPIOPAGOSALDO>
+<FECHAPAGOSALDOMANIFIESTO>29/07/2011</FECHAPAGOSALDOMANIFIES
+TO>
+<CODRESPONSABLEPAGOCARGUE>E</CODRESPONSABLEPAGOCARGUE>
+<CODRESPONSABLEPAGODESCARGUE>E</CODRESPONSABLEPAGODE
+SCARGUE>
+<ACEPTACIONELECTRONICA>SI</ACEPTACIONELECTRONICA>
+<OBSERVACIONES>Se recomienda que en caso de accidente el
+conductor debe comunicarse al número celular
+3102569871</OBSERVACIONES>
+<REMESASMAN procesoid="43">
+<REMESA>
+<CONSECUTIVOREMESA>0001</ CONSECUTIVOREMESA >
+</REMESA>
+<REMESA>
+< CONSECUTIVOREMESA >0020</ CONSECUTIVOREMESA >
+</REMESA>
+</REMESASMAN>
+</variables>
+</root>
+
+-- 20 of 35 --
+
+Pag. 21
+5. Consultas de información de los datos grabados
+previamente en el RNDC, usando Web Service
+Las empresas de transporte pueden realizar consultas de cada uno de los
+procesos o registros de información enviada previamente. Para ello se usa
+el tipo de solicitud 3 en vez del 1, que es para enviar información.
+A continuación, un ejemplo de la consulta de si un manifiesto ya fue
+firmado. Se usará el Web Service con el tipo: 3 “Consulta” del proceso
+73, el cual corresponde a la firma o aceptación de manifiestos.
+Ejemplo en Wstest del XML, con su respectiva respuesta:
+
+-- 21 of 35 --
+
+Pag. 22
+La fecha y hora entregada en el tag: <fechaing> puede ser almacenada
+en la base de datos del sistema de información de la empresa de
+transporte, para que cuando realicen la generación del pdf del manifiesto
+aparezca en la ubicación de la firma electrónica.
+Consulta de varias aprobaciones electrónicas en un rango de
+tiempo:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+<username>xxxxxxx@xxx</username>
+<password>xxxxxxxxxx</password>
+</acceso>
+<solicitud>
+<tipo>3</tipo>
+<procesoid>73</procesoid>
+</solicitud>
+<variables>
+INGRESOID,FECHAING, INGRESOIDMANIFIESTO,TIPO,
+CODIDCONDUCTOR, NUMIDCONDUCTOR, OBSERVACION
+</variables>
+<documento>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATRAN
+SPORTE>
+</documento>
+<documentorango>
+<iniFECHAING>'2020/01/01'</iniFECHAING>
+<finFECHAING>'2020/03/31'</finFECHAING>
+</documentorango>
+</root>
+Nos entrega la respuesta:
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<root>
+<documento>
+<ingresoid>15</ingresoid>
+<fechaing>28/03/2020 9:44:52 a. m.</fechaing>
+<ingresoidmanifiesto>48043700</ingresoidmanifiesto>
+
+-- 22 of 35 --
+
+Pag. 23
+<tipo>C</tipo>
+<codidconductor>C</codidconductor>
+<numidconductor>80387330</numidconductor>
+<observacion>Celular 3103040052</observacion>
+</documento>
+<documento>
+<ingresoid>8</ingresoid>
+<fechaing>22/03/2020 10:26:49 p. m.</fechaing>
+<ingresoidmanifiesto>47492363</ingresoidmanifiesto>
+<tipo>T</tipo>
+<codidconductor></codidconductor>
+<numidconductor></numidconductor>
+<observacion>okk</observacion>
+</documento>
+<documento>
+<ingresoid>18</ingresoid>
+<fechaing>30/03/2020 8:37:08 a. m.</fechaing>
+<ingresoidmanifiesto>48088076</ingresoidmanifiesto>
+<tipo>C</tipo>
+<codidconductor>C</codidconductor>
+<numidconductor>79171592</numidconductor>
+<observacion>Celular 3134850261</observacion>
+</documento>
+<documento>
+<ingresoid>12</ingresoid>
+<fechaing>27/03/2020 12:31:07 p. m.</fechaing>
+<ingresoidmanifiesto>48045984</ingresoidmanifiesto>
+<tipo>C</tipo>
+<codidconductor>C</codidconductor>
+<numidconductor>79170327</numidconductor>
+<observacion>Celular 3112119340</observacion>
+</documento>
+</root>
+Si se desean consultar los manifiestos pendientes de Aceptación
+Electrónica, el XML sería:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+
+-- 23 of 35 --
+
+Pag. 24
+<username>xxxxxx@xxxx</username>
+<password>xxxxxxxxxxx</password>
+</acceso>
+<solicitud>
+<tipo>3</tipo>
+<procesoid>4</procesoid>
+</solicitud>
+<variables>
+INGRESOID,FECHAING,NUMMANIFIESTOCARGA,NUMIDTITULARMANIFIE
+STO,NUMPLACA,NUMIDCONDUCTOR
+</variables>
+<documento>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATRAN
+SPORTE>
+<ACEPTACIONELECTRONICA>NULL</ACEPTACIONELECTRONICA>
+</documento>
+<documentorango>
+<iniFECHAING>'2020/04/01'</iniFECHAING>
+<finFECHAING>'2020/05/01'</finFECHAING>
+</documentorango>
+</root>
+La respuesta de los manifiestos pendientes de aceptación
+electrónica sería:
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<root>
+<documento>
+<ingresoid>48017065</ingresoid>
+<fechaing>05/04/2020 10:09:58 a. m.</fechaing>
+<nummanifiestocarga>M321</nummanifiestocarga>
+<numidtitularmanifiesto>19258361</numidtitularmanifiesto>
+<numplaca>BOD874</numplaca>
+<numidconductor>19258361</numidconductor>
+</documento>
+</root>
+
+-- 24 of 35 --
+
+Pag. 25
+6. Herramienta wstest para aprendizaje del
+Web Service del RNDC
+El RNDC posee un programa que permite comprender bien la forma en
+que se debe escribir el XML.
+Si el usuario empieza con el aprendizaje de la elaboración de los xml con
+esta herramienta, podrá realizar las pruebas de cada una de las
+operaciones a los procesos y comprender bien la forma en que se debe
+escribir el XML.
+URL: https://rndc.mintransporte.gov.co/wstest/default.aspx
+o
+URL: https://rndc.mintransporte.gov.co/wstest/default2.aspx
+La diferencia de las dos URL está en que la primera envía el Web Service
+al servidor: rndcws.mintransporte.gov.co:8080/….
+Mientras la segunda envía el Web Service al servidor secundario:
+rndcws2.mintransporte.gov.co:8080/….
+Existe una tercera URL
+https://rndc.mintransporte.gov.co/wstest/default2.aspx la cual envía el
+Web Service al servidor del ambiente de pruebas:
+plc.mintransporte.gov.co:8080/….
+La herramienta podrá buscarse desde distintos navegadores y al
+ingresar a la misma, se muestra una pantalla compuesta por 4
+partes:
+1. Lista de procesos del RNDC.
+2. Diccionario de datos del proceso seleccionado
+
+-- 25 of 35 --
+
+Pag. 26
+3. XML que se genera automáticamente a partir del diccionario de
+datos y además es editable
+4. XML de respuesta del RNDC cuando recibe el Web Service
+Como se observa en la figura, lo primero que se debe digitar es el usuario
+y la clave.
+En la parte superior está la lista de los procesos que reciben Web Service
+en el RNDC: Número y nombre.
+El número del proceso se debe digitar al lado izquierdo, en donde dice:
+Proceso ID.
+Después de digitar el número del proceso, se hace clic en el botón
+“Validar” e inmediatamente se visualizará el diccionario de datos de ese
+proceso.
+
+-- 26 of 35 --
+
+Pag. 27
+Por ejemplo, si se selecciona el 3-Remesa, se visualizará lo siguiente:
+
+-- 27 of 35 --
+
+Pag. 28
+El usuario debe escribir los datos de cada variable del diccionario en los
+cajones de la derecha de cada uno.
+Al terminar de diligenciar los datos, se debe hacer clic en el botón:
+Generar XML para grabar y el sistema mostrará a la derecha el XML que
+se debe enviar por el Web Service.
+Se pueden dejar campos en blanco y el sistema no los incluirá en el XML.
+
+-- 28 of 35 --
+
+Pag. 29
+Luego se debe hacer clic en el botón: Consumir Servicio.
+El programa enviará el Web Service al servidor del RNDC y se visualizará
+la respuesta en un cuadro inferior, así como mensajes de error o el
+radicado de aceptación del registro.
+7. Diccionario de datos
+Los usuarios pueden consultar el diccionario de datos para cada uno de
+los procesos. La consulta se debe hacer con la funcionalidad de
+CONSULTAR que se encuentra en el menú del portal
+rndc.mintransporte.gov.co
+
+-- 29 of 35 --
+
+Pag. 30
+Allí se debe seleccionar: Consultar Maestros
+Luego se debe seleccionar de la lista desplegable de los maestros el
+Diccionario de Datos
+
+-- 30 of 35 --
+
+Pag. 31
+Se visualizará la pantalla que permite hacer la consulta de un solo
+mensaje de error. Asimismo, al dejar la casilla en blanco se visualizará
+una mayor información sobre distintos errores.
+
+-- 31 of 35 --
+
+Pag. 32
+El usuario puede filtrar los mensajes escribiendo el dato en la línea en
+blanco que está ubicada al principio de cada columna. Ver, por ejemplo,
+la columna Proceso ID, en la casilla en mención se agregó el número 8.
+El usuario puede hacer clic en el botón: Transmitir Archivo Plano y puede
+obtener la información en un archivo en formato Excel en su PC.
+8. Diccionario de Errores
+Los usuarios pueden consultar el diccionario de errores para cada uno de
+los procesos. La consulta se debe hacer con la funcionalidad de
+CONSULTAR del menú del portal rndc.mintransporte.gov.co
+Allí se deberá seleccionar: Consultar Maestros.
+
+-- 32 of 35 --
+
+Pag. 33
+El paso a seguir será seleccionar de la lista desplegable de los maestros
+el Diccionario de Errores
+
+-- 33 of 35 --
+
+Pag. 34
+Se visualizará en la pantalla la opción que permite hacer la consulta del
+mensaje de error. Asimismo, al dejar la casilla en blanco se visualizará
+una mayor información sobre distintos errores.
+
+-- 34 of 35 --
+
+Pag. 35
+El usuario puede filtrar los mensajes escribiendo el dato en la línea en
+blanco que tiene al principio cada columna. Ver ejemplo en la columna
+PROCESO ID, en primera fila se agregó el número 93.
+Finalmente, el usuario podrá hacer clic en el botón: Transmitir Archivo
+Plano y obtener la información en un archivo en formato Excel en su PC.
+
+-- 35 of 35 --
+

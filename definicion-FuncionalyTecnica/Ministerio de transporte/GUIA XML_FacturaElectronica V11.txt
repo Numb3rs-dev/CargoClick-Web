@@ -1,0 +1,1535 @@
+Pag. 1
+Grupo de Logística
+GUÍA
+FACTURA ELECTRÓNICA
+DE TRANSPORTE
+
+-- 1 of 72 --
+
+Pag. 2
+CONTROL DE CAMBIOS
+Versión: 11
+Elaborado por:
+Jairo Vesga
+Revisado por:
+Edna Lorena Gutiérrez
+Aprobado por:
+Juan Felipe Sanabria Saetta
+Fecha de Aprobación y Descripción de las modificaciones:
+Fecha Modificación
+31/05/2022 Se modifica versión del manual, para incluir la
+trasmisión a través de web service de la facturación
+electrónica.
+06/06/2023 Se incluye el procedimiento de generar factura
+electrónica con referencia a una factura original, en
+reemplazo de Notas Debito.
+17/07/2023 Se incluye la validación de adquirentes
+(<RECEIVERPARTY>) extranjeros, es decir con
+identificación extranjera
+
+-- 2 of 72 --
+
+Pag. 3
+14/08/2023 Se incluye la facturación electrónica por mandato
+18/09/2023 Se incluye la funcionalidad de reportar varias remesas
+en una sola línea de la factura (<INVOICELINE>)
+19/09/2023 Se incluye la facturación de Consorcio o Unión
+Temporal.
+27/12/2023 Se incluye el segundo método para reportar la
+facturación electrónica por mandato
+12/02/2024 Se incluye el diseño del archivo plano con la relación
+de las remesas de las facturas.
+16/03/2024 Se explica la factura de transporte tipo 12 que cobra
+el servicio con pago anticipado. Además se aclara el
+tema de la factura de referencia en la nota crédito.
+
+-- 3 of 72 --
+
+Pag. 4
+TABLA DE CONTENIDO
+INTRODUCCIÓN ............................................................................................................................ 6
+1. XML de la factura electrónica-etiqueta ............................................................. 11
+2. XML de respuesta de la DIAN .................................................................................... 12
+3. Identificaciones del facturador y del adquirente en la factura
+electrónica........................................................................................................................................ 13
+4. Número de la factura y fecha de expedición. ............................................ 14
+5. La factura electrónica de transporte de carga y el numeral
+13.1.5.1 del anexo técnico 1.8 de la DIAN ......................................................... 15
+6. Marca correspondiente para cada línea de factura: servicio de
+remesa radicada en el RNDC u otro servicio.....................................................16
+7. La remesa en la factura ..................................................................................................17
+8. Usuario Facturación Electrónica ............................................................................. 21
+9. Cargue del xml de la factura electrónica en el RNDC ......................... 23
+10. Nota Crédito.......................................................................................................................29
+11. Tipo de Documento de Nota Crédito .......................................................... 30
+12. Concepto de corrección de la Nota Crédito ........................................... 31
+13. Factura de Venta referenciada en la Nota Crédito ........................ 33
+14. Línea de la Nota Crédito ........................................................................................ 34
+15. Información de la remesa afectada por .................................................. 35
+la Nota Crédito ............................................................................................................................. 35
+16. Ejemplo de un mensaje de Nota Crédito................................................ 38
+17. Nota Débito ....................................................................................................................... 40
+18. Concepto de corrección de la Nota Débito ........................................... 42
+19. Factura electrónica por Mandato .................................................................. 43
+20. Factura electrónica por Pago Anticipado............................................... 58
+21. Factura electrónica de un Consorcio o Unión Temporal .......... 60
+22. Varias remesas en la misma línea de la factura ...............................61
+23. Anulación de factura electrónica ...................................................................63
+
+-- 4 of 72 --
+
+Pag. 5
+24. Cargue de la factura electrónica de transporte por
+webservice...................................................................................................................................... 64
+25. Generador de carga ................................................................................................... 67
+Preguntas frecuentes ............................................................................................................ 72
+
+-- 5 of 72 --
+
+Pag. 6
+GUÍA FACTURA ELECTRÓNICA DE TRANSPORTE
+SISTEMA DE INFORMACIÓN REGISTRO NACIONAL DE DESPACHOS DE CARGA- RNDC
+INTRODUCCIÓN
+Este documento permitirá conocer el proceso a seguir para el reporte o
+cargue de la factura electrónica de transporte en el sistema Registro
+Nacional de Despachos de Carga-RNDC.
+Asimismo, es importante aclarar que los generadores de carga no deben
+adelantar ningún trámite ante el Ministerio de Transporte u otra entidad
+para obtener algún permiso, habilitación o autorización para operar como
+tal.
+Una persona (natural o jurídica) adquiere la calidad de generador de carga
+al participar en una operación de transporte de carga por carretera y al
+reunirse los elementos enunciados en la definición de que trata el artículo
+2.2.1.7.4. del Decreto 1079 de 2015, el cual establece:
+“Artículo 2.2.1.7.4. Definiciones. Para la interpretación y
+aplicación del presente Capítulo, se tendrán en cuenta las
+siguientes definiciones:
+(…)
+• Generador de la Carga: es el remitente, o el destinatario
+de la carga cuando acepte el contrato en los términos de
+los artículos 1008 y 1009 del Código de Comercio.
+(…)”
+
+-- 6 of 72 --
+
+Pag. 7
+En consonancia con el artículo 2.2.1.7.4 del Decreto 1079 de 2015, el
+artículo 1008 del Código de Comercio establece:
+“ARTÍCULO 1008. <PARTES>. <Artículo subrogado por el
+artículo 18 del Decreto extraordinario 01 de enero 2 de
+1990. El nuevo texto es el siguiente:> Se tendrá como
+partes en el contrato de transporte de cosas el
+transportador y el remitente. Hará parte el destinatario
+cuando acepte el respectivo contrato.
+Por transportador se entenderá la persona que se obliga a
+recibir, conducir y entregar las cosas objeto del contrato;
+por remitente, la que se obliga por cuenta propia o ajena,
+a entregar las cosas para la conducción, en las condiciones,
+lugar y tiempo convenidos; y por destinatario aquella a
+quien se envían las cosas.
+Una misma persona podrá ser a un mismo tiempo remitente
+y destinatario.
+El transporte bajo carta de porte, póliza o conocimiento de
+embarque, se regirá por las normas especiales”.
+Para estos efectos, las empresas de transporte al efectuar los registros
+para la expedición del manifiesto electrónico de carga a través del sistema
+de información Registro Nacional de Despachos de Carga – RDNC-, de
+manera puntual al registrar los datos de las remesas terrestres de carga
+indican quien tiene la calidad de generador de carga frente al traslado de
+la mercancía o carga objeto de cada remesa terrestre de carga.
+Según corresponda, de acuerdo con la normativa vigente, las empresas
+de transporte deben entregar factura o documento equivalente por todas
+las operaciones que realicen, teniendo en cuenta la calidad de
+
+-- 7 of 72 --
+
+Pag. 8
+comerciantes o la prestación de servicios inherentes a esta actividad que
+desarrollan, independientemente de su calidad de contribuyentes o no
+contribuyentes de los impuestos administrados por la Unidad
+Administrativa Especial Dirección de Impuestos y Aduanas Nacionales -
+DIAN, con excepción de los sujetos no obligados a expedir factura de
+venta y/o documento equivalente previstos en los artículos 616-2, inciso
+4 del parágrafo 2 y parágrafo 3 del artículo 437 y 512-13 del Estatuto
+Tributario y en el artículo 1.6.1.4.3., del Decreto 1625 de 2016, Único
+Reglamentario en Materia Tributaria.
+Por su parte, el artículo 2.2.1.7.4. del Decreto 1079 de 2015
+establece:
+“Artículo 2.2.1.7.4. Definiciones. Para la interpretación y
+aplicación del presente Capítulo, se tendrán en cuenta las
+siguientes definiciones:
+(…)
+• Flete: Es el precio establecido entre el remitente o
+destinatario de la carga con la empresa de transporte por
+concepto del contrato de transporte terrestre automotor de
+carga.
+(…)”
+De acuerdo con lo anterior, las empresas de transporte que se encuentren
+obligadas a emitir factura electrónica por concepto de la prestación del
+servicio objeto del contrato de transporte deben relacionar el Valor del
+flete que debe pagar su cliente (generador de carga).
+Por su parte, el xml de la factura electrónica de transporte de carga debe
+cumplir lo estipulado en el Anexo Técnico de Factura Electrónica de Venta
+versión 1.8., de la Resolución 012 de 09 de febrero de 2021 de la DIAN
+
+-- 8 of 72 --
+
+Pag. 9
+“Por la cual se modifican y adicionan unos artículos a la Resolución 000042
+de 05 de mayo de 2020 y se establecen otras disposiciones”.
+Es oportuno señalar que, los generadores de carga tienen la obligación de
+reportar el Valor del Flete en el sistema de información Registro Nacional
+de Despachos de Carga – RNDC-, de conformidad con los artículos
+2.2.1.7.6.2. y 2.2.1.7.6.9. del Decreto 1079 de 2015, los cuales
+establecen:
+“Artículo 2.2.1.7.6.2. Relaciones económicas. Las
+relaciones económicas entre el Generador de la Carga y la
+empresa de transporte público, y de esta con los
+propietarios, poseedores o tenedores de vehículos, serán
+establecidas por las partes, sin que en ningún caso se
+puedan efectuar pagos por debajo de los Costos Eficientes
+de Operación.
+El sistema de información SICE-TAC, del Ministerio de
+Transporte, será el parámetro de referencia.
+El generador de carga y la empresa de transporte, tendrán
+la obligación de informar al Ministerio de Transporte, a
+través del Registro Nacional de Despachos de Carga RNDC,
+el Valor a Pagar y el Flete, así como las demás condiciones
+establecidas entre el propietario, poseedor o tenedor de un
+vehículo de servicio público de carga, de conformidad con
+la metodología y los requerimientos que para tal efecto
+establezca el Ministerio de Transporte.
+El generador de la carga, la empresa de transporte y los
+
+-- 9 of 72 --
+
+Pag. 10
+propietarios, poseedores o tenedores de un vehículo de
+servicio público de carga, deberán dar cumplimiento a lo
+dispuesto en el presente artículo”.
+“Artículo 2.2.1.7.6.9. Obligaciones del Generador de la
+Carga y de la empresa de transporte. En virtud del presente
+Capítulo, el Generador de la Carga y la empresa de
+transporte tendrán las siguientes obligaciones:
+(…)
+2. Generador de la carga:
+(…)
+e) Diligenciar el Registro Nacional de Despachos de Carga
+(RNDC) con información exacta y fidedigna de acuerdo con
+los parámetros establecidos por el Ministerio de Transporte.
+Para el efecto deberá reportar como mínimo la siguiente
+información:
+1. La identificación del generador de la carga que la reporta.
+2. Nombre de la empresa de transporte de carga que
+prestará el servicio público de transporte de carga.
+3. Descripción de la mercancía transportada, indicando su
+peso o volumen y procedencia, según el caso.
+4. Lugar y dirección de origen y destino de las mercancías.
+5. El valor del flete en letras y números.
+6. Consignar en el contrato de transporte el valor del flete,
+teniendo en cuenta las previsiones contempladas en la
+presente Sección.”
+
+-- 10 of 72 --
+
+Pag. 11
+Teniendo en cuenta la obligación que tienen los generadores de carga, el
+sistema de información Registro Nacional de Despachos de Carga – RNDC-
+cuenta con la funcionalidad que permite cargar a las empresas de
+transporte de carga el XML de la factura electrónica de transporte de carga
+por carretera, de manera que, el sistema de información funcionalmente
+está ajustado para extraer de allí el dato del Valor del Flete de cada una
+de las remesas terrestres de carga que ha sido generada a nombre de
+determinado generador de carga por las empresas de transporte.
+El generador de carga puede revisar los xml cargados por la empresa de
+transporte y proceder a APROBAR la factura. Esa aprobación deja en firma
+los valores de fletes extraídos del xml. Si el generador de carga no
+aprueba la factura, el RNDC no tomará el valor de los fletes del xml y el
+generador puede enviar el valor del flete de cada remesa con otra
+funcionalidad distinta que provee el RNDC.
+Es pertinente señalar que, el XML de la factura electrónica de transporte
+de carga por carretera que recibe el sistema de información Registro
+Nacional de Despachos de Carga -RNDC- corresponde al xml de la
+respuesta que entrega la U.A.E. Dirección de Impuestos y Aduanas
+Nacionales -DIAN-, después de validar la factura que le envía la empresa
+de transporte.
+1. XML de la factura electrónica-etiqueta
+El xml de la factura electrónica inicia con la etiqueta:
+<AttachedDocument>
+
+-- 11 of 72 --
+
+Pag. 12
+<?xml version="1.0" encoding="UTF-8"?>
+<AttachedDocument xmlns=……..>
+…………
+………..
+</AttachedDocument>
+2. XML de respuesta de la DIAN
+Dentro de ese xml de respuesta de la DIAN, debe estar embebido
+el xml que envió la empresa de transporte a la DIAN, el cual inicia
+con la etiqueta: <Invoice>
+<?xml version="1.0" encoding="UTF-8"?>
+<AttachedDocument xmlns=……..>
+……..
+<cac:Attachment>
+<cac:ExternalReference>
+<cbc:MimeCode>text/xml</cbc:MimeCode>
+<cbc:EncodingCode>UTF-8</cbc:EncodingCode>
+<cbc:Description><![CDATA[<?xml version="1.0"
+encoding="UTF-8"?>
+<Invoice xmlns=…………>
+……..
+</Invoice>
+]]></cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+………..
+
+-- 12 of 72 --
+
+Pag. 13
+</AttachedDocument>
+3. Identificaciones del facturador y del
+adquirente en la factura electrónica.
+La DIAN incluye en el xml de la respuesta de la factura electrónica,
+la información de la identificación del facturador o quien expide la
+factura y la identificación del adquirente o cliente o quien recibe la
+factura. Las etiquetas de grupo usadas por la DIAN son:
+SENDERPARTY y RECEIVERPARTY respectivamente.
+<?xml version="1.0" encoding="UTF-8"?>
+<AttachedDocument xmlns=……..>
+……..
+<cac:SenderParty>
+<cac:PartyTaxScheme>
+<cbc:CompanyId schemeId=”z”
+schemeName=”31”>xxxxxxxxx</cbc:CompanyId>
+<cac:PartyTaxScheme>
+</cac:SenderParty>
+<cac:ReceiverParty>
+<cac:PartyTaxScheme>
+<cbc:CompanyId schemeId=”z”
+schemeName=”31”>yyyyyyyyy</cbc:CompanyId>
+<cac:PartyTaxScheme>
+</cac:ReceiverParty>
+………
+</AttachedDocument>
+
+-- 13 of 72 --
+
+Pag. 14
+Las identificaciones de las etiquetas CompanyId deben estar sin el
+digito de verificación. El dígito de verificación será extraído del
+atributo schemeId cuando el atributo schemeName = 31 o sea NIT.
+La identificación xxxxxxxxx + el dígito de verificación z, debe
+coincidir con la identificación de la empresa de transporte habilitada
+por el Ministerio de Transporte y que el RNDC buscará en la base
+de datos como la empresa que expidió las remesas.
+La identificación yyyyyyyyy + el dígito de verificación z, debe
+coincidir con la identificación del contratante o generador que
+contrató a la empresa de transporte habilitada por el Ministerio de
+Transporte para prestar el servicio de transporte. Es la identificación
+de quien le va a pagar a la empresa de transporte el servicio. El
+RNDC buscará en la base de datos la información en cada remesa
+como Generador o Contratante o Propietario de la mercancía.
+Los posibles valores del schemeName según la DIAN son:
+4. Número de la factura y fecha de expedición.
+
+-- 14 of 72 --
+
+Pag. 15
+La DIAN incluye en el xml de la respuesta de la factura electrónica,
+la información del consecutivo de la factura y la fecha de expedición.
+Las etiquetas usadas por la DIAN son:
+<ParentDocumentID> para el consecutivo de la factura
+<IssueDate> para la fecha de expedición de la factura
+<IssueTime> para la hora en la fecha de expedición
+Se vería así:
+<?xml version="1.0" encoding="UTF-8"?>
+<AttachedDocument xmlns=……..>
+……..
+<cbc:ParentDocumentID>xxxxxxxxx</cbc:ParentDocumentID>
+<cbc:IssueDate>2023-07-18</cbc:IssueDate>
+<cbc:IssueTime>12:00:45-05:00</cbc:IssueTime>
+………
+</AttachedDocument>
+5. La factura electrónica de transporte de
+carga y el numeral 13.1.5.1 del anexo
+técnico 1.8 de la DIAN
+La factura electrónica de transporte de carga tiene definido un tipo
+especial, de acuerdo con el numeral 13.1.5.1 del anexo técnico 1.8
+de la DIAN.
+13.1.5. Tipos de operación
+13.1.5.1. Documento Invoice – Factura electrónica
+Código Valor
+10 Estándar *
+09 AIU
+11 Mandatos
+12 Transporte**
+13 Cambiario***
+
+-- 15 of 72 --
+
+Pag. 16
+Xml ejemplo en donde se debe incluir el número 12: Transporte
+<Invoice xmlns=…………>
+<ext:UBLExtensions>
+………….
+</ext:UBLExtensions>
+<cbc:CustomizationID>12</cbc:CustomizationID>
+……..
+</Invoice>
+6. Marca correspondiente para cada línea de
+factura: servicio de remesa radicada en el
+RNDC u otro servicio
+Cada línea de la factura debe llevar la marca correspondiente a si
+la información de esa línea corresponde a un servicio de remesa
+radicada en el RNDC o a otro servicio, por ejemplo: servicio de
+escolta, servicio de montacarga. En el anexo técnico 1.8 de la DIAN,
+numeral 13.5, hace referencia a este dato.
+13.5. Códigos para los sectores
+13.5.1. Registro Transporte: @schemeID
+Lista de valores para la identificación a nivel de línea si el Bien o Servicio “B/S” reportado
+corresponde o no a una línea registrada en el RNDC.
+Código Significado
+
+-- 16 of 72 --
+
+Pag. 17
+En el siguiente ejemplo se muestran 4 líneas en la factura de las
+cuales una no tiene que ver con remesas del RNDC.
+En el xml se vería así:
+<Invoice xmlns=…………>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">02</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="0">03</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">04</cbc:ID>
+……….
+</cac:InvoiceLine>
+………
+</Invoice>
+7. La remesa en la factura
+
+-- 17 of 72 --
+
+Pag. 18
+Como parte de la información que debe llevar una línea de la
+factura, están los datos del RNDC, es decir la remesa.
+Cada remesa registrada en el RNDC debe estar asociada a una línea
+de la factura. Hay tres datos obligatorios que se deben especificar
+por cada remesa:
+01 Radicado de la Remesa
+02 Consecutivo de la Remesa
+03 Valor del servicio del transporte de la Remesa + Cantidad
+transportada
+Lo anterior es mencionado en el anexo técnico de la DIAN 1.8
+numeral 13.5.2
+En el xml se debe especificar dentro del grupo: <Item>, el cual va en
+cada <InvoiceLine>. Cada uno de los tres datos debe abrir un grupo
+llamado: <cac:AdditionalItemProperty>
+Un ejemplo del xml sería:
+13.5.2. Remesa Transporte: cbc:Name
+Lista de valores correspondientes al Sector Transporte de carga para informar los conceptos indicados
+en la columna “Descripción”.
+Código Descripción
+01 Número de Radicación de la Remesa entregado por el RNDC
+02 Nro. del consecutivo de la Remesa según codificación interna de cada empresa de
+transporte. (Alfanumérico)
+03 Valor del flete a cobrar por el servicio de transporte de la remesa.
+Los valores corresponden a las operaciones efectuadas por el sector transporte de carga.
+
+-- 18 of 72 --
+
+Pag. 19
+<Invoice xmlns=…………>
+<cbc:CustomizationID>12</cbc:CustomizationID>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+<cbc:LineExtensionAmount>45000</cbc:LineExtensionAmount>
+……….
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>37796060</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>REM12345</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>45000</cbc:Value>
+<cbc:ValueQuantity unitCode="KGM">2500</cbc:ValueQuantity>
+</cac:AdditionalItemProperty>
+</cac:Item>
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="0">02</cbc:ID>
+……….
+</cac:InvoiceLine>
+………
+</Invoice>
+Se puede notar que solo en el tercer dato se incluye la etiqueta:
+<cbc:ValueQuantity>, en el cual se digita la cantidad transportada y
+su unidad de medida:
+
+-- 19 of 72 --
+
+Pag. 20
+KGM Kilogramos
+GLL Galones
+El <Value> del tercer campo es el valor del flete y debe ser un entero
+(sin decimales).
+Si un usuario desea registrar un valor adicional al valor del flete de
+una remesa que previamente ya había sido reportada una factura
+electrónica a esa misma remesa, lo puede hacer, pero informando cual
+fue la factura original. Este dato se debe reportar en el cuarto
+AdditionalProperty de la nueva factura:
+<Invoice xmlns=…………>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+<cbc:LineExtensionAmount>3450</cbc:LineExtensionAmount>
+……….
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>37796060</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>REM12345</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>3450</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>04</cbc:Name>
+<cbc:Value>FAC12345</cbc:Value>
+</cac:AdditionalItemProperty>
+</cac:Item>
+</cac:InvoiceLine>
+
+-- 20 of 72 --
+
+Pag. 21
+………
+</Invoice>
+8. Usuario Facturación Electrónica
+La empresa de transporte deberá crear un usuario especial tipo
+dependiente llamado: Usuario Facturación Electrónica.
+Desde el usuario principal se debe crear el nuevo Usuario en el menú
+de Herramientas: Administrar Usuarios y luego click en el botón: Crear
+un nuevo Usuario.
+
+-- 21 of 72 --
+
+Pag. 22
+Así se visualiza la pantalla si el usuario entra a la opción en el menú
+de Herramientas: Administrar Usuarios
+Ese usuario tipo 3: Usuario Facturación Electrónica, es el que puede
+cargar y consultar las facturas electrónicas. Los otros usuarios
+dependientes no pueden hacerlo.
+De igual forma un usuario de tipo facturación electrónica no puede expedir
+manifiestos.
+
+-- 22 of 72 --
+
+Pag. 23
+9. Cargue del xml de la factura electrónica en
+el RNDC
+La empresa de transporte deberá cargar el xml de la factura electrónica
+en el RNDC.
+Con el usuario y clave, selecciona en el menú del portal interactivo del
+RNDC la opción de: Factura Electrónica, en el menú Cumplir.
+
+-- 23 of 72 --
+
+Pag. 24
+Luego, seleccione el archivo donde se encuentra el xml, el cual
+corresponde al que devuelve la DIAN en señal de aceptación de la
+factura. Puede tener varios .xml dentro de un archivo empaquetado
+.zip. En ese caso selecciona el archivo .zip y luego debe hacer click en
+el botón “Leer XML”.
+
+-- 24 of 72 --
+
+Pag. 25
+El RNDC procede a realizar las verificaciones de que el xml si
+corresponde a la misma empresa de transporte como facturador.
+Muestra datos de la factura en la primera grilla.
+Si lo seleccionado es un archivo .zip, el sistema muestra una línea por
+cada archivo .xml encontrado dentro del .zip, sus datos, y el mensaje
+de error más importante de cada factura.
+
+-- 25 of 72 --
+
+Pag. 26
+Si el NIT del facturador no coincide no se puede guardar la factura. Si
+hay errores o faltan datos para poder hacer la labor de verificación, el
+sistema va mostrando los mensajes de error a la derecha de cada línea
+de la grilla.
+
+-- 26 of 72 --
+
+Pag. 27
+Si el sistema encuentra remesas dentro del xml, la información de
+cada remesa la muestra en la grilla inferior.
+
+-- 27 of 72 --
+
+Pag. 28
+Las dos grillas tienen su paginador, que permite ver todo lo leído y
+también tiene la primera línea en blanco para hacer filtros, siendo
+estas ayudas importantes para revisar la información antes de grabar.
+Si el facturador está bien, el botón: “Guardar Factura” se activa y el
+usuario puede tomar la decisión de guardar el xml. Sin embargo, antes
+debe mirar cuántas remesas del RNDC encontró, se debe tener en
+cuenta que si las remesas del RNDC son 0, no se debe cargar el xml.
+
+-- 28 of 72 --
+
+Pag. 29
+El botón: “Guardar factura” guarda en la base de datos el archivo xml
+completo y los valores de los fletes cobrados en cada remesa que
+encuentre en cada factura.
+Ejemplo:
+10. Nota Crédito
+La empresa de transporte puede registrar el documento llamado
+Nota Crédito, el cual sirve para:
+- Anular una factura y todas sus remesas.
+- Anular el valor del flete de una sola remesa.
+- Otorgar un descuento en valor a una remesa.
+- Otorgar un descuento a una remesa por cantidad menor
+entregada.
+
+-- 29 of 72 --
+
+Pag. 30
+El documento también es un ATTACHDOCUMENT:
+<AttachedDocument xmlns=
+………..
+</AttachedDocument>
+Sin embargo, encontrará que se cambia la etiqueta <Invoice ……
+por <CreditNote …..
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+……
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+11. Tipo de Documento de Nota Crédito
+Según el anexo técnico 1.8 de la DIAN hay que diferenciar el tipo
+de Nota Crédito:
+
+-- 30 of 72 --
+
+Pag. 31
+Lo anterior quiere decir que a diferencia de una Factura Electrónica,
+la cual lleva el valor de 12, en este caso lleva el valor de 20 o 22.
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+……
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+12. Concepto de corrección de la Nota
+Crédito
+En el anexo técnico 1.8 de la DIAN menciona en la tabla 13.2.4 los
+5 posibles conceptos de corrección.
+13.1.5.2. Documento CreditNote – Nota Crédito Código Valor
+20 Nota Crédito que referencia una factura electrónica.
+22 Nota Crédito sin referencia a facturas*.
+El valor por default es 20, lo anterior quiere decir que si no se informa un valor, se
+asume que es 20 y aplicarán el conjunto de validaciones correspondiente. (*)
+Preferible para uso de notas rebate o de descuentos condicionados. Notas tipo 22
+no tienen validación de rechazo. Objeto de control posterior.
+
+-- 31 of 72 --
+
+Pag. 32
+Los anteriores, se aplicarán de la siguiente forma:
+Código 1: es obligatorio el campo cantidad de cada remesa.
+Código 2: no son necesarias las líneas de las Notas Crédito. El
+sistema borrará los fletes de todas las remesas de la Factura de
+Venta original o referenciada.
+Código 3, 4, y 5: solo se tomará el valor de la remesa a descontar,
+no se tendrá en cuenta la cantidad.
+Si la empresa de transporte no utiliza el grupo
+<DiscrepancyResponse> el RNDC asumirá el Código 1.
+El código del concepto de corrección deberá ser mencionado en el
+grupo:
+<cac: DiscrepancyResponse>
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+…….
+<cbc:ResponseCode>1</cbc:ResponseCode>
+…….
+
+-- 32 of 72 --
+
+Pag. 33
+</cac:DiscrepancyResponse>
+……
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+13. Factura de Venta referenciada en la
+Nota Crédito
+Cada nota crédito deberá hacer referencia a una factura
+previamente radicada. Ese dato será validado por el RNDC, de
+forma tal que, si la factura electrónica de transporte no ha sido
+radicada previamente en el RNDC, no se tendrá en cuenta la nota
+crédito.
+Una nota crédito solo puede hacer referencia a una sola factura
+electrónica de transporte. Para este tema se debe usar el grupo:
+<cac:BillingReference> y en la etiqueta <cbc:ID> se debe escribir
+el número de la factura electrónica previa.
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+<cbc:ResponseCode>xx</cbc:ResponseCode>
+</cac:DiscrepancyResponse>
+<cac:BillingReference xmlns….>
+
+-- 33 of 72 --
+
+Pag. 34
+<cac:InvoiceDocumentReference>
+<cbc:ID>xxxxxxxxx</cbc:ID>
+……….
+</cac:InvoiceDocumentReference>
+</cac:BillingReference>
+……
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+14. Línea de la Nota Crédito
+Cada línea de la nota crédito puede llevar la marca que se coloca
+en cada línea de la factura electrónica de transporte, para hacer
+referencia a una remesa reportada en el RNDC. Es decir, lleva la
+propiedad: schemeID="1". Pero si la DIAN no la recibe se puede
+omitir.
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+<cbc:ResponseCode>xx</cbc:ResponseCode>
+</cac:DiscrepancyResponse>
+<cac:BillingReference xmlns….>
+<cac:InvoiceDocumentReference>
+<cbc:ID>xxxxxxxxx</cbc:ID>
+</cac:InvoiceDocumentReference>
+
+-- 34 of 72 --
+
+Pag. 35
+</cac:BillingReference>
+……
+<cac:CreditNoteLine xmlns:cac=…..>
+<cbc:ID schemeID="1">1</cbc:ID>
+……
+</cac:CreditNoteLine>
+<cac:CreditNoteLine xmlns:cac=…..>
+<cbc:ID>2</cbc:ID>
+……
+</cac:CreditNoteLine>
+…….
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+15. Información de la remesa afectada por
+la Nota Crédito
+Cada remesa afectada por la nota crédito debe pertenecer a una
+línea de la nota crédito que tenga la propiedad schemeId = 1,
+porque pueden existir líneas de la nota crédito que afecten los
+valores de los servicios adicionales, tales como un montacarga. Sin
+embargo el RNDC también revisa las líneas de las notas crédito que
+no lleven el schemeid. Los datos de la remesa deben escribirse en
+el grupo <ítem> y en las mismas tres etiquetas
+<AdditionalItemProperty> que fueron descritas en el numeral 5 de
+este documento.
+Los valores que se escriban en el AdditionalItemProperty = 03 son
+los que el RNDC usará en la resta en cada remesa. Es decir, se resta
+el valor y la cantidad.
+
+-- 35 of 72 --
+
+Pag. 36
+Si la nota crédito corresponde a un mayor valor cobrado y la
+cantidad entregada o transportada es la misma, entonces en los
+kilogramos se debe escribir el valor de 0.
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+<cbc:ResponseCode>xx</cbc:ResponseCode>
+</cac:DiscrepancyResponse>
+<cac:BillingReference xmlns….>
+<cac:InvoiceDocumentReference>
+<cbc:ID>xxxxxxxxx</cbc:ID>
+</cac:InvoiceDocumentReference>
+</cac:BillingReference>
+……
+<cac:CreditNoteLine xmlns:cac=…..>
+<cbc:ID schemeId=”1”>1</cbc:ID>
+……
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>xxxxxxxx</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>xxxxxxxx</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>xxxxxx</cbc:Value>
+<cbc:ValueQuantity unitcode="KGM">xxxxx</cbc:ValueQuantity>
+
+-- 36 of 72 --
+
+Pag. 37
+</cac:AdditionalItemProperty>
+</cac:Item>
+……..
+</cac:CreditNoteLine>
+<cac:CreditNoteLine xmlns:cac=…..>
+<cbc:ID>2</cbc:ID>
+……
+</cac:CreditNoteLine>
+…….
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+Si el xml de la nota crédito no lleva en <Creditnote> el
+<cac:BillingReference xmlns….>
+el usuario debe incluir otro <additionalitemproperty> para reportar
+la factura de referencia o factura original: <name>04</name>
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<CreditNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>20</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+<cbc:ResponseCode>xx</cbc:ResponseCode>
+</cac:DiscrepancyResponse>
+……
+<cac:CreditNoteLine xmlns:cac=…..>
+<cbc:ID schemeId=”1”>1</cbc:ID>
+……
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>xxxxxxxx</cbc:Value>
+</cac:AdditionalItemProperty>
+
+-- 37 of 72 --
+
+Pag. 38
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>xxxxxxxx</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>xxxxxx</cbc:Value>
+<cbc:ValueQuantity unitcode="KGM">xxxxx</cbc:ValueQuantity>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>04</cbc:Name>
+<cbc:Value>xxxxxx</cbc:Value>
+</cac:AdditionalItemProperty>
+</cac:Item>
+……..
+</cac:CreditNoteLine>
+…….
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+Si no se reporta la factura de referencia o factura original por
+ninguna de las dos formas, el Sistema RNDC mostrará error para la
+Nota Crédito.
+16. Ejemplo de un mensaje de Nota Crédito
+A continuación se presenta un ejemplo del Programa de Facturación
+Electrónica cargando una nota crédito que hace referencia a una
+factura electrónica original que no ha sido cargada en el RNDC.
+
+-- 38 of 72 --
+
+Pag. 39
+Más a la derecha:
+
+-- 39 of 72 --
+
+Pag. 40
+A continuación se presenta un ejemplo de cómo el generador puede
+consultar y aprobar las facturas de las empresas de transporte. Figuran
+facturas y notas crédito:
+17. Nota Débito
+La empresa de transporte puede registrar el documento llamado Nota
+Debito.
+El documento también es un ATTACHDOCUMENT
+<AttachedDocument xmlns=
+………..
+</AttachedDocument>
+pero ahora se cambia la etiqueta <Invoice …… por <DebitNote …..
+<cac:Attachment>
+
+-- 40 of 72 --
+
+Pag. 41
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0"
+encoding="utf-8"?>
+<DebitNote xmlns=…..
+……
+</DebitNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+Lo anterior quiere decir que a diferencia de una factura electrónica, la cual
+lleva el valor de 12, en este caso lleva el valor de 30 o 32.
+<cac:Attachment>
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0"
+encoding="utf-8"?>
+<DebitNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+
+-- 41 of 72 --
+
+Pag. 42
+<cbc:CustomizationID>30</cbc:CustomizationID>
+……
+</CreditNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+18. Concepto de corrección de la Nota
+Débito
+El anexo técnico 1.8 de la DIAN menciona en la tabla 13.2.5 los cuatro
+posibles conceptos de corrección.
+Si la empresa de transporte no utiliza el grupo
+<DiscrepancyResponse> el RNDC asumirá el Código 1.
+El código del concepto de corrección deberá ser mencionado en el
+grupo:
+<cac: DiscrepancyResponse>
+<cac:Attachment>
+
+-- 42 of 72 --
+
+Pag. 43
+<cac:ExternalReference>
+…….
+<cbc:Description><![CDATA[<?xml version="1.0"
+encoding="utf-8"?>
+<DebitNote xmlns=…..
+<ext:UBLExtensions>
+</ext:UBLExtensions>
+<cbc:CustomizationID>30</cbc:CustomizationID>
+<cac:DiscrepancyResponse>
+…….
+<cbc:ResponseCode>3</cbc:ResponseCode>
+…….
+</cac:DiscrepancyResponse>
+……
+</DebitNote>]]>
+</cbc:Description>
+</cac:ExternalReference>
+</cac:Attachment>
+19. Factura electrónica por Mandato
+Las empresa de transporte (llamado: Mandante) puede realizar contratos
+de Mandato con un tercero el cual se llama: Mandatario, y en el que
+autoriza el Mandante al Mandatario para que expida las facturas
+electrónicas de transporte por los servicios de transporte prestados.
+Las facturas de mandato deben tener un 11 en el tipo de operación.
+<Invoice xmlns=…………>
+<ext:UBLExtensions>
+………….
+</ext:UBLExtensions>
+
+-- 43 of 72 --
+
+Pag. 44
+<cbc:CustomizationID>11</cbc:CustomizationID>
+……..
+</Invoice>
+La factura expedida por el mandatario debe especificar en las líneas
+(INVOICELINE) el valor del flete o valor del servicio de transporte
+prestado. No puede incluir en ese valor el valor de intermediación que le
+cobra el Mandatario al Mandante.
+La obligación de facturar en operaciones de mandato exige que, en la
+factura electrónica de venta, se deba diferenciar los ingresos del
+mandante de los ingresos del mandatario.
+La DIAN expidió una aclaración de la factura electrónica
+
+-- 44 of 72 --
+
+Pag. 45
+
+-- 45 of 72 --
+
+Pag. 46
+
+-- 46 of 72 --
+
+Pag. 47
+
+-- 47 of 72 --
+
+Pag. 48
+
+-- 48 of 72 --
+
+Pag. 49
+
+-- 49 of 72 --
+
+Pag. 50
+
+-- 50 of 72 --
+
+Pag. 51
+
+-- 51 of 72 --
+
+Pag. 52
+
+-- 52 of 72 --
+
+Pag. 53
+En al anexo técnico 1.8 de la DIAN, dice que para una factura electrónica
+por Mandato hay dos posibles valores en la propiedad: schemeId de la
+etiqueta ID del grupo INVOICELINE
+
+-- 53 of 72 --
+
+Pag. 54
+De tal forma que el RNDC solo tomará en cuenta las líneas que tengan un
+“1” en la propiedad “schemeid”
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns=…………>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">02</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="0">03</cbc:ID>
+……….
+</cac:InvoiceLine>
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">04</cbc:ID>
+……….
+</cac:InvoiceLine>
+………
+
+-- 54 of 72 --
+
+Pag. 55
+</Invoice>
+La identificación del mandante debe reportarse en el grupo ITEM
+<Invoice xmlns=…………>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+<cbc:LineExtensionAmount>$$$$$$</cbc:LineExtensionAmount>
+……..
+<cac:Item>
+<cac:InformationContentProviderParty>
+<cac:PowerOfAttorney>
+<cac:AgentParty>
+<cac:PartyIdentification>
+<cbc:ID schemeid="x" schemename="x">xxxx</cbc:ID>
+</cac:PartyIdentification>
+</cac:AgentParty>
+</cac:PowerOfAttorney>
+</cac:InformationContentProvider>
+<AdditionalItemProperty>
+………………
+</cac:Item>
+……….
+</cac:InvoiceLine>
+</Invoice>
+La empresa de transporte debe generar un archivo plano adicional con los
+datos de las remesas y después de cargar el xml de la factura electrónica
+tipo 11, debe cargar archivo plano llamado “Relación de remesas
+factura electrónica”.
+Lo anterior aplica también para las empresas de transporte que expiden
+facturas electrónicas normales, tipo 10, por el portal interactivo de la
+DIAN. Deben generar el xml de la factura tipo 10, “Attacheddocument”,
+en el portal de la DIAN, cargarlo en el RNDC y luego cargar el archivo
+plano: “Relación de remesas factura electrónica”.
+
+-- 55 of 72 --
+
+Pag. 56
+El mandatario puede cargar la factura tipo 11 en el RNDC si así lo pacta
+con la empresa de transporte, recibiendo un usuario creado previamente
+por la empresa de transporte. En ese caso, la empresa de transporte
+puede cargar la Relación de remesas de factura por Mandato, después,
+pero antes de los 5 días hábiles que dice el decreto 1079 de 2015. Eso se
+puede hacer, porque en el archivo plano de la relación de remesas se
+debe especificar el número de la factura electrónica tipo 11 (por
+Mandato).
+El archivo plano con la Relación de las Remesas lo pueden generar desde
+un Excel o cualquier otra herramienta, pero deben usar el caracter:
+TABULADOR, para separar los campos o columnas.
+En la primera línea del archivo plano deben ir los títulos o nombres de los
+campos. No deben usar tildes en esos nombres, deben escribirlos tal y
+cual como se relacionan a continuación.
+El diseño del archivo plano: Relación de remesas factura electrónica:
+TIPOIDFACTURADOR : Valores posibles C, N (Cedula, Nit)
+NUMIDFACTURADOR : Número de Identificación del Facturador, puede
+ser el mandatario para el caso de facturas por Mandato.
+TIPOIDADQUIRENTE : Valores posibles C, N, X (Cedula, Nit, Ident.
+Extranjera)
+NUMIDADQUIRENTE : Número de Identificación del Adquirente o Cliente
+que pagó por el servicio de transporte.
+NUMEROFACTURA : Número de la factura reportado a la DIAN, puede
+incluir letras. Debe coincidir con la etiqueta ID del INVOICE en el xml
+enviado a la DIAN.
+CUFE : Cadena encriptada de varios datos de la factura electrónica. Debe
+coincidir con el valor reportado en la etiqueta UUID del INVOICE en el xml
+enviado a la DIAN.
+TIPODOCUMENTO : Tipo de documento del sistema de facturación
+electrónica de la DIAN. Puede ser: FV, NC, ND (Factura de Venta, Nota
+Crédito, Nota Debito).
+TIPOOPERACION : Si es una Factura de Venta debe ir un 10, 11, 12.
+Factura Electrónica normal, Factura Electrónica de Transporte, Factura
+por Mandato.
+
+-- 56 of 72 --
+
+Pag. 57
+RADICADOREMESA : Consecutivo entregado por el RNDC cuando la
+empresa de transporte expide la Remesa.
+CONSECUTIVOREMESA : Consecutivo de la secuencia interna que maneja
+y controla la empresa de transporte en sus remesas.
+VALORFLETE : Valor cobrado al adquirente por parte de la empresa de
+transporte.
+CANTIDADENTREGADA : Cantidad de la mercancía transportada y
+entregada al sitio de descargue. Debe coincidir con el cumplido de
+remesa.
+UNIDADMEDIDA : Unidad de medida de la cantidad entregada. Puede ser
+K o G (Kilogramo, Galón).
+El archivo plano puede contener máximo 1000 registros o 200 Kbytes.
+Una factura puede hacer referencia a varias remesas. Una remesa puede
+estar referenciada por varias facturas, en ese caso, el sistema sumará los
+valores de los fletes de cada registro, para calcular el valor final del flete
+de la remesa.
+En el mismo archivo plano se pueden reportar facturas de diferentes
+clientes o adquirentes. También se pueden reportar facturas de diferentes
+mandatarios para el caso de las de mandato.
+En el mismo archivo plano se pueden referenciar facturas de venta tipo
+10 (Portal interactivo de la DIAN) o facturas de venta tipo 11 (Por
+Mandato) o facturas de venta tipo 12 de Valores de servicios de
+Transporte con Pago Anticipado.
+Desde el portal del rndc se activa la opción: Remesas Factura por Mandato
+Y se despliega el formulario que pide el archivo plano. Se debe dar click
+al botón Leer Archivo Plano y si todo se encuentra bien, se puede dar click
+al botón Guardar Remesas.
+
+-- 57 of 72 --
+
+Pag. 58
+20. Factura electrónica por Pago Anticipado
+Las empresas de transporte pueden expedir facturas de transporte tipo
+12, anticipadas a la prestación del servicio de transporte.
+Es decir, las remesas de transporte se expiden en el RNDC después de
+la factura electrónica.
+Estas facturas solo deben tener una sola línea, es decir una sola etiqueta
+INVOICELINE en el archivo xml.
+Además, esa línea del xml debe llevar la propiedad SCHEMEID = 1 que
+significa que la línea corresponde a un servicio de transporte.
+En el ADDITIONALITEMPROPERTY 01 la empresa de transporte debe
+reportar un 0 en el radicado de la remesa, que significa que enviará la
+relación de las remesas, después, mediante el archivo plano
+denominado RELACION de REMESAS, y cuyo diseño es igual al explicado
+en las facturas por mandato tipo 11.
+<Invoice xmlns=…………>
+………
+
+-- 58 of 72 --
+
+Pag. 59
+<cbc:CustomizationID>12</cbc:CustomizationID>
+……….
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+<cbc:LineExtensionAmount>$$$$$$</cbc:LineExtensionAmount>
+……….
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>0</cbc:Value>
+</cac:AdditionalItemProperty>
+</cac:Item>
+</cac:InvoiceLine>
+………
+</Invoice>
+Cuando se envíe el archivo plano con la Relación de las Remesas, el
+sistema rechazará el cargue del archivo, si la sumatoria de los fletes de
+las remesas (VALORFLETE) no coincide con el valor de la factura tipo 12
+reportada previamente, en la etiqueta LINEEXTENSIONAMOUNT.
+En ésta Relación de Remesas de facturas por Pago Anticipado no se
+permite mezclar varias facturas en el mismo archivo.
+TIPOID
+FACTU
+RADO
+R
+NUMIDFACT
+URADOR
+TIPOID
+ADQUI
+RENTE
+NUMIDADQ
+UIRENTE
+NUMERO
+FACTURA
+CUFE TIPOD
+OCUM
+ENTO
+TIPOO
+PERA
+CION
+RADICAD
+OREMESA
+CONSE
+CUTIVO
+REMES
+A
+VALORF
+LETE
+CANTID
+ADENTR
+EGADA
+UNID
+ADME
+DIDA
+N 123456789
+0
+N 123456789
+0
+XXXXXX
+XX
+XXXX
+XXXX
+FV 12 1234567
+8
+XXXXXX
+XXXX
+123123 121212 K
+N 123456789
+0
+N 123456789
+0
+XXXXXX
+XX
+XXXX
+XXXX
+FV 12 1234567
+8
+XXXXXX
+XXXX
+123123 121212 K
+Todas las remesas reportadas en el archivo plano Relación de Remesas,
+deben haber sido expedidas en el RNDC y realizado el proceso de cargue
+en el vehículo, en fechas posteriores a la fecha de expedición de la
+factura ante la DIAN.
+
+-- 59 of 72 --
+
+Pag. 60
+21. Factura electrónica de un Consorcio o
+Unión Temporal
+Las empresas de transporte pueden pertenecer a un Consorcio o a una
+Unión Temporal. En ese caso la factura tipo 12 de Transporte la puede
+expedir la misma empresa de transporte o el Consorcio. En cualquier caso
+se deben especificar los porcentajes de participación de cada uno de los
+integrantes del Consorcio.
+La identificación de la empresa de transporte debe hacer parte de la
+lista de nits con su distribución de porcentajes del consorcio.
+<Invoice xmlns=…………>
+………
+<cac:AccountingSupplierParty>
+<cac:Party>
+<cbc:CompanyId schemeId="x" schemename="x">xxxxx</cbc:CompanyId>
+<cac:PartyLegalEntity>
+<cac:ShareHolderParty>
+<cbc:PartecipationPercent>xxx</cbc:PartecipationPercent>
+<cac:Party>
+<cac:PartyTaxScheme>
+<cbc:CompanyId schemeId="x" schemename="x">xxx</cbc:CompanyId>
+</cac:PartyTaxScheme>
+</cac:Party>
+</cac:ShareHolderParty>
+<cac:ShareHolderParty>
+<cbc:PartecipationPercent>yyy</cbc:PartecipationPercent>
+<cac:Party>
+<cac:PartyTaxScheme>
+<cbc:CompanyId schemeId="y" schemename="y">yyyy</cbc:CompanyId>
+</cac:PartyTaxScheme>
+</cac:Party>
+</cac:ShareHolderParty>
+</cac:PartyLegalEntity>
+</cac:Party>
+</cac:AccountingSupplierParty>
+
+-- 60 of 72 --
+
+Pag. 61
+<cac:AccountingCustomerParty>
+……….
+</cac:AccountingCustomerParty>
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+……….
+<cac:Item>
+……..
+</cac:Item>
+</cac:InvoiceLine>
+………
+</Invoice>
+22. Varias remesas en la misma línea de la
+factura
+Las empresas de transporte, podrán reportar varias remesas en la misma
+línea de la factura, es decir en el mismo <INVOICELINE>, para ello, deben
+repetir los 3 datos obligatorios de cada remesa que se reportan con los
+<ADDITIONALITEMPROPERTY>.
+Debido a que los grupos de los ADDITIONALITEMPROPERTY deben llevar
+el 01, 02, 03 y 04 (opcional), las empresas deben tener cuidado en
+reportar en el xml, en estricto orden, los 3 datos de cada remesa. No
+deben reportar primero todos los 01 de todas las remesas y luego todos
+los 02 y así con los 03, eso es un error.
+Ejemplo de cómo se debe hacer si se desean reportar 3 remesas en la
+misma línea cuyos valores de flete suman: $910,000
+El sistema RNDC valida que la suma de los valores reportados en los
+ADDITIONALITEMPROPERTY de tipo 03 coincida con el
+LINEEXTENSIONAMOUNT.
+<Invoice xmlns=…………>
+………
+<cac:InvoiceLine>
+<cbc:ID schemeID="1">01</cbc:ID>
+<cbc:LineExtensionAmount>910000</cbc:LineExtensionAmount>
+
+-- 61 of 72 --
+
+Pag. 62
+……….
+<cac:Item>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>37796060</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>REM12345</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>150000</cbc:Value>
+<cbc:ValueQuantity unitcode="KGM">8500</cbc:ValueQuantity>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>37796061</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>REM123456</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>220000</cbc:Value>
+<cbc:ValueQuantity unitcode="KGM">2500</cbc:ValueQuantity>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>01</cbc:Name>
+<cbc:Value>37796062</cbc:Value>
+</cac:AdditionalItemProperty>
+<cac:AdditionalItemProperty>
+<cbc:Name>02</cbc:Name>
+<cbc:Value>REM1234567</cbc:Value>
+</cac:AdditionalItemProperty>
+
+-- 62 of 72 --
+
+Pag. 63
+<cac:AdditionalItemProperty>
+<cbc:Name>03</cbc:Name>
+<cbc:Value>540000</cbc:Value>
+<cbc:ValueQuantity unitcode="KGM">4000</cbc:ValueQuantity>
+</cac:AdditionalItemProperty>
+</cac:Item>
+</cac:InvoiceLine>
+………
+</Invoice>
+23. Anulación de factura electrónica
+Las empresas de transporte pueden anular el cargue del XML de la
+facturación electrónica.
+La factura electrónica que se desea anular no debe estar aprobada por
+parte del generador.
+En el menú Reversar se encuentra la opción de Anular Factura Electrónica:
+
+-- 63 of 72 --
+
+Pag. 64
+24. Cargue de la factura electrónica de
+transporte por webservice
+
+-- 64 of 72 --
+
+Pag. 65
+La empresa de transporte puede enviar la factura electrónica de
+transporte con el uso del webservice tecnología SOAP.
+Para el envío de la información por webservice, debe primero convertir
+el contenido del archivo .xml firmado por la DIAN a una cadena de
+texto de Base 64 y esa cadena se envía en uno de los parámetros o
+etiquetas del xml del RNDC llamada: ARCHIVOBASE64.
+A continuación, un ejemplo usando la herramienta
+rndc.mintransporte.gov.co/wstest/default.aspx
+En modo texto el ejemplo es:
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<root>
+<acceso>
+
+-- 65 of 72 --
+
+Pag. 66
+<username>USUARIO1</username>
+<password>PASSWORD1</password>
+</acceso>
+<solicitud>
+<tipo>1</tipo>
+<procesoid>86</procesoid>
+</solicitud>
+<variables>
+<NUMNITEMPRESATRANSPORTE>8999990554</NUMNITEMPRESATRAN
+SPORTE>
+<ARCHIVOBASE64>PEF0……….
+DFmMC1hNjI1LTRmNTBiYTIzZGM0YS1y</ARCHIVOBASE64>
+</variables>
+</root>
+El RNDC solo recibe una factura en cada xml. No recibe archivos Base64
+convertidos a partir de un archivo .zip.
+La lista de mensajes de error que muestra el RNDC cuando valida el xml
+es:
+
+-- 66 of 72 --
+
+Pag. 67
+25. Generador de carga
+El Generador puede consultar todas las facturas que han cargado en
+el RNDC las empresas de transporte, usando la opción de consulta de
+documentos:
+
+-- 67 of 72 --
+
+Pag. 68
+Y escogiendo el proceso: Factura Electrónica.
+El sistema muestra el detalle de dada una de las facturas cargadas:
+
+-- 68 of 72 --
+
+Pag. 69
+El Generador de carga puede ingresar a la opción: “Factura
+Electrónica”
+Esto, con el fin de aprobar las facturas cargadas por las empresas
+de transporte.
+
+-- 69 of 72 --
+
+Pag. 70
+Así, puede seleccionar una factura y ver el detalle de las remesas
+de esa factura.
+Después de ver el detalle de las remesas de la factura y estar de
+acuerdo con todos los datos, puede hacer clic en el botón “Aprobar
+la Factura Electrónica”.
+Una vez la factura quede aprobada, el Generador ha cumplido el
+decreto 1079 de 2015 para todas las remesas de esa factura.
+Selecciona la factura y puede hacer clic en el botón: “Ver Detalle de
+Remesas”:
+
+-- 70 of 72 --
+
+Pag. 71
+
+-- 71 of 72 --
+
+Pag. 72
+Preguntas frecuentes
+• ¿Se debe hacer una factura por cada Remesa?
+Respuesta: No. Una factura puede hacer referencia a varias
+remesas.
+• ¿Existe un límite en cuanto a la cantidad de remesas en una
+factura?
+Respuesta: No. Una factura puede hacer referencia a todas las
+remesas que necesiten.
+
+-- 72 of 72 --
+
