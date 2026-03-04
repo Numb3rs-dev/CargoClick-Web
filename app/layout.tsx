@@ -22,7 +22,10 @@ const inter = Inter({
 })
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://cargoclick.com.co';
-const isProduction = BASE_URL === 'https://cargoclick.com.co';
+// GA only fires when NEXT_PUBLIC_GA_ENABLED=true is explicitly set.
+// This prevents accidental tracking from local dev or UAT environments
+// where the variable is simply absent.
+const isProduction = process.env.NEXT_PUBLIC_GA_ENABLED === 'true';
 
 export const metadata: Metadata = {
   title: 'CargoClick – Soluciones Logísticas con Visión Digital',
