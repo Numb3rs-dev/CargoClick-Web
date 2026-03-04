@@ -9,13 +9,14 @@
  * valores reales antes de producción.
  */
 import Image from 'next/image';
+import { colors } from '@/lib/theme/colors';
 
 /** Cambiar a true cuando exista el asset en /public/assets/ */
 const ASSET_LOGO_EXISTS = true;
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0A2A5E', padding: '48px 0' }}>
+    <footer style={{ background: colors.brandNavyDark, padding: '48px 0' }}>
       <div
         style={{
           maxWidth: '1200px',
@@ -41,8 +42,8 @@ export default function Footer() {
                 style={{ fontSize: '20px', fontWeight: 700, lineHeight: 1 }}
                 aria-label="CargoClick"
               >
-                <span style={{ color: '#FFFFFF' }}>Cargo</span>
-                <span style={{ color: '#1F7A5C' }}>Click</span>
+                <span style={{ color: colors.bgWhite }}>Cargo</span>
+                <span style={{ color: colors.brandGreen }}>Click</span>
               </span>
             )}
           </div>
@@ -54,7 +55,7 @@ export default function Footer() {
           >
             <p
               style={{
-                color: 'rgba(255,255,255,0.80)',
+                color: colors.footerTextBright,
                 fontSize: '14px',
                 lineHeight: '1.8',
                 margin: 0,
@@ -69,7 +70,7 @@ export default function Footer() {
             </p>
             <p
               style={{
-                color: 'rgba(255,255,255,0.80)',
+                color: colors.footerTextBright,
                 fontSize: '14px',
                 lineHeight: '1.8',
                 margin: 0,
@@ -84,11 +85,11 @@ export default function Footer() {
         {/* Copyright */}
         <div
           style={{
-            borderTop: '1px solid rgba(255,255,255,0.15)',
+            borderTop: `1px solid ${colors.footerBorder}`,
             paddingTop: '24px',
             marginTop: '32px',
             textAlign: 'center',
-            color: 'rgba(255,255,255,0.60)',
+            color: colors.footerText,
             fontSize: '12px',
             marginBottom: 0,
             display: 'flex',
@@ -101,19 +102,19 @@ export default function Footer() {
           <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
             <a
               href="/servicios"
-              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+              style={{ color: colors.footerTextDim, textDecoration: 'none', fontSize: '12px' }}
             >
               Servicios
             </a>
             <a
               href="/quienes-somos"
-              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+              style={{ color: colors.footerTextDim, textDecoration: 'none', fontSize: '12px' }}
             >
               Quiénes Somos
             </a>
             <a
               href="/privacidad"
-              style={{ color: 'rgba(255,255,255,0.50)', textDecoration: 'none', fontSize: '12px' }}
+              style={{ color: colors.footerTextDim, textDecoration: 'none', fontSize: '12px' }}
             >
               Política de Privacidad
             </a>

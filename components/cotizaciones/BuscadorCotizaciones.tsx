@@ -8,6 +8,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { colors } from '@/lib/theme/colors'
 
 interface Props {
   /** Valor inicial leído del searchParam `q` para evitar parpadeo */
@@ -61,7 +62,7 @@ export function BuscadorCotizaciones({ initialValue }: Props) {
     <div style={{ position: 'relative', display: 'inline-block' }}>
       <span style={{
         position: 'absolute', left: 11, top: '50%', transform: 'translateY(-50%)',
-        fontSize: 15, color: '#9CA3AF', pointerEvents: 'none',
+        fontSize: 15, color: colors.textPlaceholder, pointerEvents: 'none',
       }}>
         🔍
       </span>
@@ -72,8 +73,8 @@ export function BuscadorCotizaciones({ initialValue }: Props) {
         placeholder="Empresa, contacto, teléfono, ruta…"
         style={{
           paddingLeft: 36, paddingRight: value ? 32 : 14, paddingTop: 9, paddingBottom: 9,
-          border: '1px solid #D1D5DB', borderRadius: 10, fontSize: 14,
-          width: 300, background: '#FFFFFF', color: '#111827',
+          border: `1px solid ${colors.border}`, borderRadius: 10, fontSize: 14,
+          width: 300, background: colors.bgWhite, color: colors.textPrimary,
           boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
           outline: 'none',
         }}
@@ -85,7 +86,7 @@ export function BuscadorCotizaciones({ initialValue }: Props) {
           style={{
             position: 'absolute', right: 9, top: '50%', transform: 'translateY(-50%)',
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: 16, color: '#9CA3AF', lineHeight: 1, padding: 0,
+            fontSize: 16, color: colors.textPlaceholder, lineHeight: 1, padding: 0,
           }}
         >
           ×

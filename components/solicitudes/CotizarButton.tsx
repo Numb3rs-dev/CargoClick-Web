@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { colors } from '@/lib/theme/colors'
 
 export default function CotizarButton({ solicitudId }: { solicitudId: string }) {
   const router = useRouter()
@@ -31,8 +32,8 @@ export default function CotizarButton({ solicitudId }: { solicitudId: string }) 
         disabled={loading}
         style={{
           display: 'inline-flex', alignItems: 'center', gap: 8,
-          padding: '10px 28px', background: loading ? '#9CA3AF' : '#1D4ED8',
-          color: '#FFFFFF', borderRadius: 8, fontWeight: 700, fontSize: 14,
+          padding: '10px 28px', background: loading ? colors.textPlaceholder : colors.blue,
+          color: colors.bgWhite, borderRadius: 8, fontWeight: 700, fontSize: 14,
           border: 'none', cursor: loading ? 'not-allowed' : 'pointer',
           transition: 'background 0.2s',
         }}
@@ -40,7 +41,7 @@ export default function CotizarButton({ solicitudId }: { solicitudId: string }) 
         {loading ? '⏳ Calculando...' : '⚡ Generar cotización SISETAC'}
       </button>
       {error && (
-        <p style={{ margin: 0, fontSize: 13, color: '#DC2626' }}>{error}</p>
+        <p style={{ margin: 0, fontSize: 13, color: colors.danger }}>{error}</p>
       )}
     </div>
   )

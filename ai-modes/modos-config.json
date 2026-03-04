@@ -3,9 +3,10 @@
     "version": "1.0.0",
     "creado": "2025-09-29",
     "descripcion": "Sistema de Modos AI para personalidades especializadas",
-    "modo_activo": "nextjs-marketing-page-expert",
+    "modo_activo": "operacional-implementador",
     "instruccion_critica": "SIEMPRE leer COMPLETO el archivo de personalidad (startLine=1, endLine=TOTAL) al activar un modo",
-    "ultima_activacion": "2026-02-20T15:00:00Z"
+    "ultima_activacion": "2026-03-01T00:00:00Z",
+    "modo_activo": "operacional-implementador"
   },
   "comandos_activacion": [
     "activa modo",

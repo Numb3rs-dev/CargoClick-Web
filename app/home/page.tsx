@@ -13,6 +13,7 @@ import FortalezaDualSection from '@/components/home/FortalezaDualSection';
 import ComoFuncionaSection from '@/components/home/ComoFuncionaSection';
 import CtaFinalSection from '@/components/home/CtaFinalSection';
 import JsonLd from '@/components/shared/JsonLd';
+import DashboardSection from '@/components/home/DashboardSection';
 
 export const metadata: Metadata = {
   title: 'CargoClick – Transporte de Carga Terrestre en Colombia',
@@ -88,6 +89,7 @@ export default function HomePage() {
       <Header />
       <main>
         <HeroSection />
+        <DashboardSection />
         <RespaldoSection />
         <FortalezaDualSection />
         <ComoFuncionaSection />

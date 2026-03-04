@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { colors } from '@/lib/theme/colors';
 
 interface Props {
   icon: string;
@@ -14,9 +15,9 @@ export default function CardColapsable({ icon, title, defaultOpen = true, childr
 
   return (
     <div style={{
-      background: '#FFFFFF',
+      background: colors.bgWhite,
       borderRadius: 12,
-      border: '1px solid #E5E7EB',
+      border: `1px solid ${colors.borderLight}`,
       overflow: 'hidden',
     }}>
       {/* Cabecera — siempre visible, clicable */}
@@ -32,19 +33,19 @@ export default function CardColapsable({ icon, title, defaultOpen = true, childr
           cursor: 'pointer',
           border: 'none',
           outline: 'none',
-          background: '#F9FAFB',
-          borderBottom: open ? '1px solid #F3F4F6' : 'none',
+          background: colors.bgLight,
+          borderBottom: open ? `1px solid ${colors.borderLighter}` : 'none',
           textAlign: 'left',
           gap: 12,
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 18 }}>{icon}</span>
-          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: '#111827' }}>{title}</h2>
+          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: colors.textPrimary }}>{title}</h2>
         </div>
         <span style={{
           fontSize: 13,
-          color: '#9CA3AF',
+          color: colors.textPlaceholder,
           display: 'inline-block',
           transition: 'transform 0.2s',
           transform: open ? 'rotate(180deg)' : 'rotate(0deg)',

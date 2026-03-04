@@ -465,3 +465,72 @@
     }
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SISTEMA DE FORMULARIOS OPERACIONALES — op-form
+   Estándar visual para todos los formularios del módulo operacional.
+   Complementa los estilos inline de FormStyles.tsx.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Grillas responsivas ─────────────────────────────────────────────────── */
+
+.op-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.op-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.op-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+@media (max-width: 640px) {
+  .op-grid-2 { grid-template-columns: 1fr; }
+  .op-grid-3 { grid-template-columns: 1fr; }
+  .op-grid-4 { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .op-grid-3 { grid-template-columns: 1fr 1fr; }
+  .op-grid-4 { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Focus ring en inputs dentro de .op-form ─────────────────────────────── */
+
+.op-form input:not([type='checkbox']):not([type='radio']):not([disabled]):focus,
+.op-form select:not([disabled]):focus,
+.op-form textarea:not([disabled]):focus {
+  border-color: #059669 !important;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12) !important;
+  outline: none !important;
+}
+
+.op-form input:not([type='checkbox']):not([type='radio']):not([disabled]):hover,
+.op-form select:not([disabled]):hover {
+  border-color: #9CA3AF !important;
+}
+
+/* Prevenir focus ring en campos de error (ya tienen su propio ring rojo) */
+.op-form input[style*='EF4444']:focus,
+.op-form input[style*='error']:focus {
+  border-color: #EF4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12) !important;
+}
+
+/* ── Inputs de tipo date/datetime-local — ajuste de altura ──────────────── */
+
+.op-form input[type='date'],
+.op-form input[type='datetime-local'] {
+  min-height: 42px;
+}
+
+/* ── Scroll suave para la página del formulario ──────────────────────────── */
+
+.op-form {
+  scroll-behavior: smooth;
+}
+
+/* ── Animación de entrada de los cards ───────────────────────────────────── */
+
+.op-form > * {
+  animation: opCardIn 0.18s ease both;
+}
+
+@keyframes opCardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

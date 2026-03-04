@@ -39,6 +39,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# RNDC data dump (59MB — se transfiere manualmente a UAT/PROD)
+scripts/rndc-data.sql
+
 # prisma — las migraciones SÍ deben commitearse, no se excluye nada aquí
 
 # IDEs

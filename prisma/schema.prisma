@@ -16,27 +16,109 @@ datasource db {
 
 /// Tipo de servicio de transporte ofrecido
 enum TipoServicio {
-  URBANO     @map("urbano")
-  NACIONAL   @map("nacional")
+  URBANO   @map("urbano")
+  NACIONAL @map("nacional")
 }
 
 /// Tipo de carga a transportar (categorías SISETAC)
 enum TipoCarga {
-  CARGA_GENERAL   @map("carga_general")   // Mercancía, maquinaria, muebles, materiales secos
-  REFRIGERADA     @map("refrigerada")     // Cadena de frío: alimentos, farmacéuticos, flores
-  CONTENEDOR      @map("contenedor")      // Contenedor ISO 20'/40' — importación/exportación
-  GRANEL_SOLIDO   @map("granel_solido")   // Arena, carbón, granos, escombros — sin empacar
-  GRANEL_LIQUIDO  @map("granel_liquido")  // Combustibles, aceites, químicos — en cisterna
+  CARGA_GENERAL  @map("carga_general") // Mercancía, maquinaria, muebles, materiales secos
+  REFRIGERADA    @map("refrigerada") // Cadena de frío: alimentos, farmacéuticos, flores
+  CONTENEDOR     @map("contenedor") // Contenedor ISO 20'/40' — importación/exportación
+  GRANEL_SOLIDO  @map("granel_solido") // Arena, carbón, granos, escombros — sin empacar
+  GRANEL_LIQUIDO @map("granel_liquido") // Combustibles, aceites, químicos — en cisterna
+}
+
+/// Categoría de licencia de conducción (Colombia)
+enum CategoriaLicencia {
+  A1
+  A2
+  B1
+  B2
+  B3
+  C1
+  C2
+  C3
+}
+
+/// Estado de sincronización de una Remesa con el RNDC
+enum EstadoRndcRemesa {
+  PENDIENTE // creada internamente, no enviada al RNDC
+  ENVIADA // petición SOAP enviada, esperando respuesta (idempotencia ante timeout)
+  REGISTRADA // RNDC asignó NUMREMESA — solo remesas en este estado se asignan a manifiesto
+  ANULADA // anulada vía procesoid 38
+}
+
+/// Estado operativo interno de una Remesa (independiente del estado RNDC)
+enum EstadoOperativoRemesa {
+  PENDIENTE // sin asignar a manifiesto
+  ASIGNADA // asignada a un ManifiestoOperativo
+  EN_TRANSITO // manifiesto despachado
+  ENTREGADA // carga entregada exitosamente
+  NOVEDAD // incidente durante el transporte
+}
+
+/// Estado del ManifiestoOperativo a lo largo del ciclo de vida
+enum EstadoManifiesto {
+  BORRADOR // creado internamente, no enviado
+  ENVIADO // petición SOAP enviada
+  REGISTRADO // RNDC asignó número de manifiesto
+  ACEPTADO_CONDUCTOR // conductor firmó vía app (Fase 2)
+  CULMINADO // procesoid 5+6 completados
+  ANULADO // anulado vía procesoid 32
+}
+
+/// Estado de un NuevoNegocio en el flujo operacional
+enum EstadoNegocio {
+  CONFIRMADO // negocio cerrado, pendiente de armar viaje
+  EN_PREPARACION // remesas y manifiestos en proceso
+  EN_TRANSITO // al menos un manifiesto despachado
+  COMPLETADO // todos los manifiestos culminados
+  CANCELADO // negocio cancelado
+}
+
+/// Estado interno de una Orden de Cargue (sin relación directa con RNDC)
+enum EstadoOrdenCargue {
+  BORRADOR // creada, pendiente de asignar vehículo y conductor
+  ASIGNADA // vehículo y conductor definidos
+  EN_CURSO // conductor en camino al punto de cargue
+  COMPLETADA // carga confirmada y recogida
+  CANCELADA // orden anulada internamente
+}
+
+/// Hito de seguimiento para notificaciones al cliente
+enum HitoSeguimiento {
+  NEGOCIO_CONFIRMADO
+  REMESAS_ASIGNADAS
+  DESPACHADO
+  EN_RUTA
+  EN_DESTINO
+  ENTREGADO
+  NOVEDAD
+}
+
+/// Canal por el que se envía la notificación al cliente
+enum CanalNotificacion {
+  WHATSAPP
+  EMAIL
+  PORTAL
+  SMS
+}
+
+/// Tipo de consulta al RUNT (conductor o vehículo)
+enum TipoConsultaRunt {
+  CONDUCTOR
+  VEHICULO
 }
 
 /// Estado del procesamiento de la solicitud
 enum EstadoSolicitud {
-  EN_PROGRESO  @map("en_progreso")
-  COMPLETADA   @map("completada")
-  PENDIENTE    @map("pendiente")
-  COTIZADO     @map("cotizado")
-  RECHAZADO    @map("rechazado")
-  CERRADO      @map("cerrado")
+  EN_PROGRESO @map("en_progreso")
+  COMPLETADA  @map("completada")
+  PENDIENTE   @map("pendiente")
+  COTIZADO    @map("cotizado")
+  RECHAZADO   @map("rechazado")
+  CERRADO     @map("cerrado")
 }
 
 // ============================================
@@ -49,161 +131,156 @@ model Solicitud {
   // === IDENTIFICACIÓN ===
   /// ID único ULID de 26 caracteres — generado en SolicitudService con ulid().
   /// NO usar @default(): el ID siempre lo genera la aplicación, nunca Prisma.
-  id              String   @id
+  id String @id
 
   /// Código de referencia amigable para uso externo (últimos 8 chars del ULID en mayúsculas).
   /// Visible para clientes y comerciales. El ULID interno nunca se expone al exterior.
   /// Ejemplo: "GT3R48P3"  →  se muestra como  #COT-GT3R48P3
-  codigoRef       String   @unique @map("codigo_ref") @db.VarChar(8)
-  
+  codigoRef String @unique @map("codigo_ref") @db.VarChar(8)
+
   // === DATOS DEL SERVICIO ===
   /// Tipo de servicio de transporte solicitado
-  tipoServicio    TipoServicio
-  
+  tipoServicio TipoServicio
+
   /// Ciudad o dirección de origen del servicio
-  origen          String   @db.VarChar(200)
-  
+  origen String @db.VarChar(200)
+
   /// Ciudad o dirección de destino (obligatorio solo si tipoServicio = NACIONAL)
-  destino         String?  @db.VarChar(200)
+  destino String? @db.VarChar(200)
 
   // === DATOS CALCULADOS DE RUTA ===
   /// Distancia calculada entre origen y destino en kilómetros
-  distanciaKm             Float?   @map("distancia_km")
+  distanciaKm Float? @map("distancia_km")
 
   /// Tramo logístico de la ruta (CORTA / MEDIA / LARGA / MUY_LARGA)
-  tramoDistancia          String?  @db.VarChar(20)  @map("tramo_distancia")
+  tramoDistancia String? @map("tramo_distancia") @db.VarChar(20)
 
   /// Descripción del tiempo estimado de tránsito (Ej: "2–3 días hábiles")
-  tiempoTransitoDesc      String?  @db.VarChar(100) @map("tiempo_transito_desc")
-  
+  tiempoTransitoDesc String? @map("tiempo_transito_desc") @db.VarChar(100)
+
   // === DATOS DE LA CARGA ===
   /// Tipo de carga a transportar
-  tipoCarga       TipoCarga
-  
+  tipoCarga TipoCarga
+
   /// Peso de la carga en kilogramos (precisión 2 decimales)
-  pesoKg          Decimal  @db.Decimal(10, 2)
-  
+  pesoKg Decimal @db.Decimal(10, 2)
+
   /// Dimensión: Largo en centímetros (precisión 2 decimales)
-  dimLargoCm      Decimal  @db.Decimal(10, 2) @default(0)
-  
+  dimLargoCm Decimal @default(0) @db.Decimal(10, 2)
+
   /// Dimensión: Ancho en centímetros (precisión 2 decimales)
-  dimAnchoCm      Decimal  @db.Decimal(10, 2) @default(0)
-  
+  dimAnchoCm Decimal @default(0) @db.Decimal(10, 2)
+
   /// Dimensión: Alto en centímetros (precisión 2 decimales)
-  dimAltoCm       Decimal  @db.Decimal(10, 2) @default(0)
+  dimAltoCm Decimal @default(0) @db.Decimal(10, 2)
 
   // === DATOS CALCULADOS DE CARGA ===
   /// Volumen calculado de la carga en metros cúbicos (largo × ancho × alto / 1_000_000)
-  volumenM3               Float?   @map("volumen_m3")
+  volumenM3 Float? @map("volumen_m3")
 
   /// ID del vehículo mínimo sugerido según catálogo SISETAC (Ej: "CAMION_3_EJES")
-  vehiculoSugeridoId      String?  @db.VarChar(50)  @map("vehiculo_sugerido_id")
+  vehiculoSugeridoId String? @map("vehiculo_sugerido_id") @db.VarChar(50)
 
   /// Nombre del vehículo mínimo sugerido (Ej: "Camión 3 ejes (C3)")
-  vehiculoSugeridoNombre  String?  @db.VarChar(200) @map("vehiculo_sugerido_nombre")
-  
+  vehiculoSugeridoNombre String? @map("vehiculo_sugerido_nombre") @db.VarChar(200)
+
   /// Valor asegurado de la carga en pesos colombianos (precisión 2 decimales)
-  valorAsegurado  Decimal  @db.Decimal(15, 2)
-  
+  valorAsegurado Decimal @db.Decimal(15, 2)
+
   // === CONDICIONES Y FECHAS ===
   /// Condiciones de cargue requeridas (array JSON: ["muelle", "montacargas", "manual"])
   condicionesCargue Json
-  
+
   /// Fecha requerida para el servicio (solo fecha, sin hora)
-  fechaRequerida    DateTime @db.Date
-  
+  fechaRequerida DateTime @db.Date
+
   // === DATOS DEL CLIENTE ===
   /// Nombre de la empresa cliente (opcional)
-  empresa             String?  @db.VarChar(200)
-  
+  empresa String? @db.VarChar(200)
+
   /// Teléfono directo de la empresa cliente (opcional, diferente al celular del contacto)
-  telefonoEmpresa     String?  @db.VarChar(50)  @map("telefono_empresa")
-  
+  telefonoEmpresa String? @map("telefono_empresa") @db.VarChar(50)
+
   /// Nombre del contacto principal
-  contacto        String   @db.VarChar(200)
-  
+  contacto String @db.VarChar(200)
+
   /// Número de teléfono del contacto (formato internacional)
-  telefono        String   @db.VarChar(20)
-  
+  telefono String @db.VarChar(20)
+
   /// Email del contacto para notificaciones
-  email           String   @db.VarChar(100)
-  
+  email String @db.VarChar(100)
+
   // === ENRIQUECIMIENTO (paso 6 — checklist de condiciones) ===
   /// Observaciones libres del cliente sobre la carga o el servicio
-  observaciones              String?  @db.Text
+  observaciones String? @db.Text
 
   /// Servicio expreso — prioridad en asignación y despacho
-  servicioExpreso            Boolean? @default(false)  @map("servicio_expreso")
+  servicioExpreso Boolean? @default(false) @map("servicio_expreso")
 
   /// Carga peligrosa HAZMAT — requiere permisos especiales y vehículo certificado
-  cargaPeligrosa             Boolean? @default(false)  @map("carga_peligrosa")
+  cargaPeligrosa        Boolean? @default(false) @map("carga_peligrosa")
   /// Detalle adicional de la carga peligrosa (tipo, clásificación, etc.)
-  detalleCargaPeligrosa      String?  @db.Text         @map("detalle_carga_peligrosa")
+  detalleCargaPeligrosa String?  @map("detalle_carga_peligrosa") @db.Text
 
   /// Requiere ayudante de personal en el origen para el cargue
-  ayudanteCargue             Boolean? @default(false)  @map("ayudante_cargue")
+  ayudanteCargue Boolean? @default(false) @map("ayudante_cargue")
 
   /// Requiere ayudante de personal en el destino para el descargue
-  ayudanteDescargue          Boolean? @default(false)  @map("ayudante_descargue")
+  ayudanteDescargue Boolean? @default(false) @map("ayudante_descargue")
 
   /// La carga es frágil — requiere embalaje reforzado y manejo especial
-  cargaFragil                Boolean? @default(false)  @map("carga_fragil")
+  cargaFragil Boolean? @default(false) @map("carga_fragil")
 
   /// La carga llega sin empacar y necesita embalaje antes del viaje
-  necesitaEmpaque            Boolean? @default(false)  @map("necesita_empaque")
+  necesitaEmpaque Boolean? @default(false) @map("necesita_empaque")
 
   /// El envío tiene entrega en más de un punto de destino
-  multiplesDestinosEntrega   Boolean? @default(false)  @map("multiples_destinos_entrega")
+  multiplesDestinosEntrega Boolean? @default(false) @map("multiples_destinos_entrega")
   /// Detalle de los puntos de entrega adicionales (cuántos, dónde)
-  detalleMultiplesDestinos   String?  @db.Text         @map("detalle_multiples_destinos")
+  detalleMultiplesDestinos String?  @map("detalle_multiples_destinos") @db.Text
 
   /// La carga requiere escolta de seguridad (alto valor)
-  requiereEscolta            Boolean? @default(false)  @map("requiere_escolta")
+  requiereEscolta Boolean? @default(false) @map("requiere_escolta")
 
   /// Hay acceso difícil en origen o destino (rampa, camino angosto, etc.)
-  accesosDificiles           Boolean? @default(false)  @map("accesos_dificiles")
+  accesosDificiles        Boolean? @default(false) @map("accesos_dificiles")
   /// Detalle de los accesos difíciles
-  detalleAccesosDificiles    String?  @db.Text         @map("detalle_accesos_dificiles")
+  detalleAccesosDificiles String?  @map("detalle_accesos_dificiles") @db.Text
 
   /// La carga es sobredimensionada — puede requerir permiso INVIAS y vehículo piloto
-  cargaSobredimensionada     Boolean? @default(false)  @map("carga_sobredimensionada")
+  cargaSobredimensionada   Boolean? @default(false) @map("carga_sobredimensionada")
   /// Detalle de las dimensiones fuera de estándar
-  detalleSobredimensionada   String?  @db.Text         @map("detalle_sobredimensionada")
+  detalleSobredimensionada String?  @map("detalle_sobredimensionada") @db.Text
 
   // === ESTADO Y FLAGS ===
   /// Estado actual de la solicitud en el flujo de procesamiento
-  estado          EstadoSolicitud @default(PENDIENTE)
-  
+  estado EstadoSolicitud @default(PENDIENTE)
+
   /// Flag de revisión especial (automático si peso > 10 toneladas)
-  revisionEspecial Boolean  @default(false)
-  
+  revisionEspecial Boolean @default(false)
+
   // === TIMESTAMPS ===
   /// Fecha y hora de creación del registro
-  createdAt       DateTime @default(now())      @map("created_at")
-  
+  createdAt DateTime @default(now()) @map("created_at")
+
   /// Fecha y hora de última actualización del registro
-  updatedAt       DateTime @updatedAt           @map("updated_at")
-  
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // === RELACIONES ===
+  cotizaciones       Cotizacion[]
+  ajustesComerciales AjusteComercial[]
+
   // === ÍNDICES ===
   /// Índice para consultas frecuentes por estado
   @@index([estado])
-  
   /// Índice para ordenamiento por fecha de creación (descendente)
   @@index([createdAt(sort: Desc)])
-  
   /// Índice para búsqueda por email del cliente
   @@index([email])
-  
   /// Índice para búsqueda por nombre de empresa
   @@index([empresa])
-
   /// Índice para búsqueda por código de referencia externo
   @@index([codigoRef])
-
-  // === RELACIONES ===
-  cotizaciones        Cotizacion[]
-  ajustesComerciales  AjusteComercial[]
-  
   @@map("solicitudes")
 }
 
@@ -214,13 +291,13 @@ model Solicitud {
 /// Parámetros variables que se actualizan mensualmente (ACPM, SMLMV, tasa de interés)
 model MonthlyParams {
   id               Int      @id @default(autoincrement())
-  periodoYyyyMm    Int      @unique           // 202602
-  acpmPriceCopGal  Decimal  @db.Decimal(12,2) // 10850.00
-  smlmv            Decimal  @db.Decimal(15,2) // 1423500.00
-  interesMensualBr Decimal  @db.Decimal(8,6)  // 0.008400
+  periodoYyyyMm    Int      @unique // 202602
+  acpmPriceCopGal  Decimal  @db.Decimal(12, 2) // 10850.00
+  smlmv            Decimal  @db.Decimal(15, 2) // 1423500.00
+  interesMensualBr Decimal  @db.Decimal(8, 6) // 0.008400
   notas            String?  @db.Text
-  createdAt        DateTime @default(now())   @map("created_at")
-  updatedAt        DateTime @updatedAt        @map("updated_at")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
 
   @@map("monthly_params")
 }
@@ -228,31 +305,31 @@ model MonthlyParams {
 /// Parámetros por configuración vehicular y año (capital, seguros, llantas, mantenimiento)
 model VehicleParams {
   id                          Int     @id @default(autoincrement())
-  configId                    String  @db.VarChar(10)   // C2, C3, C2S2, C2S3, C3S2, C3S3
+  configId                    String  @db.VarChar(10) // C2, C3, C2S2, C2S3, C3S2, C3S3
   ano                         Int
   // Capital
-  valorVehiculoCop            Decimal @db.Decimal(15,2)
+  valorVehiculoCop            Decimal @db.Decimal(15, 2)
   mesesRecuperacion           Int
   // Seguros
-  soatAnualCop                Decimal @db.Decimal(12,2)
-  seguroTodoRiesgoAnualCop    Decimal @db.Decimal(12,2)
+  soatAnualCop                Decimal @db.Decimal(12, 2)
+  seguroTodoRiesgoAnualCop    Decimal @db.Decimal(12, 2)
   // Operación fija
-  rtmAnualCop                 Decimal @db.Decimal(12,2)
-  comunicacionesMesCop        Decimal @db.Decimal(12,2)
-  parqueaderoNocheCop         Decimal @db.Decimal(12,2)
+  rtmAnualCop                 Decimal @db.Decimal(12, 2)
+  comunicacionesMesCop        Decimal @db.Decimal(12, 2)
+  parqueaderoNocheCop         Decimal @db.Decimal(12, 2)
   // Llantas tracción
-  precioLlantaTraccionCop     Decimal @db.Decimal(12,2)
+  precioLlantaTraccionCop     Decimal @db.Decimal(12, 2)
   qtyLlantasTraccion          Int
   vidaUtilTraccionKm          Int
   // Llantas dirección
-  precioLlantaDireccionalCop  Decimal @db.Decimal(12,2)
+  precioLlantaDireccionalCop  Decimal @db.Decimal(12, 2)
   qtyLlantasDireccional       Int
   vidaUtilDireccionalKm       Int
   // Mantenimiento COP/km
-  indicadorLubricantesCopKm   Decimal @db.Decimal(10,4)
-  indicadorFiltrosCopKm       Decimal @db.Decimal(10,4)
-  indicadorLavadoEngraseCopKm Decimal @db.Decimal(10,4)
-  mantenimientoCopKm          Decimal @db.Decimal(10,4)
+  indicadorLubricantesCopKm   Decimal @db.Decimal(10, 4)
+  indicadorFiltrosCopKm       Decimal @db.Decimal(10, 4)
+  indicadorLavadoEngraseCopKm Decimal @db.Decimal(10, 4)
+  mantenimientoCopKm          Decimal @db.Decimal(10, 4)
 
   @@unique([configId, ano])
   @@map("vehicle_params")
@@ -263,11 +340,11 @@ model RouteTerrain {
   id                 Int      @id @default(autoincrement())
   origenDane         String   @db.VarChar(10)
   destinoDane        String   @db.VarChar(10)
-  kmPlanoPercent     Decimal  @db.Decimal(5,2)  // 0.30 = 30%
-  kmOnduladoPercent  Decimal  @db.Decimal(5,2)
-  kmMontanosoPercent Decimal  @db.Decimal(5,2)
-  totalPeajesC2Cop   Decimal  @db.Decimal(12,2)
-  totalPeajesC3Cop   Decimal  @db.Decimal(12,2) // Aplica a C3, C2S2, C2S3, C3S2, C3S3
+  kmPlanoPercent     Decimal  @db.Decimal(5, 2) // 0.30 = 30%
+  kmOnduladoPercent  Decimal  @db.Decimal(5, 2)
+  kmMontanosoPercent Decimal  @db.Decimal(5, 2)
+  totalPeajesC2Cop   Decimal  @db.Decimal(12, 2)
+  totalPeajesC3Cop   Decimal  @db.Decimal(12, 2) // Aplica a C3, C2S2, C2S3, C3S2, C3S3
   fuente             String?  @db.VarChar(100)
   vigenciaDesde      DateTime @db.Date
 
@@ -279,7 +356,7 @@ model RouteTerrain {
 model CommercialParams {
   id                     Int      @id @default(autoincrement())
   vigenciaDesde          DateTime @db.Date
-  margenOperadorPercent  Decimal  @db.Decimal(5,2)  // 10.00 = 10%
+  margenOperadorPercent  Decimal  @db.Decimal(5, 2) // 10.00 = 10%
   redondeoMilCop         Int      @default(50000)
   validezCotizacionHoras Int      @default(48)
   activo                 Boolean  @default(true)
@@ -293,33 +370,33 @@ model Cotizacion {
   id                      String    @id @default(cuid())
   solicitudId             String    @map("solicitud_id")
   solicitud               Solicitud @relation(fields: [solicitudId], references: [id])
-  periodoParametros       Int       @map("periodo_parametros")  // YYYYMM usado
-  configVehiculo          String    @db.VarChar(10) @map("config_vehiculo")
+  periodoParametros       Int       @map("periodo_parametros") // YYYYMM usado
+  configVehiculo          String    @map("config_vehiculo") @db.VarChar(10)
   distanciaKm             Float     @map("distancia_km")
   // Resultados principales (COP)
-  cvTotal                 Decimal   @db.Decimal(15,2) @map("cv_total")
-  cfPorViaje              Decimal   @db.Decimal(15,2) @map("cf_por_viaje")
-  costoTecnicoBase        Decimal   @db.Decimal(15,2) @map("costo_tecnico_base")  // CV + CF
-  fleteReferencialSisetac Decimal   @db.Decimal(15,2) @map("flete_referencial_sisetac")
-  tarifaSugerida          Decimal   @db.Decimal(15,2) @map("tarifa_sugerida")
-  margenAplicado          Decimal   @db.Decimal(5,2)  @map("margen_aplicado")     // % efectivo
+  cvTotal                 Decimal   @map("cv_total") @db.Decimal(15, 2)
+  cfPorViaje              Decimal   @map("cf_por_viaje") @db.Decimal(15, 2)
+  costoTecnicoBase        Decimal   @map("costo_tecnico_base") @db.Decimal(15, 2) // CV + CF
+  fleteReferencialSisetac Decimal   @map("flete_referencial_sisetac") @db.Decimal(15, 2)
+  tarifaSugerida          Decimal   @map("tarifa_sugerida") @db.Decimal(15, 2)
+  margenAplicado          Decimal   @map("margen_aplicado") @db.Decimal(5, 2) // % efectivo
   // Desglose JSON (para trazabilidad y visualización)
   desgloseCv              Json      @map("desglose_cv")
   desgloseCf              Json      @map("desglose_cf")
   parametrosUsados        Json      @map("parametros_usados")
   // ── Referencia de mercado RNDC (nullable — se llena al cotizar si hay datos)
-  rndcEstimado            Decimal?  @db.Decimal(15,2) @map("rndc_estimado")
-  rndcMediana             Decimal?  @db.Decimal(15,2) @map("rndc_mediana")
-  rndcConfianza           String?   @db.VarChar(10)   @map("rndc_confianza")         // ALTA | MEDIA | BAJA
-  rndcViajesSimilares     Int?                         @map("rndc_viajes_similares")
-  rndcNivelFallback       Int?                         @map("rndc_nivel_fallback")    // 1=ruta exacta 2=dept 3=nacional
+  rndcEstimado            Decimal?  @map("rndc_estimado") @db.Decimal(15, 2)
+  rndcMediana             Decimal?  @map("rndc_mediana") @db.Decimal(15, 2)
+  rndcConfianza           String?   @map("rndc_confianza") @db.VarChar(10) // ALTA | MEDIA | BAJA
+  rndcViajesSimilares     Int?      @map("rndc_viajes_similares")
+  rndcNivelFallback       Int?      @map("rndc_nivel_fallback") // 1=ruta exacta 2=dept 3=nacional
   // Estado y vigencia
   estado                  String    @default("VIGENTE") @db.VarChar(20)
   validezHasta            DateTime  @map("validez_hasta")
   createdAt               DateTime  @default(now()) @map("created_at")
 
   // Relación ajustes
-  ajustesComerciales      AjusteComercial[]
+  ajustesComerciales AjusteComercial[]
 
   @@index([solicitudId])
   @@map("cotizaciones")
@@ -333,66 +410,66 @@ model Cotizacion {
 /// Almacena la oferta al cliente, la tarifa confirmada, el pago al conductor
 /// y las métricas de rentabilidad real de la operación.
 model AjusteComercial {
-  id                      String    @id @default(cuid())
+  id String @id @default(cuid())
 
   // === RELACIONES ===
-  solicitudId             String    @map("solicitud_id")
-  solicitud               Solicitud  @relation(fields: [solicitudId], references: [id])
+  solicitudId String    @map("solicitud_id")
+  solicitud   Solicitud @relation(fields: [solicitudId], references: [id])
 
-  cotizacionBaseId        String    @map("cotizacion_base_id")
-  cotizacionBase          Cotizacion @relation(fields: [cotizacionBaseId], references: [id])
+  cotizacionBaseId String     @map("cotizacion_base_id")
+  cotizacionBase   Cotizacion @relation(fields: [cotizacionBaseId], references: [id])
 
   // === SIMULADOR USADO ===
   /// Tipo de vehículo seleccionado por el comercial (puede diferir del inferido)
-  vehiculoUsado           String    @db.VarChar(10) @map("vehiculo_usado")
+  vehiculoUsado  String  @map("vehiculo_usado") @db.VarChar(10)
   /// Margen % que se tomó como base en el simulador
-  margenSimulado          Decimal   @db.Decimal(5,2) @map("margen_simulado")
+  margenSimulado Decimal @map("margen_simulado") @db.Decimal(5, 2)
 
   // === OFERTA AL CLIENTE ===
   /// Precio que se le ofrece al cliente (puede diferir de tarifaSugerida)
-  tarifaOfertadaCliente   Decimal?  @db.Decimal(15,2) @map("tarifa_ofertada_cliente")
+  tarifaOfertadaCliente Decimal? @map("tarifa_ofertada_cliente") @db.Decimal(15, 2)
   /// Margen efectivo sobre el piso SISETAC al momento de la oferta (calculado)
-  margenEfectivoOferta    Decimal?  @db.Decimal(6,2)  @map("margen_efectivo_oferta")
+  margenEfectivoOferta  Decimal? @map("margen_efectivo_oferta") @db.Decimal(6, 2)
 
   // === VALOR CONFIRMADO (LO QUE SE COBRÓ) ===
   /// Tarifa real facturada al cliente — campo impuesto por el comercial
-  tarifaConfirmadaCliente Decimal?  @db.Decimal(15,2) @map("tarifa_confirmada_cliente")
+  tarifaConfirmadaCliente Decimal?  @map("tarifa_confirmada_cliente") @db.Decimal(15, 2)
   /// Cuándo el cliente aceptó
   fechaAceptacion         DateTime? @map("fecha_aceptacion")
 
   // === PAGO AL CONDUCTOR ===
   /// Valor neto que recibe el conductor — campo impuesto por el comercial
-  pagoAlConductor         Decimal?  @db.Decimal(15,2) @map("pago_al_conductor")
+  pagoAlConductor    Decimal? @map("pago_al_conductor") @db.Decimal(15, 2)
   /// Margen bruto operativo en COP (tarifaConfirmada - pagoAlConductor)
-  margenBrutoCop          Decimal?  @db.Decimal(15,2) @map("margen_bruto_cop")
+  margenBrutoCop     Decimal? @map("margen_bruto_cop") @db.Decimal(15, 2)
   /// Margen bruto operativo en % (sobre tarifaConfirmada)
-  margenBrutoPercent      Decimal?  @db.Decimal(6,2)  @map("margen_bruto_percent")
+  margenBrutoPercent Decimal? @map("margen_bruto_percent") @db.Decimal(6, 2)
 
   // === CONDICIONES COMERCIALES ===
   /// CONTADO | CREDITO_30 | CREDITO_60 | CREDITO_90
-  formaPago               String    @default("CONTADO") @db.VarChar(20) @map("forma_pago")
+  formaPago   String @default("CONTADO") @map("forma_pago") @db.VarChar(20)
   /// Días de crédito acordados
-  diasCredito             Int       @default(0) @map("dias_credito")
+  diasCredito Int    @default(0) @map("dias_credito")
 
   // === ESTADO Y TRAZABILIDAD ===
   /// BORRADOR | EN_OFERTA | EN_NEGOCIACION | ACEPTADO | CERRADO | RECHAZADO | CANCELADO
-  estadoNegociacion       String    @default("BORRADOR") @db.VarChar(20) @map("estado_negociacion")
+  estadoNegociacion String  @default("BORRADOR") @map("estado_negociacion") @db.VarChar(20)
   /// Nombre del comercial que realizó el ajuste
-  nombreComercial         String?   @db.VarChar(100) @map("nombre_comercial")
+  nombreComercial   String? @map("nombre_comercial") @db.VarChar(100)
   /// userId de Clerk del usuario que creó el registro (M-3: audit trail)
-  creadoPor               String?   @db.VarChar(100) @map("creado_por")
+  creadoPor         String? @map("creado_por") @db.VarChar(100)
   /// userId de Clerk del último usuario que modificó el registro (M-3: audit trail)
-  modificadoPor           String?   @db.VarChar(100) @map("modificado_por")
+  modificadoPor     String? @map("modificado_por") @db.VarChar(100)
   /// Por qué se modificó el precio
-  motivoAjuste            String?   @db.Text @map("motivo_ajuste")
+  motivoAjuste      String? @map("motivo_ajuste") @db.Text
   /// Por qué el cliente rechazó
-  motivoRechazo           String?   @db.Text @map("motivo_rechazo")
+  motivoRechazo     String? @map("motivo_rechazo") @db.Text
   /// Notas internas del comercial
-  notasComerciales        String?   @db.Text @map("notas_comerciales")
+  notasComerciales  String? @map("notas_comerciales") @db.Text
 
   // === TIMESTAMPS ===
-  createdAt               DateTime  @default(now()) @map("created_at")
-  updatedAt               DateTime  @updatedAt      @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@index([solicitudId])
   @@index([estadoNegociacion])
@@ -407,44 +484,44 @@ model AjusteComercial {
 /// Cada fila es un viaje real donde VALORFLETEPACTADOVIAJE es lo que el transportador cobró.
 /// Sirve como base de referencia de mercado (complemento al piso legal SISETAC).
 model ManifiestoRndc {
-  id              Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   // === IDENTIFICACIÓN DEL MANIFIESTO ===
-  manifiesto      String   @db.VarChar(30)  @map("manifiesto")
+  manifiesto String @map("manifiesto") @db.VarChar(30)
 
   // === FECHAS ===
-  fechaExpedicion DateTime @db.Date         @map("fecha_expedicion")
+  fechaExpedicion DateTime @map("fecha_expedicion") @db.Date
 
   // === ORIGEN ===
   /// Ciudad de origen normalizada, e.g. "COTA"
-  origen          String   @db.VarChar(100) @map("origen")
+  origen     String @map("origen") @db.VarChar(100)
   /// Departamento de origen normalizado, e.g. "CUNDINAMARCA"
-  origenDept      String   @db.VarChar(60)  @map("origen_dept")
+  origenDept String @map("origen_dept") @db.VarChar(60)
 
   // === DESTINO ===
   /// Ciudad de destino normalizada, e.g. "MEDELLIN"
-  destino         String   @db.VarChar(100) @map("destino")
+  destino     String @map("destino") @db.VarChar(100)
   /// Departamento de destino normalizado, e.g. "ANTIOQUIA"
-  destinoDept     String   @db.VarChar(60)  @map("destino_dept")
+  destinoDept String @map("destino_dept") @db.VarChar(60)
 
   // === CARGA ===
   /// Kilogramos totales de la remesa
-  pesoKg          Int                       @map("peso_kg")
+  pesoKg Int @map("peso_kg")
 
   // === VALORES ECONÓMICOS ===
   /// Flete pactado con el transportador (lo que el conductor/empresa cobró por el viaje)
-  fletePactado    Decimal  @db.Decimal(15,2) @map("flete_pactado")
+  fletePactado Decimal @map("flete_pactado") @db.Decimal(15, 2)
   /// Flete neto al transportador (después de retenciones)
-  fleteNeto       Decimal  @db.Decimal(15,2) @map("flete_neto")
+  fleteNeto    Decimal @map("flete_neto") @db.Decimal(15, 2)
   /// Retención en la fuente ICA aplicada
-  retencionIca    Decimal  @db.Decimal(15,2) @map("retencion_ica")
+  retencionIca Decimal @map("retencion_ica") @db.Decimal(15, 2)
 
   // === VEHÍCULO Y CONDUCTOR ===
-  placa           String?  @db.VarChar(10)  @map("placa")
-  conductorId     String?  @db.VarChar(20)  @map("conductor_id")
+  placa       String? @map("placa") @db.VarChar(10)
+  conductorId String? @map("conductor_id") @db.VarChar(20)
 
   // === TIMESTAMPS ===
-  createdAt       DateTime @default(now())  @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@unique([manifiesto])
   @@index([origen, destino])
@@ -462,14 +539,831 @@ model ManifiestoRndc {
 /// para garantizar simetría A→B = B→A sin duplicar filas.
 model Distancia {
   /// Código DANE 5 dígitos — siempre el menor lexicográficamente
-  origen    String  @db.VarChar(5)
+  origen   String @db.VarChar(5)
   /// Código DANE 5 dígitos — siempre el mayor lexicográficamente
-  destino   String  @db.VarChar(5)
+  destino  String @db.VarChar(5)
   /// Distancia vial en kilómetros (redondeada al entero más cercano)
-  km        Int
+  km       Int
   /// 1 = validado manualmente, 0 = calculado automáticamente por OSRM
-  validado  Int     @default(0) @db.SmallInt
+  validado Int    @default(0) @db.SmallInt
 
   @@id([origen, destino])
   @@map("distancias")
+}
+
+// ══════════════════════════════════════════════════════
+// DIRECTORIO OPERATIVO
+// ══════════════════════════════════════════════════════
+
+/// Conductor registrado en CargoClick. FK en manifiestos via cedula (no id).
+/// La relación conductor↔vehículo es POR MANIFIESTO (no permanente).
+/// Un conductor tiene UNA sola ubicación (la que se envía al RNDC).
+model Conductor {
+  id                 String            @id @default(cuid())
+  cedula             String            @unique
+  /// Código tipo ID — CODTIPOIDTERCERO del maestro (siempre "C" para conductores)
+  codTipoId          String?           @db.VarChar(1)
+  /// Texto tipo ID — TIPOIDTERCERO del maestro (ej: "Cédula Ciudadanía")
+  tipoIdTexto        String?           @db.VarChar(60)
+  nombres            String
+  apellidos          String
+  categoriaLicencia  CategoriaLicencia
+  /// Número de licencia de conducción — NUMLICENCIACONDUCCION del maestro
+  numLicencia        String?           @db.VarChar(30)
+  licenciaVigencia   DateTime?         @db.Date
+  telefono           String?           @db.VarChar(30)
+  /// Celular del conductor — NUMCELULARPERSONA del RNDC
+  celular            String?           @db.VarChar(30)
+  email              String?           @db.VarChar(200)
+  /// Municipio de residencia/registro del conductor — MUNICIPIORNDC
+  municipio          String?           @db.VarChar(100)
+  /// Código DANE 5 dígitos del municipio. El código RNDC = daneMunicipio + "000"
+  daneMunicipio      String?           @db.VarChar(5)
+  /// Dirección del conductor — NOMENCLATURADIRECCION del RNDC
+  direccion          String?           @db.VarChar(300)
+  /// Coordenada GPS latitud — LATITUD del RNDC
+  latitud            Decimal?          @db.Decimal(10, 7)
+  /// Coordenada GPS longitud — LONGITUD del RNDC
+  longitud           Decimal?          @db.Decimal(10, 7)
+  /// Código sede tercero — CODSEDETERCERO (siempre "0" para conductores)
+  codSede            String?           @db.VarChar(6)
+  /// Nombre sede tercero — NOMSEDETERCERO del maestro
+  nomSede            String?           @db.VarChar(200)
+  /// Régimen simple de tributación — REGIMENSIMPLE del maestro
+  regimenSimple      Boolean           @default(false)
+  /// Código país — CODPAIS del maestro (169 = Colombia)
+  codPais            String?           @db.VarChar(10)
+  /// Nombre país — NOMBREPAIS del maestro
+  nombrePais         String?           @db.VarChar(80)
+  /// NIT empresa transporte — NUMNITEMPRESATRANSPORTE del maestro
+  nitEmpresaTransporte String?         @db.VarChar(20)
+  /// Código empresa RNDC — CODIGOEMPRESA del maestro
+  codigoEmpresaRndc    String?         @db.VarChar(20)
+  /// Nombre empresa RNDC — TEREMPRESA del maestro
+  nombreEmpresaRndc    String?         @db.VarChar(200)
+  /// Fecha ingreso al RNDC — FECHAINGRESO del maestro
+  fechaIngresoRndc     DateTime?
+  /// Usuario que registró en RNDC — USUARIOID del maestro
+  usuarioRndc          String?         @db.VarChar(60)
+  /// true = el registro existe en el RNDC (importado o confirmado por API)
+  sincronizadoRndc     Boolean         @default(false)
+  activo             Boolean           @default(true)
+  notas              String?           @db.Text
+  /// Fecha de la última consulta al RUNT para mantener el snapshot vigente
+  ultimaConsultaRunt DateTime?
+  /// Snapshot del RUNT en JSON — se actualiza con cada consulta al RUNT
+  snapshotRunt       Json?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  manifiestos   ManifiestoOperativo[]
+  consultasRunt ConsultaRunt[]
+  ordenesCargue OrdenCargue[]
+
+  @@map("conductores")
+}
+
+/// Vehículo de carga registrado en CargoClick. FK en manifiestos via placa (no id).
+/// Campos alineados con el Maestro de Vehículos del RNDC (Ministerio de Transporte).
+/// Los campos cod* son códigos de diccionario RNDC; los campos texto son la descripción legible.
+model Vehiculo {
+  id    String @id @default(cuid())
+  placa String @unique
+
+  // === MARCA Y MODELO (diccionario RNDC) ===
+  /// Código diccionario RNDC de marca — CODMARCAVEHICULOCARGA (ej: 1=CHEVROLET)
+  codMarcaVehiculo Int?
+  /// Nombre legible de la marca — MARCAVEHICULOCARGA (ej: "CHEVROLET")
+  marcaVehiculo    String?
+  /// Código diccionario RNDC de línea — CODLINEAVEHICULOCARGA
+  codLineaVehiculo Int?
+  /// Nombre legible de la línea — LINEAVEHICULOCARGA
+  lineaVehiculo    String?
+  /// Año de fabricación — ANOFABRICACIONVEHICULOCARGA
+  anioVehiculo     Int?
+
+  // === CONFIGURACIÓN (diccionario RNDC) ===
+  /// Código textual SISETAC para el WSDL — CODCONFIGURACIONVEHICULO (ej: "C2", "C3S3")
+  configVehiculo         String?
+  /// Código numérico diccionario RNDC — CODCONFIGURACIONUNIDADCARGA (ej: 50)
+  codConfiguracionUnidad Int?
+  /// Texto descriptivo — CONFIGURACIONUNIDADCARGA (ej: "2 - Camión Rígido de 2 ejes")
+  configuracionUnidad    String?
+  /// Código diccionario RNDC tipo carrocería — CODTIPOCARROCERIA (ej: 2=FURGON)
+  codTipoCarroceria      Int?
+  /// Texto legible tipo carrocería — TIPOCARROCERIA (ej: "FURGON")
+  tipoCarroceria         String?
+  /// Peso del vehículo vacío en kg — PESOVEHICULOVACIO
+  pesoVehiculoVacio      Int?
+  /// Número de ejes — NUMEJES
+  numEjes                Int?
+  /// Capacidad nominal en toneladas (uso interno CargoClick)
+  capacidadTon           Decimal? @db.Decimal(8, 2)
+  /// Tipo de vehículo legacy (uso interno): CAMION, TRACTOCAMION, MINIMULA, etc.
+  tipoVehiculo           String?
+
+  // === COMBUSTIBLE Y COLOR (diccionario RNDC) ===
+  /// Código diccionario RNDC tipo combustible — CODTIPOCOMBUSTIBLE (ej: 3=Diesel)
+  codTipoCombustible Int?
+  /// Texto legible — TIPOCOMBUSTIBLE (ej: "Diesel o ACPM")
+  tipoCombustible    String?
+  /// Código diccionario RNDC color — CODCOLORVEHICULOCARGA
+  codColorVehiculo   Int?
+
+  // === SOAT (expandido con datos RNDC) ===
+  /// Número de póliza SOAT — NUMSEGUROSOAT
+  numSoat            String?
+  /// Fecha de vencimiento del SOAT — FECHAVENCIMIENTOSOAT
+  soatVigencia       DateTime? @db.Date
+  /// Nombre de la aseguradora SOAT — ASEGURADORASOAT
+  aseguradoraSoat    String?
+  /// NIT de la aseguradora SOAT — NUMNITASEGURADORASOAT
+  nitAseguradoraSoat String?
+
+  // === PROPIETARIO (expandido con tipo ID RNDC) ===
+  /// Código diccionario tipo de identificación del propietario — CODTIPOIDPROPIETARIO
+  codTipoIdPropietario Int?
+  /// Texto tipo ID propietario — TIPOIDPROPIETARIO (ej: "NIT", "CC")
+  tipoIdPropietario    String?
+  /// Número de identificación del propietario — NUMIDPROPIETARIO
+  propietarioId        String?
+  /// Nombre del propietario — VEHNOMBREPROP
+  propietarioNombre    String?
+
+  // === TENEDOR (datos RNDC — persona que tiene la tenencia del vehículo) ===
+  /// Código diccionario tipo de identificación del tenedor — CODTIPOIDTENEDOR
+  codTipoIdTenedor Int?
+  /// Texto tipo ID tenedor — TIPOIDTENEDOR
+  tipoIdTenedor    String?
+  /// Número de identificación del tenedor — NUMIDTENEDOR
+  numIdTenedor     String?
+  /// Nombre del tenedor — VEHNOMBRETENENC
+  nombreTenedor    String?
+
+  // === RTM Y ESTADO ===
+  rtmVigencia        DateTime? @db.Date
+  activo             Boolean   @default(true)
+  notas              String?   @db.Text
+  ultimaConsultaRunt DateTime?
+  snapshotRunt       Json?
+
+  // === METADATOS RNDC (importados del Excel del Ministerio) ===
+  /// Fecha/hora de ingreso (registro) del vehículo en el RNDC — FECHAINGRESO
+  fechaIngresoRndc      DateTime?
+  /// ID del usuario RNDC que registró — USUARIOID
+  usuarioIdRndc         Int?
+  /// Nombre de la empresa de transporte en el RNDC — VEHEMPRESA
+  empresaTransporteRndc String?
+  /// NIT de la empresa de transporte — NUMNITEMPRESATRANSPORTE
+  nitEmpresaTransporte  String?
+  /// Diferencias registradas en el RNDC — VEHDIFERENCIAS
+  diferenciasRndc       String?
+  /// Código interno de empresa en el RNDC — CODIGOEMPRESA
+  codigoEmpresaRndc     Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  manifiestos   ManifiestoOperativo[]
+  consultasRunt ConsultaRunt[]
+  ordenesCargue OrdenCargue[]
+
+  @@map("vehiculos")
+}
+
+// ══════════════════════════════════════════════════════
+// DIRECTORIO DE CLIENTES (remitentes / destinatarios)
+// ══════════════════════════════════════════════════════
+
+/// Empresa cliente registrada en el directorio (remitente o destinatario de carga).
+/// El NIT/cédula + tipo es la clave natural que va al RNDC.
+model Cliente {
+  id             String   @id @default(cuid())
+  /// N=NIT, C=Cédula, P=Pasaporte
+  tipoId         String   @default("N") @db.VarChar(1)
+  /// Texto largo del tipo de ID — TIPOIDTERCERO del maestro: "NIT", "CEDULA DE CIUDADANIA", etc.
+  tipoIdTexto    String?  @db.VarChar(60)
+  /// NIT o número de identificación (sin dígito de verificación para NIT)
+  numeroId       String   @db.VarChar(20)
+  razonSocial    String   @db.VarChar(200)
+  /// Nombres (persona natural) — NOMIDTERCERO del maestro. Para empresas = razón social.
+  nombres        String?  @db.VarChar(200)
+  /// Primer apellido (persona natural) — PRIMERAPELLIDOIDTERCERO del maestro
+  primerApellido  String?  @db.VarChar(100)
+  /// Segundo apellido (persona natural) — SEGUNDOAPELLIDOIDTERCERO del maestro
+  segundoApellido String?  @db.VarChar(100)
+  email          String?  @db.VarChar(200)
+  telefono       String?  @db.VarChar(30)
+  activo         Boolean  @default(true)
+  notas          String?  @db.Text
+  /// REGIMENSIMPLE del RNDC: true = régimen simple de tributación
+  regimenSimple  Boolean  @default(false)
+  /// Categoría licencia — CODCATEGORIALICENCIACONDUCCION (vacío/null para clientes, solo aplica a conductores)
+  categoriaLicencia String? @db.VarChar(5)
+  /// Número de licencia — NUMLICENCIACONDUCCION ("0" para clientes)
+  numLicencia       String? @db.VarChar(30)
+  /// Fecha vencimiento licencia — FECHAVENCIMIENTOLICENCIA
+  fechaVencimientoLicencia DateTime?
+  /// Código país — CODPAIS del maestro (169 = Colombia)
+  codPais        String?  @db.VarChar(10)
+  /// Nombre país — NOMBREPAIS del maestro
+  nombrePais     String?  @db.VarChar(80)
+  /// NIT de la empresa de transporte — NUMNITEMPRESATRANSPORTE del maestro
+  nitEmpresaTransporte String? @db.VarChar(20)
+  /// Código empresa RNDC — CODIGOEMPRESA del maestro
+  codigoEmpresaRndc    String? @db.VarChar(20)
+  /// Nombre empresa RNDC — TEREMPRESA del maestro
+  nombreEmpresaRndc    String? @db.VarChar(200)
+  /// Fecha de ingreso al RNDC — FECHAINGRESO del maestro
+  fechaIngresoRndc     DateTime?
+  /// Usuario que registró en RNDC — USUARIOID del maestro
+  usuarioRndc          String? @db.VarChar(60)
+  /// true = el registro existe en el RNDC (importado o confirmado por API)
+  sincronizadoRndc     Boolean @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  sucursales SucursalCliente[]
+
+  /// tipoId + numeroId deben ser únicos juntos
+  @@unique([tipoId, numeroId])
+  @@index([razonSocial])
+  @@index([numeroId])
+  @@map("clientes")
+}
+
+/// Sucursal / sede de un cliente. El codSede es el código que va al RNDC
+/// en los campos codSedeRemitente / codSedeDestinatario.
+/// Una empresa siempre tiene al menos una sucursal ("Casa Matriz", codSede="1").
+model SucursalCliente {
+  id             String    @id @default(cuid())
+  clienteId      String
+  /// Código de sede para el RNDC — CODSEDETERCERO: "0" = sede principal, 6 chars alfanumérico para sedes adicionales
+  codSede        String    @default("0") @db.VarChar(6)
+  nombre         String    @default("Casa Matriz") @db.VarChar(100)
+  municipio      String?   @db.VarChar(100)
+  /// Código DANE 5 dígitos del municipio. El código RNDC se obtiene como: daneMunicipio + "000"
+  daneMunicipio  String?   @db.VarChar(5)
+  direccion      String?   @db.VarChar(300)
+  telefono       String?   @db.VarChar(30)
+  email          String?   @db.VarChar(200)
+  /// Nombre del contacto en la sede (= NOMSEDETERCERO del RNDC para sedes no-principales)
+  contactoNombre String?   @db.VarChar(100)
+  /// Celular del contacto en la sede — NUMCELULARPERSONA del RNDC
+  celular        String?   @db.VarChar(30)
+  /// Coordenada GPS latitud de la sede — LATITUD del RNDC
+  latitud        Decimal?  @db.Decimal(10, 7)
+  /// Coordenada GPS longitud de la sede — LONGITUD del RNDC
+  longitud       Decimal?  @db.Decimal(10, 7)
+  activo         Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  cliente             Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  remesasRemitente    Remesa[] @relation("RemesaRemitente")
+  remesasDestinatario Remesa[] @relation("RemesaDestinatario")
+
+  /// Un cliente no puede tener dos sedes con el mismo codSede
+  @@unique([clienteId, codSede])
+  @@index([clienteId])
+  @@map("sucursales_cliente")
+}
+
+// ══════════════════════════════════════════════════════
+// ÓRDENES DE CARGUE (operación interna)
+// ══════════════════════════════════════════════════════
+
+/// Orden de cargue interna. Instrucción operativa para recoger carga en un punto
+/// determinado. No se envía al RNDC — complementa el ManifiestoOperativo.
+/// Código formato: OC-YYYY-NNNN
+model OrdenCargue {
+  id                   String            @id @default(cuid())
+  /// Código amigable único por año: OC-2026-0001
+  numeroOrden          String            @unique
+  nuevoNegocioId       String
+  /// Placa del vehículo asignado (referencia a Vehiculo.placa)
+  vehiculoPlaca        String?
+  /// Cédula del conductor asignado (referencia a Conductor.cedula)
+  conductorCedula      String?
+  estado               EstadoOrdenCargue @default(BORRADOR)
+  /// Fecha y hora programada para el cargue
+  fechaHoraCargue      DateTime?
+  /// Dirección exacta del punto de cargue
+  puntoCargueDireccion String?           @db.VarChar(300)
+  /// Municipio del punto de cargue
+  puntoCargueMunicipio String?           @db.VarChar(100)
+  /// Código DANE 5 dígitos del municipio del punto de cargue
+  puntoCargueDane      String?           @db.VarChar(5)
+  notas                String?           @db.Text
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  nuevoNegocio NuevoNegocio @relation(fields: [nuevoNegocioId], references: [id])
+  vehiculo     Vehiculo?    @relation(fields: [vehiculoPlaca], references: [placa])
+  conductor    Conductor?   @relation(fields: [conductorCedula], references: [cedula])
+
+  @@index([nuevoNegocioId])
+  @@index([estado])
+  @@index([vehiculoPlaca])
+  @@index([createdAt(sort: Desc)])
+  @@map("ordenes_cargue")
+}
+
+/// Registro de cada consulta al RUNT (conductor o vehículo). Append-only, no se modifica.
+model ConsultaRunt {
+  id              String           @id @default(cuid())
+  tipo            TipoConsultaRunt
+  /// Cédula o placa consultada al momento de la consulta
+  identificador   String
+  respuestaJson   Json
+  /// userId Clerk del usuario que realizó la consulta
+  realizadaPor    String?
+  conductorCedula String?
+  vehiculoPlaca   String?
+  createdAt       DateTime         @default(now())
+
+  conductor Conductor? @relation(fields: [conductorCedula], references: [cedula])
+  vehiculo  Vehiculo?  @relation(fields: [vehiculoPlaca], references: [placa])
+
+  @@index([tipo, identificador])
+  @@index([createdAt])
+  @@map("consultas_runt")
+}
+
+// ══════════════════════════════════════════════════════
+// MÓDULO OPERACIONAL CORE
+// ══════════════════════════════════════════════════════
+
+/// Negocio de transporte confirmado. Agrupa remesas y manifiestos de un viaje.
+/// Código formato: NEG-YYYY-NNNN
+model NuevoNegocio {
+  id                    String        @id @default(cuid())
+  /// Código amigable único por año: NEG-2026-0001
+  codigoNegocio         String        @unique
+  solicitudId           String?
+  cotizacionId          String?
+  ajusteComercialId     String?
+  clienteNombre         String?
+  clienteNit            String?
+  fechaCierre           DateTime      @default(now())
+  fechaDespachoEstimada DateTime?     @db.Date
+  estado                EstadoNegocio @default(CONFIRMADO)
+  notas                 String?       @db.Text
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  remesas       Remesa[]
+  manifiestos   ManifiestoOperativo[]
+  seguimientos  SeguimientoCliente[]
+  encuesta      EncuestaPostEntrega?
+  ordenesCargue OrdenCargue[]
+
+  @@index([estado])
+  @@index([clienteNit])
+  @@index([createdAt(sort: Desc)])
+  @@map("nuevos_negocios")
+}
+
+/// Remesa de carga: unidad mínima de carga enviada al RNDC (procesoid 3).
+/// Solo remesas con estadoRndc=REGISTRADA pueden asignarse a un manifiesto.
+/// Campos alineados con el reporte de Remesas del RNDC (Ministerio de Transporte).
+/// Código formato: REM-YYYY-NNNN
+model Remesa {
+  id                    String  @id @default(cuid())
+  /// Código amigable único por año: REM-2026-0001
+  numeroRemesa          String  @unique
+  /// Negocio al que pertenece esta remesa. Opcional — una remesa puede existir sin negocio.
+  nuevoNegocioId        String?
+  manifiestoOperativoId String?
+
+  // === DESCRIPCIÓN DE LA CARGA ===
+  /// Descripción legible de la carga (máx 60 chars para el RNDC) — DESCRIPCIONCORTAPRODUCTO
+  descripcionCarga      String
+  /// Código del catálogo de mercancías RNDC (6 dígitos, ej: 009880 = Paquetes varios) — MERCANCIAREMESA
+  codigoAranceladoCarga String?
+  /// Peso en kg — CANTIDADCARGADA
+  pesoKg                Int
+  volumenM3             Decimal? @db.Decimal(8, 3)
+  /// Código de unidad de medida RNDC (default KGM) — UNIDADMEDIDAPRODUCTO
+  unidadMedidaProducto  String   @default("KGM")
+  /// Cantidad de producto — CANTIDADPRODUCTO
+  cantidadProducto      Decimal? @db.Decimal(12, 3)
+
+  // === CLASIFICACIÓN RNDC (diccionario) ===
+  /// Código de operación de transporte RNDC (G=General, P=Paqueteo, CC=Contenedor cargado, CV=Contenedor vacío) — CODOPERACIONTRANSPORTE
+  codOperacionTransporte String  @default("G")
+  /// Código diccionario naturaleza de carga RNDC — CODNATURALEZACARGA (G=General, 2=Peligrosa, R=Refrigerada, S=Sobredimensionada, E=Extra, 5=Alto valor)
+  codNaturalezaCarga     String  @default("G")
+  /// Texto legible naturaleza de carga — NATURALEZACARGA (ej: "Carga Normal")
+  naturalezaCarga        String?
+  /// Código diccionario mercancía RNDC — MERCANCIAREMESA (ej: 9880=PAQUETES VARIOS)
+  mercanciaRemesaCod     Int?
+  /// Código diccionario empaque RNDC — CODTIPOEMPAQUE (0=Paquetes, 4=Bulto, 6=Granel líquido, 7/8/9=Contenedores, 12=Cilindros, 15=Granel sólido, 17=Varios, 18=N.A., 19=Estibada)
+  codigoEmpaque          Int     @default(0)
+  /// Estado de la mercancía — ESTADOMERCANCIA
+  estadoMercancia        String?
+  /// Unidad de medida de capacidad — UNIDADMEDIDACAPACIDAD
+  unidadMedidaCapacidad  String?
+  /// Código ONU para mercancías peligrosas — CODIGOUN
+  codigoUn               String?
+
+  // === REMITENTE ===
+  /// Tipo de identificación del remitente (N=NIT, C=Cédula) — CODTIPOIDREMITENTE
+  tipoIdRemitente    String  @default("N")
+  /// Número de identificación del remitente — NUMIDREMITENTE
+  nitRemitente       String
+  /// Código de sede del remitente — CODSEDEREMITENTE
+  codSedeRemitente   String  @default("1")
+  /// Nombre/razón social del remitente — REMREMITENTE
+  empresaRemitente   String?
+  /// Dirección del remitente — REMDIRREMITENTE
+  direccionRemitente String?
+  /// FK opcional a SucursalCliente — se rellena al seleccionar del directorio
+  remitenteClienteId String?
+
+  // === DESTINATARIO ===
+  /// Tipo de identificación del destinatario — CODTIPOIDDESTINATARIO
+  tipoIdDestinatario    String  @default("N")
+  /// Número de identificación del destinatario — NUMIDDESTINATARIO
+  nitDestinatario       String
+  /// Código de sede del destinatario — CODSEDEDESTINATARIO
+  codSedeDestinatario   String  @default("1")
+  /// Nombre/razón social del destinatario — REMDESTINATARIO
+  empresaDestinataria   String?
+  /// FK opcional a SucursalCliente — se rellena al seleccionar del directorio
+  destinatarioClienteId String?
+
+  // === PROPIETARIO DE LA CARGA ===
+  /// Tipo de identificación del propietario — CODTIPOIDPROPIETARIO
+  tipoIdPropietario  String  @default("N")
+  /// Número de identificación del propietario — NUMIDPROPIETARIO
+  nitPropietario     String
+  /// Código de sede del propietario — CODSEDEPROPIETARIO
+  codSedePropietario String?
+  /// Nombre del propietario — REMPROPIETARIO
+  nombrePropietario  String?
+
+  // === SEGURO ===
+  /// NIT de la compañía de seguros — COMPANIASEGURO
+  companiaSeguriNit    String?
+  /// Nombre de la compañía de seguros — NOMCOMPANIASEGURO
+  companiaSeguriNombre String?
+  /// Dueño de la póliza — DUENOPOLIZA
+  duenopoliza          String?
+  /// Número de póliza de transporte — NUMPOLIZATRANSPORTE
+  numPolizaTransporte  String?
+  /// Fecha de vencimiento de la póliza — FECHAVENCIMIENTOPOLIZA
+  fechaVencimientoPoliza DateTime?
+
+  // === PUNTOS ORIGEN-DESTINO ===
+  /// Nombre del municipio de origen — REM_ORIG
+  origenMunicipio  String
+  /// Código DANE de 8 dígitos del municipio de origen — CODMUNICIPIOORIGEN
+  origenDane       String
+  /// Nombre del municipio de destino — REM_DESTI
+  destinoMunicipio String
+  /// Código DANE de 8 dígitos del municipio de destino — CODMUNICIPIODESTINO
+  destinoDane      String
+  /// @deprecated usar direccionRemitente (REMDIRREMITENTE). Migrar datos y eliminar en siguiente release.
+  direccionOrigen  String?
+  /// @deprecated sin equivalente RNDC. Usar instruccionesEspeciales para notas de descargue.
+  direccionDestino String?
+
+  // === COORDENADAS GEOGRÁFICAS ===
+  /// Latitud punto de cargue — LATITUDCARGUE
+  latitudCargue     Decimal? @db.Decimal(10, 7)
+  /// Longitud punto de cargue — LONGITUDCARGUE
+  longitudCargue    Decimal? @db.Decimal(10, 7)
+  /// Latitud punto de descargue — LATITUDDESCARGUE
+  latitudDescargue  Decimal? @db.Decimal(10, 7)
+  /// Longitud punto de descargue — LONGITUDDESCARGUE
+  longitudDescargue Decimal? @db.Decimal(10, 7)
+
+  // === TRASBORDO ===
+  /// Código DANE municipio de trasbordo — CODMUNICIPIOTRASBORDO
+  codMunicipioTrasbordo String?
+  /// Nombre municipio de trasbordo — NOMMUNICIPIOTRASBORDO
+  municipioTrasbordo    String?
+  /// Tipo de consolidada — TIPOCONSOLIDADA
+  tipoConsolidada       String?
+
+  // === TIEMPOS LOGÍSTICOS (obligatorio RNDC desde nov 2025) ===
+  /// Fecha/hora de cita pactada para cargue — FECHACITAPACTADACARGUE + HORACITAPACTADACARGUE
+  fechaHoraCitaCargue    DateTime?
+  /// Fecha/hora de cita pactada para descargue — FECHACITAPACTADADESCARGUE + HORACITAPACTADADESCARGUEREMESA
+  fechaHoraCitaDescargue DateTime?
+  /// Horas pactadas para cargue — HORASPACTOCARGA
+  horasPactoCarga        Int       @default(4)
+  /// Minutos pactados para cargue — MINUTOSPACTOCARGA
+  minutosPactoCarga      Int       @default(0)
+  /// Horas pactadas para descargue — HORASPACTODESCARGUE
+  horasPactoDescargue    Int       @default(4)
+  /// Minutos pactados para descargue — MINUTOSPACTODESCARGUE
+  minutosPactoDescargue  Int       @default(0)
+
+  // === CONTENEDOR Y EXTRAS ===
+  /// Peso del contenedor vacío en kg — PESOCONTENEDORVACIO
+  pesoContenedorVacio Decimal? @db.Decimal(10, 2)
+  /// Permiso de carga extra — PERMISOCARGAEXTRA
+  permisoCargaExtra   String?
+  /// Configuración resultante del vehículo — CONFIGURACIONRESULTANTE
+  configResultante    String?
+
+  // === VALORES ===
+  valorDeclarado          Decimal? @db.Decimal(15, 2)
+  valorAsegurado          Decimal? @db.Decimal(15, 2)
+  /// Número de orden de servicio del generador (máx 20 chars) — ORDENSERVICIOGENERADOR
+  ordenServicioGenerador  String?
+  instruccionesEspeciales String?  @db.Text
+
+  // === TRASBORDO 2 (segundo punto de trasbordo) ===
+  /// Código DANE segundo municipio de trasbordo — CODMUNICIPIOTRASBORDO2
+  codMunicipioTrasbordo2 String?
+  /// Nombre segundo municipio de trasbordo — NOMMUNICIPIOTRASBORDO2
+  municipioTrasbordo2    String?
+
+  // === EXTRAS RNDC ===
+  /// Cantidad reportada de información de carga — CANTIDADINFORMACIONCARGA
+  cantidadInformacionCarga Int?
+  /// ID del dispositivo GPS — NUMIDGPS
+  numIdGps                 String?
+  /// Placa del vehículo desde la remesa — NUMPLACA
+  numPlacaRndc             String?
+  /// Municipio del propietario de la carga — REM_PROP
+  municipioPropietario     String?
+  /// Grupo de embalaje/envase — GRUPOEMBALAJEENVASE
+  grupoEmbalajeEnvase      String?
+  /// Código arancel completo — CODIGOARANCEL_CODE
+  codigoArancelCompleto    String?
+
+  // === ESTADO RNDC ===
+  /// Número de remesa asignado por el RNDC tras el procesoid 3 exitoso (= ingresoid)
+  numeroRemesaRndc  String?
+  /// Fecha/hora de ingreso (creación) de la remesa en el RNDC — FECHAINGRESO
+  fechaIngresoRndc  DateTime?
+  /// Estado de sincronización con el RNDC
+  estadoRndc        EstadoRndcRemesa @default(PENDIENTE)
+  /// Respuesta XML completa del RNDC en JSON parseado
+  respuestaRndcJson Json?
+
+  // === METADATOS RNDC (importados del Excel del Ministerio) ===
+  /// Usuario RNDC que registró — USUARIO
+  usuarioRndc           String?
+  /// Si fue ingresado interactivamente (S/N) — INTERACTIVO
+  interactivoRndc       String?
+  /// Código interno de empresa en el RNDC — CODIGOEMPRESA
+  codigoEmpresaRndc     Int?
+  /// NIT de la empresa de transporte — NUMNITEMPRESATRANSPORTE
+  nitEmpresaTransporte  String?
+  /// Nombre de la empresa de transporte — REMEMPRESA
+  empresaTransporteRndc String?
+  /// ID numérico del usuario que ingresó — USUARIOINGR
+  usuarioIngresoRndc    Int?
+
+  // === ESTADO OPERATIVO ===
+  estado EstadoOperativoRemesa @default(PENDIENTE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  nuevoNegocio        NuevoNegocio?        @relation(fields: [nuevoNegocioId], references: [id])
+  manifiestoOperativo ManifiestoOperativo? @relation(fields: [manifiestoOperativoId], references: [id])
+  remitenteCliente    SucursalCliente?     @relation("RemesaRemitente", fields: [remitenteClienteId], references: [id])
+  destinatarioCliente SucursalCliente?     @relation("RemesaDestinatario", fields: [destinatarioClienteId], references: [id])
+
+  @@index([nuevoNegocioId])
+  @@index([manifiestoOperativoId])
+  @@index([estadoRndc])
+  @@index([estado])
+  @@index([createdAt(sort: Desc)])
+  @@map("remesas")
+}
+
+/// Manifiesto de carga operativo. Agrupa remesas para un despacho real al RNDC (procesoid 4).
+/// Campos alineados con el reporte de Manifiestos del RNDC (Ministerio de Transporte).
+/// codigoInterno es la clave de idempotencia para el SOAP. Código: MF-YYYY-NNNN
+model ManifiestoOperativo {
+  id                    String  @id @default(cuid())
+  /// Código amigable único por año: MF-2026-0001. Clave idempotente para el SOAP RNDC — NUMMANIFIESTOCARGA
+  codigoInterno         String  @unique
+  /// Número/ingresoid asignado por el RNDC tras el procesoid 4 exitoso — INGRESOID
+  numeroManifiesto      String?
+  /// Negocio al que pertenece. Opcional — un manifiesto puede existir sin negocio.
+  nuevoNegocioId        String?
+  /// FK al manifiesto anulado cuando este manifiesto es una corrección (flujo: 32 → 4)
+  reemplazaManifiestoId String?
+  motivoAnulacion       String?
+
+  // === CONDUCTOR Y VEHÍCULO (FK via cedula/placa — NO via id) ===
+  /// Cédula del conductor principal — NUMIDCONDUCTOR
+  conductorCedula  String
+  /// Placa del vehículo — NUMPLACA
+  vehiculoPlaca    String
+  /// Placa del remolque (si aplica) — NUMPLACAREMOLQUE
+  placaRemolque    String?
+  /// Placa del segundo remolque — NUMPLACAREMOLQUE2
+  placaRemolque2   String?
+  /// Tipo ID del segundo conductor — CODIDCONDUCTOR2
+  conductor2TipoId String?
+  /// Cédula del segundo conductor (auxiliar) — NUMIDCONDUCTOR2
+  conductor2Cedula String?
+
+  // === RUTA DEL VIAJE ===
+  /// Nombre del municipio de origen — MANORIGEN
+  origenMunicipio         String
+  /// Código DANE de 8 dígitos del municipio de origen — CODMUNICIPIOORIGENMANIFIESTO
+  origenDane              String
+  /// Nombre del municipio de destino — MANDESTINO
+  destinoMunicipio        String
+  /// Código DANE de 8 dígitos del municipio de destino — CODMUNICIPIODESTINOMANIFIESTO
+  destinoDane             String
+  /// Código DANE municipio intermedio — CODMUNICIPIOINTERMEDIO
+  municipioIntermedioDane String?
+  /// Nombre municipio intermedio — MANINTERMEDIO
+  municipioIntermedio     String?
+
+  // === CLASIFICACIÓN RNDC (diccionario) ===
+  /// Código de operación de transporte — CODOPERACIONTRANSPORTE (G=General, P=Puerta a puerta)
+  codOperacionTransporte   String?
+  /// Código diccionario naturaleza de carga — CODNATURALEZACARGA
+  codNaturalezaCarga       String?
+  /// Código diccionario mercancía — MERCANCIAREMESA (ej: 9880=PAQUETES VARIOS)
+  mercanciaRemesaCod       Int?
+  /// Descripción corta del producto — DESCRIPCIONCORTAPRODUCTO
+  descripcionCortaProducto String?
+  /// Configuración resultante del viaje — MANCONFIGURACIONRESULTANTE
+  configResultante         String?
+
+  // === PESO Y VOLUMEN TOTAL (campos derivados/reportados) ===
+  /// Suma de remesas[].pesoKg — MANKILOGRAMOSREMESAS
+  pesoTotalKg    Int
+  /// Total galones de las remesas (granel líquido) — MANGALONESREMESAS
+  galonesRemesas Decimal? @db.Decimal(12, 2)
+  /// Distancia en km del viaje — KILOMETROS
+  kilometros     Decimal? @db.Decimal(10, 2)
+
+  // === FECHAS ===
+  /// Fecha de expedición del manifiesto — FECHAEXPEDICIONMANIFIESTO
+  fechaExpedicion DateTime @db.Date
+  fechaDespacho   DateTime @db.Date
+
+  // === VALORES ECONÓMICOS ===
+  /// Valor total del flete pactado — VALORFLETEPACTADOVIAJE
+  fletePactado             Decimal   @db.Decimal(15, 2)
+  /// Tipo de valor pactado — TIPOVALORPACTADO
+  tipoValorPactado         String?
+  /// Porcentaje de retención — PORCENTAJERETENCION (uso como entero legacy: default 4 por mil)
+  retencionIca             Int       @default(4)
+  /// Valor del anticipo al conductor — VALORANTICIPOMANIFIESTO
+  valorAnticipo            Decimal   @default(0) @db.Decimal(15, 2)
+  /// DANE 8 dígitos del municipio de pago de saldo (default = destino)
+  municipioPagoSaldo       String?
+  fechaPagoSaldo           DateTime? @db.Date
+  /// Responsable pago cargue: E=Empresa, T=Transportador, G=Generador — CODRESPONSABLEPAGOCARGUE
+  responsablePagoCargue    String    @default("E")
+  /// Responsable pago descargue — CODRESPONSABLEPAGODESCARGUE
+  responsablePagoDescargue String    @default("E")
+
+  // === SICETAC (Sistema de Costos Eficientes) ===
+  /// Valor SICETAC de referencia para el viaje — VALORSICETAC
+  valorSicetac         Decimal? @db.Decimal(15, 2)
+  /// Valor SICETAC por tonelada — VALORTONELADASICETAC
+  valorToneladaSicetac Decimal? @db.Decimal(15, 2)
+
+  // === MONITOREO Y CONTROL ===
+  /// NIT del proveedor de GPS/monitoreo de flota — NITMONITOREOFLOTA
+  nitMonitoreoFlota     String?
+  /// Número de viajes del día (para control SICETAC) — VIAJESDIA
+  viajesDia             Int?
+  /// ID del manifiesto de trasbordo asociado — MANIFIESTOTRASBORDOID
+  trasbordoManifiestoId String?
+
+  // === ACEPTACIÓN ===
+  /// Aceptación electrónica del conductor (true por defecto) — ACEPTACIONELECTRONICA
+  aceptacionElectronica Boolean @default(true)
+  observaciones         String? @db.Text
+
+  // === ESTADO RNDC ===
+  estadoManifiesto  EstadoManifiesto @default(BORRADOR)
+  respuestaRndcJson Json?
+
+  // === METADATOS RNDC (importados del Excel del Ministerio) ===
+  /// Fecha/hora de ingreso (registro) del manifiesto en el RNDC — FECHAINGRESO
+  fechaIngresoRndc     DateTime?
+  /// Usuario RNDC que registró — USUARIO
+  usuarioRndc          String?
+  /// Si fue ingresado interactivamente (S/N) — INTERACTIVO
+  interactivoRndc      String?
+  /// Código interno de empresa en el RNDC — CODIGOEMPRESA
+  codigoEmpresaRndc    Int?
+  /// NIT de la empresa de transporte — NUMNITEMPRESATRANSPORTE
+  nitEmpresaTransporte String?
+  /// Período año-mes (ej: 202201) — ANOMES
+  anoMesRndc           Int?
+  /// ID numérico del usuario que ingresó — USUARIOINGR
+  usuarioIngresoRndc   Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  nuevoNegocio   NuevoNegocio?         @relation(fields: [nuevoNegocioId], references: [id])
+  conductor      Conductor             @relation(fields: [conductorCedula], references: [cedula])
+  vehiculo       Vehiculo              @relation(fields: [vehiculoPlaca], references: [placa])
+  remesas        Remesa[]
+  /// El manifiesto que fue anulado y que este reemplaza
+  reemplazadoPor ManifiestoOperativo?  @relation("Correccion", fields: [reemplazaManifiestoId], references: [id])
+  /// Los manifiestos corrección que reemplazaron a este
+  reemplazos     ManifiestoOperativo[] @relation("Correccion")
+
+  @@index([nuevoNegocioId])
+  @@index([conductorCedula])
+  @@index([estadoManifiesto])
+  @@index([createdAt(sort: Desc)])
+  @@index([vehiculoPlaca])
+  @@index([fechaDespacho])
+  @@map("manifiestos_operativos")
+}
+
+// ══════════════════════════════════════════════════════
+// SEGUIMIENTO Y FEEDBACK
+// ══════════════════════════════════════════════════════
+
+/// Hito de seguimiento del cliente. Registro append-only de eventos del viaje.
+model SeguimientoCliente {
+  id                    String            @id @default(cuid())
+  nuevoNegocioId        String
+  manifiestoOperativoId String?
+  hito                  HitoSeguimiento
+  descripcion           String?
+  ubicacionActual       String?
+  canalNotificacion     CanalNotificacion @default(PORTAL)
+  notificadoEn          DateTime?
+  notificadoA           String?
+  /// userId Clerk del operador que registró el hito
+  registradoPor         String?
+  createdAt             DateTime          @default(now())
+
+  nuevoNegocio NuevoNegocio @relation(fields: [nuevoNegocioId], references: [id])
+
+  @@index([nuevoNegocioId])
+  @@map("seguimientoCliente")
+}
+
+/// Encuesta post-entrega enviada al cliente. Una por negocio. Acceso público via tokenEncuesta.
+model EncuestaPostEntrega {
+  id                      String    @id @default(cuid())
+  nuevoNegocioId          String    @unique
+  /// Calificación general del servicio (1-5)
+  calificacionGeneral     Int
+  calificacionTiempos     Int?
+  calificacionTrato       Int?
+  calificacionEstadoCarga Int?
+  comentario              String?   @db.Text
+  recomendaria            Boolean?
+  /// Token único para acceso público sin auth (ruta /encuesta/[token])
+  tokenEncuesta           String    @unique @default(cuid())
+  /// Cuándo se envió el link al cliente
+  enviadoEn               DateTime?
+  /// Cuándo respondió el cliente (null hasta que responde)
+  respondidoEn            DateTime?
+
+  nuevoNegocio NuevoNegocio @relation(fields: [nuevoNegocioId], references: [id])
+
+  @@map("encuestas_post_entrega")
+}
+
+// ══════════════════════════════════════════════════════
+// AUDIT LOG RNDC (append-only — nunca UPDATE ni DELETE)
+// ══════════════════════════════════════════════════════
+
+/// Registro inmutable de cada llamada SOAP al RNDC.
+/// Sin @updatedAt — es append-only por diseño de auditoría.
+/// La contraseña NUNCA se guarda — se enmascara con *** en requestXml.
+model SyncRndc {
+  id                 String   @id @default(cuid())
+  /// Agrupa llamadas del mismo flujo (ej: crear negocio completo)
+  sessionId          String?
+  /// procesoid RNDC: 3=Remesa, 4=Manifiesto, 5=CumplirRemesa, 6=CumplirManifiesto, 11=Conductor, 12=Vehículo, 32=AnularManifiesto
+  processId          Int
+  /// Tipo de solicitud RNDC: 1=enviar, 2=maestros, 3=consultar
+  tipoSolicitud      Int
+  /// Tipo de entidad afectada: "Remesa" | "ManifiestoOperativo" | "Conductor" | "Vehiculo"
+  entidadTipo        String
+  entidadId          String
+  /// XML enviado al RNDC con contraseña enmascarada (<clave>***</clave>)
+  requestXml         String   @db.Text
+  responseXml        String?  @db.Text
+  httpStatus         Int?
+  exitoso            Boolean
+  /// Valor de <ingresoid> de la respuesta RNDC (0 = error aunque HTTP 200)
+  ingresoidRespuesta String?
+  errorMensaje       String?  @db.Text
+  duracionMs         Int?
+  createdAt          DateTime @default(now())
+
+  @@index([entidadTipo, entidadId])
+  @@index([processId])
+  @@index([exitoso])
+  @@index([createdAt])
+  @@map("sync_rndc")
 }

@@ -1,0 +1,66 @@
+FECHAINGRESO	CODIGO	CODIGOSEMIR	DESCRIPCION	DESCRIPCIONSEMIR	NOMBRECORTOCONFIGURACION	PESOMAXIMO	PESOMINIMO	GALONESMINIMO	GALONESMAXIMO	CODIGOSEMIR2	NOMBRESEMIR2	DESCRIPCIONSEMIR2	VALORMAXIMOTONELADAKILOMETRO	VALORMINIMOTONELADAKILOMETRO	
+2025/05/12 16:14:48	54	24	Tractocamión 3 ejes	SemiRemolque Modular 5 ejes	3SM5	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	23	Tractocamión 3 ejes	SemiRemolque Modular 4 ejes	3SM4	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	22	Tractocamión 3 ejes	SemiRemolque Modular 3 ejes	3SM3	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	17	Tractocamión 3 ejes	Remolque Modular 8 ejes	3RM8	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	16	Tractocamión 3 ejes	Remolque Modular 7 ejes	3RM7	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	15	Tractocamión 3 ejes	Remolque Modular 6 ejes	3RM6	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	14	Tractocamión 3 ejes	Remolque Modular 5 ejes	3RM5	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	13	Tractocamión 3 ejes	Remolque Modular 4 ejes	3RM4	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	12	Tractocamión 3 ejes	Remolque Modular 3 ejes	3RM3	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	11	Tractocamión 3 ejes	Remolque Modular 2 ejes	3RM2	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	28	Tractocamión 3 ejes	SemiRemolque Modular 9 ejes	3SM9	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	27	Tractocamión 3 ejes	SemiRemolque Modular 8 ejes	3SM8	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	26	Tractocamión 3 ejes	SemiRemolque Modular 7 ejes	3SM7	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	25	Tractocamión 3 ejes	SemiRemolque Modular 6 ejes	3SM6	150000	100	0	0	 	 	 	50000	10	
+2025/05/10 18:52:22	54	10	Tractocamión de 3 ejes	Remolque Modular de 1 eje	3RM1	150000	1000	0	0	 	 	 	20000	0	
+2025/05/09 14:23:20	63	71	Semiremolque de 3 ejes	Remolque de 2 ejes	3M2	30000	10000	0	0	 	 	 	20000	0	
+2022/01/28 12:09:21	47	71	Volqueta de 4 ejes	Remolque de 2 ejes	V4R2	49300	60	0	0	 	 	 	20000	0	
+2025/05/12 16:14:48	54	21	Tractocamión 3 ejes	SemiRemolque Modular 2 ejes	3SM2	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	20	Tractocamión 3 ejes	SemiRemolque Modular 1 eje	3SM1	150000	100	0	0	 	 	 	50000	10	
+2025/05/12 16:14:48	54	18	Tractocamión 3 ejes	Remolque Modular 9 ejes	3RM9	150000	100	0	0	 	 	 	50000	10	
+2020/10/02 07:59:12	48	72	Volqueta de 2 ejes	Remolque de 3 ejes	V2R3	40000	0	0	10000	 	 	 	20000	10	
+2020/10/02 07:58:28	48	71	Volqueta de 2 ejes	Remolque de 2 ejes	V2R2	40000	0	0	10000	 	 	 	20000	10	
+2020/10/02 08:00:35	49	72	Volqueta de 3 ejes	Remolque de 3 ejes	V3R3	48300	0	0	10000	 	 	 	20000	10	
+2020/09/25 11:00:40	49	71	Volqueta de 3 ejes	Remolque de 2 ejes	V3R2	40000	1000	0	0	 	 	 	20000	10	
+2020/08/29 10:12:34	55	62	Tractocamión de más de 3 ejes	Semiremolque de 2 ejes	4S2	53000	1000	1000	13000	 	 	 	20000	10	
+2020/12/22 18:43:15	49	 	Volqueta de 3 ejes	 	V3	28700	200	0	0	 	 	 	4500	10	
+2020/12/22 18:43:07	48	 	Volqueta de 2 ejes	 	V2	17500	100	0	0	 	 	 	5000	10	
+2011/08/31 13:09:49	45	 	Camioneta de 2 ejes	 	CA	5000	5	1000	0	 	 	 	12000	0	
+2019/01/22 13:49:37	54	63	Tractocamión de 3 ejes	Semiremolque de 3 ejes	3S3S1	63400	200	0	0	61	S1	Semiremolque de 1 eje	20000	10	
+2019/01/22 13:44:29	54	63	Tractocamión de 3 ejes	Semiremolque de 3 ejes	3S3R3	86620	200	0	0	72	R3	Remolque de 3 ejes	20000	10	
+2019/01/22 13:51:14	54	63	Tractocamión de 3 ejes	Semiremolque de 3 ejes	3S3S2	75670	200	0	0	62	S2	Semiremolque de 2 ejes	20000	10	
+2019/01/22 13:42:06	54	62	Tractocamión de 3 ejes	Semiremolque de 2 ejes	3S2R4	95620	200	0	0	73	R4	Remolque de 4 ejes	20000	10	
+2019/01/22 13:37:21	54	62	Tractocamión de 3 ejes	Semiremolque de 2 ejes	3S2S3	95620	200	0	0	63	S3	Semiremolque de 3 ejes	20000	10	
+2019/01/21 17:23:09	54	62	Tractocamión de 3 ejes	Semiremolque de 2 ejes	3S2R3	84540	200	0	0	72	R3	Remolque de 3 ejes	20000	10	
+2019/01/22 13:48:13	54	62	Tractocamión de 3 ejes	Semiremolque de 2 ejes	3S2S2	73620	200	0	0	62	S2	Semiremolque de 2 ejes	20000	10	
+2019/01/21 17:19:57	54	61	Tractocamión de 3 ejes	Semiremolque de 1 eje	3S1R3	73360	100	0	0	72	R3	Remolque de 3 ejes	20000	10	
+2019/01/21 17:17:13	54	61	Tractocamión de 3 ejes	Semiremolque de 1 eje	3S1S2	73360	100	0	0	62	S2	Semiremolque de 2 ejes	20000	10	
+2011/07/17 20:35:27	40	 	Motocarro de 2 ejes	 	M2	700	0	0	0	 	 	 	20000	0	
+2021/01/03 08:51:06	52	 	Camión Rígido de 4 ejes	 	4	36900	40	40	13000	 	 	 	5000	0	
+2011/07/17 20:20:39	51	 	Camión Rígido de 3 ejes	 	3	28700	10	40	8000	 	 	 	6000	0	
+2011/07/17 20:20:22	50	 	Camión Rígido de 2 ejes	 	2	17500	3	30	4000	 	 	 	12000	0	
+2011/07/17 20:35:27	52	83	Camión Rígido de 4 ejes	Remolque Balanceado de 3 ejes	4B3	52275	70	0	0	 	 	 	20000	10	
+2011/07/17 20:35:15	52	82	Camión Rígido de 4 ejes	Remolque Balanceado de 2 ejes	4B2	52275	60	0	0	 	 	 	20000	10	
+2011/07/17 20:34:46	52	81	Camión Rígido de 4 ejes	Remolque Balanceado de 1 eje	4B1	45100	50	0	0	 	 	 	20000	10	
+2022/01/28 11:41:09	47	 	Volqueta de 4 ejes	 	V4	36900	40	1	1	 	 	 	5000	0	
+2011/07/17 20:19:53	50	82	Camión Rígido de 2 ejes	Remolque Balanceado de 2 ejes	2B2	32800	40	0	0	 	 	 	20000	10	
+2011/07/17 20:19:33	50	81	Camión Rígido de 2 ejes	Remolque Balanceado de 1 eje	2B1	25625	30	0	0	 	 	 	20000	10	
+2011/07/17 20:16:53	51	72	Camión Rígido de 3 ejes	Remolque de 3 ejes	3R3	49300	60	0	0	 	 	 	20000	10	
+2011/07/17 20:16:40	51	71	Camión Rígido de 3 ejes	Remolque de 2 ejes	3R2	45100	50	0	0	 	 	 	20000	10	
+2011/07/17 20:16:25	50	72	Camión Rígido de 2 ejes	Remolque de 3 ejes	2R3	48175	40	0	0	 	 	 	20000	10	
+2011/07/17 20:04:16	50	71	Camión Rígido de 2 ejes	Remolque de 2 ejes	2R2	31775	40	0	0	 	 	 	20000	10	
+2011/07/17 20:21:25	51	83	Camión Rígido de 3 ejes	Remolque Balanceado de 3 ejes	3B3	49200	60	0	0	 	 	 	20000	10	
+2011/07/17 20:20:39	51	82	Camión Rígido de 3 ejes	Remolque Balanceado de 2 ejes	3B2	41000	50	0	0	 	 	 	20000	10	
+2011/07/17 20:20:22	51	81	Camión Rígido de 3 ejes	Remolque Balanceado de 1 eje	3B1	33825	40	0	0	 	 	 	20000	10	
+2011/07/17 20:20:07	50	83	Camión Rígido de 2 ejes	Remolque Balanceado de 3 ejes	2B3	32800	40	0	0	 	 	 	20000	10	
+2011/07/17 20:17:53	52	73	Camión Rígido de 4 ejes	Remolque de 4 ejes	4R4	49300	80	0	0	 	 	 	20000	10	
+2011/07/17 20:17:37	52	72	Camión Rígido de 4 ejes	Remolque de 3 ejes	4R3	49300	70	0	0	 	 	 	20000	10	
+2011/07/17 20:17:23	52	71	Camión Rígido de 4 ejes	Remolque de 2 ejes	4R2	49300	60	0	0	 	 	 	20000	10	
+2011/07/17 20:35:15	54	63	Tractocamión de 3 ejes	Semiremolque de 3 ejes	3S3	53300	30	100	15000	 	 	 	5000	0	
+2011/07/17 20:34:46	54	62	Tractocamión de 3 ejes	Semiremolque de 2 ejes	3S2	49200	30	100	13000	 	 	 	5000	0	
+2011/07/17 20:26:22	54	61	Tractocamión de 3 ejes	Semiremolque de 1 eje	3S1	29725	30	100	13000	 	 	 	20000	0	
+2021/01/03 08:52:06	53	63	Tractocamión de 2 ejes	Semiremolque de 3 ejes	2S3	41513	50	70	11000	 	 	 	5000	0	
+2011/07/17 20:22:55	53	62	Tractocamión de 2 ejes	Semiremolque de 2 ejes	2S2	32800	30	70	11000	 	 	 	5000	0	
+2011/07/17 20:21:25	53	61	Tractocamión de 2 ejes	Semiremolque de 1 eje	2S1	27765	20	70	11000	 	 	 	6000	0	
+2020/04/19 08:03:54	54	64	Tractocamión de 3 ejes	Semiremolque de más de 3 ejes	3S4	54000	70	110	13000	 	 	 	20000	10	

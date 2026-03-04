@@ -22,6 +22,8 @@ const isPublicRoute = createRouteMatcher([
   '/api/distancia(.*)',   // Distancias entre municipios (uso interno del wizard)
   '/api/solicitudes',    // POST — crear solicitud (flujo público del wizard)
   '/api/solicitudes/:id', // GET/PATCH — guardado progresivo del wizard
+  '/api/encuestas(.*)',  // Encuesta post-entrega: acceso público via tokenEncuesta
+  '/encuesta(.*)',       // Páginas públicas de encuesta (/encuesta/[token] y /encuesta/[token]/gracias)
   // /sign-up intencionalmente ausente: registro deshabilitado
 ])
 

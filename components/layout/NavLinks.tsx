@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CSSProperties } from 'react';
+import { colors } from '@/lib/theme/colors';
 
 /**
  * Links de navegación reutilizables para desktop y drawer mobile.
@@ -19,6 +20,8 @@ const NAV_LINKS = [
   { text: 'Inicio', href: '/home' },
   { text: 'Servicios', href: '/servicios' },
   { text: 'Quiénes Somos', href: '/quienes-somos' },
+  { text: 'Operacional', href: '/operacional/negocios' },
+  { text: 'Cotizaciones', href: '/cotizaciones' },
 ];
 
 export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
@@ -37,7 +40,7 @@ export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
         const linkStyle: CSSProperties =
           orientation === 'horizontal'
             ? {
-                color: isActive ? '#1F7A5C' : '#1A1A1A',
+                color: isActive ? colors.brandGreen : colors.brandTextDark,
                 fontWeight: isActive ? 600 : 500,
                 fontSize: '15px',
                 textDecoration: 'none',
@@ -45,11 +48,11 @@ export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
               }
             : {
                 display: 'block',
-                color: isActive ? '#1F7A5C' : '#1A1A1A',
+                color: isActive ? colors.brandGreen : colors.brandTextDark,
                 fontWeight: 500,
                 fontSize: '16px',
                 padding: '16px 24px',
-                borderBottom: '1px solid #F5F7FA',
+                borderBottom: `1px solid ${colors.brandBgLight}`,
                 textDecoration: 'none',
                 transition: 'color 200ms ease, background-color 200ms ease',
               };
@@ -62,13 +65,13 @@ export default function NavLinks({ orientation, onLinkClick }: NavLinksProps) {
               onClick={onLinkClick}
               aria-current={isActive ? 'page' : undefined}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = '#1F7A5C';
+                (e.currentTarget as HTMLAnchorElement).style.color = colors.brandGreen;
                 if (orientation === 'vertical') {
-                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#F5F7FA';
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = colors.brandBgLight;
                 }
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = isActive ? '#1F7A5C' : '#1A1A1A';
+                (e.currentTarget as HTMLAnchorElement).style.color = isActive ? colors.brandGreen : colors.brandTextDark;
                 if (orientation === 'vertical') {
                   (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent';
                 }

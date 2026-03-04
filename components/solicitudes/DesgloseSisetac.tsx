@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, Fragment } from 'react';
+import { colors } from '@/lib/theme/colors';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
 
@@ -49,7 +50,7 @@ function ColapsableSection({
 }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ background: '#FFFFFF', borderRadius: 12, border: '1px solid #E5E7EB', overflow: 'hidden' }}>
+    <div style={{ background: colors.bgWhite, borderRadius: 12, border: `1px solid ${colors.borderLight}`, overflow: 'hidden' }}>
       {/* Cabecera — siempre visible, clicable */}
       <button
         type="button"
@@ -57,33 +58,33 @@ function ColapsableSection({
         style={{
           width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '14px 20px', cursor: 'pointer', border: 'none', outline: 'none',
-          background: open ? '#F9FAFB' : '#FFFFFF', textAlign: 'left', gap: 12,
-          borderBottom: open ? '1px solid #F3F4F6' : 'none',
+          background: open ? colors.bgLight : colors.bgWhite, textAlign: 'left', gap: 12,
+          borderBottom: open ? `1px solid ${colors.borderLighter}` : 'none',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ fontSize: 17 }}>{icon}</span>
-          <span style={{ fontSize: 14, fontWeight: 700, color: '#111827' }}>{title}</span>
+          <span style={{ fontSize: 14, fontWeight: 700, color: colors.textPrimary }}>{title}</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           {/* Total siempre visible */}
           {!noTotal && (
             <div style={{ textAlign: 'right' }}>
-              <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF' }}>{totalLabel}</p>
+              <p style={{ margin: 0, fontSize: 11, color: colors.textPlaceholder }}>{totalLabel}</p>
               <p style={{
                 margin: 0, fontSize: 15, fontWeight: 800,
-                color: highlight ? '#065F46' : '#111827',
+                color: highlight ? colors.primaryDark : colors.textPrimary,
               }}>
                 {fmt(total)}
               </p>
             </div>
           )}
           {noTotal && (
-            <span style={{ fontSize: 12, color: '#9CA3AF' }}>{totalLabel}</span>
+            <span style={{ fontSize: 12, color: colors.textPlaceholder }}>{totalLabel}</span>
           )}
           {/* Chevron */}
           <span style={{
-            fontSize: 12, color: '#6B7280', transition: 'transform 0.2s',
+            fontSize: 12, color: colors.textMuted, transition: 'transform 0.2s',
             transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
             display: 'inline-block',
           }}>▾</span>
@@ -104,13 +105,13 @@ function MRow({ label, value, note, bold }: { label: string; value: number; note
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
-      padding: '7px 0', borderBottom: '1px solid #F9FAFB', gap: 8,
+      padding: '7px 0', borderBottom: `1px solid ${colors.bgLight}`, gap: 8,
     }}>
       <div>
-        <span style={{ fontSize: 13, color: bold ? '#111827' : '#374151', fontWeight: bold ? 700 : 400 }}>{label}</span>
-        {note && <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF' }}>{note}</p>}
+        <span style={{ fontSize: 13, color: bold ? colors.textPrimary : colors.textDefault, fontWeight: bold ? 700 : 400 }}>{label}</span>
+        {note && <p style={{ margin: 0, fontSize: 11, color: colors.textPlaceholder }}>{note}</p>}
       </div>
-      <span style={{ fontSize: 13, fontWeight: bold ? 800 : 600, color: bold ? '#065F46' : '#111827', whiteSpace: 'nowrap' }}>
+      <span style={{ fontSize: 13, fontWeight: bold ? 800 : 600, color: bold ? colors.primaryDark : colors.textPrimary, whiteSpace: 'nowrap' }}>
         {fmt(value)}
       </span>
     </div>
@@ -121,10 +122,10 @@ function IRow({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
-      gap: 16, padding: '7px 0', borderBottom: '1px solid #F9FAFB',
+      gap: 16, padding: '7px 0', borderBottom: `1px solid ${colors.bgLight}`,
     }}>
-      <span style={{ fontSize: 13, color: '#6B7280', flexShrink: 0 }}>{label}</span>
-      <span style={{ fontSize: 13, color: '#111827', fontWeight: 500, textAlign: 'right' }}>{value}</span>
+      <span style={{ fontSize: 13, color: colors.textMuted, flexShrink: 0 }}>{label}</span>
+      <span style={{ fontSize: 13, color: colors.textPrimary, fontWeight: 500, textAlign: 'right' }}>{value}</span>
     </div>
   );
 }
@@ -151,9 +152,9 @@ export default function DesgloseSisetac({
     <div style={{ marginTop: 32 }}>
       {/* ── Card contenedor blanco ── */}
       <div style={{
-        background: '#FFFFFF',
+        background: colors.bgWhite,
         borderRadius: 16,
-        border: '1px solid #E5E7EB',
+        border: `1px solid ${colors.borderLight}`,
         overflow: 'hidden',
       }}>
         {/* Cabecera del card — clicable */}
@@ -163,20 +164,20 @@ export default function DesgloseSisetac({
           style={{
             width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
             padding: '16px 24px', cursor: 'pointer', border: 'none', outline: 'none',
-            background: '#F9FAFB', borderBottom: cardOpen ? '1px solid #F3F4F6' : 'none',
+            background: colors.bgLight, borderBottom: cardOpen ? `1px solid ${colors.borderLighter}` : 'none',
             textAlign: 'left', gap: 12,
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ fontSize: 18 }}>📊</span>
-            <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: '#111827' }}>Gastos del viaje según SISETAC</h2>
+            <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: colors.textPrimary }}>Gastos del viaje según SISETAC</h2>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             {!cardOpen && (
-              <span style={{ fontSize: 15, fontWeight: 700, color: '#065F46' }}>{fmt(fleteRef)}</span>
+              <span style={{ fontSize: 15, fontWeight: 700, color: colors.primaryDark }}>{fmt(fleteRef)}</span>
             )}
             <span style={{
-              fontSize: 13, color: '#9CA3AF', display: 'inline-block',
+              fontSize: 13, color: colors.textPlaceholder, display: 'inline-block',
               transition: 'transform 0.2s',
               transform: cardOpen ? 'rotate(180deg)' : 'rotate(0deg)',
             }}>▾</span>
@@ -200,7 +201,7 @@ export default function DesgloseSisetac({
           <MRow label="Lavado y engrase"   value={desgloseCv.lavadoEngrase} />
           <MRow label="Mantenimiento"      value={desgloseCv.mantenimiento} />
           <MRow label="Imprevistos (7.5%)" value={desgloseCv.imprevistos} />
-          <div style={{ borderTop: '2px solid #E5E7EB', marginTop: 8, paddingTop: 8 }}>
+          <div style={{ borderTop: `2px solid ${colors.borderLight}`, marginTop: 8, paddingTop: 8 }}>
             <MRow label="Total CV" value={desgloseCv.total} bold />
           </div>
         </ColapsableSection>
@@ -217,11 +218,11 @@ export default function DesgloseSisetac({
           <MRow label="Parqueadero"               value={desgloseCf.parqueadero} />
           <MRow label="Comunicaciones"            value={desgloseCf.comunicaciones} />
           <MRow label="RTM / Revisión"            value={desgloseCf.rtm} />
-          <div style={{ borderTop: '1px dashed #E5E7EB', margin: '8px 0', paddingTop: 8 }}>
+          <div style={{ borderTop: `1px dashed ${colors.borderLight}`, margin: '8px 0', paddingTop: 8 }}>
             <IRow label="Total mensual CF"      value={<strong>{fmt(desgloseCf.totalMes)}</strong>} />
             <IRow label="Viajes/mes estimados"  value={`${desgloseCf.viajesMes} viajes`} />
           </div>
-          <div style={{ borderTop: '2px solid #E5E7EB', paddingTop: 8 }}>
+          <div style={{ borderTop: `2px solid ${colors.borderLight}`, paddingTop: 8 }}>
             <MRow label="CF por viaje" value={desgloseCf.porViaje} bold />
           </div>
         </ColapsableSection>
@@ -235,7 +236,7 @@ export default function DesgloseSisetac({
           <MRow label="Seguridad social conductor"    value={Math.round(fleteRef * 0.194552)}    note="19.46% s/ flete referencial" />
           <MRow label="ICA"                           value={Math.round(fleteRef * 0.008)}       note="0.80% s/ flete referencial" />
           <MRow label="Retención en la fuente"        value={Math.round(fleteRef * 0.012)}       note="1.20% s/ flete referencial" />
-          <div style={{ borderTop: '2px solid #E5E7EB', marginTop: 8, paddingTop: 8 }}>
+          <div style={{ borderTop: `2px solid ${colors.borderLight}`, marginTop: 8, paddingTop: 8 }}>
             <MRow label="Total costos técnicos" value={gastoAdmin + absorbidosOC} bold />
           </div>
         </ColapsableSection>
@@ -258,8 +259,8 @@ export default function DesgloseSisetac({
               value={`${Math.round(params_.distribucionTerreno.plano * 100)}% / ${Math.round(params_.distribucionTerreno.ondulado * 100)}% / ${Math.round(params_.distribucionTerreno.montanoso * 100)}%`} />
             <IRow label="Fuente terreno"  value={params_.fuenteTerreno} />
             <IRow label="Fuente peajes"   value={params_.fuentePeajes} />
-            <div style={{ marginTop: 10, padding: '8px 10px', background: '#F0FDF4', borderRadius: 6 }}>
-              <p style={{ margin: 0, fontSize: 12, color: '#065F46', fontWeight: 500 }}>📋 {params_.metodologia}</p>
+            <div style={{ marginTop: 10, padding: '8px 10px', background: colors.successBg, borderRadius: 6 }}>
+              <p style={{ margin: 0, fontSize: 12, color: colors.primaryDark, fontWeight: 500 }}>📋 {params_.metodologia}</p>
             </div>
           </ColapsableSection>
         )}
@@ -273,14 +274,14 @@ export default function DesgloseSisetac({
           {/* Resumen de componentes */}
           <div style={{ display: 'grid', gridTemplateColumns: '26px 1fr auto auto', gap: '0 8px', marginBottom: 4 }}>
             <span /><span />
-            <span style={{ fontSize: 11, color: '#9CA3AF', textAlign: 'right' }}>valor</span>
-            <span style={{ fontSize: 11, color: '#9CA3AF', textAlign: 'right', minWidth: 96 }}>acumulado</span>
+            <span style={{ fontSize: 11, color: colors.textPlaceholder, textAlign: 'right' }}>valor</span>
+            <span style={{ fontSize: 11, color: colors.textPlaceholder, textAlign: 'right', minWidth: 96 }}>acumulado</span>
           </div>
 
           {[
             { op: ' ', label: 'Costos Variables',     note: 'combustible · peajes · llantas · mant.', val: cvTotal,  acc: cvTotal,      bg: undefined,  clr: undefined },
             { op: '+', label: 'Costos Fijos / viaje', note: 'capital · salarios · seguros · otros',  val: cfViaje,  acc: costoTecnico, bg: undefined,  clr: undefined },
-            { op: '=', label: 'Piso SISETAC',         note: `+ administ. 5% · + OC ÷ 0.7554`,        val: fleteRef, acc: fleteRef,     bg: '#F0FDF4',  clr: '#065F46'  },
+            { op: '=', label: 'Piso SISETAC',         note: `+ administ. 5% · + OC ÷ 0.7554`,        val: fleteRef, acc: fleteRef,     bg: colors.successBg,  clr: colors.primaryDark  },
           ].map(({ op, label, note, val, acc, bg, clr }) => (
             <div key={label} style={{
               display: 'grid', gridTemplateColumns: '26px 1fr auto auto',
@@ -289,15 +290,15 @@ export default function DesgloseSisetac({
               background: bg, borderRadius: bg ? 6 : 0,
               margin: bg ? '4px -4px' : 0,
             }}>
-              <span style={{ fontWeight: 900, fontSize: 15, color: op === '+' ? '#2563EB' : op === '=' ? '#065F46' : '#9CA3AF', textAlign: 'center' }}>{op}</span>
+              <span style={{ fontWeight: 900, fontSize: 15, color: op === '+' ? colors.blueLight : op === '=' ? colors.primaryDark : colors.textPlaceholder, textAlign: 'center' }}>{op}</span>
               <div>
-                <span style={{ fontSize: 12, color: clr ?? '#374151', fontWeight: bg ? 700 : 400 }}>{label}</span>
-                {note && <p style={{ margin: 0, fontSize: 11, color: '#9CA3AF' }}>{note}</p>}
+                <span style={{ fontSize: 12, color: clr ?? colors.textDefault, fontWeight: bg ? 700 : 400 }}>{label}</span>
+                {note && <p style={{ margin: 0, fontSize: 11, color: colors.textPlaceholder }}>{note}</p>}
               </div>
-              <span style={{ fontSize: 11, color: '#9CA3AF', textAlign: 'right', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: 11, color: colors.textPlaceholder, textAlign: 'right', whiteSpace: 'nowrap' }}>
                 {op !== '=' ? (val >= 0 ? `+${fmt(val)}` : fmt(val)) : ''}
               </span>
-              <span style={{ fontSize: 12, fontWeight: 700, color: clr ?? '#9CA3AF', textAlign: 'right', whiteSpace: 'nowrap', minWidth: 96 }}>
+              <span style={{ fontSize: 12, fontWeight: 700, color: clr ?? colors.textPlaceholder, textAlign: 'right', whiteSpace: 'nowrap', minWidth: 96 }}>
                 {fmt(acc)}
               </span>
             </div>
@@ -305,8 +306,8 @@ export default function DesgloseSisetac({
 
           {/* Resultado final */}
           <div style={{
-            marginTop: 12, padding: '14px 16px', background: '#065F46', borderRadius: 10,
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#FFFFFF',
+            marginTop: 12, padding: '14px 16px', background: colors.primaryDark, borderRadius: 10,
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: colors.bgWhite,
           }}>
             <div>
               <p style={{ margin: 0, fontSize: 12, opacity: 0.8 }}>Piso SISETAC (flete referencial)</p>

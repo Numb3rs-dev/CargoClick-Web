@@ -7,6 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { UserButton, useAuth } from '@clerk/nextjs';
 import NavLinks from './NavLinks';
 import Button from '@/components/ui/Button';
+import { colors } from '@/lib/theme/colors';
 
 /**
  * Header principal de CargoClick.
@@ -52,7 +53,7 @@ export default function Header() {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          background: '#FFFFFF',
+          background: colors.bgWhite,
           boxShadow: isScrolled ? '0 1px 6px rgba(0,0,0,0.10)' : 'none',
           transition: 'box-shadow 200ms ease',
           overflow: 'visible',
@@ -123,7 +124,7 @@ export default function Header() {
               justifyContent: 'center',
             }}
           >
-            <Menu size={24} color="#1A1A1A" aria-hidden="true" />
+            <Menu size={24} color={colors.brandTextDark} aria-hidden="true" />
           </button>
         </div>
       </header>
@@ -154,7 +155,7 @@ export default function Header() {
           right: 0,
           width: '280px',
           height: '100vh',
-          background: '#FFFFFF',
+          background: colors.bgWhite,
           zIndex: 100,
           display: 'flex',
           flexDirection: 'column',
@@ -170,12 +171,12 @@ export default function Header() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            borderBottom: '1px solid #F5F7FA',
+            borderBottom: `1px solid ${colors.brandBgLight}`,
           }}
         >
           <span style={{ fontSize: '18px', fontWeight: 700 }}>
-            <span style={{ color: '#0B3D91' }}>Cargo</span>
-            <span style={{ color: '#1F7A5C' }}>Click</span>
+            <span style={{ color: colors.brandNavy }}>Cargo</span>
+            <span style={{ color: colors.brandGreen }}>Click</span>
           </span>
           <button
             ref={closeButtonRef}
@@ -191,7 +192,7 @@ export default function Header() {
               justifyContent: 'center',
             }}
           >
-            <X size={24} color="#1A1A1A" aria-hidden="true" />
+            <X size={24} color={colors.brandTextDark} aria-hidden="true" />
           </button>
         </div>
 
@@ -204,7 +205,7 @@ export default function Header() {
         <div
           style={{
             padding: '24px',
-            borderTop: '1px solid #F5F7FA',
+            borderTop: `1px solid ${colors.brandBgLight}`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: isSignedIn ? 'flex-start' : 'stretch',
@@ -220,7 +221,7 @@ export default function Header() {
                   },
                 }}
               />
-              <span style={{ fontSize: '14px', color: '#6B7280' }}>Mi cuenta</span>
+              <span style={{ fontSize: '14px', color: colors.textMuted }}>Mi cuenta</span>
             </>
           ) : (
             <Button

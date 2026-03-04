@@ -13,6 +13,7 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react'
+import { colors } from '@/lib/theme/colors'
 
 //  Tipos 
 
@@ -28,17 +29,17 @@ const VEHICULOS: { id: ConfigVehiculo; label: string; capacidad: string; maxTon:
 ]
 
 const CONFIANZA_COLOR: Record<string, string> = {
-  ALTA: '#059669', MEDIA: '#D97706', BAJA: '#DC2626',
+  ALTA: colors.primary, MEDIA: colors.amber, BAJA: colors.danger,
 }
 
 const ESTADOS_NEGOCIACION = [
-  { value: 'BORRADOR',       label: 'Borrador',       color: '#6B7280' },
-  { value: 'EN_OFERTA',      label: 'En oferta',      color: '#2563EB' },
-  { value: 'EN_NEGOCIACION', label: 'En negociación', color: '#D97706' },
-  { value: 'ACEPTADO',       label: 'Aceptado ',     color: '#059669' },
-  { value: 'RECHAZADO',      label: 'Rechazado',      color: '#DC2626' },
-  { value: 'CANCELADO',      label: 'Cancelado',      color: '#9CA3AF' },
-  { value: 'CERRADO',        label: 'Cerrado',        color: '#7C3AED' },
+  { value: 'BORRADOR',       label: 'Borrador',       color: colors.textMuted },
+  { value: 'EN_OFERTA',      label: 'En oferta',      color: colors.blueLight },
+  { value: 'EN_NEGOCIACION', label: 'En negociación', color: colors.amber },
+  { value: 'ACEPTADO',       label: 'Aceptado ',     color: colors.primary },
+  { value: 'RECHAZADO',      label: 'Rechazado',      color: colors.danger },
+  { value: 'CANCELADO',      label: 'Cancelado',      color: colors.textPlaceholder },
+  { value: 'CERRADO',        label: 'Cerrado',        color: colors.purple },
 ]
 
 interface AjusteComercial {
@@ -107,11 +108,11 @@ function inputStyle(warning?: boolean): React.CSSProperties {
   return {
     width: '100%',
     padding: '8px 12px',
-    border: `1px solid ${warning ? '#F59E0B' : '#D1D5DB'}`,
+    border: `1px solid ${warning ? colors.goldDark : colors.border}`,
     borderRadius: 8,
     fontSize: 13,
     outline: 'none',
-    background: '#FFFFFF',
+    background: colors.bgWhite,
     boxSizing: 'border-box',
   }
 }
@@ -122,9 +123,9 @@ function Badge({ estado }: { estado: string }) {
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '3px 10px', borderRadius: 9999, fontSize: 12, fontWeight: 600,
-      background: (cfg?.color ?? '#6B7280') + '20',
-      color: cfg?.color ?? '#6B7280',
-      border: `1px solid ${(cfg?.color ?? '#6B7280')}40`,
+      background: (cfg?.color ?? colors.textMuted) + '20',
+      color: cfg?.color ?? colors.textMuted,
+      border: `1px solid ${(cfg?.color ?? colors.textMuted)}40`,
     }}>
       {cfg?.label ?? estado}
     </span>
@@ -425,19 +426,19 @@ export default function PanelComercial({
           SECCIÓN 1  EMULADOR DE ESCENARIOS
            */}
       <div style={{
-        background: '#FFFFFF', borderRadius: 16, border: '1px solid #E5E7EB',
+        background: colors.bgWhite, borderRadius: 16, border: `1px solid ${colors.borderLight}`,
         overflow: 'hidden', marginBottom: 20,
       }}>
         <div style={{
-          padding: '16px 24px', borderBottom: '1px solid #F3F4F6',
-          background: '#F9FAFB', display: 'flex', alignItems: 'center', gap: 10,
+          padding: '16px 24px', borderBottom: `1px solid ${colors.borderLighter}`,
+          background: colors.bgLight, display: 'flex', alignItems: 'center', gap: 10,
         }}>
           <span style={{ fontSize: 18 }}></span>
           <div>
-            <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: '#111827' }}>
+            <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: colors.textPrimary }}>
               Emulador de Escenarios
             </h2>
-            <p style={{ margin: '2px 0 0', fontSize: 12, color: '#9CA3AF' }}>
+            <p style={{ margin: '2px 0 0', fontSize: 12, color: colors.textPlaceholder }}>
               Cambia parámetros y emula. Los datos SISETAC y RNDC de arriba no se modifican.
             </p>
           </div>
@@ -448,21 +449,21 @@ export default function PanelComercial({
           {/* Contexto del servicio */}
           <div style={{
             display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 20,
-            padding: '10px 14px', background: '#F9FAFB', borderRadius: 10,
-            border: '1px solid #E5E7EB',
+            padding: '10px 14px', background: colors.bgLight, borderRadius: 10,
+            border: `1px solid ${colors.borderLight}`,
           }}>
             {origen && destino && (
-              <span style={{ fontSize: 12, color: '#4B5563' }}>
+              <span style={{ fontSize: 12, color: colors.textSecondary }}>
                  <strong>{origen}</strong>  <strong>{destino}</strong>
               </span>
             )}
             {distanciaKm !== null && (
-              <span style={{ fontSize: 12, color: '#4B5563' }}>
+              <span style={{ fontSize: 12, color: colors.textSecondary }}>
                  <strong>{distanciaKm.toLocaleString('es-CO')} km</strong>
               </span>
             )}
             {pesoKg !== null && (
-              <span style={{ fontSize: 12, color: '#4B5563' }}>
+              <span style={{ fontSize: 12, color: colors.textSecondary }}>
                  <strong>{pesoKg.toLocaleString('es-CO')} kg</strong>
               </span>
             )}
@@ -474,9 +475,9 @@ export default function PanelComercial({
             return (
               <div style={{ marginBottom: 20 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-                  <label style={{ fontSize: 12, fontWeight: 600, color: '#374151' }}>Tipo de vehículo</label>
+                  <label style={{ fontSize: 12, fontWeight: 600, color: colors.textDefault }}>Tipo de vehículo</label>
                   {calculando && (
-                    <span style={{ fontSize: 11, color: '#9CA3AF' }}>⏳ Calculando piso…</span>
+                    <span style={{ fontSize: 11, color: colors.textPlaceholder }}>⏳ Calculando piso…</span>
                   )}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -490,18 +491,18 @@ export default function PanelComercial({
                         style={{
                           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                           padding: '8px 12px', borderRadius: 8, cursor: 'pointer',
-                          border: isSelected ? '2px solid #2563EB' : '1px solid #E5E7EB',
-                          background: isSelected ? '#EFF6FF' : '#FFFFFF',
+                          border: isSelected ? `2px solid ${colors.blueLight}` : `1px solid ${colors.borderLight}`,
+                          background: isSelected ? colors.blueBg : colors.bgWhite,
                           textAlign: 'left', fontSize: 13, transition: 'all 0.15s',
                         }}
                       >
-                        <span style={{ fontWeight: isSelected ? 600 : 400, color: isSelected ? '#1D4ED8' : '#374151' }}>
+                        <span style={{ fontWeight: isSelected ? 600 : 400, color: isSelected ? colors.blue : colors.textDefault }}>
                           {v.label}
                         </span>
                         <span style={{
                           fontSize: 11, fontWeight: 500,
-                          color: excedeEste ? '#B45309' : '#6B7280',
-                          background: excedeEste ? '#FEF3C7' : '#F3F4F6',
+                          color: excedeEste ? colors.amberDark : colors.textMuted,
+                          background: excedeEste ? colors.warningBg : colors.borderLighter,
                           padding: '2px 7px', borderRadius: 999,
                         }}>
                           {v.capacidad}{excedeEste ? ' ⚠️' : ''}
@@ -516,8 +517,8 @@ export default function PanelComercial({
                   return excedeCapacidad ? (
                     <div style={{
                       marginTop: 8, padding: '8px 12px',
-                      background: '#FFFBEB', border: '1px solid #FDE68A',
-                      borderRadius: 8, fontSize: 12, color: '#92400E',
+                      background: colors.warningBg2, border: `1px solid ${colors.warningBorder}`,
+                      borderRadius: 8, fontSize: 12, color: colors.warningDark,
                     }}>
                       ⚠️ La carga ({pesoTon.toFixed(1)} ton) supera la capacidad del vehículo seleccionado
                       ({vehiculoInfo!.maxTon} ton). El cálculo se realiza igual, pero verifica con operaciones.
@@ -531,8 +532,8 @@ export default function PanelComercial({
           {simError && (
             <div style={{
               marginTop: 14, padding: '10px 14px',
-              background: '#FEF2F2', border: '1px solid #FCA5A5',
-              borderRadius: 8, color: '#DC2626', fontSize: 13,
+              background: colors.dangerBg, border: `1px solid ${colors.dangerBorder}`,
+              borderRadius: 8, color: colors.danger, fontSize: 13,
             }}>
                {simError}
             </div>
@@ -541,40 +542,40 @@ export default function PanelComercial({
           {/* Resultado emulación — solo tras emular */}
           {resultado && (
             <div style={{ marginTop: 20 }}>
-              <p style={{ margin: '0 0 12px', fontSize: 11, color: '#6B7280', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <p style={{ margin: '0 0 12px', fontSize: 11, color: colors.textMuted, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Resultado — {VEHICULOS.find(v => v.id === resultado.vehiculo)?.label ?? resultado.vehiculo}
               </p>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
 
                 {/* Piso SISETAC */}
-                <div style={{ padding: '14px 16px', borderRadius: 12, background: '#F0FDF4', border: '1px solid #A7F3D0' }}>
-                  <p style={{ margin: 0, fontSize: 11, color: '#065F46', fontWeight: 600 }}>Piso SISETAC</p>
-                  <p style={{ margin: '4px 0 0', fontSize: 20, fontWeight: 900, color: '#065F46' }}>
+                <div style={{ padding: '14px 16px', borderRadius: 12, background: colors.successBg, border: `1px solid ${colors.successBadgeBorder}` }}>
+                  <p style={{ margin: 0, fontSize: 11, color: colors.primaryDark, fontWeight: 600 }}>Piso SISETAC</p>
+                  <p style={{ margin: '4px 0 0', fontSize: 20, fontWeight: 900, color: colors.primaryDark }}>
                     {fmt(resultado.pisoSisetac)}
                   </p>
-                  <p style={{ margin: '2px 0 0', fontSize: 11, color: '#6B7280' }}>
+                  <p style={{ margin: '2px 0 0', fontSize: 11, color: colors.textMuted }}>
                     {resultado.distanciaKm} km · {fmt(Math.round(resultado.pisoSisetac / resultado.distanciaKm))}/km
                   </p>
                 </div>
 
                 {/* RNDC */}
                 {resultado.rndc && resultado.rndc.estimado !== null ? (
-                  <div style={{ padding: '14px 16px', borderRadius: 12, background: '#FFFBEB', border: '1px solid #FDE68A' }}>
-                    <p style={{ margin: 0, fontSize: 11, color: '#92400E', fontWeight: 600 }}>
+                  <div style={{ padding: '14px 16px', borderRadius: 12, background: colors.warningBg2, border: `1px solid ${colors.warningBorder}` }}>
+                    <p style={{ margin: 0, fontSize: 11, color: colors.warningDark, fontWeight: 600 }}>
                       Ref. RNDC
                       {resultado.rndc.confianza && (
                         <span style={{
                           marginLeft: 6, padding: '1px 6px', borderRadius: 9999, fontSize: 10,
-                          background: (CONFIANZA_COLOR[resultado.rndc.confianza] ?? '#6B7280') + '20',
-                          color: CONFIANZA_COLOR[resultado.rndc.confianza] ?? '#6B7280',
+                          background: (CONFIANZA_COLOR[resultado.rndc.confianza] ?? colors.textMuted) + '20',
+                          color: CONFIANZA_COLOR[resultado.rndc.confianza] ?? colors.textMuted,
                         }}>{resultado.rndc.confianza}</span>
                       )}
                     </p>
-                    <p style={{ margin: '4px 0 0', fontSize: 20, fontWeight: 900, color: '#92400E' }}>
+                    <p style={{ margin: '4px 0 0', fontSize: 20, fontWeight: 900, color: colors.warningDark }}>
                       {fmt(resultado.rndc.estimado)}
                     </p>
-                    <p style={{ margin: '2px 0 0', fontSize: 11, color: '#6B7280' }}>
+                    <p style={{ margin: '2px 0 0', fontSize: 11, color: colors.textMuted }}>
                       {pctDiff(resultado.rndc.estimado, resultado.pisoSisetac)} vs piso SISETAC
                       {resultado.rndc.viajesSimilares !== null && ` · ${resultado.rndc.viajesSimilares} viajes`}
                     </p>
@@ -582,10 +583,10 @@ export default function PanelComercial({
                 ) : (
                   <div style={{
                     padding: '14px 16px', borderRadius: 12,
-                    background: '#F9FAFB', border: '1px solid #E5E7EB',
+                    background: colors.bgLight, border: `1px solid ${colors.borderLight}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <p style={{ margin: 0, fontSize: 12, color: '#9CA3AF', textAlign: 'center' }}>
+                    <p style={{ margin: 0, fontSize: 12, color: colors.textPlaceholder, textAlign: 'center' }}>
                       Sin referencia RNDC
                     </p>
                   </div>
@@ -597,8 +598,8 @@ export default function PanelComercial({
                   onClick={agregarEscenario}
                   style={{
                     padding: '8px 20px',
-                    background: '#FFFFFF', color: '#374151',
-                    border: '1px solid #D1D5DB', borderRadius: 8,
+                    background: colors.bgWhite, color: colors.textDefault,
+                    border: `1px solid ${colors.border}`, borderRadius: 8,
                     fontWeight: 600, fontSize: 13, cursor: 'pointer',
                     display: 'inline-flex', alignItems: 'center', gap: 6,
                   }}
@@ -606,7 +607,7 @@ export default function PanelComercial({
                   ➕ Agregar a comparativa
                 </button>
                 {escenarios.length > 0 && (
-                  <span style={{ marginLeft: 10, fontSize: 12, color: '#6B7280' }}>
+                  <span style={{ marginLeft: 10, fontSize: 12, color: colors.textMuted }}>
                     {escenarios.length} escenario{escenarios.length !== 1 ? 's' : ''} guardado{escenarios.length !== 1 ? 's' : ''}
                   </span>
                 )}
@@ -616,17 +617,17 @@ export default function PanelComercial({
 
           {/* ── Construye tu oferta — siempre visible ── */}
           <div style={{
-            marginTop: 20, padding: '20px', background: '#F8FAFF',
-            borderRadius: 12, border: '1px solid #BFDBFE',
+            marginTop: 20, padding: '20px', background: colors.blueBg2,
+            borderRadius: 12, border: `1px solid ${colors.blueBorder}`,
           }}>
-            <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 700, color: '#1D4ED8' }}>
+            <p style={{ margin: '0 0 16px', fontSize: 13, fontWeight: 700, color: colors.blue }}>
               🏗️ Construye tu oferta
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
               {/* Piso deseado */}
               <div>
-                <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>
                   Piso base deseado (COP)
                 </label>
                 <input
@@ -640,12 +641,12 @@ export default function PanelComercial({
                   }}
                 />
                 {ofertaPisoN > 0 && ofertaPisoRef > 0 && ofertaPisoN < ofertaPisoRef && (
-                  <p style={{ margin: '4px 0 0', fontSize: 11, color: '#DC2626' }}>
+                  <p style={{ margin: '4px 0 0', fontSize: 11, color: colors.danger }}>
                     ⚠️ Por debajo del piso SISETAC ({fmt(ofertaPisoRef)})
                   </p>
                 )}
                 {ofertaPisoN > 0 && ofertaPisoRef > 0 && ofertaPisoN >= ofertaPisoRef && (
-                  <p style={{ margin: '4px 0 0', fontSize: 11, color: '#059669' }}>
+                  <p style={{ margin: '4px 0 0', fontSize: 11, color: colors.primary }}>
                     +{fmt(ofertaPisoN - ofertaPisoRef)} sobre piso SISETAC
                   </p>
                 )}
@@ -653,9 +654,9 @@ export default function PanelComercial({
 
               {/* Comisión */}
               <div>
-                <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>
+                <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>
                   Comisión comercial:&nbsp;
-                  <strong style={{ color: '#1D4ED8', fontSize: 14 }}>{ofertaComision}%</strong>
+                  <strong style={{ color: colors.blue, fontSize: 14 }}>{ofertaComision}%</strong>
                 </label>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <input
@@ -672,8 +673,8 @@ export default function PanelComercial({
                   />
                 </div>
                 {ofertaPisoN > 0 && ofertaComision > 0 && (
-                  <p style={{ margin: '6px 0 0', fontSize: 11, color: '#6B7280' }}>
-                    Flete con comisión: <strong style={{ color: '#1D4ED8' }}>{fmt(ofertaTarifaBase)}</strong>
+                  <p style={{ margin: '6px 0 0', fontSize: 11, color: colors.textMuted }}>
+                    Flete con comisión: <strong style={{ color: colors.blue }}>{fmt(ofertaTarifaBase)}</strong>
                   </p>
                 )}
               </div>
@@ -682,13 +683,13 @@ export default function PanelComercial({
             {/* Condiciones especiales — siempre visible */}
             <div style={{
               marginBottom: 16, padding: '12px 14px',
-              background: '#FFFBEB', borderRadius: 10, border: '1px solid #FDE68A',
+              background: colors.warningBg2, borderRadius: 10, border: `1px solid ${colors.warningBorder}`,
             }}>
-              <p style={{ margin: '0 0 10px', fontSize: 12, fontWeight: 700, color: '#92400E' }}>
+              <p style={{ margin: '0 0 10px', fontSize: 12, fontWeight: 700, color: colors.warningDark }}>
                 📋 Costos adicionales (condiciones especiales)
               </p>
               {condicionesLocal.length === 0 ? (
-                <p style={{ margin: 0, fontSize: 12, color: '#9CA3AF', fontStyle: 'italic' }}>
+                <p style={{ margin: 0, fontSize: 12, color: colors.textPlaceholder, fontStyle: 'italic' }}>
                   No hay condiciones especiales registradas en esta solicitud.
                 </p>
               ) : (
@@ -697,10 +698,10 @@ export default function PanelComercial({
                     <div key={c.key} style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                       fontSize: 13, padding: '4px 6px', borderRadius: 6,
-                      background: c.activo ? 'transparent' : '#F9FAFB',
+                      background: c.activo ? 'transparent' : colors.bgLight,
                       opacity: c.activo ? 1 : 0.5,
                     }}>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#374151', cursor: 'pointer' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, color: colors.textDefault, cursor: 'pointer' }}>
                         <input
                           type="checkbox"
                           checked={c.activo}
@@ -725,13 +726,13 @@ export default function PanelComercial({
                             setCondicionesLocal(next)
                           }}
                           style={{
-                            width: 120, textAlign: 'right', fontWeight: 700, color: '#92400E',
-                            border: '1px solid #FCD34D', borderRadius: 6, padding: '3px 8px',
-                            fontSize: 13, background: '#FFFBEB', outline: 'none', cursor: 'text',
+                            width: 120, textAlign: 'right', fontWeight: 700, color: colors.warningDark,
+                            border: `1px solid ${colors.gold}`, borderRadius: 6, padding: '3px 8px',
+                            fontSize: 13, background: colors.warningBg2, outline: 'none', cursor: 'text',
                           }}
                         />
                       ) : (
-                        <span style={{ fontWeight: 700, color: '#9CA3AF' }}>
+                        <span style={{ fontWeight: 700, color: colors.textPlaceholder }}>
                           {fmt(c.monto)}
                         </span>
                       )}
@@ -741,11 +742,11 @@ export default function PanelComercial({
               )}
               {/* Total — fuente única de verdad */}
               <div style={{
-                marginTop: 10, paddingTop: 8, borderTop: '1px solid #FDE68A',
+                marginTop: 10, paddingTop: 8, borderTop: `1px solid ${colors.warningBorder}`,
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#92400E' }}>Total costos adicionales</span>
-                <span style={{ fontWeight: 800, color: '#92400E', fontSize: 15 }}>{fmt(sumaCondicionesActivas)}</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: colors.warningDark }}>Total costos adicionales</span>
+                <span style={{ fontWeight: 800, color: colors.warningDark, fontSize: 15 }}>{fmt(sumaCondicionesActivas)}</span>
               </div>
             </div>
 
@@ -753,9 +754,9 @@ export default function PanelComercial({
             <div style={{
               padding: '16px 20px', borderRadius: 12,
               background: ofertaTotalFinal > 0
-                ? 'linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%)'
-                : '#E5E7EB',
-              color: ofertaTotalFinal > 0 ? '#FFFFFF' : '#9CA3AF',
+                ? `linear-gradient(135deg, ${colors.blue} 0%, ${colors.blueLight} 100%)`
+                : colors.borderLight,
+              color: ofertaTotalFinal > 0 ? colors.bgWhite : colors.textPlaceholder,
             }}>
               <p style={{ margin: '0 0 6px', fontSize: 12, opacity: 0.85, fontWeight: 500 }}>
                 💰 Oferta total al cliente
@@ -765,7 +766,7 @@ export default function PanelComercial({
               </p>
               <div style={{
                 marginTop: 12, paddingTop: 10,
-                borderTop: `1px solid ${ofertaTotalFinal > 0 ? 'rgba(255,255,255,0.25)' : '#D1D5DB'}`,
+                borderTop: `1px solid ${ofertaTotalFinal > 0 ? 'rgba(255,255,255,0.25)' : colors.border}`,
                 display: 'flex', flexDirection: 'column', gap: 4,
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, opacity: 0.9 }}>
@@ -780,14 +781,14 @@ export default function PanelComercial({
                 )}
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 12, opacity: 0.9 }}>
                   <span>+ Costos adicionales</span>
-                  <span style={{ fontWeight: 700, color: sumaCondicionesActivas > 0 ? (ofertaTotalFinal > 0 ? '#FDE68A' : '#B45309') : 'inherit' }}>
+                  <span style={{ fontWeight: 700, color: sumaCondicionesActivas > 0 ? (ofertaTotalFinal > 0 ? colors.warningBorder : colors.amberDark) : 'inherit' }}>
                     {sumaCondicionesActivas > 0 ? `+${fmt(sumaCondicionesActivas)}` : '$0'}
                   </span>
                 </div>
                 <div style={{
                   display: 'flex', justifyContent: 'space-between', fontSize: 13, fontWeight: 800,
                   paddingTop: 6, marginTop: 2,
-                  borderTop: `1px solid ${ofertaTotalFinal > 0 ? 'rgba(255,255,255,0.35)' : '#D1D5DB'}`,
+                  borderTop: `1px solid ${ofertaTotalFinal > 0 ? 'rgba(255,255,255,0.35)' : colors.border}`,
                 }}>
                   <span>Total</span>
                   <span>{ofertaTotalFinal > 0 ? fmt(ofertaTotalFinal) : '—'}</span>
@@ -809,15 +810,15 @@ export default function PanelComercial({
            */}
       {escenarios.length > 0 && (
         <div style={{
-          background: '#FFFFFF', borderRadius: 16, border: '1px solid #E5E7EB',
+          background: colors.bgWhite, borderRadius: 16, border: `1px solid ${colors.borderLight}`,
           overflow: 'hidden', marginBottom: 20,
         }}>
           <div style={{
-            padding: '14px 24px', borderBottom: '1px solid #F3F4F6',
-            background: '#F9FAFB', display: 'flex', alignItems: 'center', gap: 10,
+            padding: '14px 24px', borderBottom: `1px solid ${colors.borderLighter}`,
+            background: colors.bgLight, display: 'flex', alignItems: 'center', gap: 10,
           }}>
             <span style={{ fontSize: 17 }}></span>
-            <h2 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: '#111827' }}>
+            <h2 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: colors.textPrimary }}>
               Comparativa de Escenarios ({escenarios.length})
             </h2>
           </div>
@@ -825,32 +826,32 @@ export default function PanelComercial({
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
-                <tr style={{ borderBottom: '2px solid #E5E7EB', background: '#F9FAFB' }}>
-                  <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Escenario</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Vehículo</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Piso SISETAC</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Comisión</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Tarifa final</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>Ref. RNDC</th>
-                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: '#6B7280', fontSize: 12 }}>$/km</th>
-                  <th style={{ padding: '10px 6px', textAlign: 'center', fontWeight: 600, color: '#6B7280', fontSize: 12 }}></th>
+                <tr style={{ borderBottom: `2px solid ${colors.borderLight}`, background: colors.bgLight }}>
+                  <th style={{ padding: '10px 14px', textAlign: 'left', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Escenario</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Vehículo</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Piso SISETAC</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Comisión</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Tarifa final</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>Ref. RNDC</th>
+                  <th style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}>$/km</th>
+                  <th style={{ padding: '10px 6px', textAlign: 'center', fontWeight: 600, color: colors.textMuted, fontSize: 12 }}></th>
                 </tr>
               </thead>
               <tbody>
                 {escenarios.map((e, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid #F3F4F6', background: i % 2 === 0 ? '#FFFFFF' : '#F9FAFB' }}>
+                  <tr key={i} style={{ borderBottom: `1px solid ${colors.borderLighter}`, background: i % 2 === 0 ? colors.bgWhite : colors.bgLight }}>
                     <td style={{ padding: '10px 14px' }}>
-                      <p style={{ margin: 0, fontWeight: 700, color: '#111827' }}>{e.label}</p>
-                      <p style={{ margin: '2px 0 0', fontSize: 11, color: '#9CA3AF' }}>{e.hora}</p>
+                      <p style={{ margin: 0, fontWeight: 700, color: colors.textPrimary }}>{e.label}</p>
+                      <p style={{ margin: '2px 0 0', fontSize: 11, color: colors.textPlaceholder }}>{e.hora}</p>
                     </td>
-                    <td style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 700, color: '#1D4ED8' }}>{e.vehiculo}</td>
-                    <td style={{ padding: '10px 14px', textAlign: 'right', color: '#374151' }}>{fmt(e.pisoSisetac)}</td>
-                    <td style={{ padding: '10px 14px', textAlign: 'center', color: '#374151' }}>{e.comisionPct}%</td>
-                    <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 700, color: '#065F46' }}>{fmt(e.tarifaFinal)}</td>
-                    <td style={{ padding: '10px 14px', textAlign: 'right', color: '#92400E' }}>
+                    <td style={{ padding: '10px 14px', textAlign: 'center', fontWeight: 700, color: colors.blue }}>{e.vehiculo}</td>
+                    <td style={{ padding: '10px 14px', textAlign: 'right', color: colors.textDefault }}>{fmt(e.pisoSisetac)}</td>
+                    <td style={{ padding: '10px 14px', textAlign: 'center', color: colors.textDefault }}>{e.comisionPct}%</td>
+                    <td style={{ padding: '10px 14px', textAlign: 'right', fontWeight: 700, color: colors.primaryDark }}>{fmt(e.tarifaFinal)}</td>
+                    <td style={{ padding: '10px 14px', textAlign: 'right', color: colors.warningDark }}>
                       {e.rndc?.estimado != null ? fmt(e.rndc.estimado) : ''}
                     </td>
-                    <td style={{ padding: '10px 14px', textAlign: 'right', color: '#6B7280', fontSize: 12 }}>
+                    <td style={{ padding: '10px 14px', textAlign: 'right', color: colors.textMuted, fontSize: 12 }}>
                       {fmt(Math.round(e.tarifaFinal / e.distanciaKm))}
                     </td>
                     <td style={{ padding: '10px 6px', textAlign: 'center' }}>
@@ -859,8 +860,8 @@ export default function PanelComercial({
                         title="Eliminar"
                         style={{
                           padding: '3px 9px', fontSize: 12, cursor: 'pointer',
-                          background: 'none', border: '1px solid #E5E7EB',
-                          borderRadius: 6, color: '#9CA3AF',
+                          background: 'none', border: `1px solid ${colors.borderLight}`,
+                          borderRadius: 6, color: colors.textPlaceholder,
                         }}
                       ></button>
                     </td>
@@ -876,14 +877,14 @@ export default function PanelComercial({
           SECCIÓN 3  AJUSTE COMERCIAL / NEGOCIACIÓN
            */}
       <div style={{
-        background: '#FFFFFF', borderRadius: 16, border: '1px solid #E5E7EB', overflow: 'hidden',
+        background: colors.bgWhite, borderRadius: 16, border: `1px solid ${colors.borderLight}`, overflow: 'hidden',
       }}>
         <div style={{
-          padding: '16px 24px', borderBottom: '1px solid #F3F4F6',
-          display: 'flex', alignItems: 'center', gap: 10, background: '#F9FAFB',
+          padding: '16px 24px', borderBottom: `1px solid ${colors.borderLighter}`,
+          display: 'flex', alignItems: 'center', gap: 10, background: colors.bgLight,
         }}>
           <span style={{ fontSize: 18 }}></span>
-          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: '#111827' }}>
+          <h2 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: colors.textPrimary }}>
             Ajuste Comercial y Negociación
           </h2>
           {ajuste && <Badge estado={ajuste.estadoNegociacion} />}
@@ -891,14 +892,14 @@ export default function PanelComercial({
 
         <div style={{ padding: '20px 24px' }}>
           {loadingAjuste ? (
-            <p style={{ color: '#9CA3AF', fontSize: 13 }}>Cargando ajuste</p>
+            <p style={{ color: colors.textPlaceholder, fontSize: 13 }}>Cargando ajuste</p>
           ) : !ajuste ? (
             <div>
-              <p style={{ color: '#6B7280', fontSize: 14, marginBottom: 16 }}>
+              <p style={{ color: colors.textMuted, fontSize: 14, marginBottom: 16 }}>
                 No hay ajuste comercial activo. Crea el ajuste para comenzar el proceso de negociación con el cliente.
               </p>
               <div style={{ marginBottom: 16 }}>
-                <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Nombre del comercial</label>
+                <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Nombre del comercial</label>
                 <input
                   type="text" value={nombreCom} onChange={e => setNombreCom(e.target.value)}
                   placeholder="Ej: Carlos López"
@@ -910,8 +911,8 @@ export default function PanelComercial({
                 disabled={!cotizacionActualId || guardando}
                 style={{
                   padding: '10px 24px',
-                  background: cotizacionActualId ? '#059669' : '#D1D5DB',
-                  color: '#FFFFFF', border: 'none', borderRadius: 8,
+                  background: cotizacionActualId ? colors.primary : colors.border,
+                  color: colors.bgWhite, border: 'none', borderRadius: 8,
                   fontWeight: 700, fontSize: 14,
                   cursor: cotizacionActualId ? 'pointer' : 'default',
                 }}
@@ -922,17 +923,17 @@ export default function PanelComercial({
           ) : (
             <div>
               <div style={{
-                padding: '10px 14px', background: '#F0FDF4', borderRadius: 8,
-                border: '1px solid #A7F3D0', marginBottom: 20,
+                padding: '10px 14px', background: colors.successBg, borderRadius: 8,
+                border: `1px solid ${colors.successBadgeBorder}`, marginBottom: 20,
                 display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'center',
               }}>
                 <div>
-                  <p style={{ margin: 0, fontSize: 11, color: '#065F46' }}>Vehículo base</p>
-                  <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 700, color: '#065F46' }}>{ajuste.vehiculoUsado}</p>
+                  <p style={{ margin: 0, fontSize: 11, color: colors.primaryDark }}>Vehículo base</p>
+                  <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 700, color: colors.primaryDark }}>{ajuste.vehiculoUsado}</p>
                 </div>
                 <div>
-                  <p style={{ margin: 0, fontSize: 11, color: '#065F46' }}>Piso SISETAC</p>
-                  <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 700, color: '#065F46' }}>{fmt(fleteRef)}</p>
+                  <p style={{ margin: 0, fontSize: 11, color: colors.primaryDark }}>Piso SISETAC</p>
+                  <p style={{ margin: '2px 0 0', fontSize: 15, fontWeight: 700, color: colors.primaryDark }}>{fmt(fleteRef)}</p>
                 </div>
               </div>
 
@@ -945,10 +946,10 @@ export default function PanelComercial({
                   <div style={{
                     padding: '18px 20px',
                     background: ofertaTotalFinal > 0
-                      ? 'linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%)'
-                      : '#E5E7EB',
+                      ? `linear-gradient(135deg, ${colors.blue} 0%, ${colors.blueLight} 100%)`
+                      : colors.borderLight,
                     borderRadius: 12,
-                    color: ofertaTotalFinal > 0 ? '#FFFFFF' : '#9CA3AF',
+                    color: ofertaTotalFinal > 0 ? colors.bgWhite : colors.textPlaceholder,
                   }}>
                     <p style={{ margin: '0 0 4px', fontSize: 11, opacity: 0.85, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.07em' }}>
                       Tarifa al cliente / Manifiesto
@@ -964,40 +965,40 @@ export default function PanelComercial({
                   {/* Desglose */}
                   <div style={{
                     padding: '14px 16px',
-                    background: '#F9FAFB',
+                    background: colors.bgLight,
                     borderRadius: 10,
-                    border: '1px solid #E5E7EB',
+                    border: `1px solid ${colors.borderLight}`,
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 8,
                   }}>
-                    <p style={{ margin: '0 0 4px', fontSize: 10, fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Desglose</p>
+                    <p style={{ margin: '0 0 4px', fontSize: 10, fontWeight: 700, color: colors.textPlaceholder, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Desglose</p>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                      <span style={{ color: '#6B7280' }}>Flete base (piso)</span>
-                      <span style={{ fontWeight: 600, color: '#374151' }}>{ofertaPisoN > 0 ? fmt(ofertaPisoN) : '—'}</span>
+                      <span style={{ color: colors.textMuted }}>Flete base (piso)</span>
+                      <span style={{ fontWeight: 600, color: colors.textDefault }}>{ofertaPisoN > 0 ? fmt(ofertaPisoN) : '—'}</span>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                      <span style={{ color: '#6B7280' }}>Comisión ({ofertaComision}%)</span>
-                      <span style={{ fontWeight: 600, color: '#374151' }}>{ofertaTarifaBase > 0 ? fmt(ofertaTarifaBase - ofertaPisoN) : '—'}</span>
+                      <span style={{ color: colors.textMuted }}>Comisión ({ofertaComision}%)</span>
+                      <span style={{ fontWeight: 600, color: colors.textDefault }}>{ofertaTarifaBase > 0 ? fmt(ofertaTarifaBase - ofertaPisoN) : '—'}</span>
                     </div>
 
                     {sumaCondicionesActivas > 0 && (
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
-                        <span style={{ color: '#6B7280' }}>Costos adicionales</span>
-                        <span style={{ fontWeight: 600, color: '#92400E' }}>{fmt(sumaCondicionesActivas)}</span>
+                        <span style={{ color: colors.textMuted }}>Costos adicionales</span>
+                        <span style={{ fontWeight: 600, color: colors.warningDark }}>{fmt(sumaCondicionesActivas)}</span>
                       </div>
                     )}
 
-                    <div style={{ borderTop: '1px solid #E5E7EB', paddingTop: 8, display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
-                      <span style={{ fontWeight: 700, color: '#111827' }}>Total</span>
-                      <span style={{ fontWeight: 800, color: '#1D4ED8' }}>{ofertaTotalFinal > 0 ? fmt(ofertaTotalFinal) : '—'}</span>
+                    <div style={{ borderTop: `1px solid ${colors.borderLight}`, paddingTop: 8, display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
+                      <span style={{ fontWeight: 700, color: colors.textPrimary }}>Total</span>
+                      <span style={{ fontWeight: 800, color: colors.blue }}>{ofertaTotalFinal > 0 ? fmt(ofertaTotalFinal) : '—'}</span>
                     </div>
                   </div>
 
                   {margenOferta !== null && fleteRef > 0 && (
-                    <p style={{ margin: 0, fontSize: 12, color: Number(margenOferta) >= 0 ? '#059669' : '#DC2626', fontWeight: 600 }}>
+                    <p style={{ margin: 0, fontSize: 12, color: Number(margenOferta) >= 0 ? colors.primary : colors.danger, fontWeight: 600 }}>
                       {Number(margenOferta) >= 0 ? '▲' : '▼'} {margenOferta}% sobre piso SISETAC ({fmt(fleteRef)})
                     </p>
                   )}
@@ -1005,7 +1006,7 @@ export default function PanelComercial({
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div>
-                    <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Estado negociación</label>
+                    <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Estado negociación</label>
                     <select value={estadoNeg} onChange={e => setEstadoNeg(e.target.value)} style={{ ...inputStyle(), cursor: 'pointer' }}>
                       {ESTADOS_NEGOCIACION.map(e => (
                         <option key={e.value} value={e.value}>{e.label}</option>
@@ -1014,7 +1015,7 @@ export default function PanelComercial({
                   </div>
 
                   <div>
-                    <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Forma de pago</label>
+                    <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Forma de pago</label>
                     <select value={formaPago} onChange={e => setFormaPago(e.target.value)} style={{ ...inputStyle(), cursor: 'pointer' }}>
                       {['CONTADO', 'CREDITO_30', 'CREDITO_60', 'CREDITO_90'].map(f => (
                         <option key={f} value={f}>{f.replace('_', ' ')}</option>
@@ -1023,17 +1024,17 @@ export default function PanelComercial({
                   </div>
 
                   <div>
-                    <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Nombre del comercial</label>
+                    <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Nombre del comercial</label>
                     <input type="text" value={nombreCom} onChange={e => setNombreCom(e.target.value)} placeholder="Quién gestiona" style={inputStyle()} />
                   </div>
 
                   <div>
-                    <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Motivo del ajuste de precio</label>
+                    <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Motivo del ajuste de precio</label>
                     <input type="text" value={motivoAjuste} onChange={e => setMotivoAjuste(e.target.value)} placeholder="Ej: cliente frecuente, viaje de retorno" style={inputStyle()} />
                   </div>
 
                   <div>
-                    <label style={{ fontSize: 12, color: '#6B7280', display: 'block', marginBottom: 6 }}>Notas internas</label>
+                    <label style={{ fontSize: 12, color: colors.textMuted, display: 'block', marginBottom: 6 }}>Notas internas</label>
                     <textarea
                       value={notas} onChange={e => setNotas(e.target.value)}
                       placeholder="Solo visible internamente"
@@ -1047,17 +1048,17 @@ export default function PanelComercial({
               {ajuste.tarifaConfirmadaCliente && fleteRef > 0 && (
                 <div style={{
                   marginTop: 20, padding: '14px 16px',
-                  background: '#F0FDF4', borderRadius: 10, border: '1px solid #A7F3D0',
+                  background: colors.successBg, borderRadius: 10, border: `1px solid ${colors.successBadgeBorder}`,
                   display: 'flex', gap: 32, flexWrap: 'wrap', alignItems: 'center',
                 }}>
-                  <div style={{ fontSize: 12, color: '#065F46', fontWeight: 700 }}>📋 Último guardado</div>
+                  <div style={{ fontSize: 12, color: colors.primaryDark, fontWeight: 700 }}>📋 Último guardado</div>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: '#6B7280' }}>Tarifa guardada</p>
-                    <p style={{ margin: '2px 0 0', fontSize: 16, fontWeight: 800, color: '#065F46' }}>{fmt(ajuste.tarifaConfirmadaCliente)}</p>
+                    <p style={{ margin: 0, fontSize: 11, color: colors.textMuted }}>Tarifa guardada</p>
+                    <p style={{ margin: '2px 0 0', fontSize: 16, fontWeight: 800, color: colors.primaryDark }}>{fmt(ajuste.tarifaConfirmadaCliente)}</p>
                   </div>
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: '#6B7280' }}>Diferencia vs piso SISETAC</p>
-                    <p style={{ margin: '2px 0 0', fontSize: 16, fontWeight: 800, color: ajuste.tarifaConfirmadaCliente >= fleteRef ? '#059669' : '#DC2626' }}>
+                    <p style={{ margin: 0, fontSize: 11, color: colors.textMuted }}>Diferencia vs piso SISETAC</p>
+                    <p style={{ margin: '2px 0 0', fontSize: 16, fontWeight: 800, color: ajuste.tarifaConfirmadaCliente >= fleteRef ? colors.primary : colors.danger }}>
                       {fmt(ajuste.tarifaConfirmadaCliente - fleteRef)}
                     </p>
                   </div>
@@ -1070,8 +1071,8 @@ export default function PanelComercial({
                   disabled={guardando}
                   style={{
                     padding: '10px 28px',
-                    background: guardando ? '#D1D5DB' : '#059669',
-                    color: '#FFFFFF', border: 'none', borderRadius: 8,
+                    background: guardando ? colors.border : colors.primary,
+                    color: colors.bgWhite, border: 'none', borderRadius: 8,
                     fontWeight: 700, fontSize: 14,
                     cursor: guardando ? 'default' : 'pointer',
                   }}
@@ -1083,8 +1084,8 @@ export default function PanelComercial({
                   disabled={ofertaTotalFinal === 0}
                   style={{
                     padding: '10px 24px',
-                    background: ofertaTotalFinal > 0 ? '#1D4ED8' : '#D1D5DB',
-                    color: '#FFFFFF', border: 'none', borderRadius: 8,
+                    background: ofertaTotalFinal > 0 ? colors.blue : colors.border,
+                    color: colors.bgWhite, border: 'none', borderRadius: 8,
                     fontWeight: 700, fontSize: 14,
                     cursor: ofertaTotalFinal > 0 ? 'pointer' : 'default',
                   }}
@@ -1092,7 +1093,7 @@ export default function PanelComercial({
                   🖨️ Imprimir cotización
                 </button>
                 {ajuste.updatedAt && (
-                  <span style={{ fontSize: 12, color: '#9CA3AF' }}>
+                  <span style={{ fontSize: 12, color: colors.textPlaceholder }}>
                     Último guardado: {new Date(ajuste.updatedAt).toLocaleString('es-CO')}
                   </span>
                 )}

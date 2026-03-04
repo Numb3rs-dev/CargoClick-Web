@@ -2,7 +2,43 @@
 
 ## Propósito
 
-Esta carpeta contiene **9 prompts de implementación** para construir el **módulo operacional de CargoClick**: el corazón del negocio donde se gestionan manifiestos de carga, se reporta al RNDC del Ministerio de Transporte y se hace seguimiento al cliente.
+Esta carpeta contiene los **prompts de implementación** organizados en tres fases para construir el **módulo operacional de CargoClick**: manifiestos de carga, reporte al RNDC del Ministerio de Transporte, seguimiento al cliente, integraciones avanzadas y casos especiales.
+
+> **Prerequisito de entrada:** El cotizador (solicitudes, cotizaciones, ajustes comerciales) ya está implementado. Este módulo es la capa operativa que viene después del cierre comercial.
+
+---
+
+## Estructura de fases
+
+```
+prompts/operacional/
+├── README.md              ← este archivo
+├── fase-1/                ← ✅ Implementada — núcleo operativo completo
+├── fase-2/                ← Integraciones avanzadas RNDC
+└── fase-3/                ← Integraciones con entidades externas (RUNT, SIMIT)
+```
+
+### Fase 1 — Núcleo operativo
+9 prompts que cubren el flujo base: schema, repositorios, RNDC core, servicios, API y 4 módulos UI.
+→ Ver [fase-1/README implícito](./fase-1/) — la Fase 1 ya fue **completamente implementada**.
+
+### Fase 2 — Integraciones avanzadas
+7 prompts: SICE-TAC, corrección remesas, aceptación conductor, GPS, factura electrónica.
+→ Ver [fase-2/README.md](./fase-2/README.md)
+
+### Fase 3 — Integraciones externas
+3 prompts: RUNT Bridge real-time, SIMIT multas, transporte municipal y mercancías peligrosas.
+→ Ver [fase-3/README.md](./fase-3/README.md) — **Requiere trámites formales previos.**
+
+---
+
+## Estado actual
+
+| Fase | Estado | Prompts | Descripción |
+|------|--------|---------|-------------|
+| Fase 1 | ✅ Implementada | 9 | Núcleo completo operativo |
+| Fase 2 | 🔵 Lista para implementar | 7 | Requiere Fase 1 en producción |
+| Fase 3 | ⏳ Pendiente gestiones | 3 | Requiere trámites externos |
 
 > **Prerequisito:** El cotizador (solicitudes, cotizaciones, ajustes comerciales) ya está implementado. Este módulo es la capa operativa que viene después del cierre comercial.
 
@@ -16,66 +52,45 @@ CAPA COMERCIAL (ya existe)          CAPA OPERACIONAL (este módulo)
 
 Solicitud  →  Cotizacion  →  AjusteComercial
                                        ↓
-                               NuevoNegocio  ←── BACK-02, BACK-04, BACK-05
+                               NuevoNegocio  ←── Fase 1 (BACK-02/04/05)
                                        ↓
-                               Remesa (×N)   ←── procesoid 3 RNDC
+                               Remesa (×N)   ←── procesoid 3 RNDC (Fase 1)
                                        ↓
-                           ManifiestoOperativo ←── procesoid 4 RNDC
+                           ManifiestoOperativo ←── procesoid 4 RNDC (Fase 1)
                                        ↓
-                           SeguimientoCliente + EncuestaPostEntrega
+                    SeguimientoCliente + EncuestaPostEntrega (Fase 1)
+                                       ↓
+              ┌────────────────────────────────────────────────┐
+              │ FASE 2                                          │
+              │  ├─ FacturaElectronica (procesoid 86)          │
+              │  ├─ AceptacionConductor (procesoids 73/75)     │
+              │  ├─ NovedadGPS (procesoids 45/46)              │
+              │  └─ SiceTac RT (procesoid 26)                  │
+              └────────────────────────────────────────────────┘
+                                       ↓
+              ┌────────────────────────────────────────────────┐
+              │ FASE 3                                          │
+              │  ├─ RUNT Bridge real-time                      │
+              │  ├─ SIMIT multas                               │
+              │  └─ Transporte municipal + Merc. peligrosas    │
+              └────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Orden de implementación
-
-### IMPORTANTE: respetar el orden. Cada capa depende de la anterior.
-
-```
-FASE A: BASE DE DATOS (BACK-01)
-  └─ Extender schema Prisma con 9 modelos nuevos
-
-FASE B: REPOSITORIOS (BACK-02)
-  └─ Capa de acceso a datos para cada modelo nuevo
-
-FASE C: INTEGRACIÓN RNDC SOAP (BACK-03)
-  └─ Cliente SOAP + parser XML + log SyncRndc
-
-FASE D: SERVICIOS DE NEGOCIO (BACK-04)
-  └─ Business logic: NuevoNegocio, Remesa, Manifiesto, Orchestration
-
-FASE E: API ENDPOINTS (BACK-05)
-  └─ Todos los grupos (conductores, vehículos, negocios, remesas,
-     manifiestos, seguimiento, encuesta, rndc-admin, parámetros)
-
-FASE F: UI — DIRECTORIO (FRONT-01)
-  └─ Pantallas de conductores y vehículos
-
-FASE G: UI — NEGOCIOS (FRONT-02)
-  └─ Dashboard operativo + creación de NuevoNegocio
-
-FASE H: UI — OPERACIÓN (FRONT-03)
-  └─ Gestión de remesas y manifiestos dentro de un negocio
-
-FASE I: UI — CLIENTE (FRONT-04)
-  └─ Seguimiento público + encuesta post-entrega
-```
-
----
-
-## Documentos
+## Fase 1 — Documentos (implementados)
 
 | # | Archivo | Capa | Alcance |
 |---|---------|------|---------|
-| BACK-01 | [01_BACK_SCHEMA_EXTENSIONES.md](./01_BACK_SCHEMA_EXTENSIONES.md) | DB | 9 modelos Prisma nuevos + migraciones |
-| BACK-02 | [02_BACK_REPOSITORIOS.md](./02_BACK_REPOSITORIOS.md) | Repo | Repositorios para cada modelo nuevo |
-| BACK-03 | [03_BACK_SERVICIO_RNDC.md](./03_BACK_SERVICIO_RNDC.md) | Integración | Cliente SOAP RNDC + SyncRndc |
-| BACK-04 | [04_BACK_SERVICIOS_OPERACIONALES.md](./04_BACK_SERVICIOS_OPERACIONALES.md) | Services | Lógica de negocio completa |
-| BACK-05 | [05_BACK_API_ENDPOINTS.md](./05_BACK_API_ENDPOINTS.md) | API | ~41 endpoints (9 grupos) |
-| FRONT-01 | [06_FRONT_DIRECTORIO.md](./06_FRONT_DIRECTORIO.md) | UI | Conductores + vehículos |
-| FRONT-02 | [07_FRONT_NEGOCIOS.md](./07_FRONT_NEGOCIOS.md) | UI | Dashboard operativo + NuevoNegocio |
-| FRONT-03 | [08_FRONT_OPERACION.md](./08_FRONT_OPERACION.md) | UI | Remesas + ManifiestoOperativo |
-| FRONT-04 | [09_FRONT_CLIENTE.md](./09_FRONT_CLIENTE.md) | UI | Seguimiento público + encuesta |
+| BACK-01 | [fase-1/01_BACK_SCHEMA_EXTENSIONES.md](./fase-1/01_BACK_SCHEMA_EXTENSIONES.md) | DB | 9 modelos Prisma nuevos + migraciones |
+| BACK-02 | [fase-1/02_BACK_REPOSITORIOS.md](./fase-1/02_BACK_REPOSITORIOS.md) | Repo | Repositorios para cada modelo nuevo |
+| BACK-03 | [fase-1/03_BACK_SERVICIO_RNDC.md](./fase-1/03_BACK_SERVICIO_RNDC.md) | Integración | Cliente SOAP RNDC + SyncRndc |
+| BACK-04 | [fase-1/04_BACK_SERVICIOS_OPERACIONALES.md](./fase-1/04_BACK_SERVICIOS_OPERACIONALES.md) | Services | Lógica de negocio completa |
+| BACK-05 | [fase-1/05_BACK_API_ENDPOINTS.md](./fase-1/05_BACK_API_ENDPOINTS.md) | API | ~41 endpoints (9 grupos) |
+| FRONT-01 | [fase-1/06_FRONT_DIRECTORIO.md](./fase-1/06_FRONT_DIRECTORIO.md) | UI | Conductores + vehículos |
+| FRONT-02 | [fase-1/07_FRONT_NEGOCIOS.md](./fase-1/07_FRONT_NEGOCIOS.md) | UI | Dashboard operativo + NuevoNegocio |
+| FRONT-03 | [fase-1/08_FRONT_OPERACION.md](./fase-1/08_FRONT_OPERACION.md) | UI | Remesas + ManifiestoOperativo |
+| FRONT-04 | [fase-1/09_FRONT_CLIENTE.md](./fase-1/09_FRONT_CLIENTE.md) | UI | Seguimiento público + encuesta |
 
 ---
 
