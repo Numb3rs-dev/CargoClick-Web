@@ -20,6 +20,12 @@ export interface CreateClienteInput {
   tipoId:      string;
   numeroId:    string;
   razonSocial: string;
+  /** Nombres propios combinados (persona natural) — NOMIDTERCERO del RNDC */
+  nombres?:         string;
+  /** Primer apellido (persona natural) — PRIMERAPELLIDOIDTERCERO del RNDC */
+  primerApellido?:  string;
+  /** Segundo apellido (persona natural) — SEGUNDOAPELLIDOIDTERCERO del RNDC */
+  segundoApellido?: string;
   email?:      string;
   telefono?:   string;
   notas?:      string;
@@ -36,24 +42,31 @@ export interface CreateClienteInput {
 }
 
 export interface UpdateClienteInput {
-  tipoId?:      string;
-  numeroId?:    string;
-  razonSocial?: string;
-  email?:       string;
-  telefono?:    string;
-  activo?:      boolean;
-  notas?:       string;
+  tipoId?:          string;
+  numeroId?:        string;
+  razonSocial?:     string;
+  nombres?:         string;
+  primerApellido?:  string;
+  segundoApellido?: string;
+  email?:           string;
+  telefono?:        string;
+  activo?:          boolean;
+  notas?:           string;
 }
 
 export interface UpsertSucursalInput {
-  codSede:       string;
-  nombre:        string;
-  municipio?:    string;
+  codSede:        string;
+  nombre:         string;
+  municipio?:     string;
   daneMunicipio?: string;
-  direccion?:    string;
-  telefono?:     string;
-  email?:        string;
-  activo?:       boolean;
+  direccion?:     string;
+  telefono?:      string;
+  email?:         string;
+  activo?:        boolean;
+  /** Coordenada GPS latitud (Nominatim / RNDC) */
+  latitud?:       number;
+  /** Coordenada GPS longitud (Nominatim / RNDC) */
+  longitud?:      number;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -133,12 +146,15 @@ export const clienteRepository = {
 
     return prisma.cliente.create({
       data: {
-        tipoId:      input.tipoId,
-        numeroId:    input.numeroId,
-        razonSocial: input.razonSocial,
-        email:       input.email,
-        telefono:    input.telefono,
-        notas:       input.notas,
+        tipoId:          input.tipoId,
+        numeroId:         input.numeroId,
+        razonSocial:      input.razonSocial,
+        nombres:          input.nombres,
+        primerApellido:   input.primerApellido,
+        segundoApellido:  input.segundoApellido,
+        email:            input.email,
+        telefono:         input.telefono,
+        notas:            input.notas,
         sucursales: {
           create: sucursales,
         },

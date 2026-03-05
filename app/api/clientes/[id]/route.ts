@@ -3,13 +3,16 @@ import { clienteRepository } from '@/lib/repositories/clienteRepository';
 import { z } from 'zod';
 
 const updateSchema = z.object({
-  tipoId:      z.enum(['N', 'C', 'E']).optional(),
-  numeroId:    z.string().min(3).max(20).optional(),
-  razonSocial: z.string().min(2).max(200).optional(),
-  email:       z.string().email().optional().or(z.literal('')),
-  telefono:    z.string().max(30).optional(),
-  activo:      z.boolean().optional(),
-  notas:       z.string().max(1000).optional(),
+  tipoId:           z.enum(['N', 'C', 'P', 'E']).optional(),
+  numeroId:         z.string().min(3).max(20).optional(),
+  razonSocial:      z.string().min(2).max(200).optional(),
+  nombres:          z.string().max(200).optional(),
+  primerApellido:   z.string().max(100).optional(),
+  segundoApellido:  z.string().max(100).optional(),
+  email:            z.string().email().optional().or(z.literal('')),
+  telefono:         z.string().max(30).optional(),
+  activo:           z.boolean().optional(),
+  notas:            z.string().max(1000).optional(),
 });
 
 /* ── GET /api/clientes/[id] ──────────────────────────────────────────────── */

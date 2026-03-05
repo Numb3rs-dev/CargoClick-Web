@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { ClienteConSucursales } from './ClienteList';
@@ -12,6 +13,20 @@ import {
 } from '@/components/operacional/shared/FormStyles';
 import { colors } from '@/lib/theme/colors';
 import { TIPOS_IDENTIFICACION } from '@/lib/constants';
+import { MunicipioAutocomplete } from '@/components/operacional/shared/MunicipioAutocomplete';
+
+/* Leaflet necesita window/document — desactivamos SSR */
+const SedeMap = dynamic(
+  () => import('./SedeMap').then(m => m.SedeMap),
+  {
+    ssr: false,
+    loading: () => (
+      <div style={{ height: 220, background: '#F0F9FF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#0369A1' }}>
+        Cargando mapa…
+      </div>
+    ),
+  },
+);
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Tipos
@@ -26,6 +41,13 @@ interface SucursalRow {
   direccion:     string;
   telefono:      string;
   email:         string;
+  /** Coordenada GPS — obtenida vía Nominatim */
+  latitud?:      number;
+  longitud?:     number;
+  /** true mientras se está geocodificando esta sede */
+  geocoding?:    boolean;
+  /** advertencia cuando Nominatim usó fallback (sin municipio) */
+  geocodingWarning?: string;
 }
 
 export type ClienteFormMode = 'crear' | 'editar' | 'ver';
@@ -44,12 +66,18 @@ export interface ClienteFormProps {
    Helpers
 ───────────────────────────────────────────────────────────────────────────── */
 
-const TIPO_LABEL: Record<string, string> = { N: 'NIT', C: 'Cédula', P: 'Pasaporte' };
+const TIPO_LABEL: Record<string, string> = {
+  N: 'NIT',
+  C: 'Cédula',
+  P: 'Pasaporte',
+  E: 'Cédula Extranjería',
+};
 
 function emptyRow(codSedeHint = ''): SucursalRow {
   return {
     codSede: codSedeHint, nombre: '', municipio: '',
     daneMunicipio: '', direccion: '', telefono: '', email: '',
+    latitud: undefined, longitud: undefined,
   };
 }
 
@@ -63,6 +91,9 @@ function sedesFromValues(dv: ClienteConSucursales): SucursalRow[] {
     direccion:     s.direccion      ?? '',
     telefono:      s.telefono       ?? '',
     email:         s.email          ?? '',
+    // Prisma Decimal → number (el servidor ya serializa a string o number)
+    latitud:       s.latitud  != null ? Number(s.latitud)  : undefined,
+    longitud:      s.longitud != null ? Number(s.longitud) : undefined,
   }));
 }
 
@@ -78,14 +109,23 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
   const [saving,     setSaving]     = useState(false);
   const [error,      setError]      = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  /** Errores de validación por sede: { [idx]: { municipio?, gps? } } */
+  const [sedeErrors, setSedeErrors] = useState<Record<number, { municipio?: string; gps?: string }>>({});
 
   // ── Estado del formulario
-  const [tipoId,      setTipoId]      = useState(defaultValues?.tipoId      ?? 'N');
-  const [numeroId,    setNumeroId]    = useState(defaultValues?.numeroId    ?? '');
-  const [razonSocial, setRazonSocial] = useState(defaultValues?.razonSocial ?? '');
-  const [email,       setEmail]       = useState(defaultValues?.email       ?? '');
-  const [telefono,    setTelefono]    = useState(defaultValues?.telefono    ?? '');
-  const [notas,       setNotas]       = useState(defaultValues?.notas       ?? '');
+  const [tipoId,          setTipoId]          = useState(defaultValues?.tipoId          ?? 'N');
+  const [numeroId,         setNumeroId]         = useState(defaultValues?.numeroId         ?? '');
+  const [razonSocial,      setRazonSocial]      = useState(defaultValues?.razonSocial      ?? '');
+  // Campos persona natural
+  const [nombres,          setNombres]          = useState(defaultValues?.nombres          ?? '');
+  const [primerApellido,   setPrimerApellido]   = useState(defaultValues?.primerApellido   ?? '');
+  const [segundoApellido,  setSegundoApellido]  = useState(defaultValues?.segundoApellido  ?? '');
+  const [email,            setEmail]            = useState(defaultValues?.email            ?? '');
+  const [telefono,         setTelefono]         = useState(defaultValues?.telefono         ?? '');
+  const [notas,            setNotas]            = useState(defaultValues?.notas            ?? '');
+
+  /** true para Cédula, Pasaporte, Cédula Extranjería */
+  const isPersonaNatural = tipoId !== 'N';
 
   const [sedes, setSedes] = useState<SucursalRow[]>(() =>
     defaultValues?.sucursales?.length ? sedesFromValues(defaultValues) : [emptyRow('1')]
@@ -94,6 +134,49 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
   // ── Helpers de sedes
   function updateSede(idx: number, field: keyof SucursalRow, val: string) {
     setSedes(prev => prev.map((s, i) => i === idx ? { ...s, [field]: val } : s));
+  }
+
+  /** Actualiza varios campos de una sede en una sola mutación (evita batching issues) */
+  function updateSedeFields(idx: number, patch: Partial<SucursalRow>) {
+    setSedes(prev => prev.map((s, i) => i === idx ? { ...s, ...patch } : s));
+  }
+
+  /** Geocodifica la dirección de una sede usando Nominatim vía API propia */
+  async function geocodificarSede(idx: number) {
+    const s = sedes[idx];
+    const direccion = s.direccion.trim();
+    if (!direccion) return;
+
+    updateSedeFields(idx, { geocoding: true, latitud: undefined, longitud: undefined });
+    try {
+      const res = await fetch('/api/geocodificar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ direccion, municipio: s.municipio || undefined }),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        updateSedeFields(idx, {
+          latitud: json.lat,
+          longitud: json.lon,
+          geocoding: false,
+          geocodingWarning: json.usedFallback
+            ? 'Resultado aproximado — municipio no reconocido por OSM, se buscó solo por dirección'
+            : undefined,
+        });
+        // Limpiar error GPS si existía
+        setSedeErrors(prev => {
+          const next = { ...prev };
+          if (next[idx]) { delete next[idx].gps; if (!next[idx].municipio) delete next[idx]; }
+          return next;
+        });
+      } else {
+        updateSedeFields(idx, { geocoding: false });
+        alert(json.error ?? 'No se encontraron coordenadas para esa dirección');
+      }
+    } catch {
+      updateSedeFields(idx, { geocoding: false });
+    }
   }
 
   function addSede() {
@@ -116,14 +199,44 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
     e.preventDefault();
     setError(null);
     setFieldErrors({});
+    setSedeErrors({});
     setSaving(true);
+
+    // ── Validación RNDC: municipio + GPS obligatorio en todas las sedes ──────
+    const newSedeErrors: Record<number, { municipio?: string; gps?: string }> = {};
+    sedes.forEach((s, idx) => {
+      const err: { municipio?: string; gps?: string } = {};
+      if (!s.daneMunicipio) {
+        err.municipio = 'El municipio es obligatorio para el RNDC';
+      }
+      if (s.latitud == null || s.longitud == null) {
+        err.gps = 'Las coordenadas GPS son obligatorias para el RNDC — usa el botón 📍 GPS';
+      }
+      if (err.municipio || err.gps) newSedeErrors[idx] = err;
+    });
+    if (Object.keys(newSedeErrors).length > 0) {
+      setSedeErrors(newSedeErrors);
+      setSaving(false);
+      return;
+    }
 
     try {
       let res: Response;
 
+      // Para persona natural la razón social se compone de los campos de nombre
+      const razonSocialFinal = isPersonaNatural
+        ? [nombres.trim(), primerApellido.trim(), segundoApellido.trim()].filter(Boolean).join(' ')
+        : razonSocial;
+
       if (mode === 'crear') {
         const payload = {
-          tipoId, numeroId, razonSocial,
+          tipoId, numeroId,
+          razonSocial: razonSocialFinal,
+          ...(isPersonaNatural && {
+            ...(nombres.trim()         && { nombres:         nombres.trim() }),
+            ...(primerApellido.trim()  && { primerApellido:  primerApellido.trim() }),
+            ...(segundoApellido.trim() && { segundoApellido: segundoApellido.trim() }),
+          }),
           ...(email    && { email }),
           ...(telefono && { telefono }),
           ...(notas    && { notas }),
@@ -135,6 +248,8 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
             ...(s.direccion     && { direccion:     s.direccion }),
             ...(s.telefono      && { telefono:      s.telefono }),
             ...(s.email         && { email:         s.email }),
+            ...(s.latitud  != null && { latitud:  s.latitud }),
+            ...(s.longitud != null && { longitud: s.longitud }),
           })),
         };
         res = await fetch('/api/clientes', {
@@ -145,7 +260,16 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
         // editar: PATCH datos base + upsert sucursales en paralelo
         res = await fetch(`/api/clientes/${defaultValues!.id}`, {
           method: 'PATCH', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tipoId, numeroId, razonSocial, email, telefono, notas }),
+          body: JSON.stringify({
+            tipoId, numeroId,
+            razonSocial: razonSocialFinal,
+            ...(isPersonaNatural && {
+              nombres:         nombres.trim()         || undefined,
+              primerApellido:  primerApellido.trim()  || undefined,
+              segundoApellido: segundoApellido.trim() || undefined,
+            }),
+            email, telefono, notas,
+          }),
         });
         if (res.ok) {
           await Promise.all(sedes.map(s =>
@@ -159,6 +283,8 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
                 direccion:     s.direccion     || undefined,
                 telefono:      s.telefono      || undefined,
                 email:         s.email         || undefined,
+                latitud:       s.latitud  ?? undefined,
+                longitud:      s.longitud ?? undefined,
               }),
             })
           ));
@@ -252,14 +378,55 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
         <p style={sectionTitle}>Datos generales</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
-            <label style={labelStyle}>Razón Social *</label>
-            <input
-              value={razonSocial}
-              onChange={e => setRazonSocial(e.target.value)}
-              required minLength={2} maxLength={200}
-              placeholder="Empresa S.A.S."
-              {...inputProps()}
-            />
+            {tipoId === 'N' ? (
+              /* Persona jurídica: razón social única */
+              <div>
+                <label style={labelStyle}>Razón Social *</label>
+                <input
+                  value={razonSocial}
+                  onChange={e => setRazonSocial(e.target.value)}
+                  required minLength={2} maxLength={200}
+                  placeholder="Empresa S.A.S."
+                  {...inputProps()}
+                />
+              </div>
+            ) : (
+              /* Persona natural: nombres + apellidos */
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <Grid2>
+                  <div>
+                    <label style={labelStyle}>Nombre(s) *</label>
+                    <input
+                      value={nombres}
+                      onChange={e => setNombres(e.target.value)}
+                      required minLength={2} maxLength={200}
+                      placeholder="Juan Carlos"
+                      {...inputProps()}
+                    />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Primer Apellido *</label>
+                    <input
+                      value={primerApellido}
+                      onChange={e => setPrimerApellido(e.target.value)}
+                      required minLength={2} maxLength={100}
+                      placeholder="Rodríguez"
+                      {...inputProps()}
+                    />
+                  </div>
+                </Grid2>
+                <div>
+                  <label style={labelStyle}>Segundo Apellido</label>
+                  <input
+                    value={segundoApellido}
+                    onChange={e => setSegundoApellido(e.target.value)}
+                    maxLength={100}
+                    placeholder="Pérez"
+                    {...inputProps()}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <Grid2>
             <div>
@@ -360,38 +527,136 @@ export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess 
                 </div>
               </div>
 
-              {/* Municipio + DANE */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 100px', gap: 10, marginBottom: 10 }}>
-                <div>
-                  <label style={labelStyle}>Municipio</label>
-                  <input
-                    value={s.municipio}
-                    onChange={e => updateSede(idx, 'municipio', e.target.value)}
-                    placeholder="Bogotá, D.C."
-                    {...inputProps()}
-                  />
-                </div>
-                <div>
-                  <label style={labelStyle}>Cód. DANE</label>
-                  <input
+              {/* Municipio * */}
+              <div style={{ marginBottom: 10 }}>
+                <label style={labelStyle}>Municipio *</label>
+                <div style={sedeErrors[idx]?.municipio ? {
+                  borderRadius: 8, boxShadow: '0 0 0 2px rgba(239,68,68,0.25)',
+                } : undefined}>
+                  <MunicipioAutocomplete
                     value={s.daneMunicipio}
-                    onChange={e => updateSede(idx, 'daneMunicipio', e.target.value)}
-                    maxLength={5} placeholder="11001"
-                    {...inputProps()}
+                    daneFormat="dane5"
+                    placeholder="Buscar municipio…"
+                    disabled={isVer}
+                    onSelect={(dane) => {
+                      updateSede(idx, 'daneMunicipio', dane);
+                      if (sedeErrors[idx]?.municipio) {
+                        setSedeErrors(prev => {
+                          const next = { ...prev };
+                          if (next[idx]) { delete next[idx].municipio; if (!next[idx].gps) delete next[idx]; }
+                          return next;
+                        });
+                      }
+                    }}
+                    onSelectItem={(item) => {
+                      updateSedeFields(idx, {
+                        municipio:     item?.nombre  ?? '',
+                        daneMunicipio: item?.codigo5 ?? '',
+                      });
+                      if (sedeErrors[idx]?.municipio) {
+                        setSedeErrors(prev => {
+                          const next = { ...prev };
+                          if (next[idx]) { delete next[idx].municipio; if (!next[idx].gps) delete next[idx]; }
+                          return next;
+                        });
+                      }
+                    }}
                   />
                 </div>
+                <FieldError error={sedeErrors[idx]?.municipio} />
               </div>
 
-              {/* Dirección */}
+              {/* Dirección + Botón geocodificar */}
               <div style={{ marginBottom: 10 }}>
-                <label style={labelStyle}>Dirección</label>
-                <input
-                  value={s.direccion}
-                  onChange={e => updateSede(idx, 'direccion', e.target.value)}
-                  placeholder="Cra 7 # 26-20, Piso 3"
-                  {...inputProps()}
-                />
+                <label style={labelStyle}>Dirección *</label>
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <input
+                    value={s.direccion}
+                    onChange={e => updateSede(idx, 'direccion', e.target.value)}
+                    placeholder="Cra 7 # 26-20, Piso 3"
+                    style={{ flex: 1, ...(isVer ? lockedFieldStyle : fieldStyle) }}
+                    readOnly={isVer}
+                    disabled={isVer}
+                  />
+                  {!isVer && (
+                    <button
+                      type="button"
+                      disabled={!s.direccion.trim() || !!s.geocoding}
+                      onClick={() => geocodificarSede(idx)}
+                      title="Obtener coordenadas GPS de esta dirección"
+                      style={{
+                        flexShrink: 0, height: 38, padding: '0 14px',
+                        fontSize: 13, fontWeight: 600, borderRadius: 8,
+                        border: sedeErrors[idx]?.gps
+                          ? '1.5px solid #EF4444'
+                          : '1.5px solid #0EA5E9',
+                        cursor: s.geocoding ? 'wait' : 'pointer',
+                        background: s.latitud ? '#0EA5E9' : sedeErrors[idx]?.gps ? '#FFF1F2' : '#F0F9FF',
+                        color: s.latitud ? '#FFFFFF' : sedeErrors[idx]?.gps ? '#DC2626' : '#0369A1',
+                        whiteSpace: 'nowrap', transition: 'all 0.15s',
+                        opacity: !s.direccion.trim() ? 0.4 : 1,
+                      }}
+                    >
+                      {s.geocoding ? '⏳ Buscando…' : s.latitud ? '📍 GPS ✓' : '📍 GPS'}
+                    </button>
+                  )}
+                </div>
+                <FieldError error={sedeErrors[idx]?.gps} />
               </div>
+
+              {/* Mapa OSM — se muestra cuando hay coordenadas */}
+              {s.latitud != null && s.longitud != null && (
+                <div style={{
+                  marginBottom: 10, borderRadius: 10, overflow: 'hidden',
+                  border: '1.5px solid #7DD3FC', boxShadow: '0 2px 8px rgba(14,165,233,0.12)',
+                }}>
+                  {/* Barra de info de coordenadas */}
+                  <div style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '7px 12px',
+                    background: 'linear-gradient(90deg, #0EA5E9 0%, #0284C7 100%)',
+                    color: '#FFFFFF', fontSize: 12,
+                  }}>
+                    <span style={{ fontWeight: 600 }}>
+                      📍 {s.latitud.toFixed(6)}, {s.longitud.toFixed(6)}
+                    </span>
+                    {!isVer && (
+                      <button
+                        type="button"
+                        onClick={() => updateSedeFields(idx, { latitud: undefined, longitud: undefined, geocodingWarning: undefined })}
+                        style={{
+                          background: 'rgba(255,255,255,0.2)', border: 'none',
+                          borderRadius: 5, color: '#fff', fontSize: 11,
+                          cursor: 'pointer', padding: '2px 8px',
+                        }}
+                      >
+                        ✕ Limpiar
+                      </button>
+                    )}
+                  </div>
+                  {/* Aviso de precisión reducida */}
+                  {s.geocodingWarning && (
+                    <div style={{
+                      padding: '4px 12px',
+                      background: '#FFF7ED',
+                      color: '#92400E',
+                      fontSize: 11,
+                      borderTop: '1px solid #FED7AA',
+                      display: 'flex', alignItems: 'center', gap: 5,
+                    }}>
+                      <span>⚠️</span>
+                      <span>Resultado aproximado: el municipio no fue reconocido por OSM, se buscó solo por la dirección.</span>
+                    </div>
+                  )}
+                  {/* Mapa Leaflet + tiles OSM (sin iframe, sin API key) */}
+                  <SedeMap
+                    lat={s.latitud!}
+                    lon={s.longitud!}
+                    nombre={s.nombre}
+                    direccion={s.direccion}
+                  />
+                </div>
+              )}
 
               {/* Tel + Email sede */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>

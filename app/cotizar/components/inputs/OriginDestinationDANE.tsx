@@ -13,16 +13,13 @@
 
 'use client';
 
-import { useMemo, useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
-  Autocomplete,
-  TextField,
   Box,
   Stack,
   Divider,
   Typography,
   Chip,
-  Paper,
   Alert,
   CircularProgress,
 } from '@mui/material';
@@ -34,10 +31,7 @@ import {
   AccessTimeOutlined,
   ErrorOutline,
 } from '@mui/icons-material';
-import {
-  getAllMunicipios,
-  type MunicipioOption,
-} from '@/app/cotizar/config/colombia-dane';
+import { MunicipioAutocomplete } from '@/components/operacional/shared/MunicipioAutocomplete';
 import type { FuenteDistancia } from '@/lib/utils/distancias';
 
 // ── tipos API ──────────────────────────────────────────────────────────────
@@ -46,22 +40,9 @@ type ApiDistancia =
   | { km: number; fuente: 'osrm' | 'haversine'; tramo?: string; tiempoTransito?: { descripcion: string; tiempoViajeFormato: string } }
   | { fuente: 'sin_datos' };
 
-// ── helpers ────────────────────────────────────────────────────────────────
-
-/** Normaliza texto eliminando tildes y poniendo en minúsculas */
-function normalizar(texto: string): string {
-  return texto
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
-}
-
-// Lista plana construida una sola vez al cargar el módulo
-const TODOS_LOS_MUNICIPIOS: MunicipioOption[] = getAllMunicipios();
-
 // ── tipos ──────────────────────────────────────────────────────────────────
 
-interface OriginDestinationValue {
+export interface OriginDestinationValue {
   origen: string;  // código DANE 5 dígitos
   destino: string; // código DANE 5 dígitos
   // Campos calculados — disponibles cuando ambos están seleccionados
@@ -76,126 +57,6 @@ interface OriginDestinationDANEProps {
   valor: OriginDestinationValue;
   onChange: (val: OriginDestinationValue) => void;
   disabled?: boolean;
-}
-
-// ── subcomponente: un campo de búsqueda ────────────────────────────────────
-
-interface MunicipioSearchProps {
-  label: string;
-  placeholder: string;
-  value: string;       // código DANE
-  onChange: (codigo: string) => void;
-  disabled?: boolean;
-  autoFocus?: boolean;
-  color: 'primary' | 'error' | 'success';
-  icon: React.ReactNode;
-}
-
-function MunicipioSearch({
-  label,
-  placeholder,
-  value,
-  onChange,
-  disabled,
-  autoFocus,
-  color,
-  icon,
-}: MunicipioSearchProps) {
-  const selectedOption = useMemo(
-    () => TODOS_LOS_MUNICIPIOS.find((m) => m.codigo === value) ?? null,
-    [value]
-  );
-
-  return (
-    <Box>
-      {/* Encabezado de sección */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
-        {icon}
-        <Typography variant="subtitle1" fontWeight={700} color={`${color}.main`}>
-          {label}
-        </Typography>
-      </Box>
-
-      <Autocomplete<MunicipioOption>
-        disabled={disabled}
-        options={TODOS_LOS_MUNICIPIOS}
-        value={selectedOption}
-        getOptionLabel={(opt) => opt.label}
-        filterOptions={(options, { inputValue }) => {
-          if (!inputValue.trim()) return options.slice(0, 12);
-          const query = normalizar(inputValue);
-          const filtered = options.filter((opt) =>
-            normalizar(opt.label).includes(query)
-          );
-          filtered.sort((a, b) => {
-            const aStarts = normalizar(a.nombre).startsWith(query) ? 0 : 1;
-            const bStarts = normalizar(b.nombre).startsWith(query) ? 0 : 1;
-            return aStarts - bStarts;
-          });
-          return filtered.slice(0, 10);
-        }}
-        onChange={(_, opt) => onChange(opt?.codigo ?? '')}
-        isOptionEqualToValue={(opt, val) => opt.codigo === val.codigo}
-        noOptionsText="No se encontró el municipio"
-        renderOption={(props, opt) => {
-          const { key, ...rest } = props as { key: React.Key } & React.HTMLAttributes<HTMLLIElement>;
-          return (
-            <Box
-              component="li"
-              key={key}
-              {...rest}
-              sx={{ display: 'flex', alignItems: 'center', gap: 1.5, py: 1 }}
-            >
-              <PlaceOutlined sx={{ color: 'text.disabled', fontSize: 18, flexShrink: 0 }} />
-              <Box>
-                <Typography variant="body2" fontWeight={600} lineHeight={1.2}>
-                  {opt.nombre}
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {opt.depto}
-                </Typography>
-              </Box>
-              <Typography
-                variant="caption"
-                color="text.disabled"
-                sx={{ ml: 'auto', fontWeight: 700, fontFamily: 'monospace' }}
-              >
-                {opt.codigo}
-              </Typography>
-            </Box>
-          );
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            placeholder={placeholder}
-            label="Ciudad / Municipio"
-            size="medium"
-            autoFocus={autoFocus}
-            color={color}
-            slotProps={{
-              input: {
-                ...params.InputProps,
-                startAdornment: (
-                  <PlaceOutlined
-                    sx={{
-                      color: value ? `${color}.main` : 'text.disabled',
-                      fontSize: 20,
-                      mr: 0.5,
-                      flexShrink: 0,
-                    }}
-                  />
-                ),
-              },
-            }}
-          />
-        )}
-        PaperComponent={(props) => (
-          <Paper {...props} elevation={0} sx={{ mt: 0.5, boxShadow: '0px 8px 24px rgba(0,0,0,0.12)', border: '1px solid', borderColor: 'divider' }} />
-        )}
-      />
-    </Box>
-  );
 }
 
 // ── componente principal ────────────────────────────────────────────────────
@@ -272,16 +133,23 @@ export function OriginDestinationDANE({
   return (
     <Stack spacing={0}>
       {/* ── ORIGEN ─────────────────────────────────────────────────────── */}
-      <MunicipioSearch
-        label="Lugar de origen"
-        placeholder="Ej: Medellín, Bogotá, Cali…"
-        value={valor.origen}
-        onChange={handleOrigenChange}
-        disabled={disabled}
-        autoFocus
-        color="primary"
-        icon={<PlaceOutlined sx={{ color: 'primary.main', fontSize: 20 }} />}
-      />
+      <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+          <PlaceOutlined sx={{ color: 'primary.main', fontSize: 20 }} />
+          <Typography variant="subtitle1" fontWeight={700} color="primary.main">
+            Lugar de origen
+          </Typography>
+        </Box>
+        <MunicipioAutocomplete
+          value={valor.origen}
+          onSelect={handleOrigenChange}
+          daneFormat="dane5"
+          placeholder="Ej: Medellín, Bogotá, Cali…"
+          disabled={disabled}
+          autoFocus
+          size="medium"
+        />
+      </Box>
 
       {/* ── Separador con flecha ────────────────────────────────────────── */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, py: 2, px: 1 }}>
@@ -291,15 +159,22 @@ export function OriginDestinationDANE({
       </Box>
 
       {/* ── DESTINO ─────────────────────────────────────────────────────── */}
-      <MunicipioSearch
-        label="Lugar de destino"
-        placeholder="Ej: Barranquilla, Cartagena…"
-        value={valor.destino}
-        onChange={handleDestinoChange}
-        disabled={disabled}
-        color="success"
-        icon={<PlaceTwoTone sx={{ color: 'success.main', fontSize: 20 }} />}
-      />
+      <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1.5 }}>
+          <PlaceTwoTone sx={{ color: 'success.main', fontSize: 20 }} />
+          <Typography variant="subtitle1" fontWeight={700} color="success.main">
+            Lugar de destino
+          </Typography>
+        </Box>
+        <MunicipioAutocomplete
+          value={valor.destino}
+          onSelect={handleDestinoChange}
+          daneFormat="dane5"
+          placeholder="Ej: Barranquilla, Cartagena…"
+          disabled={disabled}
+          size="medium"
+        />
+      </Box>
 
       {/* ── Indicador de carga ──────────────────────────────────────────── */}
       {rutaCargando && (

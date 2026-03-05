@@ -3,12 +3,15 @@ import { clienteRepository } from '@/lib/repositories/clienteRepository';
 import { z } from 'zod';
 
 const createSchema = z.object({
-  tipoId:      z.enum(['N', 'C', 'E']),
-  numeroId:    z.string().min(3).max(20),
-  razonSocial: z.string().min(2).max(200),
-  email:       z.string().email().optional().or(z.literal('')),
-  telefono:    z.string().max(30).optional(),
-  notas:       z.string().max(1000).optional(),
+  tipoId:           z.enum(['N', 'C', 'P', 'E']),
+  numeroId:         z.string().min(3).max(20),
+  razonSocial:      z.string().min(2).max(200),
+  nombres:          z.string().max(200).optional(),
+  primerApellido:   z.string().max(100).optional(),
+  segundoApellido:  z.string().max(100).optional(),
+  email:            z.string().email().optional().or(z.literal('')),
+  telefono:         z.string().max(30).optional(),
+  notas:            z.string().max(1000).optional(),
   sucursales: z.array(z.object({
     codSede:       z.string().min(1).max(5),
     nombre:        z.string().min(1).max(100),

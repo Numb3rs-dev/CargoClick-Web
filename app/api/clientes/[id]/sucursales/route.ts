@@ -11,6 +11,8 @@ const sucursalSchema = z.object({
   telefono:      z.string().max(30).optional(),
   email:         z.string().email().optional().or(z.literal('')),
   activo:        z.boolean().optional(),
+  latitud:       z.number().min(-90).max(90).optional(),
+  longitud:      z.number().min(-180).max(180).optional(),
 });
 
 /* ── POST /api/clientes/[id]/sucursales — crear o actualizar una sede ──── */

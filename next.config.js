@@ -67,7 +67,7 @@ const securityHeaders = [
       // Clerk necesita unsafe-inline/eval para su widget; GA4 necesita gtm/ga
       `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${clerkScriptSrc} ${gaSrc}`,
       "style-src 'self' 'unsafe-inline'",
-      "img-src 'self' data: blob: https://img.clerk.com https://flagcdn.com https://www.google-analytics.com",
+      "img-src 'self' data: blob: https://img.clerk.com https://flagcdn.com https://www.google-analytics.com https://*.tile.openstreetmap.org https://unpkg.com",
       "font-src 'self'",
       `connect-src 'self' ${clerkConnectSrc} ${gaSrc}`,
       `frame-src ${clerkFrameSrc}`,
@@ -79,6 +79,9 @@ const securityHeaders = [
 
 const nextConfig = {
   reactStrictMode: true,
+
+  // react-leaflet v5 es un módulo ESM puro — Next.js necesita transpilarlo
+  transpilePackages: ['react-leaflet'],
 
   // Aplicar security headers a todas las rutas
   async headers() {
