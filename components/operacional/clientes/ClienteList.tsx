@@ -53,14 +53,13 @@ interface Props {
   page:     number;
   pageSize: number;
   q:        string;
-  onEdit:   (cliente: ClienteConSucursales) => void;
 }
 
 /* -------------------------------------------------------------------------- */
 /*  Component                                                                   */
 /* -------------------------------------------------------------------------- */
 
-export function ClienteList({ items, total, page, pageSize, q, onEdit }: Props) {
+export function ClienteList({ items, total, page, pageSize, q }: Props) {
   const router       = useRouter();
   const searchParams = useSearchParams();
   const debouncedPush = useDebouncedPush();
@@ -178,7 +177,10 @@ export function ClienteList({ items, total, page, pageSize, q, onEdit }: Props) 
                     </td>
                     <td style={{ padding: '14px 16px', textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
-                        <Btn variant="secondary" size="sm" onClick={() => onEdit(c)}>
+                        <Btn variant="ghost" size="sm" onClick={() => router.push(`/operacional/clientes/${c.id}`)}>
+                          Ver
+                        </Btn>
+                        <Btn variant="secondary" size="sm" onClick={() => router.push(`/operacional/clientes/${c.id}/editar`)}>
                           Editar
                         </Btn>
                         {c.activo && (

@@ -1,0 +1,32 @@
+Seccion;Dato;Fuente RNDC (XLS);Sistema (BD campo);XML RNDC (tag);UI (componente);Estado;Notas
+Identificación;Cédula / NIT;NUMIDTERCERO;conductor.cedula;<NUMIDTERCERO> (procesoid 11);ConductorForm (input) · List · Detalle;OK;
+Identificación;Tipo ID (texto);TIPOIDTERCERO;conductor.tipoIdTexto;No aplica (texto descriptivo — el código va en CODTIPOIDTERCERO);ConductorForm (readonly auto);FALTA UI;
+Identificación;Código tipo ID;CODTIPOIDTERCERO;conductor.codTipoId;<CODTIPOIDTERCERO> (procesoid 11);ConductorDetalle (readonly);OK;Siempre "C" para conductores
+Nombre;Nombres;NOMIDTERCERO;conductor.nombres;<NOMIDTERCERO> (procesoid 11);ConductorForm (input) · List · Detalle;OK;
+Nombre;Primer apellido;PRIMERAPELLIDOIDTERCERO;conductor.apellidos (concatena 1ro+2do);<PRIMERAPELLIDOIDTERCERO> (procesoid 11);ConductorForm (input) · List · Detalle;OK;
+Nombre;Segundo apellido;SEGUNDOAPELLIDOIDTERCERO;conductor.apellidos (concatena 1ro+2do);<SEGUNDOAPELLIDOIDTERCERO> (procesoid 11);ConductorForm (input) · List · Detalle;OK;
+Licencia;Categoría licencia;CODCATEGORIALICENCIACONDUCCION;conductor.categoriaLicencia;<CODCATEGORIALICENCIACONDUCCION> (procesoid 11);ConductorForm (select) · List · Detalle;OK;Verificar en Diccionario de Datos
+Licencia;Vigencia licencia;FECHAVENCIMIENTOLICENCIA;conductor.licenciaVigencia;<FECHAVENCIMIENTOLICENCIA> (procesoid 11);ConductorForm (date) · List · Detalle;OK;
+Licencia;Número licencia;NUMLICENCIACONDUCCION;conductor.numLicencia;<NUMLICENCIACONDUCCION> (procesoid 11);ConductorForm (input) · Detalle;OK;
+Contacto;Teléfono;NUMTELEFONOCONTACTO;conductor.telefono;<NUMTELEFONOCONTACTO> (procesoid 11);ConductorForm (input) · Detalle;OK;
+Contacto;Celular;NUMCELULARPERSONA;conductor.celular;<NUMCELULARPERSONA> (procesoid 11);ConductorForm (input) · Detalle;FALTA UI;
+Contacto;Email;EMAILTERCERO;conductor.email;<EMAILTERCERO> (procesoid 11);ConductorForm (input) · Detalle;OK;
+Ubicación;Municipio;MUNICIPIORNDC (1ra palabra);conductor.municipio;No aplica (se envía el DANE);ConductorForm (select) · Detalle;FALTA UI;
+Ubicación;Código DANE municipio;CODMUNICIPIORNDC (÷1000 → 5 dígitos);conductor.daneMunicipio;<CODMUNICIPIORNDC> (procesoid 11 — 8 dígitos);ConductorForm (oculto/auto);FALTA UI;
+Ubicación;Dirección;NOMENCLATURADIRECCION;conductor.direccion;<NOMENCLATURADIRECCION> (procesoid 11);ConductorForm (input) · Detalle;FALTA UI;
+Ubicación;Latitud GPS;LATITUD;conductor.latitud;<LATITUD> (procesoid 11);ConductorDetalle (mapa);FALTA UI;Entre -5 y 14 con 6 decimales
+Ubicación;Longitud GPS;LONGITUD;conductor.longitud;<LONGITUD> (procesoid 11);ConductorDetalle (mapa);FALTA UI;Entre -79 y -66 con 6 decimales
+Sede;Nombre sede;NOMSEDETERCERO;conductor.nomSede;<NOMSEDETERCERO> (procesoid 11);ConductorDetalle (readonly);OK;Para sedes
+Sede;Código sede;CODSEDETERCERO;conductor.codSede;<CODSEDETERCERO> (procesoid 11);ConductorDetalle (readonly);OK;0=principal
+Empresa RNDC;NIT empresa transporte;NUMNITEMPRESATRANSPORTE;conductor.nitEmpresaTransporte;<NUMNITEMPRESATRANSPORTE> (procesoid 11);Config env / ConductorDetalle (readonly);OK;Obligatorio
+Empresa RNDC;Código empresa;CODIGOEMPRESA;conductor.codigoEmpresaRndc;No aplica (metadato maestro — código interno RNDC);ConductorDetalle (readonly);FALTA UI;
+Empresa RNDC;Nombre empresa;TEREMPRESA;conductor.nombreEmpresaRndc;No aplica (metadato maestro — nombre empresa);ConductorDetalle (readonly);FALTA UI;
+Metadatos RNDC;Régimen simple;REGIMENSIMPLE;conductor.regimenSimple;<REGIMENSIMPLE> (procesoid 11);ConductorForm (checkbox/switch);FALTA UI;
+Metadatos RNDC;País;CODPAIS / NOMBREPAIS;conductor.codPais + conductor.nombrePais;No aplica (metadato maestro — no va en XML procesoid 11);ConductorForm (select — default Colombia);FALTA UI;
+Metadatos RNDC;Fecha ingreso RNDC;FECHAINGRESO;conductor.fechaIngresoRndc;No aplica (metadato maestro — fecha registro RNDC);ConductorDetalle (readonly);FALTA UI;
+Metadatos RNDC;Usuario RNDC;USUARIOID;conductor.usuarioRndc;No aplica (metadato maestro — ID usuario que registró);ConductorDetalle (readonly);FALTA UI;
+Sistema;Sincronizado RNDC;No aplica (calculado por importación);conductor.sincronizadoRndc;No aplica (flag interno — true si existe en RNDC);ConductorList (badge Registrado/Borrador);OK;
+Sistema;Activo;No aplica (calculado);conductor.activo;No aplica;ConductorList (badge Activo/Inactivo);OK;
+Sistema;Notas;No aplica;conductor.notas;No aplica;ConductorForm (textarea) · Detalle;OK;
+Sistema;Consulta RUNT;No aplica;conductor.ultimaConsultaRunt;No aplica;ConductorDetalle (card RNDC);OK;
+Sistema;Snapshot RUNT;No aplica;conductor.snapshotRunt;No aplica;No aplica (interno);OK;

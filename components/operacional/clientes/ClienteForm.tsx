@@ -1,13 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import type { ClienteConSucursales } from './ClienteList';
-import { fieldStyle, labelStyle, sectionTitle, FormErrorBanner, errBorder, FieldError, FormActions, bluePillBtnStyle } from '@/components/operacional/shared/FormStyles';
+import {
+  fieldStyle, labelStyle, sectionTitle,
+  FormErrorBanner, FieldError, FormActions,
+  bluePillBtnStyle, lockedFieldStyle, lockedSection,
+  Grid2,
+} from '@/components/operacional/shared/FormStyles';
 import { colors } from '@/lib/theme/colors';
 import { TIPOS_IDENTIFICACION } from '@/lib/constants';
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Tipos
+───────────────────────────────────────────────────────────────────────────── */
+
 interface SucursalRow {
-  id?:           string;   // set if editing existing
+  id?:           string;
   codSede:       string;
   nombre:        string;
   municipio:     string;
@@ -17,22 +28,58 @@ interface SucursalRow {
   email:         string;
 }
 
+export type ClienteFormMode = 'crear' | 'editar' | 'ver';
+
 export interface ClienteFormProps {
-  mode:          'crear' | 'editar';
-  defaultValues?: ClienteConSucursales;
-  onSuccess?:    () => void;
+  mode:               ClienteFormMode;
+  /** Datos iniciales — requerido en modos editar y ver */
+  defaultValues?:     ClienteConSucursales;
+  /** Ruta a la que redirigir tras guardar exitosamente */
+  onSuccessRedirect?: string;
+  /** Callback legacy (slide-over); si se pasa, tiene prioridad sobre onSuccessRedirect */
+  onSuccess?:         () => void;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Helpers
+───────────────────────────────────────────────────────────────────────────── */
+
+const TIPO_LABEL: Record<string, string> = { N: 'NIT', C: 'Cédula', P: 'Pasaporte' };
 
 function emptyRow(codSedeHint = ''): SucursalRow {
-  return { codSede: codSedeHint, nombre: '', municipio: '', daneMunicipio: '', direccion: '', telefono: '', email: '' };
+  return {
+    codSede: codSedeHint, nombre: '', municipio: '',
+    daneMunicipio: '', direccion: '', telefono: '', email: '',
+  };
 }
 
-export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps) {
-  const [saving,  setSaving]  = useState(false);
-  const [error,   setError]   = useState<string | null>(null);
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
+function sedesFromValues(dv: ClienteConSucursales): SucursalRow[] {
+  return dv.sucursales.map(s => ({
+    id:            s.id,
+    codSede:       s.codSede,
+    nombre:        s.nombre,
+    municipio:     s.municipio      ?? '',
+    daneMunicipio: s.daneMunicipio  ?? '',
+    direccion:     s.direccion      ?? '',
+    telefono:      s.telefono       ?? '',
+    email:         s.email          ?? '',
+  }));
+}
 
-  // ── Campos principales
+/* ─────────────────────────────────────────────────────────────────────────────
+   Component
+───────────────────────────────────────────────────────────────────────────── */
+
+export function ClienteForm({ mode, defaultValues, onSuccessRedirect, onSuccess }: ClienteFormProps) {
+  const router    = useRouter();
+  const isVer     = mode === 'ver';
+  const isEditar  = mode === 'editar';
+
+  const [saving,     setSaving]     = useState(false);
+  const [error,      setError]      = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  // ── Estado del formulario
   const [tipoId,      setTipoId]      = useState(defaultValues?.tipoId      ?? 'N');
   const [numeroId,    setNumeroId]    = useState(defaultValues?.numeroId    ?? '');
   const [razonSocial, setRazonSocial] = useState(defaultValues?.razonSocial ?? '');
@@ -40,44 +87,17 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
   const [telefono,    setTelefono]    = useState(defaultValues?.telefono    ?? '');
   const [notas,       setNotas]       = useState(defaultValues?.notas       ?? '');
 
-  // ── Sucursales
-  const [sedes, setSedes] = useState<SucursalRow[]>(() => {
-    if (defaultValues?.sucursales?.length) {
-      return defaultValues.sucursales.map(s => ({
-        id:            s.id,
-        codSede:       s.codSede,
-        nombre:        s.nombre,
-        municipio:     s.municipio      ?? '',
-        daneMunicipio: s.daneMunicipio  ?? '',
-        direccion:     s.direccion      ?? '',
-        telefono:      s.telefono       ?? '',
-        email:         s.email          ?? '',
-      }));
-    }
-    return [emptyRow('1')];
-  });
+  const [sedes, setSedes] = useState<SucursalRow[]>(() =>
+    defaultValues?.sucursales?.length ? sedesFromValues(defaultValues) : [emptyRow('1')]
+  );
 
-  // Reset when switching from editar to crear
-  useEffect(() => {
-    if (mode === 'crear') {
-      setTipoId('N'); setNumeroId(''); setRazonSocial('');
-      setEmail(''); setTelefono(''); setNotas('');
-      setSedes([emptyRow('1')]);
-      setError(null); setFieldErrors({});
-    }
-  }, [mode]);
-
+  // ── Helpers de sedes
   function updateSede(idx: number, field: keyof SucursalRow, val: string) {
-    setSedes(prev => {
-      const next = [...prev];
-      next[idx] = { ...next[idx], [field]: val };
-      return next;
-    });
+    setSedes(prev => prev.map((s, i) => i === idx ? { ...s, [field]: val } : s));
   }
 
   function addSede() {
-    const nextCode = String(sedes.length + 1);
-    setSedes(prev => [...prev, emptyRow(nextCode)]);
+    setSedes(prev => [...prev, emptyRow(String(prev.length + 1))]);
   }
 
   function removeSede(idx: number) {
@@ -85,6 +105,13 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
     setSedes(prev => prev.filter((_, i) => i !== idx));
   }
 
+  // ── Navegación de salida
+  function handleCancel() {
+    if (onSuccessRedirect) router.push(onSuccessRedirect);
+    else router.back();
+  }
+
+  // ── Submit
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -92,36 +119,35 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
     setSaving(true);
 
     try {
-      const payload = {
-        tipoId, numeroId, razonSocial,
-        ...(email    && { email }),
-        ...(telefono && { telefono }),
-        ...(notas    && { notas }),
-        sucursales: sedes.map(s => ({
-          codSede:       s.codSede       || '1',
-          nombre:        s.nombre        || 'Casa Matriz',
-          ...(s.municipio     && { municipio:     s.municipio }),
-          ...(s.daneMunicipio && { daneMunicipio: s.daneMunicipio }),
-          ...(s.direccion     && { direccion:     s.direccion }),
-          ...(s.telefono      && { telefono:      s.telefono }),
-          ...(s.email         && { email:         s.email }),
-        })),
-      };
-
       let res: Response;
+
       if (mode === 'crear') {
+        const payload = {
+          tipoId, numeroId, razonSocial,
+          ...(email    && { email }),
+          ...(telefono && { telefono }),
+          ...(notas    && { notas }),
+          sucursales: sedes.map(s => ({
+            codSede:       s.codSede       || '1',
+            nombre:        s.nombre        || 'Casa Matriz',
+            ...(s.municipio     && { municipio:     s.municipio }),
+            ...(s.daneMunicipio && { daneMunicipio: s.daneMunicipio }),
+            ...(s.direccion     && { direccion:     s.direccion }),
+            ...(s.telefono      && { telefono:      s.telefono }),
+            ...(s.email         && { email:         s.email }),
+          })),
+        };
         res = await fetch('/api/clientes', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
       } else {
-        // Para editar: PATCH al cliente + upsert de cada sede
+        // editar: PATCH datos base + upsert sucursales en paralelo
         res = await fetch(`/api/clientes/${defaultValues!.id}`, {
           method: 'PATCH', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipoId, numeroId, razonSocial, email, telefono, notas }),
         });
         if (res.ok) {
-          // Upsert sucursales en paralelo
           await Promise.all(sedes.map(s =>
             fetch(`/api/clientes/${defaultValues!.id}/sucursales`, {
               method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -142,16 +168,27 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
       const json = await res.json();
 
       if (!res.ok) {
-        if (json.fields)  setFieldErrors(json.fields);
+        if (json.fields) setFieldErrors(json.fields);
         if (json.code === 'DUPLICATE') {
-          setFieldErrors(prev => ({ ...prev, numeroId: [`Ya existe un cliente con ese ${tipoId === 'N' ? 'NIT' : 'documento'}`] }));
+          setFieldErrors(prev => ({
+            ...prev,
+            numeroId: `Ya existe un cliente con ese ${tipoId === 'N' ? 'NIT' : 'documento'}`,
+          }));
         } else {
           setError(json.error ?? 'Error al guardar');
         }
         return;
       }
 
-      onSuccess?.();
+      // Éxito: delegar al callback o navegar a la ruta de éxito
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        const target = mode === 'crear'
+          ? `/operacional/clientes/${json.id}`
+          : (onSuccessRedirect ?? `/operacional/clientes/${defaultValues!.id}`);
+        router.push(target);
+      }
     } catch (err) {
       setError((err as Error).message);
     } finally {
@@ -159,41 +196,58 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
     }
   }
 
-  return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+  // ── Estilos condicionales según modo
+  const inputProps = (extra?: React.CSSProperties) => ({
+    style: isVer ? { ...lockedFieldStyle, ...extra } : { ...fieldStyle, ...extra },
+    readOnly: isVer,
+    disabled: isVer,
+  });
 
-      {/* Identificación */}
+  const selectProps = {
+    style: isVer ? lockedFieldStyle : fieldStyle,
+    disabled: isVer,
+  };
+
+  /* ─── Render ─── */
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+
+      {/* ── 1. Identificación ── */}
       <div>
         <p style={sectionTitle}>Identificación</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: 12 }}>
           <div>
             <label style={labelStyle}>Tipo *</label>
             <select
               value={tipoId}
               onChange={e => setTipoId(e.target.value)}
-              style={fieldStyle}
               required
+              {...selectProps}
             >
-              {TIPOS_IDENTIFICACION.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
+              {TIPOS_IDENTIFICACION.map(t => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
             </select>
           </div>
           <div>
-            <label style={labelStyle}>{tipoId === 'N' ? 'NIT' : tipoId === 'C' ? 'Cédula' : 'Pasaporte'} *</label>
+            <label style={labelStyle}>
+              {TIPO_LABEL[tipoId] ?? tipoId} *
+            </label>
             <input
               value={numeroId}
               onChange={e => setNumeroId(e.target.value)}
-              style={{ ...fieldStyle, borderColor: fieldErrors.numeroId ? colors.error : colors.border }}
               required minLength={3} maxLength={20}
               placeholder={tipoId === 'N' ? '900123456' : '1023456789'}
+              {...inputProps(fieldErrors.numeroId
+                ? { borderColor: colors.error, boxShadow: '0 0 0 3px rgba(239,68,68,0.10)' }
+                : undefined)}
             />
-            {fieldErrors.numeroId && (
-              <FieldError error={fieldErrors.numeroId[0]} />
-            )}
+            <FieldError error={fieldErrors.numeroId} />
           </div>
         </div>
       </div>
 
-      {/* Datos generales */}
+      {/* ── 2. Datos generales ── */}
       <div>
         <p style={sectionTitle}>Datos generales</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -202,19 +256,19 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
             <input
               value={razonSocial}
               onChange={e => setRazonSocial(e.target.value)}
-              style={fieldStyle}
               required minLength={2} maxLength={200}
               placeholder="Empresa S.A.S."
+              {...inputProps()}
             />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <Grid2>
             <div>
               <label style={labelStyle}>Email</label>
               <input
                 type="email" value={email}
                 onChange={e => setEmail(e.target.value)}
-                style={fieldStyle}
                 placeholder="contacto@empresa.com"
+                {...inputProps()}
               />
             </div>
             <div>
@@ -222,71 +276,77 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
               <input
                 value={telefono}
                 onChange={e => setTelefono(e.target.value)}
-                style={fieldStyle}
                 placeholder="+57 300 123 4567"
+                {...inputProps()}
               />
             </div>
-          </div>
+          </Grid2>
           <div>
             <label style={labelStyle}>Notas internas</label>
             <textarea
               value={notas}
               onChange={e => setNotas(e.target.value)}
               rows={2}
-              style={{ ...fieldStyle, resize: 'vertical' }}
               placeholder="Cliente frecuente, entregas sábados…"
+              {...inputProps({ resize: 'vertical' } as React.CSSProperties)}
             />
           </div>
         </div>
       </div>
 
-      {/* Sedes */}
+      {/* ── 3. Sedes / Sucursales ── */}
       <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-          <p style={{ ...sectionTitle, marginBottom: 0 }}>Sedes / Sucursales (RNDC)</p>
-          <button
-            type="button"
-            onClick={addSede}
-            style={bluePillBtnStyle}
-          >
-            + Sede
-          </button>
+        <div style={{
+          display: 'flex', alignItems: 'center',
+          justifyContent: 'space-between', marginBottom: 12,
+        }}>
+          <p style={{ ...sectionTitle, marginBottom: 0 }}>
+            Sedes / Sucursales (RNDC)
+          </p>
+          {!isVer && (
+            <button type="button" onClick={addSede} style={bluePillBtnStyle}>
+              + Sede
+            </button>
+          )}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {sedes.map((s, idx) => (
-            <div key={idx} style={{
-              background: colors.bgLight, borderRadius: 10,
-              border: `1px solid ${colors.borderLight}`, padding: 16,
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div
+              key={idx}
+              style={{
+                background: colors.bgLight, borderRadius: 10,
+                border: `1px solid ${colors.borderLight}`, padding: 16,
+                ...lockedSection(isVer),
+              }}
+            >
+              <div style={{
+                display: 'flex', justifyContent: 'space-between',
+                alignItems: 'center', marginBottom: 12,
+              }}>
                 <span style={{ fontSize: 13, fontWeight: 600, color: colors.textDefault }}>
                   Sede #{idx + 1}
+                  {s.nombre ? ` — ${s.nombre}` : ''}
                 </span>
-                {sedes.length > 1 && (
+                {!isVer && sedes.length > 1 && (
                   <button
-                    type="button"
-                    onClick={() => removeSede(idx)}
-                    style={{
-                      background: 'none', border: 'none', cursor: 'pointer',
-                      color: colors.error, fontSize: 12,
-                    }}
+                    type="button" onClick={() => removeSede(idx)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: colors.error, fontSize: 12 }}
                   >
                     ✕ Eliminar
                   </button>
                 )}
               </div>
 
-              {/* Fila 1: codSede + nombre */}
+              {/* Cod. Sede + Nombre */}
               <div style={{ display: 'grid', gridTemplateColumns: '100px 1fr', gap: 10, marginBottom: 10 }}>
                 <div>
                   <label style={labelStyle}>Cod. Sede *</label>
                   <input
                     value={s.codSede}
                     onChange={e => updateSede(idx, 'codSede', e.target.value)}
-                    style={fieldStyle}
-                    maxLength={5} required
-                    placeholder="1"
+                    maxLength={5} required placeholder="1"
+                    {...inputProps()}
                   />
                 </div>
                 <div>
@@ -294,21 +354,21 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
                   <input
                     value={s.nombre}
                     onChange={e => updateSede(idx, 'nombre', e.target.value)}
-                    style={fieldStyle}
                     required placeholder="Casa Matriz"
+                    {...inputProps()}
                   />
                 </div>
               </div>
 
-              {/* Fila 2: municipio + DANE */}
+              {/* Municipio + DANE */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 100px', gap: 10, marginBottom: 10 }}>
                 <div>
                   <label style={labelStyle}>Municipio</label>
                   <input
                     value={s.municipio}
                     onChange={e => updateSede(idx, 'municipio', e.target.value)}
-                    style={fieldStyle}
                     placeholder="Bogotá, D.C."
+                    {...inputProps()}
                   />
                 </div>
                 <div>
@@ -316,42 +376,41 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
                   <input
                     value={s.daneMunicipio}
                     onChange={e => updateSede(idx, 'daneMunicipio', e.target.value)}
-                    style={fieldStyle}
                     maxLength={5} placeholder="11001"
+                    {...inputProps()}
                   />
                 </div>
               </div>
 
-              {/* Fila 3: dirección */}
+              {/* Dirección */}
               <div style={{ marginBottom: 10 }}>
                 <label style={labelStyle}>Dirección</label>
                 <input
                   value={s.direccion}
                   onChange={e => updateSede(idx, 'direccion', e.target.value)}
-                  style={fieldStyle}
                   placeholder="Cra 7 # 26-20, Piso 3"
+                  {...inputProps()}
                 />
               </div>
 
-              {/* Fila 4: tel + email de sede */}
+              {/* Tel + Email sede */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
                   <label style={labelStyle}>Teléfono sede</label>
                   <input
                     value={s.telefono}
                     onChange={e => updateSede(idx, 'telefono', e.target.value)}
-                    style={fieldStyle}
                     placeholder="+57 1 234 5678"
+                    {...inputProps()}
                   />
                 </div>
                 <div>
                   <label style={labelStyle}>Email sede</label>
                   <input
-                    type="email"
-                    value={s.email}
+                    type="email" value={s.email}
                     onChange={e => updateSede(idx, 'email', e.target.value)}
-                    style={fieldStyle}
                     placeholder="sede@empresa.com"
+                    {...inputProps()}
                   />
                 </div>
               </div>
@@ -360,24 +419,45 @@ export function ClienteForm({ mode, defaultValues, onSuccess }: ClienteFormProps
         </div>
       </div>
 
+      {/* ── Errores + Acciones ── */}
       <FormErrorBanner message={error} />
 
-      {/* Acciones */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12, paddingTop: 8 }}>
-        <button
-          type="submit"
-          disabled={saving}
-          style={{
-            background: saving ? colors.disabledBtn : colors.primary,
-            color: colors.bgWhite, border: 'none', borderRadius: 8,
-            padding: '10px 24px', fontSize: 14, fontWeight: 600,
-            cursor: saving ? 'not-allowed' : 'pointer',
-            transition: 'background 0.15s',
-          }}
-        >
-          {saving ? 'Guardando…' : mode === 'crear' ? 'Crear cliente →' : 'Guardar cambios →'}
-        </button>
-      </div>
+      {isVer ? (
+        /* Modo lectura: solo botón Editar */
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, paddingTop: 8 }}>
+          <button
+            type="button" onClick={handleCancel}
+            style={{
+              padding: '10px 20px', fontSize: 14, fontWeight: 500,
+              border: '1.5px solid #E2E8F0', borderRadius: 9,
+              background: '#F8FAFC', color: '#374151', cursor: 'pointer',
+            }}
+          >
+            ← Volver
+          </button>
+          {defaultValues && (
+            <Link
+              href={`/operacional/clientes/${defaultValues.id}/editar`}
+              style={{
+                display: 'inline-flex', alignItems: 'center',
+                padding: '10px 26px', fontSize: 14, fontWeight: 600,
+                borderRadius: 9, border: 'none', textDecoration: 'none',
+                background: 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                color: '#FFFFFF', boxShadow: '0 2px 6px rgba(5,150,105,0.25)',
+              }}
+            >
+              ✏️ Editar cliente
+            </Link>
+          )}
+        </div>
+      ) : (
+        /* Modo crear/editar */
+        <FormActions
+          saving={saving}
+          onCancel={handleCancel}
+          submitLabel={isEditar ? 'Guardar cambios →' : 'Crear cliente →'}
+        />
+      )}
     </form>
   );
 }

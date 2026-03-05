@@ -40,7 +40,7 @@ yarn-error.log*
 next-env.d.ts
 
 # RNDC data dump (59MB — se transfiere manualmente a UAT/PROD)
-scripts/rndc-data.sql
+scripts/importar/rndc-data.sql
 
 # prisma — las migraciones SÍ deben commitearse, no se excluye nada aquí
 

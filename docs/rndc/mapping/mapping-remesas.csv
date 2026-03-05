@@ -1,0 +1,89 @@
+Seccion;Dato;Fuente RNDC (XLS);Sistema (BD campo);XML RNDC (tag);UI (componente);Estado;Notas
+Identificación interna;ID;N/A;remesa.id;N/A;id (InitialData read);OK;String PK — cuid generado por Prisma
+Identificación interna;Número de remesa;CONSECUTIVOREMESA;remesa.numeroRemesa;<CONSECUTIVOREMESA> (procesoid 3);numeroRemesa (InitialData read);OK;Generado internamente REM-YYYY-NNNN. Unique
+Identificación interna;FK Negocio;N/A;remesa.nuevoNegocioId;N/A;N/A;OK;FK al NuevoNegocio (String? opcional)
+Identificación interna;FK Manifiesto;N/A;remesa.manifiestoOperativoId;N/A;N/A;OK;Se asigna al armar el manifiesto — posterior a la remesa
+Identificación interna;FK Remitente;N/A;remesa.remitenteClienteId;N/A;N/A (SucursalPicker);OK;FK al directorio de clientes
+Identificación interna;FK Destinatario;N/A;remesa.destinatarioClienteId;N/A;N/A (SucursalPicker);OK;FK al directorio de clientes
+Identificación interna;Fecha creación;N/A;remesa.createdAt;N/A;createdAt (InitialData read);OK;DateTime — timestamp auto
+Identificación interna;Fecha actualización;N/A;remesa.updatedAt;N/A;updatedAt (InitialData read);OK;DateTime — timestamp auto
+Descripción de carga;Descripción producto;DESCRIPCIONCORTAPRODUCTO;remesa.descripcionCarga;<DESCRIPCIONCORTAPRODUCTO> (procesoid 3);descripcionCarga (req);OK;Max 60 chars. NO se envía para mercancías peligrosas. Obligatorio RNDC
+Descripción de carga;Código arancel carga;MERCANCIAREMESA;remesa.codigoAranceladoCarga;<MERCANCIAREMESA> (procesoid 3);codigoAranceladoCarga (opt);OK;6 dígitos ej 009880. XML hace padStart(6). Obligatorio RNDC
+Descripción de carga;Código mercancía remesa;N/A;remesa.mercanciaRemesaCod;N/A;mercanciaRemesaCod (InitialData read);PENDIENTE;Pendiente unificar con codigoAranceladoCarga — mismo concepto (Int?)
+Descripción de carga;Peso en kilogramos;CANTIDADCARGADA;remesa.pesoKg;<CANTIDADCARGADA> (procesoid 3);pesoKg (req);OK;Int — peso total en kg. Obligatorio RNDC
+Descripción de carga;Volumen m³;N/A;remesa.volumenM3;N/A;N/A;N/A;Decimal? — uso interno. El RNDC procesoid 3 no recibe este campo
+Descripción de carga;Unidad medida capacidad;N/A (hardcoded);N/A;<UNIDADMEDIDACAPACIDAD> (procesoid 3);N/A;OK;Siempre 1=kg. Hardcoded en rndcXmlBuilder. Sin campo en BD. Obligatorio RNDC
+Clasificación RNDC;Código operación transporte;CODOPERACIONTRANSPORTE;remesa.codOperacionTransporte;<CODOPERACIONTRANSPORTE> (procesoid 3);codOperacionTransporte (req);OK;G=General | P=Paqueteo | CC=Cont.cargado | CV=Cont.vacío | C=Consolidada. Default G. Obligatorio RNDC
+Clasificación RNDC;Código naturaleza carga;CODNATURALEZACARGA;remesa.codNaturalezaCarga;<CODNATURALEZACARGA> (procesoid 3);codNaturalezaCarga (req);OK;G=General | 2=Peligrosa | R=Refrigerada | S=Sobredimensionada | E=Extrapesada | 5=Alto valor. Default G. Obligatorio RNDC
+Clasificación RNDC;Naturaleza carga (texto);N/A;remesa.naturalezaCarga;N/A;N/A;N/A;String? — texto legible importado del Excel. No se envía al Ministerio
+Clasificación RNDC;Código tipo empaque;CODTIPOEMPAQUE;remesa.codigoEmpaque;<CODTIPOEMPAQUE> (procesoid 3);codigoEmpaque (req);OK;0=Paquetes | 4=Bulto | 6=Granel líq | 10=Estiba | 15=Granel sól | 17=Varios | 19=Estibada. Default 0. Obligatorio RNDC
+Clasificación RNDC;Tipo consolidada;TIPOCONSOLIDADA;remesa.tipoConsolidada;<TIPOCONSOLIDADA> (procesoid 3);tipoConsolidada (cond);OK;Solo cuando codOperacionTransporte=P (Paqueteo). Valores: N | P. Condicional
+Clasificación RNDC;Unidad medida capacidad (campo);N/A (hardcoded=1);remesa.unidadMedidaCapacidad;N/A;N/A;DEPRECAR;Campo Prisma reservado. El XML envía 1 fijo. Pendiente deprecar
+Mercancía peligrosa;Código UN;CODIGOUN;remesa.codigoUn;<CODIGOUN> (procesoid 3);codigoUn (cond);OK;Código ONU Libro Naranja ej 1203=gasolina. Obligatorio para peligrosas. Max 4
+Mercancía peligrosa;Estado mercancía;ESTADOMERCANCIA;remesa.estadoMercancia;<ESTADOMERCANCIA> (procesoid 3);estadoMercancia (cond);OK;S=Sólido | L=Líquido | G=Gaseoso. Solo mercancías peligrosas. Condicional
+Mercancía peligrosa;Grupo embalaje envase;GRUPOEMBALAJEENVASE;remesa.grupoEmbalajeEnvase;<GRUPOEMBALAJEENVASE> (procesoid 3);grupoEmbalajeEnvase (cond);OK;I | II | III. Solo peligrosas con varios grupos de embalaje. Condicional
+Mercancía peligrosa;Código arancel completo;CODIGOARANCEL_CODE;remesa.codigoArancelCompleto;N/A;N/A;N/A;2 dígitos cuarto nivel codif. armonizada. Importado Excel. Condicional
+Granel líquido;Unidad medida producto;UNIDADMEDIDAPRODUCTO;remesa.unidadMedidaProducto;<UNIDADMEDIDAPRODUCTO> (procesoid 3);unidadMedidaProducto (cond);OK;Solo granel líquido. KGM | GLL | MTQ | LTR | BLL | MLT | CMQ | UN. Default KGM. Condicional
+Granel líquido;Cantidad producto;CANTIDADPRODUCTO;remesa.cantidadProducto;<CANTIDADPRODUCTO> (procesoid 3);cantidadProducto (cond);OK;Decimal? — cantidad en unidad comercial. Solo granel líquido. Condicional
+Contenedor;Peso contenedor vacío;PESOCONTENEDORVACIO;remesa.pesoContenedorVacio;<PESOCONTENEDORVACIO> (procesoid 3);pesoContenedorVacio (cond);OK;Decimal? — peso en kg. Solo operaciones CC o CV. Condicional
+Contenedor;Configuración resultante;CONFIGURACIONRESULTANTE;remesa.configResultante;N/A;N/A;N/A;String? — config resultante del vehículo. Importado Excel. Condicional
+Remitente;Tipo ID remitente;CODTIPOIDREMITENTE;remesa.tipoIdRemitente;<CODTIPOIDREMITENTE> (procesoid 3);N/A (InitialData — SucursalPicker);OK;C=Cédula | N=NIT | E=Extranjero. Default N. Obligatorio RNDC
+Remitente;NIT/CC remitente;NUMIDREMITENTE;remesa.nitRemitente;<NUMIDREMITENTE> (procesoid 3);N/A (InitialData — SucursalPicker);OK;Documento de identificación. Obligatorio RNDC
+Remitente;Código sede remitente;CODSEDEREMITENTE;remesa.codSedeRemitente;<CODSEDEREMITENTE> (procesoid 3);N/A (InitialData — SucursalPicker);OK;Código sede registrada en RNDC. Default 1. Obligatorio RNDC
+Remitente;Empresa remitente;N/A;remesa.empresaRemitente;N/A;empresaRemitente (InitialData read);OK;String? — nombre/razón social. Display interno. No va al RNDC p3
+Remitente;Dirección remitente;REMDIRREMITENTE;remesa.direccionRemitente;<REMDIRREMITENTE> (procesoid 3);remDirRemitente (opt);OK;Alias UI: remDirRemitente → Prisma: direccionRemitente. PATCH route convierte. Max 150. Opcional RNDC
+Destinatario;Tipo ID destinatario;CODTIPOIDDESTINATARIO;remesa.tipoIdDestinatario;<CODTIPOIDDESTINATARIO> (procesoid 3);N/A (InitialData — SucursalPicker);OK;C=Cédula | N=NIT | E=Extranjero. Default N. Obligatorio RNDC
+Destinatario;NIT/CC destinatario;NUMIDDESTINATARIO;remesa.nitDestinatario;<NUMIDDESTINATARIO> (procesoid 3);N/A (InitialData — SucursalPicker);OK;Documento del destinatario. Obligatorio RNDC
+Destinatario;Código sede destinatario;CODSEDEDESTINATARIO;remesa.codSedeDestinatario;<CODSEDEDESTINATARIO> (procesoid 3);N/A (InitialData — SucursalPicker);OK;Sede del destinatario en RNDC. Default 1. Obligatorio RNDC
+Destinatario;Empresa destinataria;N/A;remesa.empresaDestinataria;N/A;empresaDestinataria (InitialData read);OK;String? — nombre/razón social. Display interno
+Propietario;Tipo ID propietario;CODTIPOIDPROPIETARIO;remesa.tipoIdPropietario;<CODTIPOIDPROPIETARIO> (procesoid 3);N/A (InitialData — PropietarioMode);OK;C=Cédula | N=NIT. Default N. Obligatorio RNDC
+Propietario;NIT propietario;NUMIDPROPIETARIO;remesa.nitPropietario;<NUMIDPROPIETARIO> (procesoid 3);N/A (InitialData — PropietarioMode);OK;NIT del dueño de la póliza de seguros. Obligatorio RNDC
+Propietario;Código sede propietario;CODSEDEPROPIETARIO;remesa.codSedePropietario;<CODSEDEPROPIETARIO> (procesoid 3);codSedePropietario (opt default 1);OK;Crítico: RNDC lo requiere. XML usa fallback 1. Obligatorio RNDC. Max 5
+Propietario;Nombre propietario;N/A;remesa.nombrePropietario;N/A;nombrePropietario (InitialData read);OK;String? — display interno. Importado del Excel
+Propietario;Municipio propietario;N/A;remesa.municipioPropietario;N/A;N/A;N/A;String? — REM_PROP del Excel. No editable en form
+Seguro;Número póliza transporte;NUMPOLIZATRANSPORTE;remesa.numPolizaTransporte;<NUMPOLIZATRANSPORTE> (procesoid 3);numPolizaTransporte (opt);OK;Max 30. Opcional RNDC
+Seguro;Fecha vencimiento póliza;FECHAVENCIMIENTOPOLIZACARGA;remesa.fechaVencimientoPoliza;<FECHAVENCIMIENTOPOLIZACARGA> (procesoid 3);fechaVencimientoPoliza (opt);OK;DateTime? — formato DD/MM/AAAA en XML. API acepta ISO date. Opcional RNDC
+Seguro;NIT compañía aseguradora;COMPANIASEGURO;remesa.companiaSeguriNit;<COMPANIASEGURO> (procesoid 3);companiaSeguriNit (InitialData read);OK;XML lo envía si existe. No editable en form. Opcional RNDC
+Seguro;Nombre aseguradora;N/A;remesa.companiaSeguriNombre;N/A;companiaSeguriNombre (InitialData read);OK;String? — display interno
+Seguro;Dueño póliza;DUENOPOLIZA;remesa.duenopoliza;<DUENOPOLIZA> (procesoid 3);duenopoliza (InitialData read);OK;Importado del Excel. Opcional RNDC
+Seguro;Valor asegurado;VALORASEGURADO;remesa.valorAsegurado;<VALORASEGURADO> (procesoid 3);valorAsegurado (opt);OK;Decimal? — valor ante aseguradora. Opcional RNDC
+Seguro;Valor declarado;N/A;remesa.valorDeclarado;N/A;N/A;N/A;Decimal? — uso interno. RNDC procesoid 3 no recibe
+Origen y destino;Municipio origen (nombre);N/A (solo display);remesa.origenMunicipio;N/A;origenMunicipio (InitialData read);OK;Nombre legible. RNDC solo recibe código DANE
+Origen y destino;Código DANE origen;CODMUNICIPIOORIGEN;remesa.origenDane;<CODMUNICIPIOORIGEN> (procesoid 3);origenDane (req);OK;8 dígitos ej 76001000=Cali. Obligatorio RNDC
+Origen y destino;Municipio destino (nombre);N/A (solo display);remesa.destinoMunicipio;N/A;destinoMunicipio (InitialData read);OK;Nombre legible del municipio de destino
+Origen y destino;Código DANE destino;CODMUNICIPIODESTINO;remesa.destinoDane;<CODMUNICIPIODESTINO> (procesoid 3);destinoDane (req);OK;8 dígitos. Obligatorio RNDC
+Origen y destino;Dirección origen;N/A;remesa.direccionOrigen;N/A;N/A;DEPRECATED;Reemplazado por direccionRemitente. Eliminar en próxima migración
+Origen y destino;Dirección destino;N/A;remesa.direccionDestino;N/A;N/A;DEPRECATED;Sin equivalente RNDC. Usar instruccionesEspeciales para notas de descargue
+Coordenadas;Latitud cargue;N/A (no enviar);remesa.latitudCargue;N/A;N/A;FUTURO;Decimal? — uso futuro (mapas). RNDC procesoid 3 no recibe coordenadas
+Coordenadas;Longitud cargue;N/A (no enviar);remesa.longitudCargue;N/A;N/A;FUTURO;Decimal? — uso futuro
+Coordenadas;Latitud descargue;N/A (no enviar);remesa.latitudDescargue;N/A;N/A;FUTURO;Decimal? — uso futuro
+Coordenadas;Longitud descargue;N/A (no enviar);remesa.longitudDescargue;N/A;N/A;FUTURO;Decimal? — uso futuro
+Tiempos logísticos;Fecha/hora cita cargue;FECHACITAPACTADACARGUE + HORACITAPACTADACARGUE;remesa.fechaHoraCitaCargue;<FECHACITAPACTADACARGUE> + <HORACITAPACTADACARGUE> (procesoid 3);fechaHoraCitaCargue (req);OK;DateTime? — un solo campo en Prisma. XML builder separa en 2 tags. Obligatorio RNDC
+Tiempos logísticos;Fecha/hora cita descargue;FECHACITAPACTADADESCARGUE + HORACITAPACTADADESCARGUEREMESA;remesa.fechaHoraCitaDescargue;<FECHACITAPACTADADESCARGUE> + <HORACITAPACTADADESCARGUEREMESA> (procesoid 3);fechaHoraCitaDescargue (req);OK;DateTime? — igual que cargue, 2 tags XML desde 1 DateTime. Obligatorio RNDC
+Tiempos logísticos;Horas pacto carga;HORASPACTOCARGA;remesa.horasPactoCarga;<HORASPACTOCARGA> (procesoid 3);horasPactoCarga (opt default 4);OK;Int — default 4. Obligatorio RNDC
+Tiempos logísticos;Minutos pacto carga;MINUTOSPACTOCARGA;remesa.minutosPactoCarga;<MINUTOSPACTOCARGA> (procesoid 3);minutosPactoCarga (opt default 0);OK;Int 0-59 — complemento de horas. Obligatorio RNDC
+Tiempos logísticos;Horas pacto descargue;HORASPACTODESCARGUE;remesa.horasPactoDescargue;<HORASPACTODESCARGUE> (procesoid 3);horasPactoDescargue (opt default 4);OK;Int — default 4. Obligatorio RNDC
+Tiempos logísticos;Minutos pacto descargue;MINUTOSPACTODESCARGUE;remesa.minutosPactoDescargue;<MINUTOSPACTODESCARGUE> (procesoid 3);minutosPactoDescargue (opt default 0);OK;Int 0-59 — complemento de horas. Obligatorio RNDC
+Trasbordo;Código municipio trasbordo;CODMUNICIPIOTRASBORDO;remesa.codMunicipioTrasbordo;<CODMUNICIPIOTRASBORDO> (procesoid 3);N/A;FUTURO;String? — código DANE. No editable en form. Condicional
+Trasbordo;Municipio trasbordo (nombre);NOMMUNICIPIOTRASBORDO;remesa.municipioTrasbordo;<NOMMUNICIPIOTRASBORDO> (procesoid 3);N/A;FUTURO;String? — display. Condicional
+Trasbordo;Código municipio trasbordo 2;CODMUNICIPIOTRASBORDO2;remesa.codMunicipioTrasbordo2;<CODMUNICIPIOTRASBORDO2> (procesoid 3);N/A;FUTURO;String? — segundo punto de trasbordo. Condicional
+Trasbordo;Municipio trasbordo 2 (nombre);NOMMUNICIPIOTRASBORDO2;remesa.municipioTrasbordo2;<NOMMUNICIPIOTRASBORDO2> (procesoid 3);N/A;FUTURO;String? — segundo municipio. Condicional
+Valores y extras;Orden servicio generador;ORDENSERVICIOGENERADOR;remesa.ordenServicioGenerador;<ORDENSERVICIOGENERADOR> (procesoid 3);ordenServicioGenerador (opt);OK;String? — número orden de compra del cliente. Max 20. Opcional RNDC
+Valores y extras;Instrucciones especiales;N/A;remesa.instruccionesEspeciales;N/A;instruccionesEspeciales (InitialData read);OK;String? Text — uso interno. No va al RNDC procesoid 3. Max 500
+Valores y extras;Permiso carga extra;PERMISOCARGAEXTRA;remesa.permisoCargaExtra;<PERMISOCARGAEXTRA> (procesoid 3);N/A;N/A;String? — permiso INVÍAS. Solo carga extradimensionada. No editable. Condicional
+Valores y extras;ID dispositivo GPS;NUMIDGPS;remesa.numIdGps;<NUMIDGPS> (procesoid 3);N/A;N/A;String? — se envía al RNDC si existe. No editable en form. Opcional
+Valores y extras;Placa vehículo (importada);N/A;remesa.numPlacaRndc;N/A;N/A;N/A;String? — NUMPLACA del Excel importado. Solo lectura
+Valores y extras;Cantidad info carga;N/A;remesa.cantidadInformacionCarga;N/A;N/A;N/A;Int? — CANTIDADINFORMACIONCARGA del Excel importado. Solo lectura
+Estado RNDC;Estado RNDC remesa;N/A (calculado);remesa.estadoRndc;N/A;estadoRndc (InitialData read);OK;EstadoRndcRemesa: PENDIENTE → ENVIADA → REGISTRADA / ANULADA. Auto
+Estado RNDC;Número remesa RNDC;N/A (respuesta);remesa.numeroRemesaRndc;N/A;numeroRemesaRndc (InitialData read);OK;String? — ingresoid de respuesta RNDC tras procesoid 3 exitoso. Auto
+Estado RNDC;Fecha ingreso RNDC;N/A (respuesta);remesa.fechaIngresoRndc;N/A;fechaIngresoRndc (InitialData read);OK;DateTime? — puede venir de respuesta o Excel importado. Auto
+Estado RNDC;Respuesta RNDC (JSON);N/A;remesa.respuestaRndcJson;N/A;N/A;OK;Json? — XML respuesta SOAP parseado a JSON. Solo auditoría interna
+Estado RNDC;NIT empresa transportadora;N/A (config);N/A;<NUMNITEMPRESATRANSPORTE> (procesoid 3);N/A;OK;Viene de RNDC_NIT_EMPRESA env var. No almacenado en remesa. Obligatorio RNDC
+Metadatos Excel;Usuario RNDC;N/A;remesa.usuarioRndc;N/A;N/A;N/A;String? — USUARIO del Excel. Usuario que registró
+Metadatos Excel;Interactivo RNDC;N/A;remesa.interactivoRndc;N/A;N/A;N/A;String? — INTERACTIVO S/N. Si fue ingresado por portal web del Ministerio
+Metadatos Excel;Código empresa RNDC;N/A;remesa.codigoEmpresaRndc;N/A;N/A;N/A;Int? — CODIGOEMPRESA del Excel importado
+Metadatos Excel;NIT empresa transporte;N/A;remesa.nitEmpresaTransporte;N/A;N/A;N/A;String? — verificación contra empresa actual
+Metadatos Excel;Empresa transporte RNDC;N/A;remesa.empresaTransporteRndc;N/A;N/A;N/A;String? — REMEMPRESA del Excel. Nombre empresa en RNDC
+Metadatos Excel;Usuario ingreso RNDC;N/A;remesa.usuarioIngresoRndc;N/A;N/A;N/A;Int? — USUARIOINGR del Excel. ID numérico
+Metadatos Excel;Naturaleza carga (texto);N/A;remesa.naturalezaCarga;N/A;N/A;N/A;String? — texto ej Carga Normal
+Estado operativo;Estado operativo;N/A (calculado);remesa.estado;N/A;estado (InitialData read);OK;EstadoOperativoRemesa: PENDIENTE → ASIGNADA → EN_TRANSITO → ENTREGADA / NOVEDAD. Flujo interno. Auto

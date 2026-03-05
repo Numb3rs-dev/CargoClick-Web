@@ -343,8 +343,8 @@ taskkill /PID [PID] /F
 
 ### Guías del Proyecto
 
-- `definicion-FuncionalyTecnica/DEFINICION_FUNCIONAL.md` - Requerimientos de negocio
-- `definicion-FuncionalyTecnica/DEFINICION_TECNICA.md` - Especificaciones técnicas
+- `docs/proyecto/DEFINICION_FUNCIONAL.md` - Requerimientos de negocio
+- `docs/proyecto/DEFINICION_TECNICA.md` - Especificaciones técnicas
 - `prompts/BACK_README.md` - Guía completa de implementación backend
 
 ## 🤝 Contribuir

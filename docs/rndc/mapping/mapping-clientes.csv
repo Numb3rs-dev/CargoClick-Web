@@ -1,0 +1,37 @@
+Seccion;Dato;Fuente RNDC (XLS);Sistema (BD campo);XML RNDC (tag);UI (componente);Estado;Notas
+;;;;;TABLA: CLIENTES;;
+Identificación;Tipo identificación;CODTIPOIDTERCERO;cliente.tipoId;<CODTIPOIDTERCERO> (procesoid 11) / en Remesa: <CODTIPOIDREMITENTE> · <CODTIPOIDDESTINATARIO> · <CODTIPOIDPROPIETARIO>;ClienteForm (select NIT/CC/Pasaporte) · List;OK;
+Identificación;Número identificación;NUMIDTERCERO;cliente.numeroId;<NUMIDTERCERO> (procesoid 11) / en Remesa: <NUMIDREMITENTE> · <NUMIDDESTINATARIO> · <NUMIDPROPIETARIO>;ClienteForm (input) · List;OK;
+Identificación;Tipo ID (texto largo);TIPOIDTERCERO;cliente.tipoIdTexto;No aplica (texto descriptivo — el código va en CODTIPOIDTERCERO);ClienteForm (readonly auto desde tipoId);FALTA UI;
+Nombre;Razón social / Nombre;NIT→NOMIDTERCERO · CC→NOM+AP1+AP2;cliente.razonSocial;<NOMIDTERCERO> + <PRIMERAPELLIDOIDTERCERO> + <SEGUNDOAPELLIDOIDTERCERO> (procesoid 11);ClienteForm (input) · List;OK;
+Nombre;Nombres (persona natural);NOMIDTERCERO;cliente.nombres;<NOMIDTERCERO> (procesoid 11);ClienteForm (input — visible si persona natural);FALTA UI;
+Nombre;Primer apellido;PRIMERAPELLIDOIDTERCERO;cliente.primerApellido;<PRIMERAPELLIDOIDTERCERO> (procesoid 11);ClienteForm (input — visible si persona natural);FALTA UI;
+Nombre;Segundo apellido;SEGUNDOAPELLIDOIDTERCERO;cliente.segundoApellido;<SEGUNDOAPELLIDOIDTERCERO> (procesoid 11);ClienteForm (input — visible si persona natural);FALTA UI;
+Contacto;Email;EMAILTERCERO;cliente.email;<EMAILTERCERO> (procesoid 11);ClienteForm (input) · List;OK;
+Contacto;Teléfono;NUMTELEFONOCONTACTO;cliente.telefono;<NUMTELEFONOCONTACTO> (procesoid 11);ClienteForm (input) · List;OK;
+Licencia;Categoría licencia;CODCATEGORIALICENCIACONDUCCION;cliente.categoriaLicencia;<CODCATEGORIALICENCIACONDUCCION> (procesoid 11);No aplica para clientes (visible en ConductorForm);OK;Solo conductores
+Licencia;Número licencia;NUMLICENCIACONDUCCION;cliente.numLicencia;<NUMLICENCIACONDUCCION> (procesoid 11);No aplica para clientes (visible en ConductorForm);OK;Solo conductores
+Licencia;Vigencia licencia;FECHAVENCIMIENTOLICENCIA;cliente.fechaVencimientoLicencia;<FECHAVENCIMIENTOLICENCIA> (procesoid 11);No aplica para clientes (visible en ConductorForm);OK;Solo conductores
+Metadatos RNDC;Régimen simple tributación;REGIMENSIMPLE;cliente.regimenSimple;<REGIMENSIMPLE> (procesoid 11);ClienteForm (checkbox/switch);FALTA UI;
+Metadatos RNDC;País;CODPAIS / NOMBREPAIS;cliente.codPais + cliente.nombrePais;No aplica (metadato maestro — no va en XML procesoid 11);ClienteForm (select — default Colombia);FALTA UI;
+Empresa RNDC;NIT empresa transporte;NUMNITEMPRESATRANSPORTE;cliente.nitEmpresaTransporte;<NUMNITEMPRESATRANSPORTE> (procesoid 11);Config env / ClienteDetalle (readonly);OK;Obligatorio
+Empresa RNDC;Código empresa;CODIGOEMPRESA;cliente.codigoEmpresaRndc;No aplica (metadato maestro — código interno RNDC);ClienteDetalle (readonly);FALTA UI;
+Empresa RNDC;Nombre empresa;TEREMPRESA;cliente.nombreEmpresaRndc;No aplica (metadato maestro — nombre empresa);ClienteDetalle (readonly);FALTA UI;
+Metadatos RNDC;Fecha ingreso RNDC;FECHAINGRESO;cliente.fechaIngresoRndc;No aplica (metadato maestro — fecha registro RNDC);ClienteDetalle (readonly);FALTA UI;
+Metadatos RNDC;Usuario RNDC;USUARIOID;cliente.usuarioRndc;No aplica (metadato maestro — ID usuario que registró);ClienteDetalle (readonly);FALTA UI;
+Sistema;Sincronizado RNDC;No aplica (calculado por importación);cliente.sincronizadoRndc;No aplica (flag interno — true si existe en RNDC);ClienteList (badge Registrado/Borrador);OK;
+Sistema;Activo;No aplica (calculado);cliente.activo;No aplica;ClienteList (badge Activo/Inactivo);OK;
+Sistema;Notas;No aplica;cliente.notas;No aplica;ClienteForm (textarea);OK;
+;;;;;TABLA: SUCURSALES CLIENTE;;
+Sede;Código sede;CODSEDETERCERO;sucursal.codSede;<CODSEDETERCERO> (procesoid 11) / en Remesa: <CODSEDEREMITENTE> · <CODSEDEDESTINATARIO> · <CODSEDEPROPIETARIO>;ClienteForm sección sedes (input);OK;
+Sede;Nombre sede;NOMSEDETERCERO (sede 0→Casa Matriz);sucursal.nombre;<NOMSEDETERCERO> (procesoid 11);ClienteForm sección sedes (input);OK;
+Sede;Contacto en sede;NOMSEDETERCERO (sedes adicionales);sucursal.contactoNombre;No aplica (no va en XML);ClienteForm sección sedes (input);FALTA UI;
+Ubicación sede;Municipio sede;MUNICIPIORNDC (1ra palabra);sucursal.municipio;No aplica (se envía el DANE);ClienteForm sección sedes (input);OK;
+Ubicación sede;Código DANE municipio;CODMUNICIPIORNDC (÷1000 → 5 dígitos);sucursal.daneMunicipio;<CODMUNICIPIORNDC> (procesoid 11 — 8 dígitos);ClienteForm sección sedes (input);OK;
+Ubicación sede;Dirección sede;NOMENCLATURADIRECCION;sucursal.direccion;<NOMENCLATURADIRECCION> (procesoid 11);ClienteForm sección sedes (input);OK;
+Contacto sede;Teléfono sede;NUMTELEFONOCONTACTO;sucursal.telefono;<NUMTELEFONOCONTACTO> (procesoid 11);ClienteForm sección sedes (input);OK;Mismo del tercero
+Contacto sede;Email sede;EMAILTERCERO;sucursal.email;<EMAILTERCERO> (procesoid 11);ClienteForm sección sedes (input);OK;
+Contacto sede;Celular sede;NUMCELULARPERSONA;sucursal.celular;<NUMCELULARPERSONA> (procesoid 11);ClienteForm sección sedes (input);FALTA UI;
+Ubicación sede;Latitud GPS sede;LATITUD;sucursal.latitud;<LATITUD> (procesoid 11);ClienteForm sección sedes (input decimal);FALTA UI;Entre -5 y 14 con 6 decimales. RNDC lo resuelve en la remesa
+Ubicación sede;Longitud GPS sede;LONGITUD;sucursal.longitud;<LONGITUD> (procesoid 11);ClienteForm sección sedes (input decimal);FALTA UI;Entre -79 y -66 con 6 decimales. RNDC lo resuelve en la remesa
+Sistema;Activo sede;No aplica (calculado);sucursal.activo;No aplica;No aplica (implícito filtro);OK;
