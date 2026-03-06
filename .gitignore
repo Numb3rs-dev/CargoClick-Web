@@ -48,6 +48,9 @@ next-env.d.ts
 *.swo
 *~
 
+# scripts de importación / dumps de base de datos
+scripts/importar/
+
 # OS
 Thumbs.db
 
